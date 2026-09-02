@@ -5,6 +5,7 @@ import {
 } from 'vue';
 
 
+
 // =====================================
 // PROPS
 // =====================================
@@ -20,27 +21,21 @@ const props =
     );
 
 
+
 // =====================================
 // TYPES
 // =====================================
 
 interface Discipline {
-
     id: string;
-
     number: string;
-
     title: string;
-
     subtitle: string;
-
     icon: string;
-
     description: string;
-
     points: string[];
-
 }
+
 
 
 // =====================================
@@ -48,6 +43,7 @@ interface Discipline {
 // =====================================
 
 const activeDiscipline = ref<string | null>(null);
+
 
 
 // =====================================
@@ -59,13 +55,11 @@ const disciplines: Discipline[] = [
     {
         id: 'learning',
         number: '01',
-        title: 'LEERGIERIG',
+        title: 'VERNIEUWING',
         subtitle: 'Blijven ontdekken',
         icon: 'bi-book',
-
         description:
             'Ik ben voortdurend bezig met het ontdekken van nieuwe technieken, tools en manieren om mezelf verder te ontwikkelen.',
-
         points: [
             'Nieuwe technologie leren',
             'Onderzoeken hoe dingen werken',
@@ -79,10 +73,8 @@ const disciplines: Discipline[] = [
         title: 'TECHNISCH',
         subtitle: 'Architectuur & structuur',
         icon: 'bi-code-slash',
-
         description:
             'Ik denk niet alleen na over wat een applicatie moet doen, maar ook over hoe deze technisch wordt opgebouwd.',
-
         points: [
             'Systemen ontwerpen',
             'Code structureren',
@@ -96,10 +88,8 @@ const disciplines: Discipline[] = [
         title: 'PRAKTISCH',
         subtitle: 'Van idee naar resultaat',
         icon: 'bi-gear',
-
         description:
             'Een goed idee is pas waardevol wanneer het ook daadwerkelijk wordt gebouwd, getest en verbeterd.',
-
         points: [
             'Oplossingsgericht werken',
             'Bouwen, testen en verbeteren',
@@ -113,10 +103,8 @@ const disciplines: Discipline[] = [
         title: 'CREATIEF',
         subtitle: 'Denken buiten de standaard',
         icon: 'bi-brush',
-
         description:
             'Ik combineer techniek met creativiteit en zoek graag naar interactieve en visueel interessante oplossingen.',
-
         points: [
             'Nieuwe ideeën bedenken',
             'Experimenteren met interactie',
@@ -130,10 +118,8 @@ const disciplines: Discipline[] = [
         title: 'COMMUNICATIE',
         subtitle: 'Techniek begrijpelijk maken',
         icon: 'bi-chat-square-text',
-
         description:
             'Goede communicatie helpt om ideeën, techniek en verwachtingen bij elkaar te brengen.',
-
         points: [
             'Luisteren en vragen stellen',
             'Ideeën duidelijk uitleggen',
@@ -142,6 +128,7 @@ const disciplines: Discipline[] = [
     }
 
 ];
+
 
 
 // =====================================
@@ -167,450 +154,293 @@ function activateDiscipline(
 
 </script>
 
+
 <template>
 
-<section
-    class="work-disciplines"
-    :class="`work-disciplines--${variant}`"
->
-
-    <div class="container">
-
-
-        <!-- =====================================
-             HEADING
-        ===================================== -->
-
-       <div
-    class="work-disciplines-heading"
->
-
-    <div class="section-label">
-
-        {{
-            variant === 'home'
-                ? 'DIGITALE OPLOSSING'
-                : 'MIJN WERKWIJZE'
-        }}
-
-    </div>
-
-
-    <h2>
-
-        <template
-            v-if="variant === 'home'"
-        >
-
-            Vijf
-            <span class="heading-accent">
-                disciplines
-            </span>
-
-            <br />
-
-            Eén manier van werken.
-
-        </template>
-
-
-        <template
-            v-else
-        >
-
-            Verschillende
-            perspectieven.
-
-            <br />
-
-            Eén <span class="heading-accent">Resultaat</span>.
-
-        </template>
-
-    </h2>
-
-
-    <!-- =====================================
-         HOME TEXT
-    ====================================== -->
-
-    <p
-        v-if="variant === 'home'"
+    <section
+        class="work-disciplines"
+        :class="`work-disciplines--${variant}`"
     >
 
-        Verschillende disciplines komen samen
-        in één manier van werken. Door techniek,
-        creativiteit, communicatie, vernieuwing
-        en een doelgerichte aanpak te combineren,
-        ontstaan digitale oplossingen die zowel
-        doordacht als bruikbaar zijn.
+        <div class="container">
 
-    </p>
+            <!-- =====================================
+                 DISCIPLINE SYSTEM
+            ====================================== -->
 
+            <div class="discipline-system">
 
-    <!-- =====================================
-         ABOUT TEXT
-    ====================================== -->
+                <!-- SVG CONNECTIONS -->
 
-    <p
-        v-if="variant === 'about'"
-    >
-
-        Een digitale oplossing ontstaat
-        voor mij niet vanuit één discipline.
-        Techniek, creativiteit, communicatie,
-        vernieuwing en een doelgerichte
-        aanpak versterken elkaar.
-
-    </p>
-
-</div>
-
-
-
-        <!-- =====================================
-             DISCIPLINE SYSTEM
-        ===================================== -->
-
-        <div
-            class="discipline-system"
-        >
-
-
-            <!-- =================================
-                 CONNECTIONS + PULSES
-            ================================== -->
-
-            <svg
-                class="discipline-connections"
-                viewBox="0 0 1000 1000"
-                preserveAspectRatio="xMidYMid meet"
-            >
-
-
-                <!-- =============================
-                     LEERGIERIG
-                ============================== -->
-
-                <path
-                    id="learning-path"
-                    class="connection-path"
-                    d="M 500 170 L 500 500"
-                />
-
-                <circle
-                    v-if="
-                        activeDiscipline ===
-                        'learning'
-                    "
-                    class="pulse-dot"
-                    r="8"
+                <svg
+                    class="discipline-connections"
+                    viewBox="0 0 1000 1000"
+                    preserveAspectRatio="xMidYMid meet"
                 >
 
-                    <animateMotion
-                        dur="1.2s"
-                        repeatCount="indefinite"
-                        path="M 500 170 L 500 500"
+                    <!-- LEERGIERIG -->
+
+                    <path
+                        id="learning-path"
+                        class="connection-path"
+                        d="M 500 170 L 500 500"
                     />
 
-                </circle>
+                    <circle
+                        v-if="
+                            activeDiscipline ===
+                            'learning'
+                        "
+                        class="pulse-dot"
+                        r="8"
+                    >
+                        <animateMotion
+                            dur="1.2s"
+                            repeatCount="indefinite"
+                            path="M 500 170 L 500 500"
+                        />
+                    </circle>
 
 
 
-                <!-- =============================
-                     TECHNISCH
-                ============================== -->
+                    <!-- TECHNISCH -->
 
-                <path
-                    id="technical-path"
-                    class="connection-path"
-                    d="M 815 400 L 500 500"
-                />
+                    <path
+                        id="technical-path"
+                        class="connection-path"
+                        d="M 815 400 L 500 500"
+                    />
 
-                <circle
-                    v-if="
-                        activeDiscipline ===
-                        'technical'
-                    "
-                    class="pulse-dot"
-                    r="8"
+                    <circle
+                        v-if="
+                            activeDiscipline ===
+                            'technical'
+                        "
+                        class="pulse-dot"
+                        r="8"
+                    >
+                        <animateMotion
+                            dur="1.2s"
+                            repeatCount="indefinite"
+                            path="M 815 400 L 500 500"
+                        />
+                    </circle>
+
+
+
+                    <!-- PRAKTISCH -->
+
+                    <path
+                        id="practical-path"
+                        class="connection-path"
+                        d="M 695 770 L 500 500"
+                    />
+
+                    <circle
+                        v-if="
+                            activeDiscipline ===
+                            'practical'
+                        "
+                        class="pulse-dot"
+                        r="8"
+                    >
+                        <animateMotion
+                            dur="1.2s"
+                            repeatCount="indefinite"
+                            path="M 695 770 L 500 500"
+                        />
+                    </circle>
+
+
+
+                    <!-- CREATIEF -->
+
+                    <path
+                        id="creative-path"
+                        class="connection-path"
+                        d="M 305 770 L 500 500"
+                    />
+
+                    <circle
+                        v-if="
+                            activeDiscipline ===
+                            'creative'
+                        "
+                        class="pulse-dot"
+                        r="8"
+                    >
+                        <animateMotion
+                            dur="1.2s"
+                            repeatCount="indefinite"
+                            path="M 305 770 L 500 500"
+                        />
+                    </circle>
+
+
+
+                    <!-- COMMUNICATIE -->
+
+                    <path
+                        id="communication-path"
+                        class="connection-path"
+                        d="M 185 400 L 500 500"
+                    />
+
+                    <circle
+                        v-if="
+                            activeDiscipline ===
+                            'communication'
+                        "
+                        class="pulse-dot"
+                        r="8"
+                    >
+                        <animateMotion
+                            dur="1.2s"
+                            repeatCount="indefinite"
+                            path="M 185 400 L 500 500"
+                        />
+                    </circle>
+
+                </svg>
+
+
+
+                <!-- =================================
+                     CENTER
+                ================================== -->
+
+                <div
+                    class="discipline-center"
                 >
 
-                    <animateMotion
-                        dur="1.2s"
-                        repeatCount="indefinite"
-                        path="M 815 400 L 500 500"
-                    />
+                    <span>
+                        DIGITALE
+                    </span>
 
-                </circle>
+                    <strong>
+                        OPLOSSING
+                    </strong>
+
+                </div>
 
 
 
-                <!-- =============================
-                     PRAKTISCH
-                ============================== -->
+                <!-- =================================
+                     DISCIPLINES
+                ================================== -->
 
-                <path
-                    id="practical-path"
-                    class="connection-path"
-                    d="M 695 770 L 500 500"
-                />
-
-                <circle
-                    v-if="
-                        activeDiscipline ===
-                        'practical'
+                <button
+                    v-for="
+                        discipline in disciplines
                     "
-                    class="pulse-dot"
-                    r="8"
+                    :key="discipline.id"
+                    type="button"
+                    class="discipline-node"
+                    :class="[
+                        `discipline-node--${discipline.id}`,
+                        {
+                            'is-active':
+                                activeDiscipline ===
+                                discipline.id
+                        }
+                    ]"
+                    @mouseenter="
+                        activeDiscipline =
+                            discipline.id
+                    "
+                    @mouseleave="
+                        variant === 'home'
+                            ? activeDiscipline = null
+                            : null
+                    "
+                    @click="
+                        activateDiscipline(
+                            discipline.id
+                        )
+                    "
                 >
 
-                    <animateMotion
-                        dur="1.2s"
-                        repeatCount="indefinite"
-                        path="M 695 770 L 500 500"
-                    />
-
-                </circle>
+                    <span
+                        class="discipline-node-number"
+                    >
+                        {{ discipline.number }}
+                    </span>
 
 
 
-                <!-- =============================
-                     CREATIEF
-                ============================== -->
+                    <div
+                        class="discipline-node-icon"
+                    >
 
-                <path
-                    id="creative-path"
-                    class="connection-path"
-                    d="M 305 770 L 500 500"
-                />
+                        <i
+                            :class="[
+                                'bi',
+                                discipline.icon
+                            ]"
+                        ></i>
 
-                <circle
-                    v-if="
-                        activeDiscipline ===
-                        'creative'
-                    "
-                    class="pulse-dot"
-                    r="8"
-                >
-
-                    <animateMotion
-                        dur="1.2s"
-                        repeatCount="indefinite"
-                        path="M 305 770 L 500 500"
-                    />
-
-                </circle>
+                    </div>
 
 
 
-                <!-- =============================
-                     COMMUNICATIE
-                ============================== -->
+                    <div
+                        class="discipline-node-content"
+                    >
 
-                <path
-                    id="communication-path"
-                    class="connection-path"
-                    d="M 185 400 L 500 500"
-                />
+                        <h3>
+                            {{ discipline.title }}
+                        </h3>
 
-                <circle
-                    v-if="
-                        activeDiscipline ===
-                        'communication'
-                    "
-                    class="pulse-dot"
-                    r="8"
-                >
+                        <span>
+                            {{ discipline.subtitle }}
+                        </span>
 
-                    <animateMotion
-                        dur="1.2s"
-                        repeatCount="indefinite"
-                        path="M 185 400 L 500 500"
-                    />
-
-                </circle>
-
-            </svg>
+                    </div>
 
 
 
-            <!-- =================================
-                 CENTER
-            ================================== -->
+                    <div
+                        v-if="
+                            variant === 'about'
+                        "
+                        class="discipline-node-description"
+                    >
 
-            <div
-                class="discipline-center"
-            >
+                        <p>
+                            {{ discipline.description }}
+                        </p>
 
-                <span>
-                    DIGITALE
-                </span>
+                        <ul>
 
-                <strong>
-                    OPLOSSING
-                </strong>
+                            <li
+                                v-for="
+                                    point in discipline.points
+                                "
+                                :key="point"
+                            >
+
+                                <i
+                                    class="bi bi-arrow-right"
+                                ></i>
+
+                                {{ point }}
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </button>
 
             </div>
 
-
-
-            <!-- =================================
-                 DISCIPLINES
-            ================================== -->
-
-            <button
-                v-for="
-                    discipline in disciplines
-                "
-                :key="discipline.id"
-
-                type="button"
-
-                class="discipline-node"
-
-                :class="[
-                    `discipline-node--${discipline.id}`,
-
-                    {
-                        'is-active':
-                            activeDiscipline ===
-                            discipline.id
-                    }
-                ]"
-
-                @mouseenter="
-                    activeDiscipline =
-                        discipline.id
-                "
-
-                @mouseleave="
-                    variant === 'home'
-                        ? activeDiscipline = null
-                        : null
-                "
-
-                @click="
-                    activateDiscipline(
-                        discipline.id
-                    )
-                "
-            >
-
-
-                <!-- =========================
-                     NUMBER
-                ========================== -->
-
-                <span
-                    class="discipline-node-number"
-                >
-
-                    {{
-                        discipline.number
-                    }}
-
-                </span>
-
-
-
-                <!-- =========================
-                     ICON
-                ========================== -->
-
-                <div
-                    class="discipline-node-icon"
-                >
-
-                    <i
-                        :class="[
-                            'bi',
-                            discipline.icon
-                        ]"
-                    ></i>
-
-                </div>
-
-
-
-                <!-- =========================
-                     CONTENT
-                ========================== -->
-
-                <div
-                    class="discipline-node-content"
-                >
-
-                    <h3>
-
-                        {{
-                            discipline.title
-                        }}
-
-                    </h3>
-
-                    <span>
-
-                        {{
-                            discipline.subtitle
-                        }}
-
-                    </span>
-
-                </div>
-
-
-
-                <!-- =========================
-                     ABOUT DESCRIPTION
-                ========================== -->
-
-                <div
-                    v-if="
-                        variant === 'about'
-                    "
-                    class="discipline-node-description"
-                >
-
-                    <p>
-
-                        {{
-                            discipline.description
-                        }}
-
-                    </p>
-
-
-                    <ul>
-
-                        <li
-                            v-for="
-                                point in discipline.points
-                            "
-                            :key="point"
-                        >
-
-                            <i
-                                class="bi bi-arrow-right"
-                            ></i>
-
-                            {{ point }}
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
-            </button>
-
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 </template>
+
 
 
 <style scoped>
@@ -619,13 +449,11 @@ function activateDiscipline(
    SECTION
 ===================================== */
 
-/* =====================================
-   SECTION
-===================================== */
-
 .work-disciplines {
 
     position: relative;
+
+    width: 100%;
 
     padding: 160px 0;
 
@@ -652,57 +480,6 @@ function activateDiscipline(
 }
 
 
-/* =====================================
-   HEADING
-===================================== */
-
-.work-disciplines-heading {
-    max-width: 800px;
-
-    margin:
-        0 auto 90px;
-
-    text-align: center;
-}
-
-.heading-accent {
-    color: #a78bfa;
-}
-
-.work-disciplines-heading h2 {
-
-    margin: 20px 0 0;
-
-    font-size:
-        clamp(
-            2.8rem,
-            5vw,
-            5.5rem
-        );
-
-    line-height: 0.95;
-
-    letter-spacing: -0.05em;
-}
-
-.work-disciplines-heading p {
-    max-width: 650px;
-
-    margin:
-        30px auto 0;
-
-    color: #a8adbd;
-
-    font-size:
-        clamp(
-            1rem,
-            1.2vw,
-            1.35rem
-        );
-
-    line-height: 1.8;
-}
-
 
 /* =====================================
    SYSTEM
@@ -712,16 +489,22 @@ function activateDiscipline(
 
     position: relative;
 
-    width:
-        min(
-            100%,
-            1000px
-        );
+    /*
+     * De figuur neemt nu de volledige
+     * beschikbare breedte van de container.
+     */
+    width: 100%;
 
-    aspect-ratio: 1;
+    /*
+     * Behoudt de vierkante verhouding
+     * van het SVG-systeem.
+     */
+    aspect-ratio: 1 / 1;
 
-    margin: 0 auto;
+    margin: 0;
+
 }
+
 
 
 /* =====================================
@@ -743,7 +526,9 @@ function activateDiscipline(
     pointer-events: none;
 
     z-index: 1;
+
 }
+
 
 
 .connection-path {
@@ -763,7 +548,9 @@ function activateDiscipline(
     transition:
         stroke 0.3s ease,
         stroke-width 0.3s ease;
+
 }
+
 
 
 /* =====================================
@@ -804,6 +591,7 @@ function activateDiscipline(
     border-radius: 50%;
 
     background:
+
         radial-gradient(
             circle at 50% 40%,
             rgba(
@@ -843,7 +631,9 @@ function activateDiscipline(
             -50%,
             -50%
         );
+
 }
+
 
 
 .discipline-center span {
@@ -861,7 +651,9 @@ function activateDiscipline(
     font-size: 0.7rem;
 
     letter-spacing: 0.25em;
+
 }
+
 
 
 .discipline-center strong {
@@ -873,7 +665,9 @@ function activateDiscipline(
     font-size: 1.2rem;
 
     letter-spacing: 0.08em;
+
 }
+
 
 
 /* =====================================
@@ -896,7 +690,9 @@ function activateDiscipline(
         );
 
     z-index: 10;
+
 }
+
 
 
 /* =====================================
@@ -937,6 +733,7 @@ function activateDiscipline(
     border-radius: 50%;
 
     background:
+
         radial-gradient(
             circle at 50% 35%,
             rgba(
@@ -978,8 +775,14 @@ function activateDiscipline(
         background 0.3s ease;
 
     appearance: none;
+
 }
 
+
+
+/* =====================================
+   HOVER / ACTIVE
+===================================== */
 
 .discipline-node:hover,
 .discipline-node.is-active {
@@ -995,6 +798,7 @@ function activateDiscipline(
         );
 
     background:
+
         radial-gradient(
             circle at 50% 35%,
             rgba(
@@ -1012,6 +816,7 @@ function activateDiscipline(
         );
 
     box-shadow:
+
         0 0 45px
         rgba(
             139,
@@ -1026,7 +831,9 @@ function activateDiscipline(
             -50%
         )
         scale(1.08);
+
 }
+
 
 
 /* =====================================
@@ -1038,7 +845,9 @@ function activateDiscipline(
     top: 17%;
 
     left: 50%;
+
 }
+
 
 
 .discipline-node--technical {
@@ -1046,7 +855,9 @@ function activateDiscipline(
     top: 40%;
 
     left: 81.5%;
+
 }
+
 
 
 .discipline-node--practical {
@@ -1054,7 +865,9 @@ function activateDiscipline(
     top: 77%;
 
     left: 69.5%;
+
 }
+
 
 
 .discipline-node--creative {
@@ -1062,7 +875,9 @@ function activateDiscipline(
     top: 77%;
 
     left: 30.5%;
+
 }
+
 
 
 .discipline-node--communication {
@@ -1070,7 +885,9 @@ function activateDiscipline(
     top: 40%;
 
     left: 18.5%;
+
 }
+
 
 
 /* =====================================
@@ -1098,7 +915,9 @@ function activateDiscipline(
     font-size: 0.65rem;
 
     letter-spacing: 0.15em;
+
 }
+
 
 
 /* =====================================
@@ -1132,7 +951,9 @@ function activateDiscipline(
         );
 
     font-size: 1.4rem;
+
 }
+
 
 
 /* =====================================
@@ -1146,7 +967,9 @@ function activateDiscipline(
     flex-direction: column;
 
     align-items: center;
+
 }
+
 
 
 .discipline-node-content h3 {
@@ -1158,7 +981,9 @@ function activateDiscipline(
     font-weight: 700;
 
     letter-spacing: 0.08em;
+
 }
+
 
 
 .discipline-node-content span {
@@ -1176,7 +1001,9 @@ function activateDiscipline(
     font-size: 0.65rem;
 
     text-align: center;
+
 }
+
 
 
 /* =====================================
@@ -1227,6 +1054,7 @@ function activateDiscipline(
         );
 
     box-shadow:
+
         0 20px 50px
         rgba(
             0,
@@ -1244,7 +1072,9 @@ function activateDiscipline(
         transform 0.3s ease,
 
         visibility 0.3s ease;
+
 }
+
 
 
 .discipline-node:hover
@@ -1262,7 +1092,9 @@ function activateDiscipline(
             -50%,
             0
         );
+
 }
+
 
 
 .discipline-node-description p {
@@ -1282,7 +1114,9 @@ function activateDiscipline(
     line-height: 1.6;
 
     text-align: left;
+
 }
+
 
 
 .discipline-node-description ul {
@@ -1298,7 +1132,9 @@ function activateDiscipline(
     padding: 0;
 
     list-style: none;
+
 }
+
 
 
 .discipline-node-description li {
@@ -1322,7 +1158,9 @@ function activateDiscipline(
     line-height: 1.4;
 
     text-align: left;
+
 }
+
 
 
 .discipline-node-description li i {
@@ -1330,7 +1168,9 @@ function activateDiscipline(
     flex-shrink: 0;
 
     color: #a78bfa;
+
 }
+
 
 
 /* =====================================
@@ -1341,16 +1181,25 @@ function activateDiscipline(
 
     padding:
         120px 0 160px;
+
 }
+
 
 
 .work-disciplines--about
 .discipline-node {
 
     cursor: pointer;
+
 }
 
-p{
+
+
+/* =====================================
+   PARAGRAPHS
+===================================== */
+
+p {
 
     font-size:
         clamp(
@@ -1358,7 +1207,9 @@ p{
             1.2vw,
             1.35rem
         );
+
 }
+
 
 
 /* =====================================
@@ -1367,23 +1218,37 @@ p{
 
 @media (max-width: 768px) {
 
-        .work-disciplines {
+    .work-disciplines {
+
         padding: 100px 0;
+
     }
 
-   
+
 
     .discipline-system {
-        width: min(700px, 127vw);
+
+        /*
+         * Op mobiel mag de figuur groter zijn
+         * dan de container, zodat hij niet
+         * onnatuurlijk klein wordt weergegeven.
+         */
+
+        width: min(
+            700px,
+            127vw
+        );
+
         max-width: none;
+
         margin-left: 50%;
+
         margin-right: 0;
 
-        transform: translateX(-50%);
+        transform:
+            translateX(-50%);
+
     }
-
-
-
 
 
 
@@ -1392,7 +1257,9 @@ p{
         width: 160px;
 
         height: 160px;
+
     }
+
 
 
     .discipline-node {
@@ -1402,7 +1269,9 @@ p{
         height: 125px;
 
         padding: 12px;
+
     }
+
 
 
     .discipline-node-icon {
@@ -1414,19 +1283,25 @@ p{
         margin-bottom: 8px;
 
         font-size: 1rem;
+
     }
+
 
 
     .discipline-node-content h3 {
 
         font-size: 0.6rem;
+
     }
+
 
 
     .discipline-node-content span {
 
         display: none;
+
     }
+
 
 
     .discipline-node-number {
@@ -1436,7 +1311,9 @@ p{
         left: 15px;
 
         font-size: 0.5rem;
+
     }
+
 
 
     .discipline-node-description {
@@ -1446,18 +1323,23 @@ p{
         padding: 14px;
 
         margin-top: 12px;
+
     }
+
 
 
     .discipline-node-description p {
 
         font-size: 0.65rem;
+
     }
+
 
 
     .discipline-node-description li {
 
         font-size: 0.58rem;
+
     }
 
 }

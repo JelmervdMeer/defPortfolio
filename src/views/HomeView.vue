@@ -1,6 +1,5 @@
+```vue
 <script setup lang="ts">
-
-import WorkDisciplines from '../components/WorkDisciplines.vue';
 
 import {
     onMounted,
@@ -8,7 +7,10 @@ import {
     ref
 } from 'vue';
 
-import { projects } from '../data/projects';
+import WorkDisciplines from '../components/WorkDisciplines.vue';
+import SectionLayout from '../components/SectionLayout.vue';
+import ProjectScrollShowcase from '../components/ProjectScroll.vue';
+import ContactScene from '../components/ContactScene.vue';
 
 
 // =====================================
@@ -33,8 +35,6 @@ interface Particle {
 
     amplitudeX: number;
     amplitudeY: number;
-
-    size: number;
 
 }
 
@@ -101,26 +101,37 @@ function createParticles() {
         element.className =
             'hero-particle';
 
-
-        // ---------------------------------
-        // RANDOM SIZE
-        // ---------------------------------
-
         const size =
             Math.random() * 4 + 1;
 
-            const glow = Math.random();
+        const glow =
+            Math.random();
 
-            element.style.boxShadow = `
-    0 0 ${4 + glow * 4}px rgba(255, 255, 255, ${0.5 + glow * 0.5}),
-    0 0 ${8 + glow * 8}px rgba(167, 139, 250, ${0.6 + glow * 0.4}),
-    0 0 ${18 + glow * 20}px rgba(139, 92, 246, ${0.4 + glow * 0.4})
-`;
+        element.style.boxShadow = `
+            0 0 ${4 + glow * 4}px
+            rgba(
+                255,
+                255,
+                255,
+                ${0.5 + glow * 0.5}
+            ),
 
+            0 0 ${8 + glow * 8}px
+            rgba(
+                167,
+                139,
+                250,
+                ${0.6 + glow * 0.4}
+            ),
 
-        // ---------------------------------
-        // RANDOM START POSITION
-        // ---------------------------------
+            0 0 ${18 + glow * 20}px
+            rgba(
+                139,
+                92,
+                246,
+                ${0.4 + glow * 0.4}
+            )
+        `;
 
         const x =
             Math.random() * 100;
@@ -128,33 +139,31 @@ function createParticles() {
         const y =
             Math.random() * 100;
 
-
-        // ---------------------------------
-        // RANDOM MOVEMENT
-        // ---------------------------------
-
         const phaseX =
-            Math.random() * Math.PI * 2;
+            Math.random() *
+            Math.PI *
+            2;
 
         const phaseY =
-            Math.random() * Math.PI * 2;
+            Math.random() *
+            Math.PI *
+            2;
 
         const speedX =
-            Math.random() * 0.012 + 0.003;
+            Math.random() * 0.012 +
+            0.003;
 
         const speedY =
-            Math.random() * 0.012 + 0.003;
+            Math.random() * 0.012 +
+            0.003;
 
         const amplitudeX =
-            Math.random() * 35 + 15;
+            Math.random() * 35 +
+            15;
 
         const amplitudeY =
-            Math.random() * 35 + 15;
-
-
-        // ---------------------------------
-        // ELEMENT SIZE
-        // ---------------------------------
+            Math.random() * 35 +
+            15;
 
         element.style.width =
             `${size}px`;
@@ -162,38 +171,18 @@ function createParticles() {
         element.style.height =
             `${size}px`;
 
-
-        // ---------------------------------
-        // INITIAL POSITION
-        // ---------------------------------
-
         element.style.left =
             `${x}%`;
 
         element.style.top =
             `${y}%`;
 
-
-        // ---------------------------------
-        // RANDOM OPACITY
-        // ---------------------------------
-
         element.style.opacity =
             `${Math.random() * 0.45 + 0.2}`;
-
-
-        // ---------------------------------
-        // ADD TO DOM
-        // ---------------------------------
 
         container.appendChild(
             element
         );
-
-
-        // ---------------------------------
-        // STORE PARTICLE
-        // ---------------------------------
 
         particles.push({
 
@@ -212,9 +201,7 @@ function createParticles() {
             speedY,
 
             amplitudeX,
-            amplitudeY,
-
-            size
+            amplitudeY
 
         });
 
@@ -236,11 +223,6 @@ function animateParticles() {
     const container =
         heroParticles.value;
 
-
-    // ---------------------------------
-    // SMOOTH MOUSE MOVEMENT
-    // ---------------------------------
-
     mouseX +=
         (
             targetMouseX -
@@ -252,11 +234,6 @@ function animateParticles() {
             targetMouseY -
             mouseY
         ) * 0.08;
-
-
-    // ---------------------------------
-    // CONTAINER POSITION
-    // ---------------------------------
 
     const rect =
         container.getBoundingClientRect();
@@ -272,12 +249,8 @@ function animateParticles() {
             );
 
         return;
+
     }
-
-
-    // ---------------------------------
-    // CURSOR POSITION IN %
-    // ---------------------------------
 
     const cursorX =
         (
@@ -295,28 +268,14 @@ function animateParticles() {
         rect.height *
         100;
 
-
-    // ---------------------------------
-    // PARTICLES
-    // ---------------------------------
-
     particles.forEach(
         particle => {
-
-            // ---------------------------------
-            // UNIQUE TIME
-            // ---------------------------------
 
             particle.phaseX +=
                 particle.speedX;
 
             particle.phaseY +=
                 particle.speedY;
-
-
-            // ---------------------------------
-            // NATURAL FLOATING MOTION
-            // ---------------------------------
 
             const movementX =
                 Math.sin(
@@ -330,21 +289,11 @@ function animateParticles() {
                 ) *
                 particle.amplitudeY;
 
-
-            // ---------------------------------
-            // TARGET POSITION
-            // ---------------------------------
-
             let targetX =
                 particle.baseX;
 
             let targetY =
                 particle.baseY;
-
-
-            // ---------------------------------
-            // CURSOR DISTANCE
-            // ---------------------------------
 
             const dx =
                 cursorX -
@@ -366,11 +315,6 @@ function animateParticles() {
                     rect.width
                 ) *
                 100;
-
-
-            // ---------------------------------
-            // CURSOR INTERACTION
-            // ---------------------------------
 
             if (
                 distance < radius
@@ -395,11 +339,6 @@ function animateParticles() {
 
             }
 
-
-            // ---------------------------------
-            // APPLY POSITION
-            // ---------------------------------
-
             particle.element.style.left =
                 `${targetX}%`;
 
@@ -416,11 +355,6 @@ function animateParticles() {
         }
     );
 
-
-    // ---------------------------------
-    // NEXT FRAME
-    // ---------------------------------
-
     particleAnimationFrame =
         requestAnimationFrame(
             animateParticles
@@ -433,10 +367,15 @@ function animateParticles() {
 // MOUSE MOVE
 // =====================================
 
-function handleMouseMove(event: MouseEvent) {
+function handleMouseMove(
+    event: MouseEvent
+) {
 
-    targetMouseX = event.clientX;
-    targetMouseY = event.clientY;
+    targetMouseX =
+        event.clientX;
+
+    targetMouseY =
+        event.clientY;
 
     if (!heroParticles.value) {
         return;
@@ -453,10 +392,24 @@ function handleMouseMove(event: MouseEvent) {
         hero.getBoundingClientRect();
 
     const x =
-        ((event.clientX - rect.left) / rect.width) * 100;
+        (
+            (
+                event.clientX -
+                rect.left
+            ) /
+            rect.width
+        ) *
+        100;
 
     const y =
-        ((event.clientY - rect.top) / rect.height) * 100;
+        (
+            (
+                event.clientY -
+                rect.top
+            ) /
+            rect.height
+        ) *
+        100;
 
     hero.style.setProperty(
         '--cursor-x',
@@ -467,6 +420,7 @@ function handleMouseMove(event: MouseEvent) {
         '--cursor-y',
         `${y}%`
     );
+
 }
 
 
@@ -506,13 +460,13 @@ let revealObserver:
 function setupRevealObserver() {
 
     const revealElements =
-        document.querySelectorAll('.reveal');
+        document.querySelectorAll(
+            '.reveal'
+        );
 
-    console.log(
-        'REVEAL ELEMENTS:',
-        revealElements.length,
-        revealElements
-    );
+    if (!revealElements.length) {
+        return;
+    }
 
     revealObserver =
         new IntersectionObserver(
@@ -522,25 +476,19 @@ function setupRevealObserver() {
                 entries.forEach(
                     entry => {
 
-                        console.log(
-                            'REVEAL:',
-                            entry.target,
-                            entry.isIntersecting
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
+
+                        entry.target.classList.add(
+                            'is-visible'
                         );
 
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.classList.add(
-                                'is-visible'
-                            );
-
-                            revealObserver?.unobserve(
-                                entry.target
-                            );
-
-                        }
+                        revealObserver?.unobserve(
+                            entry.target
+                        );
 
                     }
                 );
@@ -565,6 +513,7 @@ function setupRevealObserver() {
 
 }
 
+
 // =====================================
 // LIFECYCLE
 // =====================================
@@ -574,11 +523,6 @@ onMounted(() => {
     createParticles();
 
     setupRevealObserver();
-
-
-    // ---------------------------------
-    // INITIAL MOUSE POSITION
-    // ---------------------------------
 
     if (heroParticles.value) {
 
@@ -602,11 +546,6 @@ onMounted(() => {
 
     }
 
-
-    // ---------------------------------
-    // MOUSE EVENTS
-    // ---------------------------------
-
     window.addEventListener(
         'mousemove',
         handleMouseMove
@@ -616,11 +555,6 @@ onMounted(() => {
         'mouseleave',
         handleMouseLeave
     );
-
-
-    // ---------------------------------
-    // START ANIMATION
-    // ---------------------------------
 
     particleAnimationFrame =
         requestAnimationFrame(
@@ -646,7 +580,6 @@ onUnmounted(() => {
         handleMouseLeave
     );
 
-
     if (
         particleAnimationFrame !== null
     ) {
@@ -659,13 +592,7 @@ onUnmounted(() => {
 
     }
 
-
     revealObserver?.disconnect();
-
-
-    // ---------------------------------
-    // REMOVE PARTICLES
-    // ---------------------------------
 
     particles.forEach(
         particle => {
@@ -684,15 +611,14 @@ onUnmounted(() => {
 
 <template>
 
-    <main>
+    <main class="home-page">
+
 
         <!-- =====================================
              HERO
         ====================================== -->
 
         <section class="hero">
-
-            <!-- PARTICLES -->
 
             <div
                 ref="heroParticles"
@@ -701,27 +627,37 @@ onUnmounted(() => {
             ></div>
 
 
-            <!-- HERO CONTENT -->
-
             <div class="container">
 
                 <div class="hero-content">
 
-                    <!-- LEFT -->
-
                     <div class="hero-title-content">
 
-                        <div class="hero-label reveal">
+                        <div
+                            class="
+                                hero-label
+                                reveal
+                            "
+                        >
                             FREELANCE DEVELOPER
                         </div>
 
 
-                        <h1 class="page-title reveal">
+                        <h1
+                            class="
+                                page-title
+                                reveal
+                            "
+                        >
 
                             Ik bouw
 
-                            <span class="animated-gradient-text">
-                                digitale ervaringen.
+                            <span
+                                class="
+                                    animated-gradient-text
+                                "
+                            >
+                                digitale oplossingen.
                             </span>
 
                         </h1>
@@ -729,13 +665,13 @@ onUnmounted(() => {
                     </div>
 
 
-                    <!-- RIGHT -->
-
                     <div class="hero-actions">
 
                         <p
-                            class="hero-text reveal"
-                            style="transition-delay: 100ms"
+                            class="
+                                hero-text
+                                reveal
+                            "
                         >
                             Ik ontwerp en ontwikkel interactieve
                             websites, 3D-ervaringen en software
@@ -745,25 +681,45 @@ onUnmounted(() => {
 
 
                         <div
-                            class="hero-buttons reveal"
-                            style="transition-delay: 200ms"
+                            class="
+                                hero-buttons
+                                reveal
+                            "
                         >
 
                             <RouterLink
                                 to="/projects"
-                                class="btn btn-primary btn-lg"
+                                class="
+                                    btn
+                                    btn-primary
+                                    btn-lg
+                                "
                             >
+
                                 Bekijk mijn projecten
 
-                                <i class="bi bi-arrow-right ms-2"></i>
+                                <i
+                                    class="
+                                        bi
+                                        bi-arrow-right
+                                        ms-2
+                                    "
+                                ></i>
+
                             </RouterLink>
 
 
                             <RouterLink
                                 to="/contact"
-                                class="btn btn-outline-light btn-lg"
+                                class="
+                                    btn
+                                    btn-outline-light
+                                    btn-lg
+                                "
                             >
+
                                 Neem contact op
+
                             </RouterLink>
 
                         </div>
@@ -783,8 +739,6 @@ onUnmounted(() => {
 
                 <div class="tech-marquee-track">
 
-                    <!-- GROUP 1 -->
-
                     <div class="tech-marquee-group">
 
                         <span>THREE.JS</span>
@@ -820,9 +774,10 @@ onUnmounted(() => {
                     </div>
 
 
-                    <!-- GROUP 2 -->
-
-                    <div class="tech-marquee-group">
+                    <div
+                        class="tech-marquee-group"
+                        aria-hidden="true"
+                    >
 
                         <span>THREE.JS</span>
                         <span class="tech-marquee-dot">•</span>
@@ -864,309 +819,285 @@ onUnmounted(() => {
 
 
         <!-- =====================================
-             PROJECTS
+             HOME CONTENT
         ====================================== -->
 
-        <section class="projects-preview">
+        <div class="home-sections">
 
-            <div class="container">
 
-                <!-- PROJECT HEADING -->
+            <!-- =====================================
+                 PROJECTS
+            ====================================== -->
 
-                <div class="projects-heading reveal">
+            <div class="home-section-container projects-container">
 
-                    <div class="section-label">
-                        PROJECTEN
+                <SectionLayout
+                    class="home-projects"
+                    variant="split"
+                    reverse
+                    label="PROJECTEN"
+                    title="Een selectie van mijn werk."
+                    description="Een aantal projecten waarin techniek, creativiteit en praktische oplossingen samenkomen."
+                >
+
+                    <template #title>
+
+                        Een selectie van mijn
+
+                        <span class="animated-gradient-text">
+                            werk
+                        </span>.
+
+                    </template>
+
+
+                    <div
+                        class="
+                            section-reveal
+                            reveal
+                        "
+                    >
+
+                        <ProjectScrollShowcase />
+
                     </div>
 
+                </SectionLayout>
 
-                    <h2 class="home-section-heading">
+            </div>
 
-                        Een selectie
+
+            <!-- =====================================
+                 WORK DISCIPLINES
+            ====================================== -->
+
+            <div class="home-section-container disciplines-container">
+
+                <SectionLayout
+                    class="home-disciplines"
+                    variant="split"
+                    label="MIJN WERKWIJZE"
+                    title="Vijf disciplines een manier van werken"
+                    description="Verschillende disciplines komen samen in één manier van werken. Door techniek, creativiteit, communicatie, vernieuwing en een doelgerichte aanpak te combineren, ontstaan digitale oplossingen die zowel doordacht als bruikbaar zijn."
+                >
+
+                    <template #title>
+
+                        Vijf
+
+                        <span class="animated-gradient-text">
+                            disciplines
+                        </span>
+
+                        een werkwijze.
+
+                    </template>
+
+
+                    <div
+                        class="
+                            section-reveal
+                            reveal
+                        "
+                    >
+
+                        <WorkDisciplines
+                            variant="home"
+                        />
+
+                    </div>
+
+                </SectionLayout>
+
+            </div>
+
+
+            <!-- =====================================
+                 CONTACT
+            ====================================== -->
+
+            <div class="home-section-container contact-container">
+
+                <SectionLayout
+                    class="home-contact"
+                    variant="split"
+                    reverse
+                    label="CONTACT"
+                    title="Samen iets geweldigs maken?"
+                    description="Heb je een idee, een project, een experiment of een digitale uitdaging? Ik denk graag mee over een passende oplossing."
+                >
+
+                    <template #title>
+
+                        Samen iets
+
+                        <span class="animated-gradient-text">
+                            geweldigs
+                        </span>
 
                         <br />
 
-                        van mijn
+                        bouwen?
 
-                        <span class="heading-accent">
-                            werk.
-                        </span>
+                    </template>
 
-                    </h2>
-
-
-                    <p>
-                        Een aantal projecten waarin techniek,
-                        creativiteit en praktische oplossingen
-                        samenkomen.
-                    </p>
-
-                </div>
-
-
-                <!-- PROJECT GRID -->
-
-                <div class="home-project-grid mt-5">
 
                     <div
-    v-for="project in projects.slice(0, 3)"
-    :key="project.slug"
-    class="home-project-grid-item"
->
+                        class="
+                            contact-content-wrapper
+                            section-reveal
+                            reveal
+                        "
+                    >
 
-                        <RouterLink
-                            :to="`/projects/${project.slug}`"
-                            class="home-project-card h-100"
-                        >
+                        <div class="contact-scene-wrapper">
 
-                            <!-- IMAGE -->
+                            <ContactScene />
 
-                            <div class="home-project-image">
-
-                                <img
-                                    :src="project.image"
-                                    :alt="project.title"
-                                />
-
-                            </div>
+                        </div>
 
 
-                            <!-- CONTENT -->
+                        <div class="contact-cta">
 
-                            <div
-                                class="home-project-card-content"
+                            <RouterLink
+                                to="/contact"
+                                class="
+                                    btn
+                                    btn-primary
+                                    btn-lg
+                                    contact-primary-button
+                                "
                             >
 
-                                <span
-                                    class="home-project-category"
-                                >
-                                    {{ project.category }}
-                                </span>
+                                Start een gesprek
+
+                                <i
+                                    class="
+                                        bi
+                                        bi-arrow-right
+                                        ms-2
+                                    "
+                                ></i>
+
+                            </RouterLink>
 
 
-                                <h3>
-                                    {{ project.title }}
-                                </h3>
+                            <RouterLink
+                                to="/projects"
+                                class="
+                                    btn
+                                    btn-outline-light
+                                    btn-lg
+                                    contact-secondary-button
+                                "
+                            >
 
+                                Bekijk mijn werk
 
-                                <p>
-                                    {{ project.shortDescription }}
-                                </p>
+                                <i
+                                    class="
+                                        bi
+                                        bi-grid-3x3-gap
+                                        ms-2
+                                    "
+                                ></i>
 
+                            </RouterLink>
 
-                                <!-- TECHNOLOGIES -->
-
-                                <div
-                                    class="home-project-technologies"
-                                >
-
-                                    <span
-                                        v-for="technology in project.technologies"
-                                        :key="technology"
-                                        class="technology"
-                                    >
-                                        {{ technology }}
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </RouterLink>
+                        </div>
 
                     </div>
 
-                </div>
-
-
-                <!-- ALL PROJECTS -->
-
-                <div
-                    class="
-                        d-flex
-                        justify-content-center
-                        mt-5
-                        reveal
-                    "
-                    style="transition-delay: 300ms"
-                >
-
-                    <RouterLink
-                        to="/projects"
-                        class="btn btn-primary btn-lg"
-                    >
-
-                        Bekijk alle projecten
-
-                        <i
-                            class="
-                                bi
-                                bi-arrow-right
-                                ms-2
-                            "
-                        ></i>
-
-                    </RouterLink>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================
-             WORK DISCIPLINES
-        ====================================== -->
-
-      
-
-            <WorkDisciplines
-                variant="home"
-            />
-
-       
-
-
-        <!-- =====================================
-             CONTACT
-        ====================================== -->
-
-        <!-- =====================================
-     CONTACT
-===================================== -->
-
-<section class="contact-section">
-
-    <div class="container">
-
-        <div class="contact-section-content">
-
-            <div class="contact-section-text reveal">
-
-                <div class="section-label">
-                    CONTACT
-                </div>
-
-                <h2>
-                    Samen iets
-
-                    <span class="animated-gradient-text">
-                        geweldigs
-                    </span>
-
-                    <br />
-
-                    bouwen?
-                </h2>
-
-                <p>
-                    Heb je een idee, een project of een digitale uitdaging?
-                    Ik denk graag mee over een passende oplossing.
-                </p>
-
-            </div>
-
-
-            <div
-                class="contact-actions reveal"
-                style="transition-delay: 150ms"
-            >
-
-                <a
-                    href="mailto:jouwmail@example.com"
-                    class="btn btn-primary"
-                >
-                    Neem contact op
-
-                    <i class="bi bi-arrow-right ms-2"></i>
-                </a>
-
-
-                <RouterLink
-                    to="/about"
-                    class="btn btn-outline-light"
-                >
-                    Meer over mij
-                </RouterLink>
+                </SectionLayout>
 
             </div>
 
         </div>
 
-    </div>
-
-</section>
-
     </main>
 
 </template>
 
+
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* =========================================
+   PAGE
+========================================= */
 
+.home-page {
 
+    position: relative;
 
-body {
-    font-family: 'Space Grotesk', sans-serif;
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: clip;
+
+    background:
+        #08090d;
+
 }
 
-h1,
-h2,
-h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-}
-
-.home-section-heading {
-
-
-    line-height: 0.95;
-
-    letter-spacing: -0.05em;
-}
 
 /* =========================================
    HERO
 ========================================= */
 
 .hero {
+
     --cursor-x: 50%;
     --cursor-y: 50%;
 
     display: grid;
 
-    grid-template-rows: 1fr auto;
+    grid-template-rows:
+        1fr auto;
 
-     position: relative;
-    padding: 160px 0 0px;
-    overflow: hidden;
+    position: relative;
+
+    min-height: 100vh;
+
+    padding:
+        190px
+        0
+        0;
 
     overflow: hidden;
 
     isolation: isolate;
 
     background:
+
         radial-gradient(
             circle at 20% 20%,
-            rgba(108, 99, 255, 0.16),
+            rgba(
+                108,
+                99,
+                255,
+                0.16
+            ),
             transparent 35%
         ),
+
         radial-gradient(
             circle at 80% 70%,
-            rgba(0, 212, 255, 0.08),
+            rgba(
+                0,
+                212,
+                255,
+                0.08
+            ),
             transparent 35%
         ),
+
         #08090d;
+
 }
 
 
-/* =========================================
-   HERO ATMOSPHERE
-========================================= */
-
 .hero::before {
+
     content: "";
 
     position: absolute;
@@ -1177,27 +1108,48 @@ h3 {
     width: 700px;
     height: 700px;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
 
     border-radius: 50%;
 
     background:
+
         radial-gradient(
             circle,
-            rgba(139, 92, 246, 0.14) 0%,
-            rgba(139, 92, 246, 0.06) 35%,
+
+            rgba(
+                139,
+                92,
+                246,
+                0.14
+            ) 0%,
+
+            rgba(
+                139,
+                92,
+                246,
+                0.06
+            ) 35%,
+
             transparent 70%
         );
 
-    filter: blur(20px);
+    filter:
+        blur(20px);
 
     pointer-events: none;
 
     z-index: -1;
+
 }
 
 
 .hero::after {
+
     content: "";
 
     position: absolute;
@@ -1208,35 +1160,57 @@ h3 {
     width: 420px;
     height: 420px;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
 
     border-radius: 50%;
 
     background:
+
         radial-gradient(
             circle,
-            rgba(139, 92, 246, 0.16) 0%,
-            rgba(139, 92, 246, 0.07) 30%,
+
+            rgba(
+                139,
+                92,
+                246,
+                0.16
+            ) 0%,
+
+            rgba(
+                139,
+                92,
+                246,
+                0.07
+            ) 30%,
+
             transparent 70%
         );
 
-    filter: blur(15px);
+    filter:
+        blur(15px);
 
     pointer-events: none;
 
     transition:
+
         left 0.15s ease-out,
         top 0.15s ease-out;
 
     z-index: -1;
+
 }
 
 
 /* =========================================
-   HERO CONTAINER
+   HERO CONTENT
 ========================================= */
 
 .hero .container {
+
     position: relative;
 
     z-index: 5;
@@ -1246,48 +1220,148 @@ h3 {
     display: flex;
 
     align-items: center;
+
+}
+
+
+.hero-content {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 80px;
+
+    width: 100%;
+
+}
+
+
+.hero-title-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.hero-actions {
+
+    flex:
+        0 0 380px;
+
+    width: 380px;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 50px;
+
+}
+
+
+.hero-text {
+
+    max-width: 650px;
+
+    margin:
+        38px
+        0
+        0;
+
+    color:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.62
+        );
+
+    line-height: 1.8;
+
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+
+}
+
+
+.hero-buttons .btn {
+
+    width: 100%;
+
 }
 
 
 /* =========================================
-   HERO CONTENT
+   BUTTON HOVER
 ========================================= */
 
-.hero-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 80px;
-}
-
-.hero-title-content {
-    flex: 1;
-    min-width: 0;
-}
-
-.hero-actions {
-    width: 380px;
-    flex-shrink: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-}
-
-.hero-text {
-    margin: 0;
-}
-
-.hero-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
 .hero-buttons .btn {
-    width: 100%;
+
+    transition:
+
+        transform 250ms ease,
+        box-shadow 250ms ease,
+        background-color 250ms ease,
+        border-color 250ms ease;
+
+    will-change:
+        transform;
+
 }
 
+
+.hero-buttons .btn:hover {
+
+    transform:
+        translateY(-4px);
+
+}
+
+
+.hero-buttons .btn-primary:hover {
+
+    box-shadow:
+
+        0 10px 35px
+        rgba(
+            139,
+            92,
+            246,
+            0.32
+        );
+
+}
+
+
+.hero-buttons .btn-outline-light:hover {
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+}
 
 
 /* =========================================
@@ -1295,36 +1369,45 @@ h3 {
 ========================================= */
 
 .hero-label {
+
     display: inline-flex;
 
     align-items: center;
 
     margin-bottom: 28px;
 
-    
     font-weight: 600;
 
     letter-spacing: 0.22em;
 
     text-transform: uppercase;
 
-  
 }
 
 
 .hero-label::before {
+
     content: "";
 
     width: 28px;
+
     height: 1px;
 
     margin-right: 12px;
 
-    background: #8b5cf6;
+    background:
+        #8b5cf6;
 
     box-shadow:
+
         0 0 10px
-        rgba(139, 92, 246, 0.8);
+        rgba(
+            139,
+            92,
+            246,
+            0.8
+        );
+
 }
 
 
@@ -1333,73 +1416,29 @@ h3 {
 ========================================= */
 
 .hero h1 {
+
     max-width: 950px;
 
     margin: 0;
 
-    color: #ffffff;
-
-   
+    color:
+        #ffffff;
 
     font-weight: 700;
 
     line-height: 1.20;
 
     letter-spacing: -0.055em;
-}
 
-
-
-
-
-
-/* =========================================
-   HERO TEXT
-========================================= */
-
-.hero-text {
-    max-width: 650px;
-
-    margin-top: 38px;
-
-    margin-bottom: 0;
-
-    color:
-        rgba(255, 255, 255, 0.62);
-
-   
-
-    line-height: 1.8;
 }
 
 
 /* =========================================
-   HERO BUTTONS
-========================================= */
-
-/*.hero-buttons {
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    margin-top: 42px;
-
-    animation:
-        fadeUp
-        0.9s
-        cubic-bezier(0.16, 1, 0.3, 1)
-        0.55s
-        both;
-}*/
-
-
-/* =========================================
-   HERO PARTICLES
+   PARTICLES
 ========================================= */
 
 .hero-particles {
+
     position: absolute;
 
     inset: 0;
@@ -1409,149 +1448,127 @@ h3 {
     pointer-events: none;
 
     z-index: 1;
+
 }
 
 
 .hero-particles :deep(.hero-particle) {
+
     position: absolute;
 
     border-radius: 50%;
 
-    background: #a78bfa;
+    background:
+        #a78bfa;
 
     pointer-events: none;
 
     z-index: 1;
 
     will-change:
+
         left,
         top,
         transform;
+
 }
 
+
 /* =========================================
-   HERO REVEAL DELAYS
+   REVEAL
 ========================================= */
 
 .hero-label.reveal {
-    transition-delay: 0ms;
+
+    transition-delay:
+        0ms;
+
 }
+
 
 .hero h1.reveal {
-    transition-delay: 100ms;
+
+    transition-delay:
+        100ms;
+
 }
+
 
 .hero-text.reveal {
-    transition-delay: 200ms;
+
+    transition-delay:
+        200ms;
+
 }
+
 
 .hero-buttons.reveal {
-    transition-delay: 300ms;
+
+    transition-delay:
+        300ms;
+
 }
 
-
-/* =========================================
-   SCROLL REVEAL
-========================================= */
 
 .reveal,
 .reveal-left,
 .reveal-right {
+
     opacity: 0;
 
     transition:
+
         opacity 700ms ease,
-        transform 700ms cubic-bezier(.2, .8, .2, 1);
+
+        transform 700ms
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+
 }
+
 
 .reveal {
-    transform: translateY(50px);
+
+    transform:
+        translateY(50px);
+
 }
+
 
 .reveal-left {
-    transform: translateX(-50px);
+
+    transform:
+        translateX(-50px);
+
 }
 
+
 .reveal-right {
-    transform: translateX(50px);
+
+    transform:
+        translateX(50px);
+
 }
+
 
 .reveal.is-visible,
 .reveal-left.is-visible,
 .reveal-right.is-visible {
+
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+
+    transform:
+        translate3d(
+            0,
+            0,
+            0
+        );
+
 }
-
-.home-project-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 1.5rem;
-}
-
-@keyframes heroReveal {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateY(100px)
-            scale(0.9)
-            rotateX(8deg);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1)
-            rotateX(0);
-    }
-}
-
-@keyframes particleFloat {
-
-    0% {
-        transform:
-            translate3d(
-                calc(var(--move-x) * -1),
-                var(--move-y),
-                0
-            )
-            scale(var(--scale-start, 0.7));
-
-        opacity: var(--opacity-low, 0.15);
-    }
-
-    50% {
-        transform:
-            translate3d(
-                var(--move-x),
-                calc(var(--move-y) * -1),
-                0
-            )
-            scale(var(--scale-middle, 1));
-
-        opacity: var(--opacity-middle, 0.45);
-    }
-
-    100% {
-        transform:
-            translate3d(
-                calc(var(--move-x) * 1.5),
-                calc(var(--move-y) * -1.5),
-                0
-            )
-            scale(var(--scale-end, 1.2));
-
-        opacity: var(--opacity-high, 0.65);
-    }
-}
-
 
 
 /* =========================================
@@ -1559,13 +1576,12 @@ h3 {
 ========================================= */
 
 .tech-marquee {
+
     position: relative;
 
     width: 100%;
 
     overflow: hidden;
-
-    margin: 0;
 
     margin-top: 120px;
 
@@ -1574,27 +1590,46 @@ h3 {
     flex-shrink: 0;
 
     border-top:
+
         1px solid
-        rgba(255, 255, 255, 0.06);
+
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
 
     border-bottom:
+
         1px solid
-        rgba(255, 255, 255, 0.06);
+
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
 
     background:
-        rgba(8, 9, 13, 0.35);
 
-    backdrop-filter: blur(8px);
+        rgba(
+            8,
+            9,
+            13,
+            0.35
+        );
+
+    backdrop-filter:
+        blur(8px);
 
     z-index: 5;
+
 }
 
 
-/* =========================================
-   MARQUEE TRACK
-========================================= */
-
 .tech-marquee-track {
+
     display: flex;
 
     width: max-content;
@@ -1602,20 +1637,20 @@ h3 {
     flex-wrap: nowrap;
 
     animation:
+
         techMarqueeMove
         20s
         linear
         infinite;
 
-    will-change: transform;
+    will-change:
+        transform;
+
 }
 
 
-/* =========================================
-   MARQUEE GROUP
-========================================= */
-
 .tech-marquee-group {
+
     display: flex;
 
     align-items: center;
@@ -1623,402 +1658,967 @@ h3 {
     flex: 0 0 auto;
 
     white-space: nowrap;
+
 }
 
 
-/* =========================================
-   MARQUEE TEXT
-========================================= */
-
-/* =========================================
-   MARQUEE TEXT
-========================================= */
-
 .tech-marquee-group span {
+
     display: inline-block;
 
     flex: 0 0 auto;
 
-    margin: 0 25px;
+    margin:
+        0 25px;
 
     color:
-        rgba(255, 255, 255, 0.55);
 
-    font-family: monospace;
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
 
-    font-size: 1rem;
+    font-family:
+        monospace;
 
-    letter-spacing: 0.12em;
+    font-size:
+        1rem;
 
-    text-transform: uppercase;
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
+
+    transition:
+
+        transform 250ms ease,
+        color 250ms ease,
+        text-shadow 250ms ease;
+
 }
 
 
-/* =========================================
-   MARQUEE DOT
-========================================= */
+.tech-marquee-group span:not(.tech-marquee-dot):hover {
 
-.tech-marquee-group span.tech-marquee-dot {
-    flex: 0 0 auto;
+    color:
+        #ffffff;
 
-    margin: 0 10px !important;
-
-    color: #8b5cf6 !important;
-
-    font-size: 0.9rem;
-
-    letter-spacing: 0;
+    transform:
+        scale(1.12);
 
     text-shadow:
-        0 0 8px
-        rgba(139, 92, 246, 0.8),
 
-        0 0 16px
-        rgba(139, 92, 246, 0.35);
+        0 0 10px
+        rgba(
+            139,
+            92,
+            246,
+            0.8
+        ),
 
-    -webkit-text-fill-color: #8b5cf6;
+        0 0 22px
+        rgba(
+            139,
+            92,
+            246,
+            0.35
+        );
+
 }
 
 
-/* =========================================
-   MARQUEE ANIMATION
-========================================= */
+.tech-marquee-group
+span.tech-marquee-dot {
+
+    flex: 0 0 auto;
+
+    margin:
+        0 10px !important;
+
+    color:
+        #8b5cf6 !important;
+
+    font-size:
+        0.9rem;
+
+    letter-spacing:
+        0;
+
+    text-shadow:
+
+        0 0 8px
+        rgba(
+            139,
+            92,
+            246,
+            0.8
+        ),
+
+        0 0 16px
+        rgba(
+            139,
+            92,
+            246,
+            0.35
+        );
+
+    -webkit-text-fill-color:
+        #8b5cf6;
+
+}
+
 
 @keyframes techMarqueeMove {
 
     from {
+
         transform:
             translate3d(
                 0,
                 0,
                 0
             );
+
     }
 
     to {
+
         transform:
             translate3d(
                 -50%,
                 0,
                 0
             );
+
     }
 
 }
 
 
 /* =========================================
-   PROJECTS PREVIEW
+   HOME SECTIONS
 ========================================= */
 
-.projects-preview {
+.home-sections {
+
     position: relative;
 
-    padding: 140px 0;
+    display: flex;
 
-    overflow: hidden;
+    flex-direction: column;
 
-    isolation: isolate;
+    gap: 60px;
+
+    width: 100%;
+
+    padding:
+        60px
+        0
+        100px;
+
 }
 
 
 /* =========================================
-   PROJECT GLOW
+   SECTION CONTAINER
 ========================================= */
 
-.projects-preview::before {
+.home-section-container {
+
+    position: relative;
+
+    width:
+        calc(100% - 20px);
+
+    max-width:
+        1600px;
+
+    margin:
+        0 auto;
+
+    overflow: hidden;
+
+    border:
+
+        1px solid
+
+        rgba(
+            255,
+            255,
+            255,
+            0.055
+        );
+
+    border-radius:
+        28px;
+
+    isolation: isolate;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                255,
+                255,
+                0.018
+            ),
+            rgba(
+                255,
+                255,
+                255,
+                0.006
+            )
+        );
+
+    box-shadow:
+
+        0 25px 80px
+        rgba(
+            0,
+            0,
+            0,
+            0.18
+        );
+
+}
+
+
+/* =========================================
+   SECTION CONTENT
+========================================= */
+
+.home-section-container
+:deep(.section-layout > .container) {
+
+    width: 100%;
+
+    max-width: none;
+
+    padding-left:
+        70px;
+
+    padding-right:
+        70px;
+
+}
+
+
+.home-section-container
+:deep(.section-layout) {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: none;
+
+    overflow: hidden;
+
+    background:
+        transparent;
+
+    padding:
+        100px
+        70px;
+
+}
+
+
+/* =========================================
+   PROJECTS CONTAINER
+========================================= */
+
+.projects-container {
+
+    background:
+
+        radial-gradient(
+            circle at 5% 10%,
+            rgba(
+                168,
+                85,
+                247,
+                0.075
+            ),
+            transparent 34%
+        ),
+
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(
+                217,
+                70,
+                239,
+                0.035
+            ),
+            transparent 35%
+        ),
+
+        rgba(
+            10,
+            9,
+            17,
+            0.7
+        );
+
+}
+
+
+:deep(.home-projects::before) {
+
     content: "";
 
     position: absolute;
 
-    top: -250px;
-    left: -250px;
+    top: -140px;
+    left: -180px;
 
-    width: 700px;
-    height: 700px;
+    width: 520px;
+    height: 520px;
 
     border-radius: 50%;
 
     background:
+
         radial-gradient(
             circle,
-            rgba(139, 92, 246, 0.18) 0%,
-            rgba(139, 92, 246, 0.08) 35%,
-            transparent 70%
+
+            rgba(
+                168,
+                85,
+                247,
+                0.14
+            ) 0%,
+
+            rgba(
+                217,
+                70,
+                239,
+                0.07
+            ) 35%,
+
+            transparent 72%
         );
 
-    filter: blur(40px);
+    filter:
+        blur(30px);
 
     pointer-events: none;
 
     z-index: -1;
-}
 
-/* =========================================
-   PROJECTS HEADING
-========================================= */
-
-.projects-heading {
-    max-width: 850px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.projects-heading p {
-    max-width: 650px;
-    margin: 32px auto 0;
 }
 
 
-/*
-   Geen aparte font-styling voor
-   PROJECTEN of de heading.
+:deep(.home-projects::after) {
 
-   Hierdoor gebruiken ze dezelfde
-   algemene HomeView styling als
-   de andere secties.
-*/
+    content: "";
 
-.projects-heading .section-label {
-    
-    margin-bottom: 28px;
-}
+    position: absolute;
 
+    right: -180px;
+    bottom: -160px;
 
-.projects-heading h2 {
-    margin: 0;
-}
+    width: 480px;
+    height: 480px;
 
-
-.projects-heading p {
-    max-width: 650px;
-
-    margin-top: 32px;
-
-    margin-bottom: 0;
-
-    
-}
-
-
-/* =========================================
-   HOME PROJECT CARDS
-========================================= */
-
-.home-project-card {
-    display: flex;
-
-    flex-direction: column;
-
-    min-width: 0;
-
-    height: 100%;
-
-    overflow: hidden;
-
-    text-decoration: none;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.08);
-
-    border-radius: 14px;
+    border-radius: 50%;
 
     background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.04),
-            rgba(139, 92, 246, 0.03)
+
+        radial-gradient(
+            circle,
+
+            rgba(
+                236,
+                72,
+                153,
+                0.09
+            ) 0%,
+
+            rgba(
+                168,
+                85,
+                247,
+                0.05
+            ) 38%,
+
+            transparent 72%
         );
 
-    transition:
-        transform 0.4s ease,
-        border-color 0.4s ease,
-        box-shadow 0.4s ease;
-}
+    filter:
+        blur(30px);
 
+    pointer-events: none;
 
-.home-project-card:hover {
-    transform:
-        translateY(-8px);
+    z-index: -1;
 
-    border-color:
-        rgba(139, 92, 246, 0.45);
-
-    box-shadow:
-        0 20px 60px
-        rgba(0, 0, 0, 0.35);
 }
 
 
 /* =========================================
-   PROJECT IMAGE
+   DISCIPLINES CONTAINER
 ========================================= */
 
-.home-project-image {
-    height: 240px;
-
-    overflow: hidden;
-
-    background: #11131a;
-}
-
-
-.home-project-image img {
-    display: block;
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    transition:
-        transform 0.6s
-        cubic-bezier(
-            0.16,
-            1,
-            0.3,
-            1
-        );
-}
-
-
-.home-project-card:hover
-.home-project-image img {
-    transform:
-        scale(1.05);
-}
-
-
-/* =========================================
-   PROJECT CONTENT
-========================================= */
-
-.home-project-card-content {
-    display: flex;
-
-    flex-direction: column;
-
-    flex: 1;
-
-    padding: 28px;
-}
-
-
-.home-project-category {
-    display: block;
-
-    margin-bottom: 12px;
-
-    color: #a78bfa;
-
-    font-family: monospace;
-
-    
-
-    letter-spacing: 0.15em;
-
-    text-transform: uppercase;
-}
-
-
-.home-project-card h3 {
-    margin: 0 0 12px;
-
-    color: #ffffff;
-
-    
-
-    letter-spacing: -0.03em;
-}
-
-
-.home-project-card p {
-    margin: 0 0 22px;
-
-    color:
-        rgba(255, 255, 255, 0.55);
-
-    line-height: 1.7;
-}
-
-
-/* =========================================
-   TECHNOLOGIES
-========================================= */
-
-.home-project-technologies {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 7px;
-
-    margin-top: auto;
-}
-
-/*
-.home-project-technologies .technology {
-    padding:
-        5px 9px;
-
-    color:
-        rgba(255, 255, 255, 0.55);
-
-    border:
-        1px solid
-        rgba(139, 92, 246, 0.15);
-
-    border-radius: 5px;
+.disciplines-container {
 
     background:
-        rgba(139, 92, 246, 0.04);
 
-    font-size: 0.9rem;
+        radial-gradient(
+            circle at 95% 5%,
+            rgba(
+                59,
+                130,
+                246,
+                0.07
+            ),
+            transparent 34%
+        ),
+
+        radial-gradient(
+            circle at 5% 90%,
+            rgba(
+                6,
+                182,
+                212,
+                0.035
+            ),
+            transparent 35%
+        ),
+
+        rgba(
+            7,
+            11,
+            18,
+            0.72
+        );
+
 }
-    */
+
+
+:deep(.home-disciplines::before) {
+
+    content: "";
+
+    position: absolute;
+
+    top: -120px;
+    right: -180px;
+
+    width: 540px;
+    height: 540px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+
+            rgba(
+                59,
+                130,
+                246,
+                0.13
+            ) 0%,
+
+            rgba(
+                6,
+                182,
+                212,
+                0.07
+            ) 38%,
+
+            transparent 72%
+        );
+
+    filter:
+        blur(30px);
+
+    pointer-events: none;
+
+    z-index: -1;
+
+}
+
+
+:deep(.home-disciplines::after) {
+
+    content: "";
+
+    position: absolute;
+
+    left: -180px;
+    bottom: -160px;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+
+            rgba(
+                14,
+                165,
+                233,
+                0.08
+            ) 0%,
+
+            rgba(
+                59,
+                130,
+                246,
+                0.045
+            ) 40%,
+
+            transparent 72%
+        );
+
+    filter:
+        blur(30px);
+
+    pointer-events: none;
+
+    z-index: -1;
+
+}
+
+
+/* =========================================
+   CONTACT CONTAINER
+========================================= */
+
+.contact-container {
+
+    background:
+
+        radial-gradient(
+            circle at 35% 5%,
+            rgba(
+                139,
+                92,
+                246,
+                0.075
+            ),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 95% 90%,
+            rgba(
+                59,
+                130,
+                246,
+                0.045
+            ),
+            transparent 35%
+        ),
+
+        rgba(
+            9,
+            9,
+            17,
+            0.72
+        );
+
+}
+
+
+:deep(.home-contact::before) {
+
+    content: "";
+
+    position: absolute;
+
+    top: -150px;
+    left: 35%;
+
+    width: 560px;
+    height: 560px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+
+            rgba(
+                139,
+                92,
+                246,
+                0.13
+            ) 0%,
+
+            rgba(
+                59,
+                130,
+                246,
+                0.07
+            ) 35%,
+
+            transparent 72%
+        );
+
+    filter:
+        blur(30px);
+
+    pointer-events: none;
+
+    z-index: -1;
+
+}
+
+
+:deep(.home-contact::after) {
+
+    content: "";
+
+    position: absolute;
+
+    right: -160px;
+    bottom: -170px;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+
+            rgba(
+                59,
+                130,
+                246,
+                0.08
+            ) 0%,
+
+            rgba(
+                139,
+                92,
+                246,
+                0.05
+            ) 38%,
+
+            transparent 72%
+        );
+
+    filter:
+        blur(30px);
+
+    pointer-events: none;
+
+    z-index: -1;
+
+}
 
 
 /* =========================================
    CONTACT CTA
 ========================================= */
 
-.contact-section {
-    padding-top: 160px;
-    padding-bottom: 220px;
-}
+.contact-content-wrapper {
 
-.contact-section-content {
-    max-width: 1100px;
-    margin: 0 auto;
+    position: relative;
 
     display: flex;
-    align-items: center;
-    justify-content: space-between;
 
-    gap: 80px;
-}
-
-.contact-section-text {
-    flex: 1;
-    text-align: left;
-}
-
-.contact-section-content .section-label {
-    
-    margin-bottom: 28px;
-}
-
-.contact-actions {
-    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-    flex-shrink: 0;
+
+    align-items: center;
+
+    width: 100%;
+
 }
 
 
+.contact-scene-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 280px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.contact-scene-wrapper::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+
+            rgba(
+                139,
+                92,
+                246,
+                0.18
+            ) 0%,
+
+            rgba(
+                0,
+                212,
+                255,
+                0.08
+            ) 38%,
+
+            transparent 72%
+        );
+
+    filter:
+        blur(30px);
+
+    pointer-events: none;
+
+}
+
+
+.contact-cta {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    width: 100%;
+
+    margin-top: 10px;
+
+}
+
+
+.contact-cta .btn {
+
+    min-width: 190px;
+
+    transition:
+
+        transform 250ms ease,
+        box-shadow 250ms ease;
+
+}
+
+
+.contact-cta .btn:hover {
+
+    transform:
+        translateY(-4px);
+
+}
+
+
+.contact-primary-button:hover {
+
+    box-shadow:
+
+        0 12px 35px
+
+        rgba(
+            139,
+            92,
+            246,
+            0.3
+        );
+
+}
+
+
+.contact-secondary-button:hover {
+
+    box-shadow:
+
+        0 10px 30px
+
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
+}
+
+
+/* =========================================
+   PROJECT / CONTENT HOVER
+========================================= */
+
+:deep(.project-card),
+:deep(.project-preview-card),
+:deep(.project-item) {
+
+    transition:
+
+        transform 300ms ease,
+        box-shadow 300ms ease;
+
+    will-change:
+        transform;
+
+}
+
+
+:deep(.project-card:hover),
+:deep(.project-preview-card:hover),
+:deep(.project-item:hover) {
+
+    transform:
+        translateY(-6px);
+
+}
+
+
+/* =========================================
+   PROJECT IMAGE HOVER
+========================================= */
+
+:deep(.project-card img),
+:deep(.project-preview-card img),
+:deep(.project-item img),
+:deep(.project-image img),
+:deep(.project-preview img) {
+
+    transition:
+
+        transform 450ms
+        cubic-bezier(
+            0.2,
+            0.8,
+            0.2,
+            1
+        );
+
+    will-change:
+        transform;
+
+}
+
+
+:deep(.project-card:hover img),
+:deep(.project-preview-card:hover img),
+:deep(.project-item:hover img),
+:deep(.project-image:hover img),
+:deep(.project-preview:hover img) {
+
+    transform:
+        scale(1.06);
+
+}
+
+
+/* =========================================
+   PROJECT IMAGE CONTAINER
+========================================= */
+
+:deep(.project-card .project-image),
+:deep(.project-preview-card .project-image),
+:deep(.project-item .project-image),
+:deep(.project-preview) {
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================
+   TECH LABELS
+========================================= */
+
+:deep(.tech-label),
+:deep(.tech-tag),
+:deep(.project-tech span),
+:deep(.project-technologies span) {
+
+    transition:
+
+        transform 220ms ease,
+        color 220ms ease,
+        background-color 220ms ease,
+        box-shadow 220ms ease;
+
+}
+
+
+:deep(.tech-label:hover),
+:deep(.tech-tag:hover),
+:deep(.project-tech span:hover),
+:deep(.project-technologies span:hover) {
+
+    transform:
+
+        scale(1.08)
+        translateY(-2px);
+
+    box-shadow:
+
+        0 5px 18px
+
+        rgba(
+            139,
+            92,
+            246,
+            0.20
+        );
+
+}
+
+
+/* =========================================
+   WORK DISCIPLINES HOVER
+========================================= */
+
+:deep(.work-discipline),
+:deep(.discipline-card),
+:deep(.discipline-item) {
+
+    transition:
+
+        transform 300ms ease,
+        box-shadow 300ms ease;
+
+}
+
+
+:deep(.work-discipline:hover),
+:deep(.discipline-card:hover),
+:deep(.discipline-item:hover) {
+
+    transform:
+        translateY(-5px);
+
+}
 
 
 /* =========================================
@@ -2027,13 +2627,87 @@ h3 {
 
 @media (max-width: 991px) {
 
-    .home-project-grid-item:nth-child(3) {
-        display: none;
+    .hero {
+
+        padding-top:
+            170px;
+
     }
 
-    .home-project-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+
+    .hero-content {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 40px;
+
+        text-align: center;
+
+    }
+
+
+    .hero-title-content {
+
+        width: 100%;
+
+    }
+
+
+    .hero-actions {
+
+        width: 100%;
+
+        max-width: 380px;
+
+        flex: none;
+
+    }
+
+
+    .home-sections {
+
+        gap: 40px;
+
+        padding:
+            40px
+            0
+            70px;
+
+    }
+
+
+    .home-section-container {
+
+        width:
+            calc(100% - 28px);
+
+        border-radius:
+            24px;
+
+    }
+
+
+    .home-section-container
+    :deep(.section-layout > .container) {
+
+        padding-left:
+            30px;
+
+        padding-right:
+            30px;
+
+    }
+
+
+    .home-section-container
+    :deep(.section-layout) {
+
+        padding:
+            75px
+            30px;
+
     }
 
 }
@@ -2041,137 +2715,237 @@ h3 {
 
 @media (max-width: 768px) {
 
-    .home-project-grid {
-        grid-template-columns: 1fr;
-    }
-
-   
-
-    .contact-section {
-        padding-top: 110px;
-        padding-bottom: 160px;
-    }
-
-
-
     .hero {
+
         min-height: 90vh;
+
+        padding-top:
+            150px;
+
     }
 
 
-      .hero-content {
-        flex-direction: column;
-        align-items: center;
+    .hero-content {
+
         gap: 40px;
-        text-align: center;
+
     }
 
-    .hero-text-content {
+
+    .hero-actions {
+
         width: 100%;
-        max-width: 800px;
-        text-align: center;
+
+        max-width: 320px;
+
+        align-items: center;
+
     }
+
 
     .hero-buttons {
+
         width: 100%;
+
         max-width: 320px;
+
         align-items: stretch;
+
     }
 
 
     .hero h1 {
+
         font-size:
+
             clamp(
                 3.2rem,
                 14vw,
                 5rem
             );
 
-        letter-spacing: -2px;
+        letter-spacing:
+            -2px;
+
     }
 
 
     .hero-text {
+
         margin-top: 28px;
 
-        font-size: 1rem;
+        font-size:
+            1rem;
+
     }
 
 
-    
-
     .hero::before {
-        width: 400px;
 
+        width: 400px;
         height: 400px;
+
     }
 
 
     .hero::after {
+
         width: 300px;
-
         height: 300px;
+
     }
 
 
-    .projects-preview {
-        padding: 90px 0;
+    .home-sections {
+
+        gap: 32px;
+
+        padding:
+            32px
+            0
+            60px;
+
     }
 
 
-    .projects-heading .section-label {
-        margin-bottom: 22px;
+    .home-section-container {
+
+        width:
+            calc(100% - 20px);
+
+        border-radius:
+            22px;
+
     }
 
 
-    .projects-heading p {
-        margin-top: 24px;
+    .home-section-container
+    :deep(.section-layout > .container) {
+
+        padding-left:
+            24px;
+
+        padding-right:
+            24px;
+
     }
 
 
-    .home-project-image {
-        height: 220px;
+    .home-section-container
+    :deep(.section-layout) {
+
+        padding:
+            60px
+            24px;
+
     }
 
-
-    .home-project-card-content {
-        padding: 25px;
-    }
-
-
-    .home-project-card h3 {
-        font-size: 1.6rem;
-    }
-
-
-    .home-project-card p {
-        font-size: 0.95rem;
-    }
-
-      .contact-section-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-
-        text-align: center;
-    }
-
-    .contact-section-text {
-        width: 100%;
-        text-align: center;
-    }
-
-    .contact-actions {
-        width: 100%;
-        max-width: 320px;
-        align-items: stretch;
-    }
 }
 
 
+@media (max-width: 576px) {
+
+    .hero {
+
+        padding-top:
+            125px;
+
+    }
+
+
+    .hero-content {
+
+        gap:
+            35px;
+
+    }
+
+
+    .hero-actions {
+
+        max-width:
+            100%;
+
+    }
+
+
+    .hero-buttons {
+
+        max-width:
+            320px;
+
+    }
+
+
+    .home-sections {
+
+        gap: 24px;
+
+        padding:
+            24px
+            0
+            45px;
+
+    }
+
+
+    .home-section-container {
+
+        width:
+            calc(100% - 12px);
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .home-section-container
+    :deep(.section-layout > .container) {
+
+        padding-left:
+            18px;
+
+        padding-right:
+            18px;
+
+    }
+
+
+    .home-section-container
+    :deep(.section-layout) {
+
+        padding:
+            50px
+            18px;
+
+    }
+
+
+    .contact-cta {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .contact-cta .btn {
+
+        width: 100%;
+
+    }
+
+
+    .contact-scene-wrapper {
+
+        min-height: 230px;
+
+    }
+
+}
 
 </style>
-```
 
 ```
-

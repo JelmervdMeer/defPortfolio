@@ -1,3 +1,4 @@
+```vue
 <script setup lang="ts">
 
 import {
@@ -8,7 +9,6 @@ import {
 } from 'vue';
 
 import { useRoute } from 'vue-router';
-
 import { projects } from '../data/projects';
 
 
@@ -24,11 +24,9 @@ const route = useRoute();
 // =====================================
 
 const project = computed(() => {
-
     return projects.find(
         item => item.slug === route.params.slug
     );
-
 });
 
 
@@ -37,11 +35,9 @@ const project = computed(() => {
 // =====================================
 
 const imageCount = computed(() => {
-
     return String(
         project.value?.images?.length ?? 0
     ).padStart(2, '0');
-
 });
 
 
@@ -50,11 +46,8 @@ const imageCount = computed(() => {
 // =====================================
 
 const carouselRotation = ref(0);
-
 const isDragging = ref(false);
-
 const startX = ref(0);
-
 const currentX = ref(0);
 
 
@@ -65,9 +58,7 @@ const currentX = ref(0);
 let animationFrame: number | null = null;
 
 let currentRotation = 0;
-
 let targetRotation = 0;
-
 
 function animateRotation() {
 
@@ -80,20 +71,8 @@ function animateRotation() {
         const difference =
             targetRotation - currentRotation;
 
-        /*
-         * Hoe kleiner dit getal,
-         * hoe langzamer en vloeiender
-         * de animatie.
-         */
-
         currentRotation +=
             difference * 0.12;
-
-
-        /*
-         * Wanneer we bijna bij het
-         * doel zijn, stoppen we netjes.
-         */
 
         if (Math.abs(difference) < 0.01) {
 
@@ -106,27 +85,21 @@ function animateRotation() {
             animationFrame = null;
 
             return;
-
         }
-
 
         carouselRotation.value =
             currentRotation;
-
 
         animationFrame =
             requestAnimationFrame(
                 animate
             );
-
     };
-
 
     animationFrame =
         requestAnimationFrame(
             animate
         );
-
 }
 
 
@@ -139,45 +112,27 @@ const radius = computed(() => {
     const count =
         project.value?.images?.length ?? 1;
 
-
     const cardWidth =
         window.innerWidth <= 768
-
             ? 350
-
             : window.innerWidth <= 991
-
                 ? 560
-
                 : 700;
-
-
-    /*
-     * Grotere radius zorgt voor
-     * meer ruimte tussen de foto's.
-     */
 
     const spacingFactor = 1.35;
 
-
     return Math.round(
-
         (
             cardWidth /
-
             (
                 2 *
-
                 Math.tan(
                     Math.PI / count
                 )
             )
         ) *
-
         spacingFactor
-
     );
-
 });
 
 
@@ -187,8 +142,8 @@ const angle = computed(() => {
         project.value?.images?.length ?? 1;
 
     return 360 / count;
-
 });
+
 
 // =====================================
 // FULLSCREEN IMAGE
@@ -197,11 +152,11 @@ const angle = computed(() => {
 const fullscreenImage =
     ref<string | null>(null);
 
-
 const fullscreenAlt =
     ref('');
 
-    // =====================================
+
+// =====================================
 // OPEN FULLSCREEN
 // =====================================
 
@@ -213,10 +168,8 @@ function openFullscreen(
     fullscreenImage.value =
         image;
 
-
     fullscreenAlt.value =
         `${project.value?.title ?? 'Project'} screenshot ${index + 1}`;
-
 }
 
 
@@ -231,7 +184,6 @@ function closeFullscreen() {
 
     fullscreenAlt.value =
         '';
-
 }
 
 
@@ -247,11 +199,8 @@ function handleKeydown(
         event.key === 'Escape' &&
         fullscreenImage.value
     ) {
-
         closeFullscreen();
-
     }
-
 }
 
 
@@ -266,11 +215,9 @@ function isFrontImage(
     const count =
         project.value?.images?.length ?? 1;
 
-
     if (count <= 1) {
         return true;
     }
-
 
     const imageRotation =
         (
@@ -280,18 +227,15 @@ function isFrontImage(
             ) % 360 + 360
         ) % 360;
 
-
     const normalized =
         imageRotation > 180
             ? imageRotation - 360
             : imageRotation;
 
-
     return (
         Math.abs(normalized) <
         angle.value / 2
     );
-
 }
 
 
@@ -305,7 +249,6 @@ function rotateNext() {
         angle.value;
 
     animateRotation();
-
 }
 
 
@@ -315,7 +258,6 @@ function rotatePrevious() {
         angle.value;
 
     animateRotation();
-
 }
 
 
@@ -327,12 +269,6 @@ function startDrag(
     event: MouseEvent
 ) {
 
-    /*
-     * Een eventuele lopende animatie
-     * stoppen zodat de gebruiker direct
-     * controle krijgt.
-     */
-
     if (animationFrame !== null) {
 
         cancelAnimationFrame(
@@ -340,13 +276,7 @@ function startDrag(
         );
 
         animationFrame = null;
-
     }
-
-
-    /*
-     * Synchroniseer de huidige positie.
-     */
 
     currentRotation =
         carouselRotation.value;
@@ -354,15 +284,14 @@ function startDrag(
     targetRotation =
         currentRotation;
 
-
-    isDragging.value = true;
+    isDragging.value =
+        true;
 
     startX.value =
         event.clientX;
 
     currentX.value =
         event.clientX;
-
 }
 
 
@@ -374,41 +303,31 @@ function drag(
         return;
     }
 
-
     currentX.value =
         event.clientX;
-
 
     const difference =
         currentX.value -
         startX.value;
 
-
     if (Math.abs(difference) > 50) {
 
         if (difference > 0) {
-
             rotatePrevious();
-
         } else {
-
             rotateNext();
-
         }
-
 
         startX.value =
             currentX.value;
-
     }
-
 }
 
 
 function stopDrag() {
 
-    isDragging.value = false;
-
+    isDragging.value =
+        false;
 }
 
 
@@ -424,13 +343,6 @@ function startTouch(
         return;
     }
 
-
-    /*
-     * Stop eventuele animatie
-     * wanneer de gebruiker opnieuw
-     * begint te slepen.
-     */
-
     if (animationFrame !== null) {
 
         cancelAnimationFrame(
@@ -438,9 +350,7 @@ function startTouch(
         );
 
         animationFrame = null;
-
     }
-
 
     currentRotation =
         carouselRotation.value;
@@ -448,16 +358,14 @@ function startTouch(
     targetRotation =
         currentRotation;
 
-
-    isDragging.value = true;
-
+    isDragging.value =
+        true;
 
     startX.value =
         event.touches[0].clientX;
 
     currentX.value =
         event.touches[0].clientX;
-
 }
 
 
@@ -472,45 +380,270 @@ function moveTouch(
         return;
     }
 
-
     currentX.value =
         event.touches[0].clientX;
-
 
     const difference =
         currentX.value -
         startX.value;
 
-
     if (Math.abs(difference) > 50) {
 
         if (difference > 0) {
-
             rotatePrevious();
-
         } else {
-
             rotateNext();
-
         }
-
 
         startX.value =
             currentX.value;
-
     }
-
 }
 
 
 function endTouch() {
 
-    isDragging.value = false;
+    isDragging.value =
+        false;
 
-    currentX.value = 0;
+    currentX.value =
+        0;
 
-    startX.value = 0;
+    startX.value =
+        0;
+}
 
+
+// =====================================
+// FEATURES CAROUSEL
+// =====================================
+
+const featureIndex = ref(0);
+const isFeatureDragging = ref(false);
+const featureStartY = ref(0);
+
+let featureInterval: number | null = null;
+
+const currentFeatureIndex = computed(() => {
+
+    const features =
+        project.value?.features ?? [];
+
+    if (!features.length) {
+        return 0;
+    }
+
+    return (
+        (
+            featureIndex.value %
+            features.length
+        ) +
+        features.length
+    ) % features.length;
+});
+
+
+function getFeatureOffset(
+    index: number
+): number {
+
+    const features =
+        project.value?.features ?? [];
+
+    if (!features.length) {
+        return 0;
+    }
+
+    let offset =
+        index -
+        currentFeatureIndex.value;
+
+    const count =
+        features.length;
+
+    if (offset > count / 2) {
+        offset -= count;
+    }
+
+    if (offset < -count / 2) {
+        offset += count;
+    }
+
+    return offset;
+}
+
+
+function nextFeature() {
+
+    const features =
+        project.value?.features ?? [];
+
+    if (features.length <= 1) {
+        return;
+    }
+
+    featureIndex.value++;
+}
+
+
+function previousFeature() {
+
+    const features =
+        project.value?.features ?? [];
+
+    if (features.length <= 1) {
+        return;
+    }
+
+    featureIndex.value--;
+}
+
+
+function startFeatureDrag(
+    event: MouseEvent
+) {
+
+    isFeatureDragging.value =
+        true;
+
+    featureStartY.value =
+        event.clientY;
+
+    stopFeatureAutoplay();
+}
+
+
+function moveFeatureDrag(
+    event: MouseEvent
+) {
+
+    if (!isFeatureDragging.value) {
+        return;
+    }
+
+    const difference =
+        event.clientY -
+        featureStartY.value;
+
+    if (Math.abs(difference) > 40) {
+
+        if (difference < 0) {
+            nextFeature();
+        } else {
+            previousFeature();
+        }
+
+        featureStartY.value =
+            event.clientY;
+    }
+}
+
+
+function stopFeatureDrag() {
+
+    if (!isFeatureDragging.value) {
+        return;
+    }
+
+    isFeatureDragging.value =
+        false;
+
+    startFeatureAutoplay();
+}
+
+
+function startFeatureAutoplay() {
+
+    stopFeatureAutoplay();
+
+    if (
+        !project.value?.features ||
+        project.value.features.length <= 1
+    ) {
+        return;
+    }
+
+    featureInterval =
+        window.setInterval(() => {
+
+            if (!isFeatureDragging.value) {
+                nextFeature();
+            }
+
+        }, 3000);
+}
+
+
+function stopFeatureAutoplay() {
+
+    if (featureInterval !== null) {
+
+        window.clearInterval(
+            featureInterval
+        );
+
+        featureInterval = null;
+    }
+}
+
+
+// =====================================
+// FEATURE TOUCH
+// =====================================
+
+function startFeatureTouch(
+    event: TouchEvent
+) {
+
+    if (!event.touches.length) {
+        return;
+    }
+
+    isFeatureDragging.value =
+        true;
+
+    featureStartY.value =
+        event.touches[0].clientY;
+
+    stopFeatureAutoplay();
+}
+
+
+function moveFeatureTouch(
+    event: TouchEvent
+) {
+
+    if (
+        !isFeatureDragging.value ||
+        !event.touches.length
+    ) {
+        return;
+    }
+
+    const difference =
+        event.touches[0].clientY -
+        featureStartY.value;
+
+    if (Math.abs(difference) > 40) {
+
+        if (difference < 0) {
+            nextFeature();
+        } else {
+            previousFeature();
+        }
+
+        featureStartY.value =
+            event.touches[0].clientY;
+    }
+}
+
+
+function endFeatureTouch() {
+
+    isFeatureDragging.value =
+        false;
+
+    startFeatureAutoplay();
 }
 
 
@@ -529,10 +662,8 @@ function setupRevealObserver() {
             '.reveal, .reveal-left, .reveal-right'
         );
 
-
     revealObserver =
         new IntersectionObserver(
-
             entries => {
 
                 entries.forEach(
@@ -546,24 +677,18 @@ function setupRevealObserver() {
                                 'is-visible'
                             );
 
-
                             revealObserver?.unobserve(
                                 entry.target
                             );
-
                         }
-
                     }
                 );
 
             },
-
             {
                 threshold: 0.12
             }
-
         );
-
 
     elements.forEach(
         element => {
@@ -571,10 +696,8 @@ function setupRevealObserver() {
             revealObserver?.observe(
                 element
             );
-
         }
     );
-
 }
 
 
@@ -586,12 +709,12 @@ onMounted(() => {
 
     setupRevealObserver();
 
+    startFeatureAutoplay();
 
     window.addEventListener(
         'keydown',
         handleKeydown
     );
-
 });
 
 
@@ -599,12 +722,12 @@ onUnmounted(() => {
 
     revealObserver?.disconnect();
 
-
     window.removeEventListener(
         'keydown',
         handleKeydown
     );
 
+    stopFeatureAutoplay();
 
     if (animationFrame !== null) {
 
@@ -613,9 +736,7 @@ onUnmounted(() => {
         );
 
         animationFrame = null;
-
     }
-
 });
 
 </script>
@@ -634,7 +755,6 @@ onUnmounted(() => {
 
         <div class="container">
 
-
             <!-- =====================================
                  PROJECT HEADER
             ====================================== -->
@@ -649,7 +769,6 @@ onUnmounted(() => {
                     {{ project.category }}
                 </div>
 
-
                 <h1
                     class="reveal"
                     style="transition-delay: 100ms"
@@ -657,14 +776,12 @@ onUnmounted(() => {
                     {{ project.title }}
                 </h1>
 
-
                 <p
                     class="reveal"
                     style="transition-delay: 200ms"
                 >
                     {{ project.description }}
                 </p>
-
 
                 <div
                     v-if="
@@ -682,15 +799,12 @@ onUnmounted(() => {
                         rel="noopener noreferrer"
                         class="btn btn-outline-light"
                     >
-
                         GitHub
 
                         <i
                             class="bi bi-github ms-2"
                         ></i>
-
                     </a>
-
 
                     <a
                         v-if="project.demo"
@@ -699,13 +813,11 @@ onUnmounted(() => {
                         rel="noopener noreferrer"
                         class="btn btn-primary"
                     >
-
                         Live demo
 
                         <i
                             class="bi bi-arrow-up-right ms-2"
                         ></i>
-
                     </a>
 
                 </div>
@@ -715,8 +827,6 @@ onUnmounted(() => {
 
             <!-- =====================================
                  MAIN VIDEO
-                 Video krijgt voorrang
-                 op de hoofdfoto.
             ====================================== -->
 
             <section
@@ -729,11 +839,9 @@ onUnmounted(() => {
                     PROJECT DEMO
                 </div>
 
-
                 <h2>
                     Bekijk het project in actie.
                 </h2>
-
 
                 <div class="project-video-wrapper">
 
@@ -761,9 +869,6 @@ onUnmounted(() => {
 
             <!-- =====================================
                  MAIN IMAGE
-
-                 Alleen tonen wanneer
-                 er geen video beschikbaar is.
             ====================================== -->
 
             <div
@@ -805,7 +910,6 @@ onUnmounted(() => {
 
                     </div>
 
-
                     <div
                         class="project-cylinder-count"
                     >
@@ -821,17 +925,17 @@ onUnmounted(() => {
                 </div>
 
 
-                <!-- =====================================
-                     CYLINDER STAGE
-                ====================================== -->
+                <!-- CYLINDER -->
 
                 <div
                     class="cylinder-stage reveal"
                     style="transition-delay: 150ms"
+
                     @mousedown="startDrag"
                     @mousemove="drag"
                     @mouseup="stopDrag"
                     @mouseleave="stopDrag"
+
                     @touchstart="startTouch"
                     @touchmove="moveTouch"
                     @touchend="endTouch"
@@ -840,9 +944,11 @@ onUnmounted(() => {
 
                     <div
                         class="cylinder"
+
                         :class="{
                             dragging: isDragging
                         }"
+
                         :style="{
                             transform:
                                 `translateZ(-${radius}px) rotateY(${carouselRotation}deg)`
@@ -850,66 +956,71 @@ onUnmounted(() => {
                     >
 
                         <div
-    v-for="(
-        image,
-        index
-    ) in project.images"
-    :key="image"
-    class="cylinder-card"
-    :class="{
-        'is-front':
-            isFrontImage(index)
-    }"
-    :style="{
-        transform:
-            `rotateY(${index * angle}deg) translateZ(${radius}px)`
-    }"
-    @click="
-        isFrontImage(index) &&
-        openFullscreen(
-            image,
-            index
-        )
-    "
->
+                            v-for="(
+                                image,
+                                index
+                            ) in project.images"
 
-    <div
-        v-if="isFrontImage(index)"
-        class="cylinder-fullscreen-icon"
-    >
+                            :key="image"
 
-        <i
-            class="bi bi-arrows-fullscreen"
-        ></i>
+                            class="cylinder-card"
 
-    </div>
+                            :class="{
+                                'is-front':
+                                    isFrontImage(index)
+                            }"
 
+                            :style="{
+                                transform:
+                                    `rotateY(${index * angle}deg) translateZ(${radius}px)`
+                            }"
 
-    <img
-        :src="image"
-        :alt="
-            `${project.title} screenshot ${index + 1}`
-        "
-        draggable="false"
-    />
+                            @click="
+                                isFrontImage(index) &&
+                                openFullscreen(
+                                    image,
+                                    index
+                                )
+                            "
+                        >
 
+                            <div
+                                v-if="isFrontImage(index)"
+                                class="cylinder-fullscreen-icon"
+                            >
 
-    <div
-        class="cylinder-number"
-    >
+                                <i
+                                    class="bi bi-arrows-fullscreen"
+                                ></i>
 
-        {{
-            String(
-                index + 1
-            ).padStart(
-                2,
-                '0'
-            )
-        }}
+                            </div>
 
-    </div>
+                            <img
+                                :src="image"
 
-</div>
+                                :alt="
+                                    `${project.title} screenshot ${index + 1}`
+                                "
+
+                                draggable="false"
+                            />
+
+                            <div
+                                class="cylinder-number"
+                            >
+
+                                {{
+                                    String(
+                                        index + 1
+                                    ).padStart(
+                                        2,
+                                        '0'
+                                    )
+                                }}
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -925,13 +1036,14 @@ onUnmounted(() => {
 
                     <button
                         type="button"
+
                         class="
                             cylinder-arrow
                             cylinder-arrow-left
                         "
-                        aria-label="
-                            Vorige afbeelding
-                        "
+
+                        aria-label="Vorige afbeelding"
+
                         @click="rotatePrevious"
                     >
 
@@ -946,13 +1058,14 @@ onUnmounted(() => {
 
                     <button
                         type="button"
+
                         class="
                             cylinder-arrow
                             cylinder-arrow-right
                         "
-                        aria-label="
-                            Volgende afbeelding
-                        "
+
+                        aria-label="Volgende afbeelding"
+
                         @click="rotateNext"
                     >
 
@@ -983,268 +1096,295 @@ onUnmounted(() => {
 
 
             <!-- =====================================
-                 PROJECT CONTENT
+                 FEATURES
+                 VERTICAL CAROUSEL
             ====================================== -->
 
             <section
-                class="project-detail-content"
+                v-if="project.features?.length"
+
+                class="
+                    project-split-section
+                    project-features-section
+                    reveal
+                "
             >
 
-                <div class="row g-5">
+                <div class="project-split-grid">
+
+                    <!-- TITLE -->
+
+                    <div class="project-split-title">
+
+                        <div class="section-label">
+                            FEATURES
+                        </div>
+
+                        <h2>
+
+                            Wat heb ik
+
+                            <span class="animated-gradient-text">
+                                gebouwd?
+                            </span>
+
+                        </h2>
+
+                    </div>
 
 
-                    <!-- =====================================
-                         MAIN CONTENT
-                    ====================================== -->
+                    <!-- VERTICAL CAROUSEL -->
 
-                    <div class="col-lg-8">
+                    <div
+                        class="project-split-content"
+                    >
 
+                        <div
+                            class="feature-carousel-wrapper"
 
-                        <!-- FEATURES -->
+                            @mousedown="startFeatureDrag"
+                            @mousemove="moveFeatureDrag"
+                            @mouseup="stopFeatureDrag"
+                            @mouseleave="stopFeatureDrag"
 
-                        <section
-                            v-if="
-                                project.features?.length
-                            "
-                            class="
-                                project-section
-                                reveal
-                            "
+                            @touchstart="startFeatureTouch"
+                            @touchmove="moveFeatureTouch"
+                            @touchend="endFeatureTouch"
+                            @touchcancel="endFeatureTouch"
                         >
 
-                            <div class="section-label">
-                                FEATURES
-                            </div>
-
-
-                            <h2>
-                                Wat heb ik gebouwd?
-                            </h2>
-
-
-                            <div class="row g-3">
+                            <div
+                                class="feature-carousel"
+                            >
 
                                 <div
                                     v-for="(
                                         feature,
                                         index
                                     ) in project.features"
+
                                     :key="feature"
-                                    class="col-md-6"
-                                >
 
-                                    <div
-                                        class="
-                                            feature-card
-                                            reveal
-                                        "
-                                        :style="{
-                                            transitionDelay:
-                                                `${index * 100}ms`
-                                        }"
-                                    >
+                                    class="feature-carousel-item"
 
-                                        <span
-                                            class="
-                                                feature-number
-                                            "
-                                        >
+                                    :class="{
+                                        active:
+                                            getFeatureOffset(index) === 0,
 
-                                            {{
-                                                String(
-                                                    index + 1
-                                                ).padStart(
-                                                    2,
-                                                    '0'
-                                                )
-                                            }}
+                                        previous:
+                                            getFeatureOffset(index) === -1,
 
-                                        </span>
+                                        next:
+                                            getFeatureOffset(index) === 1,
 
+                                        hidden:
+                                            Math.abs(
+                                                getFeatureOffset(index)
+                                            ) > 1
+                                    }"
 
-                                        <span>
-                                            {{ feature }}
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </section>
-
-
-                        <!-- =====================================
-                             CHALLENGE
-                        ====================================== -->
-
-                        <section
-                            v-if="
-                                project.challenges
-                            "
-                            class="
-                                project-section
-                                reveal
-                            "
-                        >
-
-                            <div class="section-label">
-                                CHALLENGE
-                            </div>
-
-
-                            <h2>
-                                De uitdaging
-                            </h2>
-
-
-                            <p
-                                class="large-text"
-                            >
-                                {{ project.challenges }}
-                            </p>
-
-                        </section>
-
-
-                        <!-- =====================================
-                             SOLUTION
-                        ====================================== -->
-
-                        <section
-                            v-if="
-                                project.solution
-                            "
-                            class="
-                                project-section
-                                reveal
-                            "
-                        >
-
-                            <div class="section-label">
-                                SOLUTION
-                            </div>
-
-
-                            <h2>
-                                De oplossing
-                            </h2>
-
-
-                            <p
-                                class="large-text"
-                            >
-                                {{ project.solution }}
-                            </p>
-
-                        </section>
-
-                    </div>
-
-
-                    <!-- =====================================
-                         SIDEBAR
-                    ====================================== -->
-
-                    <aside
-                        class="col-lg-4"
-                    >
-
-
-                        <!-- TECHNOLOGIES -->
-
-                        <div
-                            class="
-                                technology-box
-                                reveal-right
-                            "
-                        >
-
-                            <div class="section-label">
-                                TECHNOLOGIES
-                            </div>
-
-
-                            <div
-                                class="
-                                    detail-technologies
-                                "
-                            >
-
-                                <span
-                                    v-for="
-                                        technology in
-                                        project.technologies
-                                    "
-                                    :key="technology"
-                                    class="technology"
-                                >
-
-                                    {{ technology }}
-
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- ROLE -->
-
-                        <div
-                            v-if="
-                                project.role?.length
-                            "
-                            class="
-                                technology-box
-                                mt-4
-                                reveal-right
-                            "
-                            style="
-                                transition-delay: 150ms
-                            "
-                        >
-
-                            <div class="section-label">
-                                MIJN ROL
-                            </div>
-
-
-                            <div class="role-list">
-
-                                <div
-                                    v-for="(
-                                        role,
-                                        index
-                                    ) in project.role"
-                                    :key="role"
-                                    class="role-item"
                                     :style="{
-                                        transitionDelay:
-                                            `${index * 80}ms`
+                                        '--feature-offset':
+                                            getFeatureOffset(index)
                                     }"
                                 >
 
-                                    <i
-                                        class="
-                                            bi
-                                            bi-check2
-                                        "
-                                    ></i>
+                                    <span
+                                        class="feature-carousel-number"
+                                    >
 
+                                        {{
+                                            String(
+                                                index + 1
+                                            ).padStart(
+                                                2,
+                                                '0'
+                                            )
+                                        }}
 
-                                    <span>
-                                        {{ role }}
+                                    </span>
+
+                                    <span
+                                        class="feature-carousel-text"
+                                    >
+                                        {{ feature }}
                                     </span>
 
                                 </div>
 
                             </div>
 
+
+                            <!-- CONTROLS -->
+
+                            <div
+                                class="feature-carousel-controls"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="feature-carousel-arrow"
+                                    aria-label="Vorige feature"
+                                    @click="previousFeature"
+                                >
+
+                                    <i
+                                        class="bi bi-arrow-up"
+                                    ></i>
+
+                                </button>
+
+
+                                <div
+                                    class="feature-carousel-counter"
+                                >
+
+                                    {{
+                                        String(
+                                            currentFeatureIndex + 1
+                                        ).padStart(
+                                            2,
+                                            '0'
+                                        )
+                                    }}
+
+                                    <span>
+                                        /
+                                        {{
+                                            String(
+                                                project.features.length
+                                            ).padStart(
+                                                2,
+                                                '0'
+                                            )
+                                        }}
+                                    </span>
+
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    class="feature-carousel-arrow"
+                                    aria-label="Volgende feature"
+                                    @click="nextFeature"
+                                >
+
+                                    <i
+                                        class="bi bi-arrow-down"
+                                    ></i>
+
+                                </button>
+
+                            </div>
+
                         </div>
 
-                    </aside>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 CHALLENGE
+                 SPLIT SECTION
+            ====================================== -->
+
+            <section
+                v-if="project.challenges"
+
+                class="
+                    project-split-section
+                    project-split-reversed
+                    reveal
+                "
+            >
+
+                <div class="project-split-grid">
+
+                    <div
+                        class="project-split-content"
+                    >
+
+                        <p class="large-text">
+                            {{ project.challenges }}
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="project-split-title"
+                    >
+
+                        <div class="section-label">
+                            CHALLENGE
+                        </div>
+
+                        <h2>
+
+                            De
+
+                            <span class="animated-gradient-text">
+                                uitdaging
+                            </span>
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 SOLUTION
+            ====================================== -->
+
+            <section
+                v-if="project.solution"
+
+                class="
+                    project-split-section
+                    reveal
+                "
+            >
+
+                <div class="project-split-grid">
+
+                    <div
+                        class="project-split-title"
+                    >
+
+                        <div class="section-label">
+                            SOLUTION
+                        </div>
+
+                        <h2>
+
+                            De
+
+                            <span class="animated-gradient-text">
+                                oplossing
+                            </span>
+
+                        </h2>
+
+                    </div>
+
+
+                    <div
+                        class="project-split-content"
+                    >
+
+                        <p class="large-text">
+                            {{ project.solution }}
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -1300,11 +1440,9 @@ onUnmounted(() => {
                 404
             </div>
 
-
             <h1>
                 Project niet gevonden.
             </h1>
-
 
             <RouterLink
                 to="/projects"
@@ -1325,67 +1463,69 @@ onUnmounted(() => {
         </div>
 
     </main>
+
+
     <!-- =====================================
-     FULLSCREEN IMAGE
-===================================== -->
+         FULLSCREEN IMAGE
+    ====================================== -->
 
-<Teleport to="body">
+    <Teleport to="body">
 
-    <Transition name="fullscreen">
+        <Transition name="fullscreen">
 
-        <div
-            v-if="fullscreenImage"
-            class="fullscreen-overlay"
-            @click.self="closeFullscreen"
-        >
-
-            <!-- CLOSE -->
-
-            <button
-                type="button"
-                class="fullscreen-close"
-                aria-label="Sluiten"
-                @click="closeFullscreen"
+            <div
+                v-if="fullscreenImage"
+                class="fullscreen-overlay"
+                @click.self="closeFullscreen"
             >
 
-                <i
-                    class="bi bi-x-lg"
-                ></i>
+                <!-- CLOSE -->
 
-            </button>
+                <button
+                    type="button"
+                    class="fullscreen-close"
+                    aria-label="Sluiten"
+                    @click="closeFullscreen"
+                >
+
+                    <i
+                        class="bi bi-x-lg"
+                    ></i>
+
+                </button>
 
 
-            <!-- IMAGE -->
+                <!-- IMAGE -->
 
-            <img
-                :src="fullscreenImage"
-                :alt="fullscreenAlt"
-            />
+                <img
+                    :src="fullscreenImage"
+                    :alt="fullscreenAlt"
+                />
 
-        </div>
+            </div>
 
-    </Transition>
+        </Transition>
 
-</Teleport>
+    </Teleport>
 
 </template>
 
-
 <style scoped>
-
 /* =========================================
    PROJECT DETAIL
 ========================================= */
 
 .project-detail {
     position: relative;
+    min-height: 100vh;
     overflow: hidden;
     isolation: isolate;
+    padding-top: 120px;
 }
 
 
 /* =========================================
-   PROJECT GLOW
+   PROJECT GLOWS
 ========================================= */
 
 .project-detail::before {
@@ -1404,13 +1544,13 @@ onUnmounted(() => {
     background:
         radial-gradient(
             circle,
-            rgba(108, 99, 255, 0.30) 0%,
-            rgba(155, 92, 255, 0.18) 30%,
-            rgba(0, 212, 255, 0.08) 50%,
+            rgba(108, 99, 255, 0.28) 0%,
+            rgba(155, 92, 255, 0.14) 35%,
+            rgba(0, 212, 255, 0.06) 55%,
             transparent 72%
         );
 
-    filter: blur(40px);
+    filter: blur(45px);
 
     pointer-events: none;
 
@@ -1418,15 +1558,13 @@ onUnmounted(() => {
 }
 
 
-/* Blauwe tweede gloed */
-
 .project-detail::after {
     content: "";
 
     position: absolute;
 
-    top: 250px;
-    right: -300px;
+    top: 500px;
+    right: -350px;
 
     width: 700px;
     height: 700px;
@@ -1436,54 +1574,150 @@ onUnmounted(() => {
     background:
         radial-gradient(
             circle,
-            rgba(0, 212, 255, 0.20) 0%,
-            rgba(108, 99, 255, 0.12) 40%,
+            rgba(0, 212, 255, 0.14) 0%,
+            rgba(108, 99, 255, 0.10) 40%,
             transparent 72%
         );
 
-    filter: blur(50px);
+    filter: blur(60px);
 
     pointer-events: none;
 
     z-index: -1;
 }
 
+
+/* =========================================
+   PROJECT HEADER
+========================================= */
+
+.project-detail-header {
+    max-width: 950px;
+
+    padding-top: 50px;
+    padding-bottom: 90px;
+}
+
+
+.project-detail-header .section-label {
+    margin-bottom: 24px;
+}
+
+
+.project-detail-header h1 {
+    margin-bottom: 28px;
+
+    font-size:
+        clamp(
+            3.5rem,
+            7vw,
+            7rem
+        );
+
+    line-height: 0.9;
+
+    letter-spacing: -0.055em;
+}
+
+
+.project-detail-header p {
+    max-width: 760px;
+
+    margin: 0;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.68
+        );
+
+    font-size:
+        clamp(
+            1.05rem,
+            1.4vw,
+            1.3rem
+        );
+
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   PROJECT ACTIONS
+========================================= */
+
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+
+    margin-top: 36px;
+}
+
+
+.project-actions .btn {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 13px 22px;
+
+    border-radius: 10px;
+
+    font-weight: 500;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.project-actions .btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.25);
+}
+
+
 /* =========================================
    PROJECT VIDEO
 ========================================= */
 
 .project-video {
+    position: relative;
 
     width: 100%;
 
-    margin-top: 80px;
-
+    padding: 90px 0 120px;
 }
 
 
-/* =========================================
-   VIDEO HEADING
-========================================= */
-
 .project-video .section-label {
-
     margin-bottom: 18px;
-
 }
 
 
 .project-video h2 {
+    margin-bottom: 36px;
 
-    margin-bottom: 32px;
+    font-size:
+        clamp(
+            2.5rem,
+            5vw,
+            5rem
+        );
 
+    line-height: 0.95;
+
+    letter-spacing: -0.04em;
 }
 
 
-/* =========================================
-   VIDEO WRAPPER
-========================================= */
-
 .project-video-wrapper {
+    position: relative;
 
     overflow: hidden;
 
@@ -1491,42 +1725,70 @@ onUnmounted(() => {
         1px solid
         rgba(255, 255, 255, 0.1);
 
-    border-radius: 16px;
+    border-radius: 18px;
 
     background: #000;
 
     box-shadow:
         0 30px 80px
-        rgba(0, 0, 0, 0.35);
-
+        rgba(0, 0, 0, 0.4);
 }
 
 
-/* =========================================
-   VIDEO
-========================================= */
-
 .project-video video {
-
     display: block;
 
     width: 100%;
-
     height: auto;
-
-    background: #000;
-
 }
 
+
 /* =========================================
-   3D CYLINDER PROJECT GALLERY
+   MAIN IMAGE
+========================================= */
+
+.project-detail-image {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.1);
+
+    border-radius: 18px;
+
+    background: #11131a;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.35);
+}
+
+
+.project-detail-image img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    object-fit: cover;
+}
+
+
+/* =========================================
+   PROJECT GALLERY
 ========================================= */
 
 .project-cylinder-gallery {
     position: relative;
 
     margin: 140px 0;
-    padding: 100px 0;
+
+    padding: 110px 0;
 
     overflow: hidden;
 
@@ -1539,41 +1801,54 @@ onUnmounted(() => {
         rgba(255, 255, 255, 0.07);
 }
 
+
 .project-cylinder-header {
     display: flex;
+
     align-items: flex-end;
     justify-content: space-between;
 
     gap: 30px;
+
     margin-bottom: 70px;
 }
+
 
 .project-cylinder-header h2 {
     margin: 0;
 
-    font-size: clamp(
-        2.5rem,
-        5vw,
-        5rem
-    );
+    font-size:
+        clamp(
+            2.5rem,
+            5vw,
+            5rem
+        );
 
-    line-height: 0.9;
-    letter-spacing: -3px;
+    line-height: 0.95;
+
+    letter-spacing: -0.04em;
 }
 
+
 .project-cylinder-count {
+    display: flex;
+
+    align-items: baseline;
+    gap: 10px;
+
     color: #ffffff;
 
     font-family: monospace;
+
     font-size: 2rem;
 }
 
-.project-cylinder-count span {
-    margin-left: 8px;
 
-    color: #6c7080;
+.project-cylinder-count span {
+    color: #6f7484;
 
     font-size: 0.7rem;
+
     letter-spacing: 2px;
 }
 
@@ -1586,6 +1861,7 @@ onUnmounted(() => {
     position: relative;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -1593,12 +1869,14 @@ onUnmounted(() => {
     height: 650px;
 
     perspective: 1800px;
-    perspective-origin: center center;
 
     cursor: grab;
+
     user-select: none;
+
     touch-action: pan-y;
 }
+
 
 .cylinder-stage:active {
     cursor: grabbing;
@@ -1621,7 +1899,8 @@ onUnmounted(() => {
     transform-style: preserve-3d;
 
     transition:
-        transform 700ms cubic-bezier(
+        transform 700ms
+        cubic-bezier(
             0.22,
             1,
             0.36,
@@ -1630,6 +1909,7 @@ onUnmounted(() => {
 
     will-change: transform;
 }
+
 
 .cylinder.dragging {
     transition: none;
@@ -1656,9 +1936,9 @@ onUnmounted(() => {
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.15);
+        rgba(255, 255, 255, 0.13);
 
-    border-radius: 14px;
+    border-radius: 16px;
 
     background: #11131a;
 
@@ -1669,13 +1949,16 @@ onUnmounted(() => {
     backface-visibility: hidden;
 
     transition:
-        border-color 0.3s ease;
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
+
 
 .cylinder-card:hover {
     border-color:
-        rgba(108, 99, 255, 0.6);
+        rgba(139, 92, 246, 0.6);
 }
+
 
 .cylinder-card img {
     display: block;
@@ -1686,6 +1969,7 @@ onUnmounted(() => {
     object-fit: cover;
 
     pointer-events: none;
+
     user-select: none;
 
     filter: grayscale(100%);
@@ -1695,8 +1979,49 @@ onUnmounted(() => {
         transform 0.5s ease;
 }
 
+
 .cylinder-card.is-front img {
     filter: grayscale(0%);
+}
+
+
+.cylinder-card.is-front:hover img {
+    transform: scale(1.02);
+}
+
+
+/* =========================================
+   FULLSCREEN ICON
+========================================= */
+
+.cylinder-fullscreen-icon {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    border-radius: 50%;
+
+    background:
+        rgba(8, 9, 13, 0.7);
+
+    backdrop-filter: blur(10px);
+
+    color: #ffffff;
 }
 
 
@@ -1715,9 +2040,9 @@ onUnmounted(() => {
 
     border:
         1px solid
-        rgba(108, 99, 255, 0.08);
+        rgba(139, 92, 246, 0.1);
 
-    border-radius: 14px;
+    border-radius: 16px;
 
     transform:
         translate(-50%, -50%);
@@ -1727,7 +2052,7 @@ onUnmounted(() => {
 
 
 /* =========================================
-   CYLINDER IMAGE NUMBER
+   CYLINDER NUMBER
 ========================================= */
 
 .cylinder-number {
@@ -1741,6 +2066,7 @@ onUnmounted(() => {
     color: #ffffff;
 
     font-family: monospace;
+
     font-size: 0.8rem;
 
     background:
@@ -1750,7 +2076,7 @@ onUnmounted(() => {
         1px solid
         rgba(255, 255, 255, 0.15);
 
-    border-radius: 5px;
+    border-radius: 6px;
 
     backdrop-filter: blur(10px);
 }
@@ -1764,14 +2090,16 @@ onUnmounted(() => {
     position: absolute;
 
     top: 50%;
+
     z-index: 50;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    width: 55px;
-    height: 55px;
+    width: 56px;
+    height: 56px;
 
     color: #ffffff;
 
@@ -1784,11 +2112,12 @@ onUnmounted(() => {
     background:
         rgba(17, 19, 26, 0.85);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
 
     cursor: pointer;
 
-    transform: translateY(-50%);
+    transform:
+        translateY(-50%);
 
     transition:
         background 0.2s ease,
@@ -1796,19 +2125,22 @@ onUnmounted(() => {
         transform 0.2s ease;
 }
 
+
 .cylinder-arrow-left {
     left: 20px;
 }
+
 
 .cylinder-arrow-right {
     right: 20px;
 }
 
+
 .cylinder-arrow:hover {
-    border-color: #6c63ff;
+    border-color: #8b5cf6;
 
     background:
-        rgba(108, 99, 255, 0.2);
+        rgba(139, 92, 246, 0.2);
 
     transform:
         translateY(-50%)
@@ -1822,32 +2154,496 @@ onUnmounted(() => {
 
 .cylinder-hint {
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     gap: 10px;
+
     margin-top: 40px;
 
     color: #6f7484;
 
     font-size: 0.8rem;
+
     letter-spacing: 1px;
 }
 
+
 .cylinder-hint i {
-    color: #6c63ff;
+    color: #a78bfa;
+
     font-size: 1rem;
 }
 
 
 /* =========================================
-   FULLSCREEN OVERLAY
+   PROJECT SPLIT SECTIONS
 ========================================= */
 
+.project-split-section {
+    position: relative;
 
+    padding: 140px 0;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+}
+
+
+.project-split-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(280px, 0.8fr)
+        minmax(0, 1.2fr);
+
+    gap: 100px;
+
+    align-items: start;
+}
+
+
+.project-split-title {
+    position: sticky;
+
+    top: 140px;
+}
+
+
+.project-split-title .section-label {
+    margin-bottom: 20px;
+
+    color: #a78bfa;
+}
+
+
+.project-split-title h2 {
+    margin: 0;
+
+    font-size:
+        clamp(
+            2.5rem,
+            5vw,
+            5rem
+        );
+
+    line-height: 1.10;
+
+    letter-spacing: -0.04em;
+}
+
+
+.project-split-content {
+    min-width: 0;
+}
+
+
+/* =========================================
+   CHALLENGE REVERSED
+========================================= */
+
+.project-split-reversed .project-split-grid {
+    grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(280px, 0.8fr);
+}
+
+
+.project-split-reversed .project-split-content {
+    grid-column: 1;
+}
+
+
+.project-split-reversed .project-split-title {
+    grid-column: 2;
+}
+
+
+/* =========================================
+   FEATURE CAROUSEL
+========================================= */
+
+.feature-carousel-wrapper {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 430px;
+
+    user-select: none;
+
+    cursor: grab;
+
+    touch-action: pan-x;
+}
+
+
+.feature-carousel-wrapper:active {
+    cursor: grabbing;
+}
+
+
+.feature-carousel {
+    position: relative;
+
+    width: 100%;
+    height: 360px;
+
+    overflow: hidden;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            #000 18%,
+            #000 82%,
+            transparent 100%
+        );
+
+    -webkit-mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            #000 18%,
+            #000 82%,
+            transparent 100%
+        );
+}
+
+
+.feature-carousel-item {
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    width: 100%;
+
+    min-height: 90px;
+
+    padding: 20px 26px;
+
+    border:
+        1px solid
+        rgba(139, 92, 246, 0.14);
+
+    border-radius: 14px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    opacity: 0;
+
+    transform:
+        translateY(
+            calc(
+                var(--feature-offset) * 110px
+            )
+        )
+        scale(0.88);
+
+    transition:
+        transform 0.55s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        ),
+        opacity 0.45s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+
+    pointer-events: none;
+}
+
+
+.feature-carousel-item.active {
+    opacity: 1;
+
+    border-color:
+        rgba(139, 92, 246, 0.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139, 92, 246, 0.16),
+            rgba(255, 255, 255, 0.035)
+        );
+
+    box-shadow:
+        0 25px 60px
+        rgba(0, 0, 0, 0.3),
+
+        0 0 45px
+        rgba(139, 92, 246, 0.1);
+
+    transform:
+        translateY(-50%)
+        scale(1);
+
+    pointer-events: auto;
+}
+
+
+.feature-carousel-item.previous,
+.feature-carousel-item.next {
+    opacity: 0.38;
+
+    transform:
+        translateY(
+            calc(
+                -50% +
+                var(--feature-offset) * 110px
+            )
+        )
+        scale(0.86);
+}
+
+
+.feature-carousel-item.hidden {
+    opacity: 0;
+}
+
+
+.feature-carousel-number {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 54px;
+    height: 54px;
+
+    border-radius: 14px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #a855f7
+        );
+
+    font-family: monospace;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 0 25px
+        rgba(139, 92, 246, 0.3);
+}
+
+
+.feature-carousel-text {
+    color:
+        rgba(255, 255, 255, 0.82);
+
+    font-size: 1.15rem;
+
+    line-height: 1.5;
+
+    font-weight: 500;
+}
+
+
+.feature-carousel-item.active
+.feature-carousel-text {
+    color: #ffffff;
+}
+
+
+/* =========================================
+   FEATURE CONTROLS
+========================================= */
+
+.feature-carousel-controls {
+    position: absolute;
+
+    right: 0;
+    top: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 14px;
+
+    transform:
+        translateY(-50%);
+}
+
+
+.feature-carousel-arrow {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    background:
+        rgba(17, 19, 26, 0.8);
+
+    backdrop-filter: blur(10px);
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.feature-carousel-arrow:hover {
+    border-color: #8b5cf6;
+
+    background:
+        rgba(139, 92, 246, 0.2);
+
+    transform: scale(1.08);
+}
+
+
+.feature-carousel-counter {
+    color: #ffffff;
+
+    font-family: monospace;
+
+    font-size: 0.8rem;
+
+    letter-spacing: 1px;
+
+    writing-mode: vertical-rl;
+}
+
+
+.feature-carousel-counter span {
+    color: #666b7a;
+}
+
+
+/* =========================================
+   LARGE TEXT
+========================================= */
+
+.large-text {
+    max-width: 850px;
+
+    margin: 0;
+
+    color:
+        rgba(255, 255, 255, 0.68);
+
+    font-size:
+        clamp(
+            1.1rem,
+            1.4vw,
+            1.4rem
+        );
+
+    line-height: 1.9;
+}
+
+
+/* =========================================
+   BACK TO PROJECTS
+========================================= */
+
+.project-back {
+    display: flex;
+
+    justify-content: center;
+
+    padding:
+        110px 0
+        150px;
+}
+
+
+.project-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 24px;
+
+    border:
+        1px solid
+        rgba(139, 92, 246, 0.35);
+
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    background:
+        rgba(139, 92, 246, 0.06);
+
+    text-decoration: none;
+
+    font-size: 0.95rem;
+
+    font-weight: 500;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.project-link:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(139, 92, 246, 0.7);
+
+    background:
+        rgba(139, 92, 246, 0.14);
+
+    box-shadow:
+        0 10px 35px
+        rgba(108, 99, 255, 0.18);
+}
+
+
+/* =========================================
+   FULLSCREEN
+========================================= */
 
 .fullscreen-overlay {
-
     position: fixed;
 
     inset: 0;
@@ -1862,47 +2658,33 @@ onUnmounted(() => {
     background:
         rgba(0, 0, 0, 0.92);
 
-    backdrop-filter:
-        blur(12px);
+    backdrop-filter: blur(12px);
 
     z-index: 9999;
 
     cursor: zoom-out;
-
 }
 
 
-/* =========================================
-   FULLSCREEN IMAGE
-========================================= */
-
 .fullscreen-overlay img {
-
     display: block;
 
     max-width: 100%;
-
     max-height: 100%;
 
     object-fit: contain;
 
-    border-radius: 8px;
+    border-radius: 10px;
 
     cursor: default;
 
     box-shadow:
         0 30px 100px
         rgba(0, 0, 0, 0.7);
-
 }
 
 
-/* =========================================
-   CLOSE BUTTON
-========================================= */
-
 .fullscreen-close {
-
     position: absolute;
 
     top: 24px;
@@ -1927,616 +2709,83 @@ onUnmounted(() => {
 
     color: #ffffff;
 
-    font-size: 1.1rem;
-
     cursor: pointer;
 
     transition:
         transform 0.3s ease,
         background 0.3s ease;
-
 }
 
 
 .fullscreen-close:hover {
-
-    transform:
-        scale(1.08);
+    transform: scale(1.08);
 
     background:
         rgba(139, 92, 246, 0.7);
-
 }
+
 
 /* =========================================
-   FULLSCREEN TRANSITION
+   REVEAL
 ========================================= */
 
-.fullscreen-enter-active,
-.fullscreen-leave-active {
-
-    transition:
-        opacity 0.35s ease;
-
-}
-
-
-.fullscreen-enter-from,
-.fullscreen-leave-to {
-
+.reveal {
     opacity: 0;
 
-}
+    transform:
+        translateY(40px);
 
-
-.fullscreen-enter-active img {
-
-    animation:
-        fullscreenImageIn
-        0.45s
+    transition:
+        opacity 700ms ease,
+        transform 700ms
         cubic-bezier(
-            0.16,
-            1,
-            0.3,
+            0.2,
+            0.8,
+            0.2,
             1
         );
-
 }
 
 
-@keyframes fullscreenImageIn {
+.reveal.is-visible {
+    opacity: 1;
 
-    from {
-
-        opacity: 0;
-
-        transform:
-            scale(0.92);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            scale(1);
-
-    }
-
-}
-
-/* =========================================
-   PROJECT CONTENT
-========================================= */
-
-.project-detail-content {
-    padding-top: 160px;
-    padding-bottom: 80px;
-}
-
-
-/* =========================================
-   PROJECT SECTION
-========================================= */
-
-.project-section {
-    position: relative;
-
-    margin-bottom: 140px;
-}
-
-
-.project-section:last-child {
-    margin-bottom: 0;
-}
-
-
-/* =========================================
-   SECTION HEADINGS
-========================================= */
-
-.project-section h2 {
-    margin-top: 18px;
-    margin-bottom: 36px;
-
-   
-
-    line-height: 1.05;
-
-    letter-spacing: -0.04em;
-}
-
-
-.project-section .section-label {
-    color: #a78bfa;
-
-    
-}
-
-
-/* =========================================
-   LARGE TEXT
-========================================= */
-
-.large-text {
-    max-width: 850px;
-
-    margin: 0;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.68
-        );
-
-    font-size:
-        clamp(
-            1.1rem,
-            1.4vw,
-            1.4rem
-        );
-
-    line-height: 1.9;
-}
-
-
-/* =========================================
-   FEATURES GRID
-========================================= */
-
-.project-section .row {
-    margin-top: 50px;
-}
-
-
-/* =========================================
-   FEATURE CARD
-========================================= */
-
-.feature-card {
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 22px;
-
-    min-height: 110px;
-
-    padding:
-        26px
-        30px;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(
-            139,
-            92,
-            246,
-            0.18
-        );
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(
-                139,
-                92,
-                246,
-                0.09
-            ),
-            rgba(
-                255,
-                255,
-                255,
-                0.02
-            )
-        );
-
-    transition:
-        transform 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease,
-        background 0.35s ease;
-}
-
-
-/* =========================================
-   FEATURE HOVER
-========================================= */
-
-.feature-card:hover {
     transform:
-        translateY(-6px);
-
-    border-color:
-        rgba(
-            167,
-            139,
-            250,
-            0.55
-        );
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(
-                139,
-                92,
-                246,
-                0.16
-            ),
-            rgba(
-                255,
-                255,
-                255,
-                0.04
-            )
-        );
-
-    box-shadow:
-        0
-        20px
-        50px
-        rgba(
-            0,
-            0,
-            0,
-            0.3
-        );
+        translateY(0);
 }
 
 
-/* =========================================
-   FEATURE NUMBER
-========================================= */
-
-.feature-number {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    width: 54px;
-    height: 54px;
-
-    border-radius: 14px;
-
-    color: #ffffff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7c3aed,
-            #a855f7
-        );
-
-    font-size: 1rem;
-
-    font-weight: 700;
-
-    letter-spacing: 0.05em;
-
-    box-shadow:
-        0
-        0
-        25px
-        rgba(
-            139,
-            92,
-            246,
-            0.35
-        );
-}
-
-
-/* =========================================
-   FEATURE TEXT
-========================================= */
-
-.feature-card > span:last-child {
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.78
-        );
-
-    font-size: 1.05rem;
-
-    line-height: 1.5;
-
-    font-weight: 500;
-}
-
-
-/* =========================================
-   TECHNOLOGY / SIDEBAR
-========================================= */
-
-.technology-box {
-    padding: 32px;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
-
-    border-radius: 16px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(
-                255,
-                255,
-                255,
-                0.035
-            ),
-            rgba(
-                139,
-                92,
-                246,
-                0.05
-            )
-        );
-}
-
-
-/* =========================================
-   DETAIL TECHNOLOGIES
-========================================= */
-
-.detail-technologies {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-    margin-top: 24px;
-}
-
-
-.detail-technologies .technology {
-    padding:
-        9px
-        14px;
-
-    border:
-        1px solid
-        rgba(
-            139,
-            92,
-            246,
-            0.22
-        );
-
-    border-radius: 8px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.75
-        );
-
-    background:
-        rgba(
-            139,
-            92,
-            246,
-            0.06
-        );
-
-    font-size: 0.85rem;
-
-    transition:
-        background 0.25s ease,
-        border-color 0.25s ease,
-        transform 0.25s ease;
-}
-
-
-.detail-technologies .technology:hover {
-    transform:
-        translateY(-2px);
-
-    border-color:
-        rgba(
-            167,
-            139,
-            250,
-            0.55
-        );
-
-    background:
-        rgba(
-            139,
-            92,
-            246,
-            0.14
-        );
-}
-
-
-/* =========================================
-   ROLE
-========================================= */
-
-.role-list {
-    display: flex;
-    flex-direction: column;
-
-    gap: 15px;
-
-    margin-top: 20px;
-}
-
-.role-item {
-    display: flex;
-    align-items: flex-start;
-
-    gap: 12px;
-
-    color: #c4c7d4;
-    line-height: 1.6;
-}
-
-.role-item i {
-    flex: 0 0 auto;
-
-    margin-top: 3px;
-
-    color: #6c63ff;
-}
-
-
-/* =========================================
-   BACK TO PROJECTS
-========================================= */
-
-.project-back {
-    padding-top: 100px;
-    padding-bottom: 140px;
-}
-
-/* =========================================
-   PROJECT MAIN IMAGE
-========================================= */
-
-.project-detail-image {
-    width: 100%;
-    max-width: 900px;
-
-    margin: 60px auto 0;
-
-    overflow: hidden;
-
-    border-radius: 16px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.08);
-
-    background: #11131a;
-}
-
-
-.project-detail-image img {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-height: 500px;
-
-    object-fit: cover;
-}
-
-/* =========================================
-   CHALLENGE SECTION
-========================================= */
-
-.challenge-section {
-    position: relative;
-    isolation: isolate;
-}
-
-.challenge-section::before {
-    content: "";
-
-    position: absolute;
-
-    top: -180px;
-    left: -280px;
-
-    width: 650px;
-    height: 650px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(108, 99, 255, 0.20) 0%,
-            rgba(155, 92, 255, 0.13) 32%,
-            rgba(0, 212, 255, 0.07) 52%,
-            transparent 72%
-        );
-
-    filter: blur(45px);
-
-    pointer-events: none;
-
-    z-index: -1;
-}
 /* =========================================
    RESPONSIVE
 ========================================= */
 
 @media (max-width: 991px) {
 
-    .project-detail-content {
-        padding-top: 110px;
+    .project-split-section {
+        padding: 100px 0;
     }
 
+    .project-split-grid {
+        grid-template-columns: 1fr;
 
-    .project-section {
-        margin-bottom: 100px;
+        gap: 50px;
     }
 
-
-    .technology-box {
-        margin-top: 20px;
+    .project-split-title {
+        position: static;
     }
 
-/* Project detail */
+    .project-split-reversed
+    .project-split-content,
 
-    .project-detail-header {
-        padding-top: 60px;
-        padding-bottom: 50px;
-    }
-
-    .project-detail-image {
-        height: 450px;
-    }
-
-    .project-detail-content {
-        padding-top: 90px;
-    }
-
-    .project-section {
-        margin-bottom: 80px;
-    }
-
-
-    /* Cylinder */
-
-    .project-cylinder-gallery {
-        margin: 100px 0;
-        padding: 80px 0;
+    .project-split-reversed
+    .project-split-title {
+        grid-column: auto;
     }
 
     .cylinder-stage {
         height: 550px;
+
         perspective: 1400px;
     }
 
@@ -2557,64 +2806,41 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
 
-    .project-detail-content {
-        padding-top: 90px;
+    .project-detail {
+        padding-top: 100px;
     }
 
-
-    .project-section {
-        margin-bottom: 80px;
+    .project-detail-header {
+        padding-top: 40px;
+        padding-bottom: 70px;
     }
 
-
-    .project-section h2 {
-        margin-bottom: 28px;
+    .project-detail-header h1 {
+        font-size:
+            clamp(
+                3rem,
+                13vw,
+                5rem
+            );
     }
-
-
-    .project-section .row {
-        margin-top: 35px;
-    }
-
-
-    .feature-card {
-        min-height: 90px;
-
-        padding:
-            20px
-            22px;
-
-        gap: 16px;
-    }
-
-
-    .feature-number {
-        width: 46px;
-        height: 46px;
-
-        border-radius: 12px;
-    }
-
-
-    .technology-box {
-        padding: 25px;
-    }
-
-       /* Cylinder */
 
     .project-cylinder-header {
         align-items: flex-start;
+
         flex-direction: column;
+
         margin-bottom: 40px;
     }
 
     .project-cylinder-gallery {
         margin: 80px 0;
-        padding: 60px 0;
+
+        padding: 70px 0;
     }
 
     .cylinder-stage {
         height: 400px;
+
         perspective: 1000px;
     }
 
@@ -2631,6 +2857,7 @@ onUnmounted(() => {
     .cylinder-center-line {
         width: 350px;
         height: 230px;
+
         border-radius: 10px;
     }
 
@@ -2647,82 +2874,79 @@ onUnmounted(() => {
         right: 5px;
     }
 
-    .cylinder-hint {
-        margin-top: 25px;
+    .feature-carousel-wrapper {
+        min-height: 360px;
+
+        padding-right: 50px;
     }
 
+    .project-back {
+        padding:
+            80px 0
+            100px;
+    }
+}
 
-    /* Project detail */
+
+@media (max-width: 576px) {
 
     .project-detail {
-        padding-top: 120px;
+        padding-top: 90px;
     }
 
-    .project-detail-header {
-        padding-top: 40px;
-        padding-bottom: 45px;
+    .project-split-section {
+        padding: 75px 0;
     }
 
-    .project-detail-header h1 {
-        font-size:
-            clamp(
-                2.8rem,
-                13vw,
-                4rem
-            );
-
-        letter-spacing: -3px;
-    }
-
-    .project-detail-header p {
-        font-size: 1rem;
-    }
-
-    .project-detail-image {
-        height: 300px;
-        border-radius: 8px;
-    }
-
-    .project-detail-content {
-        padding-top: 70px;
-        padding-bottom: 40px;
-    }
-
-     .project-video {
-
-        margin-top: 50px;
-
-    }
-
-
-    .project-video h2 {
-
-        margin-bottom: 24px;
-
-    }
-
-      .project-section {
-        margin-bottom: 70px;
-    }
-
-    .project-section h2 {
-        font-size: 2.2rem;
+    .project-split-grid {
+        gap: 35px;
     }
 
     .project-actions {
         flex-direction: column;
-        align-items: flex-start;
     }
 
-    .feature-card {
-        min-height: auto;
-        padding: 20px;
+    .project-actions .btn {
+        justify-content: center;
     }
 
-    .technology-box {
-        padding: 22px;
+    .feature-carousel-wrapper {
+        min-height: 330px;
+
+        padding-right: 40px;
     }
 
+    .feature-carousel {
+        height: 280px;
+    }
+
+    .feature-carousel-item {
+        gap: 12px;
+
+        padding: 16px;
+    }
+
+    .feature-carousel-number {
+        width: 42px;
+        height: 42px;
+
+        font-size: 0.75rem;
+    }
+
+    .feature-carousel-text {
+        font-size: 0.9rem;
+    }
+
+    .feature-carousel-arrow {
+        width: 38px;
+        height: 38px;
+    }
+
+    .project-link {
+        width: 100%;
+
+        justify-content: center;
+    }
 }
 
 </style>

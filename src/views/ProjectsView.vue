@@ -1,3 +1,4 @@
+kun je aan mijn projectsview ook reveal animaties toevoegen. gecorrigeerde bestand terugsturen: ```vue
 <script setup lang="ts">
 
 import {
@@ -8,6 +9,8 @@ import {
 } from 'vue';
 
 import { projects } from '../data/projects';
+
+import PageHeader from '../components/ProjectHeader.vue';
 
 
 // =====================================
@@ -50,23 +53,27 @@ async function setupRevealObserver() {
 
             entries => {
 
-                entries.forEach(entry => {
+                entries.forEach(
+                    entry => {
 
-                    if (!entry.isIntersecting) {
-                        return;
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
+
+
+                        entry.target.classList.add(
+                            'is-visible'
+                        );
+
+
+                        revealObserver?.unobserve(
+                            entry.target
+                        );
+
                     }
-
-
-                    entry.target.classList.add(
-                        'is-visible'
-                    );
-
-
-                    revealObserver?.unobserve(
-                        entry.target
-                    );
-
-                });
+                );
 
             },
 
@@ -77,13 +84,15 @@ async function setupRevealObserver() {
         );
 
 
-    elements.forEach(element => {
+    elements.forEach(
+        element => {
 
-        revealObserver?.observe(
-            element
-        );
+            revealObserver?.observe(
+                element
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -110,63 +119,27 @@ onUnmounted(() => {
 
 <template>
 
-    <main
-        class="
-            projects-page
-            page-section
-        "
-    >
-
-        <div class="container">
+    <main class="projects-page">
 
 
-            <!-- =====================================
-                 HEADER
-            ====================================== -->
+        <!-- =====================================
+             PAGE HEADER
+        ====================================== -->
 
-            <div
-                class="
-                    projects-heading
-                    reveal
-                    mb-5
-                "
-            >
-
-                <div class="section-label">
-
-                    PORTFOLIO
-
-                </div>
+        <PageHeader
+            label="PORTFOLIO"
+            title="Mijn projecten"
+            description="Een selectie van interactieve applicaties, webapplicaties en gameprojecten die ik heb ontwikkeld met moderne webtechnologieën."
+        />
 
 
-                <h1 class="mt-3 mb-4">
+        <!-- =====================================
+             PROJECTS
+        ====================================== -->
 
-                    Mijn projecten
+        <section class="projects-list">
 
-                </h1>
-
-
-                <p class="mb-0">
-
-                    Een selectie van interactieve applicaties,
-                    webapplicaties en gameprojecten die ik heb
-                    ontwikkeld met moderne webtechnologieën.
-
-                </p>
-
-            </div>
-
-
-            <!-- =====================================
-                 PROJECTS
-            ====================================== -->
-
-            <section
-                class="
-                    projects-list
-                    pb-5
-                "
-            >
+            <div class="container">
 
                 <div class="row g-4">
 
@@ -176,7 +149,9 @@ onUnmounted(() => {
                             project,
                             index
                         ) in projectList"
+
                         :key="project.slug"
+
                         class="
                             col-md-6
                             d-flex
@@ -190,6 +165,7 @@ onUnmounted(() => {
                                 h-100
                                 w-100
                             "
+
                             :style="{
                                 transitionDelay:
                                     `${index * 120}ms`
@@ -200,6 +176,7 @@ onUnmounted(() => {
                                 :to="
                                     `/projects/${project.slug}`
                                 "
+
                                 class="
                                     project-card-link
                                     h-100
@@ -223,6 +200,7 @@ onUnmounted(() => {
                                             :src="
                                                 project.image
                                             "
+
                                             :alt="
                                                 project.title
                                             "
@@ -293,7 +271,6 @@ onUnmounted(() => {
                                     "
                                 >
 
-
                                     <!-- CATEGORY -->
 
                                     <div
@@ -303,7 +280,9 @@ onUnmounted(() => {
                                         "
                                     >
 
-                                        {{ project.category }}
+                                        {{
+                                            project.category
+                                        }}
 
                                     </div>
 
@@ -312,7 +291,9 @@ onUnmounted(() => {
 
                                     <h2 class="h3 mb-3">
 
-                                        {{ project.title }}
+                                        {{
+                                            project.title
+                                        }}
 
                                     </h2>
 
@@ -346,11 +327,19 @@ onUnmounted(() => {
                                                 technology in
                                                 project.technologies
                                             "
-                                            :key="technology"
-                                            class="technology"
+
+                                            :key="
+                                                technology
+                                            "
+
+                                            class="
+                                                technology
+                                            "
                                         >
 
-                                            {{ technology }}
+                                            {{
+                                                technology
+                                            }}
 
                                         </span>
 
@@ -366,9 +355,10 @@ onUnmounted(() => {
 
                 </div>
 
-            </section>
+            </div>
 
-        </div>
+        </section>
+
 
     </main>
 
@@ -377,143 +367,37 @@ onUnmounted(() => {
 
 <style scoped>
 
+
 /* =====================================
    PAGE
 ===================================== */
 
 .projects-page {
+
     position: relative;
+
+    width: 100%;
 
     min-height: 100vh;
 
-    padding-top: 160px;
-
     overflow: hidden;
 
-    isolation: isolate;
 }
 
 
 /* =====================================
-   PROJECTS ATMOSPHERE
+   PROJECT LIST
 ===================================== */
 
-/* Paarse gloed linksboven */
+.projects-list {
 
-.projects-page::before {
-    content: "";
+    width: 100%;
 
-    position: absolute;
+    padding:
+        80px
+        0
+        120px;
 
-    top: -250px;
-    left: -300px;
-
-    width: 850px;
-    height: 850px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(108, 99, 255, 0.30) 0%,
-            rgba(155, 92, 255, 0.18) 30%,
-            rgba(0, 212, 255, 0.08) 52%,
-            transparent 72%
-        );
-
-    filter: blur(45px);
-
-    pointer-events: none;
-
-    z-index: 0;
-}
-
-
-/* Blauwe gloed rechtsonder */
-
-.projects-page::after {
-    content: "";
-
-    position: absolute;
-
-    right: -350px;
-    bottom: 0;
-
-    width: 850px;
-    height: 850px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0, 212, 255, 0.18) 0%,
-            rgba(108, 99, 255, 0.10) 40%,
-            transparent 72%
-        );
-
-    filter: blur(55px);
-
-    pointer-events: none;
-
-    z-index: 0;
-}
-
-
-/* =====================================
-   CONTENT LAYER
-===================================== */
-
-.projects-page > .container {
-    position: relative;
-
-    z-index: 1;
-}
-
-
-/* =====================================
-   HEADER
-===================================== */
-
-.projects-heading {
-    max-width: 700px;
-}
-
-
-.projects-heading h1 {
-    font-size:
-        clamp(
-            2.8rem,
-            6vw,
-            5rem
-        );
-
-    line-height: 1;
-
-    letter-spacing: -0.04em;
-}
-
-
-.projects-heading p {
-    max-width: 620px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.55
-        );
-
-    font-size:
-        clamp(
-            1rem,
-            1.2vw,
-            1.35rem
-        );
-
-    line-height: 1.8;
 }
 
 
@@ -522,6 +406,7 @@ onUnmounted(() => {
 ===================================== */
 
 .project-card {
+
     overflow: hidden;
 
     border:
@@ -533,9 +418,11 @@ onUnmounted(() => {
             0.08
         );
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
-    background: #11131a;
+    background:
+        #11131a;
 
     transition:
         transform 0.5s
@@ -545,12 +432,16 @@ onUnmounted(() => {
             0.3,
             1
         ),
+
         border-color 0.4s ease,
+
         box-shadow 0.5s ease;
+
 }
 
 
 .project-card:hover {
+
     transform:
         translateY(-10px);
 
@@ -570,6 +461,7 @@ onUnmounted(() => {
             0,
             0.35
         );
+
 }
 
 
@@ -578,15 +470,19 @@ onUnmounted(() => {
 ===================================== */
 
 .project-card-link {
+
     display: flex;
 
     flex-direction: column;
 
     height: 100%;
 
-    color: inherit;
+    color:
+        inherit;
 
-    text-decoration: none;
+    text-decoration:
+        none;
+
 }
 
 
@@ -595,32 +491,47 @@ onUnmounted(() => {
 ===================================== */
 
 .project-image {
+
     position: relative;
 
-    height: 300px;
+    height:
+        300px;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    background: #08090d;
+    background:
+        #08090d;
+
 }
 
 
 .project-image-inner {
+
     position: absolute;
 
-    inset: 0;
+    inset:
+        0;
 
-    overflow: hidden;
+    overflow:
+        hidden;
+
 }
 
 
 .project-image img {
-    display: block;
 
-    width: 100%;
-    height: 100%;
+    display:
+        block;
 
-    object-fit: cover;
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
 
     transition:
         transform 0.7s
@@ -630,13 +541,16 @@ onUnmounted(() => {
             0.3,
             1
         );
+
 }
 
 
 .project-card:hover
 .project-image img {
+
     transform:
         scale(1.08);
+
 }
 
 
@@ -645,14 +559,21 @@ onUnmounted(() => {
 ===================================== */
 
 .project-overlay {
-    position: absolute;
 
-    inset: 0;
+    position:
+        absolute;
 
-    display: flex;
+    inset:
+        0;
 
-    align-items: center;
-    justify-content: center;
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
 
     background:
         rgba(
@@ -662,14 +583,17 @@ onUnmounted(() => {
             0.65
         );
 
-    opacity: 0;
+    opacity:
+        0;
 
     transition:
         opacity 0.4s ease;
+
 }
 
 
 .project-overlay span {
+
     padding:
         12px
         20px;
@@ -683,9 +607,11 @@ onUnmounted(() => {
             0.3
         );
 
-    border-radius: 30px;
+    border-radius:
+        30px;
 
-    color: #ffffff;
+    color:
+        #ffffff;
 
     background:
         rgba(
@@ -700,19 +626,25 @@ onUnmounted(() => {
 
     transition:
         transform 0.4s ease;
+
 }
 
 
 .project-card:hover
 .project-overlay {
-    opacity: 1;
+
+    opacity:
+        1;
+
 }
 
 
 .project-card:hover
 .project-overlay span {
+
     transform:
         translateY(0);
+
 }
 
 
@@ -721,20 +653,28 @@ onUnmounted(() => {
 ===================================== */
 
 .project-number {
-    position: absolute;
 
-    right: 20px;
-    bottom: 20px;
+    position:
+        absolute;
+
+    right:
+        20px;
+
+    bottom:
+        20px;
 
     padding:
         6px
         10px;
 
-    font-family: monospace;
+    font-family:
+        monospace;
 
-    font-size: 0.75rem;
+    font-size:
+        0.75rem;
 
-    color: #ffffff;
+    color:
+        #ffffff;
 
     background:
         rgba(
@@ -753,10 +693,12 @@ onUnmounted(() => {
             0.15
         );
 
-    border-radius: 6px;
+    border-radius:
+        6px;
 
     backdrop-filter:
         blur(10px);
+
 }
 
 
@@ -765,7 +707,10 @@ onUnmounted(() => {
 ===================================== */
 
 .project-content {
-    flex-grow: 1;
+
+    flex-grow:
+        1;
+
 }
 
 
@@ -774,17 +719,25 @@ onUnmounted(() => {
 ===================================== */
 
 .project-category {
-    color: #a78bfa;
 
-    font-family: monospace;
+    color:
+        #a78bfa;
 
-    font-size: 0.7rem;
+    font-family:
+        monospace;
 
-    font-weight: 700;
+    font-size:
+        0.7rem;
 
-    letter-spacing: 0.16em;
+    font-weight:
+        700;
 
-    text-transform: uppercase;
+    letter-spacing:
+        0.16em;
+
+    text-transform:
+        uppercase;
+
 }
 
 
@@ -793,11 +746,16 @@ onUnmounted(() => {
 ===================================== */
 
 .project-content h2 {
-    color: #ffffff;
 
-    line-height: 1.1;
+    color:
+        #ffffff;
 
-    letter-spacing: -0.03em;
+    line-height:
+        1.1;
+
+    letter-spacing:
+        -0.03em;
+
 }
 
 
@@ -806,10 +764,162 @@ onUnmounted(() => {
 ===================================== */
 
 .project-content p {
-    color: #a8adbd;
 
-    line-height: 1.7;
+    color:
+        #a8adbd;
+
+    line-height:
+        1.7;
+
 }
+
+
+/* =====================================
+   TECHNOLOGY LABELS
+===================================== */
+
+.technology {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    padding:
+        6px
+        12px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    border-radius:
+        999px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.65
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.04
+        );
+
+    font-family:
+        monospace;
+
+    font-size:
+        0.75rem;
+
+    letter-spacing:
+        0.04em;
+
+    transition:
+        transform 220ms ease,
+        color 220ms ease,
+        border-color 220ms ease,
+        background-color 220ms ease,
+        box-shadow 220ms ease;
+
+}
+
+
+/*
+   Belangrijk:
+   De technology labels hebben hun
+   eigen hover en reageren niet op
+   de hover van de afbeelding.
+*/
+
+.technology:hover {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(
+            139,
+            92,
+            246,
+            0.6
+        );
+
+    background:
+        rgba(
+            139,
+            92,
+            246,
+            0.10
+        );
+
+    transform:
+        translateY(-2px)
+        scale(1.05);
+
+    box-shadow:
+        0 5px 18px
+        rgba(
+            139,
+            92,
+            246,
+            0.20
+        );
+
+}
+
+
+/* =====================================
+   REVEAL
+===================================== */
+
+.reveal {
+
+    opacity:
+        0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        opacity 700ms ease,
+        transform 700ms
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+
+}
+
+
+.reveal.is-visible {
+
+    opacity:
+        1;
+
+    transform:
+        translate3d(
+            0,
+            0,
+            0
+        );
+
+}
+
 
 /* =====================================
    MOBILE
@@ -817,32 +927,24 @@ onUnmounted(() => {
 
 @media (max-width: 576px) {
 
-    .projects-page {
-        padding-top: 120px;
+    .projects-list {
+
+        padding:
+            60px
+            0
+            80px;
+
     }
 
 
     .project-image {
-        height: 240px;
-    }
 
+        height:
+            240px;
 
-    .projects-page::before {
-        top: -300px;
-        left: -400px;
-
-        width: 700px;
-        height: 700px;
-    }
-
-
-    .projects-page::after {
-        right: -400px;
-
-        width: 650px;
-        height: 650px;
     }
 
 }
 
 </style>
+```

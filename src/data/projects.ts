@@ -26,7 +26,7 @@ export const projects: Project[] = [
             'Een interactieve 3D drummachine gebouwd met Three.js en TypeScript.',
 
         description:
-            'Een interactieve 3D drummachine waarin 3D-modellen, gebruikersinteractie, een sequencer en audio samenkomen. Het project combineert Three.js, TypeScript, Blender en de Web Audio API.',
+            'Een interactieve 3D drummachine waarin 3D-modellen, gebruikersinteractie, een sequencer en verschillende audiouncties samenkomen. Het project combineert Three.js, TypeScript, Blender en de Web Audio API.',
 
         category: '3D / Interactive',
 
@@ -150,7 +150,7 @@ export const projects: Project[] = [
             'Een belangrijke uitdaging was het bouwen van een duidelijke verbinding tussen de Vue frontend en de Laravel backend. Daarnaast moest rekening worden gehouden met authenticatie, gebruikersrollen en toegangsrechten. Een administrator moet bijvoorbeeld alle tickets kunnen bekijken, terwijl een normale gebruiker alleen zijn eigen tickets mag zien.',
 
         solution:
-            'De applicatie is opgebouwd als een gescheiden frontend en backend. Laravel verzorgt de API, authenticatie, database en autorisatie. Vue 3 verzorgt de gebruikersinterface en gebruikt Pinia voor centrale state management. Door deze verantwoordelijkheden te scheiden blijft de applicatie overzichtelijk en uitbreidbaar.',
+            'De applicatie is opgebouwd als een gescheiden frontend en backend. Laravel verzorgt de API, authenticatie, database en autorisatie. Vue 3 verzorgt de gebruikersinterface en gebruikt Pinia voor centrale state management. Door deze verantwoordelijkheden te scheiden blijft de applicatie overzichtelijk, onderhoudtbaar en uitbreidbaar.',
 
         github: '',
 
@@ -158,15 +158,15 @@ export const projects: Project[] = [
     },
 
     {
-        slug: 'board-tilemap',
+        slug: 'Koudum the Game',
 
-        title: 'Board & Tilemap',
+        title: 'Koudum the Game',
 
         shortDescription:
             'Een digitaal bordspel gebaseerd op het dorp Koudum.',
 
         description:
-            'Een digitaal bordspel gebaseerd op het dorp waar ik woon: Koudum. Het dorp is volledig in 3D nagebouwd en vormt de basis voor een interactief bordspel. Het project combineert 3D-rendering, game-logica, een tilemap en gebruikersinteractie.',
+            'Een digitaal bordspel gebaseerd op het dorp waar ik woon: Koudum. Het dorp is volledig in 3D nagebouwd en vormt de basis voor een interactief bordspel. Het project combineert 3D-rendering, game-logica, een tilemap en gebruikersinteractie.. Het weer in degame is hetzelfde als het weer in de echte wereld dorr te verbinden met een weerAPI. Er zijn verschillende minigames aanwezig',
 
         category: 'Game / Interactive',
 
@@ -186,7 +186,11 @@ export const projects: Project[] = [
             '/images/boardgame/03.png',
             '/images/boardgame/04.png',
             '/images/boardgame/05.png',
-            '/images/boardgame/06.png'
+            '/images/boardgame/07.png',
+            '/images/boardgame/08.png',
+            '/images/boardgame/09.png',
+            '/images/boardgame/10.png',
+
         ],
 
         role: [

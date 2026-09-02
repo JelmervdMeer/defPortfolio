@@ -791,7 +791,7 @@ onUnmounted(() => {
                                 <i class="bi bi-github"></i>
 
                                 <span>
-                                    GitHub
+                                    https://github.com/JelmervdMeer
                                 </span>
 
                             </a>
@@ -807,7 +807,7 @@ onUnmounted(() => {
                                 <i class="bi bi-linkedin"></i>
 
                                 <span>
-                                    LinkedIn
+                                    https://www.linkedin.com/in/jelmer-van-der-meer-18614614b/
                                 </span>
 
                             </a>
@@ -821,7 +821,7 @@ onUnmounted(() => {
                                 <i class="bi bi-envelope"></i>
 
                                 <span>
-                                    E-mail
+                                    jelmervandermeer02@gmail.com
                                 </span>
 
                             </a>
