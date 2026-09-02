@@ -60,7 +60,7 @@ onMounted(() => {
     // CODE LINES
     // =========================
 
-    const lines = [
+  /*  const lines = [
         'import * as THREE from "three";',
         '',
         'class Developer {',
@@ -73,7 +73,7 @@ onMounted(() => {
         '        return new Project();',
         '    }',
         '}',
-    ];
+    ];*/
 
   
 
