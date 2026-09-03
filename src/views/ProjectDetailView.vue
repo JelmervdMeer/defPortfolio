@@ -2469,6 +2469,13 @@ onUnmounted(() => {
     color: #ffffff;
 }
 
+/* Tijdens animatie volledig uitschakelen */
+.project-scroll-showcase.is-animating .project-scroll-arrow {
+    pointer-events: none;
+    cursor: wait;
+    opacity: 0.35;
+}
+
 
 /* =========================================
    FEATURE CONTROLS

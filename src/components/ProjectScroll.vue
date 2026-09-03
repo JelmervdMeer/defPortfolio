@@ -1,3 +1,4 @@
+```vue
 <script setup lang="ts">
 
 import {
@@ -14,6 +15,7 @@ import { projects } from '../data/projects';
 // =========================================
 
 const currentIndex = ref(0);
+
 const displayIndex = ref(0);
 
 const isAnimating = ref(false);
@@ -47,6 +49,7 @@ onMounted(() => {
     projects.forEach(project => {
 
         const image = new Image();
+
         image.src = project.image;
 
     });
@@ -55,16 +58,19 @@ onMounted(() => {
 
 
 // =========================================
-// PRELOAD NEXT IMAGE
+// PRELOAD IMAGE
 // =========================================
 
-function preloadImage(src: string): Promise<void> {
+function preloadImage(
+    src: string
+): Promise<void> {
 
     return new Promise(resolve => {
 
         const image = new Image();
 
         image.onload = () => resolve();
+
         image.onerror = () => resolve();
 
         image.src = src;
@@ -78,11 +84,16 @@ function preloadImage(src: string): Promise<void> {
 // WAIT
 // =========================================
 
-function wait(ms: number): Promise<void> {
+function wait(
+    ms: number
+): Promise<void> {
 
     return new Promise(resolve => {
 
-        window.setTimeout(resolve, ms);
+        window.setTimeout(
+            resolve,
+            ms
+        );
 
     });
 
@@ -116,71 +127,107 @@ function waitForRender(): Promise<void> {
 // CHANGE PROJECT
 // =========================================
 
-async function changeProject(direction: number): Promise<void> {
+async function changeProject(
+    direction: number
+): Promise<void> {
 
-    // -------------------------------
+    // -------------------------------------
     // HARD LOCK
-    // -------------------------------
+    // -------------------------------------
+    // Prevents a second animation from
+    // starting while the current one runs.
 
-    if (isAnimating.value) return;
+    if (isAnimating.value) {
+        return;
+    }
+
+
+    // -------------------------------------
+    // CALCULATE TARGET
+    // -------------------------------------
 
     const targetIndex =
         currentIndex.value + direction;
 
-    // -------------------------------
+
+    // -------------------------------------
     // OUT OF BOUNDS
-    // -------------------------------
+    // -------------------------------------
 
     if (
         targetIndex < 0 ||
         targetIndex >= projects.length
     ) {
+
         return;
+
     }
 
-    // -------------------------------
-    // LOCK BUTTONS IMMEDIATELY
-    // -------------------------------
+
+    // -------------------------------------
+    // LOCK IMMEDIATELY
+    // -------------------------------------
 
     isAnimating.value = true;
+
+
+    // -------------------------------------
+    // SET DIRECTION
+    // -------------------------------------
 
     animationDirection.value =
         direction > 0
             ? 'next'
             : 'previous';
 
-    // -------------------------------
-    // PRELOAD NEXT IMAGE
-    // -------------------------------
 
-    await preloadImage(
-        projects[targetIndex].image
-    );
+    try {
 
-    // -------------------------------
-    // PLAY ROTATION
-    // -------------------------------
+        // ---------------------------------
+        // PRELOAD TARGET IMAGE
+        // ---------------------------------
 
-    await wait(ROTATION_DURATION);
+        await preloadImage(
+            projects[targetIndex].image
+        );
 
-    // -------------------------------
-    // CHANGE PROJECT
-    // -------------------------------
 
-    currentIndex.value = targetIndex;
-    displayIndex.value = targetIndex;
+        // ---------------------------------
+        // PLAY ROTATION
+        // ---------------------------------
 
-    // -------------------------------
-    // WAIT UNTIL VUE HAS RENDERED
-    // -------------------------------
+        await wait(
+            ROTATION_DURATION
+        );
 
-    await waitForRender();
 
-    // -------------------------------
-    // UNLOCK BUTTONS
-    // -------------------------------
+        // ---------------------------------
+        // UPDATE PROJECT
+        // ---------------------------------
 
-    isAnimating.value = false;
+        currentIndex.value =
+            targetIndex;
+
+        displayIndex.value =
+            targetIndex;
+
+
+        // ---------------------------------
+        // WAIT FOR VUE RENDER
+        // ---------------------------------
+
+        await waitForRender();
+
+
+    } finally {
+
+        // ---------------------------------
+        // UNLOCK
+        // ---------------------------------
+
+        isAnimating.value = false;
+
+    }
 
 }
 
@@ -191,7 +238,9 @@ async function changeProject(direction: number): Promise<void> {
 
 function showNextProject(): void {
 
-    if (isAnimating.value) return;
+    if (isAnimating.value) {
+        return;
+    }
 
     void changeProject(1);
 
@@ -204,7 +253,9 @@ function showNextProject(): void {
 
 function showPreviousProject(): void {
 
-    if (isAnimating.value) return;
+    if (isAnimating.value) {
+        return;
+    }
 
     void changeProject(-1);
 
@@ -218,12 +269,9 @@ function showPreviousProject(): void {
     <div
         class="project-scroll-showcase"
         :class="{
-            'is-animating':
-                isAnimating,
-
+            'is-animating': isAnimating,
             'direction-next':
                 animationDirection === 'next',
-
             'direction-previous':
                 animationDirection === 'previous'
         }"
@@ -236,6 +284,7 @@ function showPreviousProject(): void {
         <div class="project-card-scene">
 
             <div class="project-card-3d">
+
 
                 <!-- =================================
                      TOP CUBE
@@ -256,9 +305,7 @@ function showPreviousProject(): void {
 
                         <img
                             :src="currentProject.image"
-                            :alt="
-                                currentProject.title
-                            "
+                            :alt="currentProject.title"
                         />
 
 
@@ -337,27 +384,33 @@ function showPreviousProject(): void {
                                     project-showcase-category
                                 "
                             >
+
                                 {{
                                     currentProject.category
                                 }}
+
                             </span>
 
 
                             <!-- TITLE -->
 
                             <h3>
+
                                 {{
                                     currentProject.title
                                 }}
+
                             </h3>
 
 
                             <!-- DESCRIPTION -->
 
                             <p>
+
                                 {{
                                     currentProject.shortDescription
                                 }}
+
                             </p>
 
 
@@ -377,7 +430,9 @@ function showPreviousProject(): void {
                                     :key="technology"
                                     class="technology"
                                 >
+
                                     {{ technology }}
+
                                 </span>
 
                             </div>
@@ -459,6 +514,7 @@ function showPreviousProject(): void {
             >
 
                 <span>
+
                     {{
                         String(
                             currentIndex + 1
@@ -467,7 +523,9 @@ function showPreviousProject(): void {
                             '0'
                         )
                     }}
+
                 </span>
+
 
                 <span
                     class="
@@ -477,7 +535,9 @@ function showPreviousProject(): void {
                     /
                 </span>
 
+
                 <span>
+
                     {{
                         String(
                             projects.length
@@ -486,6 +546,7 @@ function showPreviousProject(): void {
                             '0'
                         )
                     }}
+
                 </span>
 
             </div>
@@ -539,6 +600,7 @@ function showPreviousProject(): void {
 
     perspective:
         1800px;
+
 }
 
 
@@ -559,6 +621,7 @@ function showPreviousProject(): void {
 
     transform-style:
         preserve-3d;
+
 }
 
 
@@ -576,6 +639,7 @@ function showPreviousProject(): void {
 
     transform-style:
         preserve-3d;
+
 }
 
 
@@ -612,6 +676,7 @@ function showPreviousProject(): void {
             0.36,
             1
         );
+
 }
 
 
@@ -648,6 +713,7 @@ function showPreviousProject(): void {
             0.36,
             1
         );
+
 }
 
 
@@ -660,6 +726,7 @@ function showPreviousProject(): void {
 
     transform:
         rotateY(-180deg);
+
 }
 
 
@@ -668,6 +735,7 @@ function showPreviousProject(): void {
 
     transform:
         rotateY(180deg);
+
 }
 
 
@@ -680,6 +748,7 @@ function showPreviousProject(): void {
 
     transform:
         rotateY(180deg);
+
 }
 
 
@@ -688,6 +757,7 @@ function showPreviousProject(): void {
 
     transform:
         rotateY(-180deg);
+
 }
 
 
@@ -713,6 +783,7 @@ function showPreviousProject(): void {
 
     transform-style:
         preserve-3d;
+
 }
 
 
@@ -740,6 +811,7 @@ function showPreviousProject(): void {
             0,
             0.35
         );
+
 }
 
 
@@ -762,6 +834,7 @@ function showPreviousProject(): void {
             0.36,
             1
         );
+
 }
 
 
@@ -774,6 +847,7 @@ function showPreviousProject(): void {
 
     transform:
         scale(1.06);
+
 }
 
 
@@ -805,6 +879,7 @@ function showPreviousProject(): void {
         );
 
     z-index: 1;
+
 }
 
 
@@ -881,18 +956,15 @@ function showPreviousProject(): void {
     transition:
         opacity
         0.4s ease,
-
         transform
         0.4s ease,
-
         background
         0.4s ease,
-
         border-color
         0.4s ease,
-
         box-shadow
         0.4s ease;
+
 }
 
 
@@ -910,6 +982,7 @@ function showPreviousProject(): void {
             -50%,
             -50%
         );
+
 }
 
 
@@ -950,6 +1023,7 @@ function showPreviousProject(): void {
             -50%
         )
         scale(1.03);
+
 }
 
 
@@ -962,6 +1036,7 @@ function showPreviousProject(): void {
     transition:
         transform
         0.3s ease;
+
 }
 
 
@@ -972,6 +1047,7 @@ function showPreviousProject(): void {
             3px,
             -3px
         );
+
 }
 
 
@@ -995,6 +1071,7 @@ function showPreviousProject(): void {
 
     transform:
         rotateY(180deg);
+
 }
 
 
@@ -1023,6 +1100,7 @@ function showPreviousProject(): void {
 
     background-size:
         22px 22px;
+
 }
 
 
@@ -1074,6 +1152,7 @@ function showPreviousProject(): void {
             0,
             0.35
         );
+
 }
 
 
@@ -1085,6 +1164,7 @@ function showPreviousProject(): void {
 
     padding:
         30px;
+
 }
 
 
@@ -1113,6 +1193,7 @@ function showPreviousProject(): void {
 
     text-transform:
         uppercase;
+
 }
 
 
@@ -1137,6 +1218,7 @@ function showPreviousProject(): void {
             2.5vw,
             2.2rem
         );
+
 }
 
 
@@ -1159,6 +1241,7 @@ function showPreviousProject(): void {
 
     line-height:
         1.7;
+
 }
 
 
@@ -1174,6 +1257,7 @@ function showPreviousProject(): void {
 
     gap:
         8px;
+
 }
 
 
@@ -1224,12 +1308,11 @@ function showPreviousProject(): void {
     transition:
         transform
         0.25s ease,
-
         border-color
         0.25s ease,
-
         background
         0.25s ease;
+
 }
 
 
@@ -1259,6 +1342,7 @@ function showPreviousProject(): void {
             246,
             0.08
         );
+
 }
 
 
@@ -1286,6 +1370,7 @@ function showPreviousProject(): void {
 
     transform:
         rotateY(180deg);
+
 }
 
 
@@ -1311,6 +1396,7 @@ function showPreviousProject(): void {
 
     letter-spacing:
         0.25em;
+
 }
 
 
@@ -1329,6 +1415,7 @@ function showPreviousProject(): void {
 
     margin-top:
         25px;
+
 }
 
 
@@ -1379,12 +1466,11 @@ function showPreviousProject(): void {
     transition:
         transform
         0.25s ease,
-
         background
         0.25s ease,
-
         border-color
         0.25s ease;
+
 }
 
 
@@ -1412,6 +1498,7 @@ function showPreviousProject(): void {
             246,
             0.18
         );
+
 }
 
 
@@ -1426,6 +1513,7 @@ function showPreviousProject(): void {
 
     cursor:
         not-allowed;
+
 }
 
 
@@ -1451,6 +1539,7 @@ function showPreviousProject(): void {
 
     letter-spacing:
         0.12em;
+
 }
 
 
@@ -1459,6 +1548,7 @@ span:first-child {
 
     color:
         #a78bfa;
+
 }
 
 
@@ -1474,6 +1564,7 @@ span:first-child {
             255,
             0.2
         );
+
 }
 
 
@@ -1487,6 +1578,7 @@ span:first-child {
 
         height:
             500px;
+
     }
 
 
@@ -1494,6 +1586,7 @@ span:first-child {
 
         height:
             250px;
+
     }
 
 
@@ -1501,6 +1594,7 @@ span:first-child {
 
         height:
             250px;
+
     }
 
 
@@ -1508,6 +1602,7 @@ span:first-child {
 
         padding:
             24px;
+
     }
 
 
@@ -1515,6 +1610,7 @@ span:first-child {
 
         font-size:
             1.5rem;
+
     }
 
 
@@ -1525,6 +1621,7 @@ span:first-child {
 
         margin-bottom:
             18px;
+
     }
 
 
@@ -1532,6 +1629,7 @@ span:first-child {
 
         gap:
             6px;
+
     }
 
 
@@ -1542,6 +1640,7 @@ span:first-child {
 
         font-size:
             0.7rem;
+
     }
 
 
@@ -1552,9 +1651,14 @@ span:first-child {
 
         font-size:
             0.8rem;
+
     }
 
 }
 
 </style>
 ```
+
+**Belangrijk:** met deze versie blijft `isAnimating` gedurende de volledige **850 ms** actief. Dus als je bijvoorbeeld vijf keer heel snel op `→` klikt, wordt alleen de eerste klik uitgevoerd. De overige klikken worden genegeerd. Pas nadat de kaart volledig is gedraaid én Vue het nieuwe project heeft gerenderd, wordt de knop weer actief.
+
+Ook heb ik de `*background*`-fouten uit je `transition`-regels verwijderd.

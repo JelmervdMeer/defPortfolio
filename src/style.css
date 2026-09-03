@@ -287,13 +287,9 @@ p {
 
     letter-spacing: 0.18em;
 
-    background:
-        linear-gradient(
-            90deg,
-            #6c63ff,
-            #9b5cff,
-            #00d4ff
-        );
+    background:#9b5cff;
+           
+        
 
     background-clip: text;
 

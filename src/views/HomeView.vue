@@ -901,9 +901,221 @@ onUnmounted(() => {
                         "
                     >
 
-                        <WorkDisciplines
-                            variant="home"
-                        />
+                        <!-- =================================
+                             DESKTOP FIGURE
+                        ================================== -->
+
+                        <div class="discipline-desktop">
+
+                            <WorkDisciplines
+                                variant="home"
+                            />
+
+                        </div>
+
+
+                        <!-- =================================
+                             MOBILE TIMELINE
+                        ================================== -->
+
+                        <div class="discipline-mobile">
+
+                            <div class="mobile-discipline-list">
+
+
+                                <!-- 01 -->
+
+                                <div class="mobile-discipline">
+
+                                    <div class="mobile-discipline-marker">
+
+                                        <span>
+                                            01
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="mobile-discipline-content">
+
+                                        <div class="mobile-discipline-icon">
+
+                                            <i class="bi bi-book"></i>
+
+                                        </div>
+
+                                        <div>
+
+                                            <h3>
+                                                VERNIEUWING
+                                            </h3>
+
+                                            <span>
+                                                Blijven ontdekken
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- 02 -->
+
+                                <div class="mobile-discipline">
+
+                                    <div class="mobile-discipline-marker">
+
+                                        <span>
+                                            02
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="mobile-discipline-content">
+
+                                        <div class="mobile-discipline-icon">
+
+                                            <i class="bi bi-code-slash"></i>
+
+                                        </div>
+
+                                        <div>
+
+                                            <h3>
+                                                TECHNISCH
+                                            </h3>
+
+                                            <span>
+                                                Architectuur & structuur
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- 03 -->
+
+                                <div class="mobile-discipline">
+
+                                    <div class="mobile-discipline-marker">
+
+                                        <span>
+                                            03
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="mobile-discipline-content">
+
+                                        <div class="mobile-discipline-icon">
+
+                                            <i class="bi bi-gear"></i>
+
+                                        </div>
+
+                                        <div>
+
+                                            <h3>
+                                                PRAKTISCH
+                                            </h3>
+
+                                            <span>
+                                                Van idee naar resultaat
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- 04 -->
+
+                                <div class="mobile-discipline">
+
+                                    <div class="mobile-discipline-marker">
+
+                                        <span>
+                                            04
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="mobile-discipline-content">
+
+                                        <div class="mobile-discipline-icon">
+
+                                            <i class="bi bi-brush"></i>
+
+                                        </div>
+
+                                        <div>
+
+                                            <h3>
+                                                CREATIEF
+                                            </h3>
+
+                                            <span>
+                                                Denken buiten de standaard
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- 05 -->
+
+                                <div class="mobile-discipline">
+
+                                    <div class="mobile-discipline-marker">
+
+                                        <span>
+                                            05
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="mobile-discipline-content">
+
+                                        <div class="mobile-discipline-icon">
+
+                                            <i class="bi bi-chat-square-text"></i>
+
+                                        </div>
+
+                                        <div>
+
+                                            <h3>
+                                                COMMUNICATIE
+                                            </h3>
+
+                                            <span>
+                                                Techniek begrijpelijk maken
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -2194,6 +2406,388 @@ span.tech-marquee-dot {
 
 
 /* =========================================
+   DISCIPLINE RESPONSIVE SYSTEM
+========================================= */
+
+.discipline-desktop {
+
+    display: block;
+
+    width: 100%;
+
+}
+
+
+.discipline-mobile {
+
+    display: none;
+
+}
+
+
+/* =========================================
+   MOBILE DISCIPLINE TIMELINE
+========================================= */
+
+.mobile-discipline-list {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    max-width: 600px;
+
+    margin:
+        0 auto;
+
+    padding:
+        10px
+        0;
+
+}
+
+
+/* Vertical purple connection line */
+
+.mobile-discipline-list::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 35px;
+    bottom: 35px;
+
+    left: 26px;
+
+    width: 2px;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+            rgba(
+                139,
+                92,
+                246,
+                0.25
+            ),
+            #8b5cf6,
+            rgba(
+                139,
+                92,
+                246,
+                0.25
+            )
+        );
+
+    box-shadow:
+
+        0 0 12px
+        rgba(
+            139,
+            92,
+            246,
+            0.35
+        );
+
+    pointer-events: none;
+
+}
+
+
+.mobile-discipline {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 105px;
+
+    width: 100%;
+
+}
+
+
+.mobile-discipline-marker {
+
+    position: relative;
+
+    z-index: 2;
+
+    flex:
+        0 0 54px;
+
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(
+            139,
+            92,
+            246,
+            0.7
+        );
+
+    border-radius: 50%;
+
+    background:
+        #08090d;
+
+    box-shadow:
+
+        0 0 20px
+        rgba(
+            139,
+            92,
+            246,
+            0.2
+        );
+
+}
+
+
+.mobile-discipline-marker::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 5px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(
+                139,
+                92,
+                246,
+                0.25
+            ),
+            rgba(
+                139,
+                92,
+                246,
+                0.05
+            )
+        );
+
+    z-index: -1;
+
+}
+
+
+.mobile-discipline-marker span {
+
+    color:
+        #a78bfa;
+
+    font-family:
+        monospace;
+
+    font-size:
+        0.68rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.mobile-discipline-content {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    min-width: 0;
+
+    margin-left: 22px;
+
+    padding:
+        18px
+        20px;
+
+    flex: 1;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.07
+        );
+
+    border-radius:
+        16px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                255,
+                255,
+                0.045
+            ),
+            rgba(
+                255,
+                255,
+                255,
+                0.012
+            )
+        );
+
+    box-shadow:
+
+        0 15px 40px
+        rgba(
+            0,
+            0,
+            0,
+            0.15
+        );
+
+    transition:
+
+        transform 250ms ease,
+        border-color 250ms ease,
+        box-shadow 250ms ease;
+
+}
+
+
+.mobile-discipline-content:hover {
+
+    transform:
+        translateX(5px);
+
+    border-color:
+
+        rgba(
+            139,
+            92,
+            246,
+            0.45
+        );
+
+    box-shadow:
+
+        0 15px 40px
+        rgba(
+            139,
+            92,
+            246,
+            0.12
+        );
+
+}
+
+
+.mobile-discipline-icon {
+
+    flex:
+        0 0 46px;
+
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color:
+        #a78bfa;
+
+    border-radius:
+        50%;
+
+    background:
+
+        rgba(
+            139,
+            92,
+            246,
+            0.1
+        );
+
+    font-size:
+        1.15rem;
+
+}
+
+
+.mobile-discipline-content h3 {
+
+    margin:
+        0;
+
+    color:
+        #ffffff;
+
+    font-size:
+        0.85rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.mobile-discipline-content span {
+
+    display: block;
+
+    margin-top:
+        6px;
+
+    color:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.45
+        );
+
+    font-size:
+        0.72rem;
+
+    line-height:
+        1.4;
+
+}
+
+
+/* =========================================
    CONTACT CONTAINER
 ========================================= */
 
@@ -2596,32 +3190,6 @@ span.tech-marquee-dot {
 
 
 /* =========================================
-   WORK DISCIPLINES HOVER
-========================================= */
-
-:deep(.work-discipline),
-:deep(.discipline-card),
-:deep(.discipline-item) {
-
-    transition:
-
-        transform 300ms ease,
-        box-shadow 300ms ease;
-
-}
-
-
-:deep(.work-discipline:hover),
-:deep(.discipline-card:hover),
-:deep(.discipline-item:hover) {
-
-    transform:
-        translateY(-5px);
-
-}
-
-
-/* =========================================
    RESPONSIVE
 ========================================= */
 
@@ -2707,6 +3275,24 @@ span.tech-marquee-dot {
         padding:
             75px
             30px;
+
+    }
+
+
+    /* =================================
+       DISCIPLINES → MOBILE TIMELINE
+    ================================= */
+
+    .discipline-desktop {
+
+        display: none;
+
+    }
+
+
+    .discipline-mobile {
+
+        display: block;
 
     }
 
@@ -2944,8 +3530,111 @@ span.tech-marquee-dot {
 
     }
 
+
+    /* =================================
+       SMALL MOBILE DISCIPLINES
+    ================================= */
+
+    .mobile-discipline-list {
+
+        max-width:
+            100%;
+
+        padding:
+            5px
+            0;
+
+    }
+
+
+    .mobile-discipline-list::before {
+
+        left:
+            23px;
+
+    }
+
+
+    .mobile-discipline {
+
+        min-height:
+            95px;
+
+    }
+
+
+    .mobile-discipline-marker {
+
+        flex-basis:
+            48px;
+
+        width:
+            48px;
+
+        height:
+            48px;
+
+    }
+
+
+    .mobile-discipline-marker span {
+
+        font-size:
+            0.6rem;
+
+    }
+
+
+    .mobile-discipline-content {
+
+        gap:
+            12px;
+
+        margin-left:
+            15px;
+
+        padding:
+            14px;
+
+        border-radius:
+            14px;
+
+    }
+
+
+    .mobile-discipline-icon {
+
+        flex-basis:
+            40px;
+
+        width:
+            40px;
+
+        height:
+            40px;
+
+        font-size:
+            1rem;
+
+    }
+
+
+    .mobile-discipline-content h3 {
+
+        font-size:
+            0.72rem;
+
+    }
+
+
+    .mobile-discipline-content span {
+
+        font-size:
+            0.62rem;
+
+    }
+
 }
 
 </style>
-
 ```
