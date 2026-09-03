@@ -2767,28 +2767,48 @@ onUnmounted(() => {
 ========================================= */
 
 @media (max-width: 991px) {
-
     .project-split-section {
         padding: 100px 0;
     }
 
     .project-split-grid {
-        grid-template-columns: 1fr;
-
+        display: flex;
+        flex-direction: column;
         gap: 50px;
     }
 
     .project-split-title {
         position: static;
+        width: 100%;
+        order: 1;
+    }
+
+    .project-split-content {
+        width: 100%;
+        order: 2;
+    }
+
+    /* Challenge */
+    .project-split-reversed .project-split-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-split-reversed .project-split-title {
+        order: 1;
+    }
+
+    .project-split-reversed .project-split-content {
+        order: 2;
     }
 
     .project-split-reversed
     .project-split-content,
-
     .project-split-reversed
     .project-split-title {
         grid-column: auto;
     }
+
 
     .cylinder-stage {
         height: 550px;
