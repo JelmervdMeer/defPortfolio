@@ -933,6 +933,10 @@ onUnmounted(() => {
 
 }
 
+:deep(.home-disciplines .section-layout-content) {
+    column-gap: 120px;
+}
+
 
 /* =========================================
    TABLET

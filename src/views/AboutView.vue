@@ -450,6 +450,7 @@ onUnmounted(() => {
                         <span class="animated-gradient-text">
                             oplossing
                         </span>
+                        .
 
                     </template>
 

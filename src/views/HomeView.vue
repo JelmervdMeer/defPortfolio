@@ -650,15 +650,16 @@ onUnmounted(() => {
                             "
                         >
 
-                            Ik bouw
+                            Ik maak digitale
 
                             <span
                                 class="
                                     animated-gradient-text
                                 "
                             >
-                                digitale oplossingen.
+                                 oplossingen
                             </span>
+                            .
 
                         </h1>
 
@@ -2751,7 +2752,7 @@ span.tech-marquee-dot {
         #ffffff;
 
     font-size:
-        0.85rem;
+        1.5rem;
 
     font-weight:
         700;
@@ -2779,7 +2780,7 @@ span.tech-marquee-dot {
         );
 
     font-size:
-        0.72rem;
+        1rem;
 
     line-height:
         1.4;
@@ -3185,8 +3186,29 @@ span.tech-marquee-dot {
             246,
             0.20
         );
-
 }
+
+  /* =================================
+       DISCIPLINES → MOBILE TIMELINE
+    ================================= */
+
+    .discipline-desktop {
+
+        display: none;
+
+    }
+
+
+    .discipline-mobile {
+
+        display: block;
+
+    }
+
+
+
+  
+
 
 
 /* =========================================
@@ -3278,25 +3300,114 @@ span.tech-marquee-dot {
 
     }
 
-
     /* =================================
-       DISCIPLINES → MOBILE TIMELINE
+       SMALL MOBILE DISCIPLINES
     ================================= */
 
-    .discipline-desktop {
+    .mobile-discipline-list {
 
-        display: none;
+        max-width:
+            100%;
+
+        padding:
+            5px
+            0;
 
     }
 
 
-    .discipline-mobile {
+    .mobile-discipline-list::before {
 
-        display: block;
+        left:
+            23px;
+
+    }
+
+
+    .mobile-discipline {
+
+        min-height:
+            95px;
+
+    }
+
+
+    .mobile-discipline-marker {
+
+        flex-basis:
+            48px;
+
+        width:
+            48px;
+
+        height:
+            48px;
+
+    }
+
+
+    .mobile-discipline-marker span {
+
+        font-size:
+            0.6rem;
+
+    }
+
+
+    .mobile-discipline-content {
+
+        gap:
+            12px;
+
+        margin-left:
+            15px;
+
+        padding:
+            14px;
+
+        border-radius:
+            14px;
+
+    }
+
+
+    .mobile-discipline-icon {
+
+        flex-basis:
+            40px;
+
+        width:
+            40px;
+
+        height:
+            40px;
+
+        font-size:
+            1rem;
+
+    }
+
+
+    .mobile-discipline-content h3 {
+
+        font-size:
+            0.72rem;
+
+    }
+
+
+    .mobile-discipline-content span {
+
+        font-size:
+            0.62rem;
 
     }
 
 }
+
+
+  
+
 
 
 @media (max-width: 768px) {

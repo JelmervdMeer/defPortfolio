@@ -173,9 +173,7 @@ function toggleMenu() {
    NAVBAR
 ========================================= */
 
-.work {
-  color: #a855f7 !important;
-}
+.work { color: #ffffff !important; } /* Active contact page */ .portfolio-nav-contact.router-link-active .work { color: #a855f7 !important; }
 
 .lets-work:hover {
   color: #c084fc !important;
@@ -360,7 +358,7 @@ function toggleMenu() {
 
 .portfolio-nav-link.router-link-active {
 
-    color: #ffffff !important;
+    color: #6c63ff !important;
 
     font-weight: 600;
 

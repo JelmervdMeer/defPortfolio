@@ -479,7 +479,33 @@ function activateDiscipline(
         );
 }
 
+.discipline-center span {
+    font-size: clamp(0.7rem, 0.65vw, 0.9rem);
+}
 
+.discipline-center strong {
+    font-size: clamp(1.2rem, 1.15vw, 1.55rem);
+}
+
+.discipline-node-number {
+    font-size: clamp(0.65rem, 0.55vw, 0.8rem);
+}
+
+.discipline-node-content h3 {
+    font-size: clamp(0.85rem, 0.75vw, 1.05rem);
+}
+
+.discipline-node-content span {
+    font-size: clamp(0.65rem, 0.6vw, 0.8rem);
+}
+
+.discipline-node-description p {
+    font-size: clamp(0.72rem, 0.65vw, 0.9rem);
+}
+
+.discipline-node-description li {
+    font-size: clamp(0.65rem, 0.55vw, 0.78rem);
+}
 
 /* =====================================
    SYSTEM
