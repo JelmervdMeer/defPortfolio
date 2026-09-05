@@ -11,6 +11,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 import SectionLayout from '../components/SectionLayout.vue';
 import ProjectScrollShowcase from '../components/ProjectScroll.vue';
 import ContactScene from '../components/ContactScene.vue';
+import ThreeHeading from '../components/ThreeHeading.vue';
 
 
 // =====================================
@@ -627,109 +628,95 @@ onUnmounted(() => {
             ></div>
 
 
-            <div class="container">
+            
+<div class="container">
 
-                <div class="hero-content">
+    <div class="hero-content">
 
-                    <div class="hero-title-content">
+        <!-- =================================
+             HERO TITLE
+        ================================== -->
 
-                        <div
-                            class="
-                                hero-label
-                                reveal
-                            "
-                        >
-                            FREELANCE DEVELOPER
-                        </div>
+        <div class="hero-title-content">
 
+            <div class="hero-3d-label">
 
-                        <h1
-                            class="
-                                page-title
-                                reveal
-                            "
-                        >
-
-                            Ik maak digitale
-
-                            <span
-                                class="
-                                    animated-gradient-text
-                                "
-                            >
-                                 oplossingen
-                            </span>
-                            .
-
-                        </h1>
-
-                    </div>
-
-
-                    <div class="hero-actions">
-
-                        <p
-                            class="
-                                hero-text
-                                reveal
-                            "
-                        >
-                            Ik ontwerp en ontwikkel interactieve
-                            websites, 3D-ervaringen en software
-                            waarin techniek en creativiteit
-                            samenkomen.
-                        </p>
-
-
-                        <div
-                            class="
-                                hero-buttons
-                                reveal
-                            "
-                        >
-
-                            <RouterLink
-                                to="/projects"
-                                class="
-                                    btn
-                                    btn-primary
-                                    btn-lg
-                                "
-                            >
-
-                                Bekijk mijn projecten
-
-                                <i
-                                    class="
-                                        bi
-                                        bi-arrow-right
-                                        ms-2
-                                    "
-                                ></i>
-
-                            </RouterLink>
-
-
-                            <RouterLink
-                                to="/contact"
-                                class="
-                                    btn
-                                    btn-outline-light
-                                    btn-lg
-                                "
-                            >
-
-                                Neem contact op
-
-                            </RouterLink>
-
-                        </div>
-
-                    </div>
-
+                <div class="hero-label reveal">
+                    Freelance Web Developer
                 </div>
 
             </div>
+
+
+            <div class="hero-title">
+
+                <h1 class="page-title">
+
+                    Ik maak digitale
+                    <span class="animated-gradient-text">
+
+                        oplossingen
+                    </span>
+                    .
+
+                </h1>
+                
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             HERO ACTIONS
+        ================================== -->
+
+        <div class="hero-actions">
+
+            <p class="hero-text reveal">
+
+                Ik ontwerp en ontwikkel interactieve
+                websites, 3D-ervaringen en software
+                waarin techniek en creativiteit
+                samenkomen.
+
+            </p>
+
+
+            <div class="hero-buttons reveal">
+
+                <RouterLink
+                    to="/projects"
+                    class="btn btn-primary btn-lg"
+                >
+
+                    Bekijk mijn projecten
+
+                    <i
+                        class="bi bi-arrow-right ms-2"
+                    ></i>
+
+                </RouterLink>
+
+
+                <RouterLink
+                    to="/contact"
+                    class="btn btn-outline-light btn-lg"
+                >
+
+                    Neem contact op
+
+                </RouterLink>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
 
 
             <!-- =====================================
@@ -740,40 +727,75 @@ onUnmounted(() => {
 
                 <div class="tech-marquee-track">
 
+
+                    <!-- FIRST GROUP -->
+
                     <div class="tech-marquee-group">
 
                         <span>THREE.JS</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>TYPESCRIPT</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>VUE</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>LARAVEL</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>JAVASCRIPT</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>BLENDER</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>PHP</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>SQL</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>UML</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>PYTHON</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                     </div>
 
+
+                    <!-- SECOND GROUP -->
 
                     <div
                         class="tech-marquee-group"
@@ -781,34 +803,64 @@ onUnmounted(() => {
                     >
 
                         <span>THREE.JS</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>TYPESCRIPT</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>VUE</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>LARAVEL</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>JAVASCRIPT</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>BLENDER</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>PHP</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>SQL</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>UML</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                         <span>PYTHON</span>
-                        <span class="tech-marquee-dot">•</span>
+
+                        <span class="tech-marquee-dot">
+                            •
+                        </span>
 
                     </div>
 
@@ -846,17 +898,16 @@ onUnmounted(() => {
                         Een selectie van mijn
 
                         <span class="animated-gradient-text">
+
                             werk
+
                         </span>.
 
                     </template>
 
 
                     <div
-                        class="
-                            section-reveal
-                            reveal
-                        "
+                        class="section-reveal reveal"
                     >
 
                         <ProjectScrollShowcase />
@@ -878,7 +929,7 @@ onUnmounted(() => {
                     class="home-disciplines"
                     variant="split"
                     label="MIJN WERKWIJZE"
-                    title="Vijf disciplines een manier van werken"
+                    title="Vijf disciplines,één manier van werken"
                     description="Verschillende disciplines komen samen in één manier van werken. Door techniek, creativiteit, communicatie, vernieuwing en een doelgerichte aanpak te combineren, ontstaan digitale oplossingen die zowel doordacht als bruikbaar zijn."
                 >
 
@@ -887,7 +938,9 @@ onUnmounted(() => {
                         Vijf
 
                         <span class="animated-gradient-text">
+
                             disciplines
+
                         </span>
 
                         een werkwijze.
@@ -896,11 +949,9 @@ onUnmounted(() => {
 
 
                     <div
-                        class="
-                            section-reveal
-                            reveal
-                        "
+                        class="section-reveal reveal"
                     >
+
 
                         <!-- =================================
                              DESKTOP FIGURE
@@ -945,6 +996,7 @@ onUnmounted(() => {
 
                                         </div>
 
+
                                         <div>
 
                                             <h3>
@@ -982,6 +1034,7 @@ onUnmounted(() => {
                                             <i class="bi bi-code-slash"></i>
 
                                         </div>
+
 
                                         <div>
 
@@ -1021,6 +1074,7 @@ onUnmounted(() => {
 
                                         </div>
 
+
                                         <div>
 
                                             <h3>
@@ -1058,6 +1112,7 @@ onUnmounted(() => {
                                             <i class="bi bi-brush"></i>
 
                                         </div>
+
 
                                         <div>
 
@@ -1097,6 +1152,7 @@ onUnmounted(() => {
 
                                         </div>
 
+
                                         <div>
 
                                             <h3>
@@ -1112,7 +1168,6 @@ onUnmounted(() => {
                                     </div>
 
                                 </div>
-
 
                             </div>
 
@@ -1145,7 +1200,9 @@ onUnmounted(() => {
                         Samen iets
 
                         <span class="animated-gradient-text">
+
                             geweldigs
+
                         </span>
 
                         <br />
@@ -1628,20 +1685,65 @@ onUnmounted(() => {
    HERO TITLE
 ========================================= */
 
-.hero h1 {
+.hero-title {
 
-    max-width: 950px;
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    width: 100%;
+
+}
+
+
+.hero-title .page-title {
+
+    max-width: none;
 
     margin: 0;
+
+}
+
+
+.hero h1 {
 
     color:
         #ffffff;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.20;
+    line-height:
+        1.20;
 
-    letter-spacing: -0.055em;
+    letter-spacing:
+        -0.055em;
+
+}
+
+
+.hero-3d-word {
+
+    position: relative;
+
+    width: 520px;
+
+    height: 130px;
+
+    margin-left: 10px;
+
+    flex-shrink: 1;
+
+}
+
+
+.hero-title-period {
+
+    display: inline-block;
+
+    line-height: 1;
 
 }
 
@@ -1679,7 +1781,6 @@ onUnmounted(() => {
     z-index: 1;
 
     will-change:
-
         left,
         top,
         transform;
@@ -1695,14 +1796,6 @@ onUnmounted(() => {
 
     transition-delay:
         0ms;
-
-}
-
-
-.hero h1.reveal {
-
-    transition-delay:
-        100ms;
 
 }
 
@@ -2452,8 +2545,6 @@ span.tech-marquee-dot {
 }
 
 
-/* Vertical purple connection line */
-
 .mobile-discipline-list::before {
 
     content: "";
@@ -3186,29 +3277,8 @@ span.tech-marquee-dot {
             246,
             0.20
         );
+
 }
-
-  /* =================================
-       DISCIPLINES → MOBILE TIMELINE
-    ================================= */
-
-    .discipline-desktop {
-
-        display: none;
-
-    }
-
-
-    .discipline-mobile {
-
-        display: block;
-
-    }
-
-
-
-  
-
 
 
 /* =========================================
@@ -3227,42 +3297,51 @@ span.tech-marquee-dot {
 
     .hero-content {
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        align-items: center;
+        align-items:
+            center;
 
-        gap: 40px;
+        gap:
+            40px;
 
-        text-align: center;
+        text-align:
+            center;
 
     }
 
 
     .hero-title-content {
 
-        width: 100%;
+        width:
+            100%;
 
     }
 
 
     .hero-actions {
 
-        width: 100%;
+        width:
+            100%;
 
-        max-width: 380px;
+        max-width:
+            380px;
 
-        flex: none;
+        flex:
+            none;
 
     }
 
 
     .home-sections {
 
-        gap: 40px;
+        gap:
+            40px;
 
         padding:
             40px
-            0
+            20px
             70px;
 
     }
@@ -3300,9 +3379,26 @@ span.tech-marquee-dot {
 
     }
 
+
     /* =================================
-       SMALL MOBILE DISCIPLINES
+       MOBILE DISCIPLINE TIMELINE
     ================================= */
+
+    .discipline-desktop {
+
+        display:
+            none;
+
+    }
+
+
+    .discipline-mobile {
+
+        display:
+            block;
+
+    }
+
 
     .mobile-discipline-list {
 
@@ -3406,15 +3502,16 @@ span.tech-marquee-dot {
 }
 
 
-  
-
-
+/* =========================================
+   TABLET / MOBILE HERO
+========================================= */
 
 @media (max-width: 768px) {
 
     .hero {
 
-        min-height: 90vh;
+        min-height:
+            90vh;
 
         padding-top:
             150px;
@@ -3424,29 +3521,36 @@ span.tech-marquee-dot {
 
     .hero-content {
 
-        gap: 40px;
+        gap:
+            40px;
 
     }
 
 
     .hero-actions {
 
-        width: 100%;
+        width:
+            100%;
 
-        max-width: 320px;
+        max-width:
+            320px;
 
-        align-items: center;
+        align-items:
+            center;
 
     }
 
 
     .hero-buttons {
 
-        width: 100%;
+        width:
+            100%;
 
-        max-width: 320px;
+        max-width:
+            320px;
 
-        align-items: stretch;
+        align-items:
+            stretch;
 
     }
 
@@ -3467,9 +3571,57 @@ span.tech-marquee-dot {
     }
 
 
+    /* =================================
+       MOBILE 3D TITLE
+    ================================= */
+
+    .hero-title {
+
+        display:
+            block;
+
+        width:
+            100%;
+
+    }
+
+
+    .hero-title .page-title {
+
+        margin-bottom:
+            0;
+
+    }
+
+
+    .hero-3d-word {
+
+        width:
+            100%;
+
+        height:
+            110px;
+
+        margin:
+            5px
+            0
+            0;
+
+    }
+
+
+    .hero-title-period {
+
+        display:
+            inline;
+
+    }
+
+
     .hero-text {
 
-        margin-top: 28px;
+        margin-top:
+            28px;
 
         font-size:
             1rem;
@@ -3479,23 +3631,30 @@ span.tech-marquee-dot {
 
     .hero::before {
 
-        width: 400px;
-        height: 400px;
+        width:
+            400px;
+
+        height:
+            400px;
 
     }
 
 
     .hero::after {
 
-        width: 300px;
-        height: 300px;
+        width:
+            300px;
+
+        height:
+            300px;
 
     }
 
 
     .home-sections {
 
-        gap: 32px;
+        gap:
+            32px;
 
         padding:
             32px
@@ -3540,6 +3699,10 @@ span.tech-marquee-dot {
 }
 
 
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
 @media (max-width: 576px) {
 
     .hero {
@@ -3574,9 +3737,18 @@ span.tech-marquee-dot {
     }
 
 
+    .hero-3d-word {
+
+        height:
+            95px;
+
+    }
+
+
     .home-sections {
 
-        gap: 24px;
+        gap:
+            24px;
 
         padding:
             24px
@@ -3621,23 +3793,27 @@ span.tech-marquee-dot {
 
     .contact-cta {
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        align-items: stretch;
+        align-items:
+            stretch;
 
     }
 
 
     .contact-cta .btn {
 
-        width: 100%;
+        width:
+            100%;
 
     }
 
 
     .contact-scene-wrapper {
 
-        min-height: 230px;
+        min-height:
+            230px;
 
     }
 

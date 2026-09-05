@@ -1161,6 +1161,8 @@ onUnmounted(() => {
 
 }
 
+/* ========================================= SECTION LABEL ========================================= */ .section-label { display: inline-flex; align-items: center; margin-bottom: 28px; font-family: var(--font-heading); font-size: clamp( 1rem, 1.6vw, 3rem ); font-weight: 600; letter-spacing: 0.18em; line-height: 1.2; color: #9b5cff; text-transform: uppercase; }
+
 
 /* =========================================
    TABLET

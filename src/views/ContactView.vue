@@ -46,7 +46,7 @@ function setupRevealObserver() {
 
     const elements =
         document.querySelectorAll(
-            '.reveal'
+            '.contact-page .reveal'
         );
 
 
@@ -85,7 +85,10 @@ function setupRevealObserver() {
             },
 
             {
-                threshold: 0.08
+                threshold: 0.08,
+
+                rootMargin:
+                    '0px 0px -40px 0px'
             }
 
         );
@@ -118,6 +121,8 @@ onMounted(() => {
 onUnmounted(() => {
 
     revealObserver?.disconnect();
+
+    revealObserver = null;
 
 });
 
@@ -166,7 +171,7 @@ onUnmounted(() => {
                     variant="split"
                     reverse
                     label="CONTACTGEGEVENS"
-                    title="Neem contact op"
+                    title="Neem contact op."
                     description="Ik sta open voor freelance opdrachten, samenwerkingen en interessante projecten."
                 >
 
@@ -178,7 +183,7 @@ onUnmounted(() => {
                             contact
                         </span>
 
-                        op
+                        op.
 
                     </template>
 
@@ -200,7 +205,7 @@ onUnmounted(() => {
                             <!-- E-MAIL -->
 
                             <a
-                                href="mailto:jou@email.nl"
+                                href="mailto:jelmervandermeer02@gmail.com"
                                 class="contact-detail"
                             >
 
@@ -229,7 +234,7 @@ onUnmounted(() => {
                             <!-- LINKEDIN -->
 
                             <a
-                                href="#"
+                                href="https://www.linkedin.com/in/jelmer-van-der-meer-18614614b/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="contact-detail"
@@ -249,7 +254,7 @@ onUnmounted(() => {
                                     </small>
 
                                     <span>
-                                        https://www.linkedin.com/in/jelmer-van-der-meer-18614614b/
+                                        LinkedIn
                                     </span>
 
                                 </div>
@@ -260,7 +265,7 @@ onUnmounted(() => {
                             <!-- GITHUB -->
 
                             <a
-                                href="#"
+                                href="https://github.com/JelmervdMeer"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="contact-detail"
@@ -280,7 +285,7 @@ onUnmounted(() => {
                                     </small>
 
                                     <span>
-                                         https://github.com/JelmervdMeer
+                                        GitHub
                                     </span>
 
                                 </div>
@@ -324,6 +329,7 @@ onUnmounted(() => {
                         <span class="animated-gradient-text">
                             idee
                         </span>
+                        .
 
                     </template>
 
@@ -535,7 +541,6 @@ onUnmounted(() => {
 
             <!-- =====================================
                  BOTTOM CTA
-                 TITLE RIGHT
             ====================================== -->
 
             <div
@@ -545,7 +550,7 @@ onUnmounted(() => {
                 "
             >
 
-                
+                &nbsp;
 
             </div>
 
@@ -580,6 +585,44 @@ onUnmounted(() => {
 
     background:
         #08090d;
+
+}
+
+
+/* =========================================
+   PAGE HEADER LABEL
+========================================= */
+
+/*
+   Houdt het label van PageHeader gelijk
+   aan de labels in de overige secties.
+*/
+
+.contact-page :deep(.page-header-label),
+.contact-page :deep(.hero-label),
+.contact-page :deep(.section-label) {
+
+    font-family:
+        var(--font-heading);
+
+    font-size:
+        clamp(
+            1rem,
+            1.6vw,
+            3rem
+        );
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.18em;
+
+    color:
+        #9b5cff;
+
+    text-transform:
+        uppercase;
 
 }
 
@@ -699,7 +742,6 @@ onUnmounted(() => {
         none;
 
     padding:
-        70px
         70px;
 
     overflow:
@@ -1603,7 +1645,8 @@ onUnmounted(() => {
    ANIMATED GRADIENT
 ========================================= */
 
-/*.animated-gradient-text {
+/*
+.animated-gradient-text {
 
     display:
         inline-block;
@@ -1689,6 +1732,28 @@ onUnmounted(() => {
             0,
             0
         );
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal {
+
+        opacity:
+            1;
+
+        transform:
+            none;
+
+        transition:
+            none;
+
+    }
 
 }
 

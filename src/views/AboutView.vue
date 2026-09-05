@@ -2,14 +2,13 @@
 <script setup lang="ts">
 
 import {
-    nextTick,
     onMounted,
     onUnmounted
 } from 'vue';
 
+import PageHeader from '../components/PageHeader.vue';
 import SectionLayout from '../components/SectionLayout.vue';
 import WorkDisciplines from '../components/WorkDisciplines.vue';
-import AboutHeader from '../components/AboutHeader.vue';
 
 
 // =====================================
@@ -20,18 +19,20 @@ let revealObserver:
     IntersectionObserver | null = null;
 
 
-async function setupRevealObserver() {
-
-    await nextTick();
+function setupRevealObserver() {
 
     const elements =
         document.querySelectorAll(
-            '.reveal'
+            '.about-page .reveal'
         );
 
+
     if (!elements.length) {
+
         return;
+
     }
+
 
     revealObserver =
         new IntersectionObserver(
@@ -44,12 +45,16 @@ async function setupRevealObserver() {
                         if (
                             !entry.isIntersecting
                         ) {
+
                             return;
+
                         }
+
 
                         entry.target.classList.add(
                             'is-visible'
                         );
+
 
                         revealObserver?.unobserve(
                             entry.target
@@ -61,7 +66,10 @@ async function setupRevealObserver() {
             },
 
             {
-                threshold: 0.08
+                threshold: 0.08,
+
+                rootMargin:
+                    '0px 0px -40px 0px'
             }
 
         );
@@ -95,6 +103,8 @@ onUnmounted(() => {
 
     revealObserver?.disconnect();
 
+    revealObserver = null;
+
 });
 
 </script>
@@ -109,7 +119,13 @@ onUnmounted(() => {
              HERO
         ====================================== -->
 
-        <AboutHeader />
+        <PageHeader
+            label="OVER MIJ"
+            title="Wie ik ben."
+            accent="ben"
+            description="Ik ben een creatieve developer die graag techniek en creativiteit combineert om interactieve digitale ervaringen te bouwen."
+            :particles="true"
+        />
 
 
         <!-- =====================================
@@ -141,11 +157,13 @@ onUnmounted(() => {
 
                     <template #title>
 
-                        Hoe ik
-
                         <span class="animated-gradient-text">
-                            werk
+                            Hoe
                         </span>
+
+                        ik werk.
+
+                        
 
                     </template>
 
@@ -416,6 +434,7 @@ onUnmounted(() => {
 
                             </div>
 
+
                         </div>
 
                     </div>
@@ -503,6 +522,7 @@ onUnmounted(() => {
 
             </div>
 
+
         </div>
 
     </main>
@@ -511,7 +531,6 @@ onUnmounted(() => {
 
 
 <style scoped>
-
 
 /* =====================================
    PAGE
@@ -536,6 +555,43 @@ onUnmounted(() => {
 
     background:
         #08090d;
+
+}
+
+
+/* =====================================
+   SECTION LABELS
+   ZELFDE STYLING ALS ANDERE LABELS
+===================================== */
+
+.about-page :deep(.section-label),
+.about-page :deep(.page-header-label),
+.about-page :deep(.hero-label) {
+
+    font-family:
+        var(--font-heading);
+
+    font-size:
+        clamp(
+            1rem,
+            1.6vw,
+            3rem
+        );
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.18em;
+
+    line-height:
+        1.2;
+
+    color:
+        #9b5cff;
+
+    text-transform:
+        uppercase;
 
 }
 
@@ -670,7 +726,6 @@ onUnmounted(() => {
 .work-container {
 
     background:
-
         radial-gradient(
             circle at 5% 10%,
             rgba(
@@ -727,7 +782,6 @@ onUnmounted(() => {
         50%;
 
     background:
-
         radial-gradient(
             circle,
             rgba(
@@ -736,12 +790,14 @@ onUnmounted(() => {
                 247,
                 0.14
             ) 0%,
+
             rgba(
                 217,
                 70,
                 239,
                 0.07
             ) 35%,
+
             transparent 72%
         );
 
@@ -764,7 +820,6 @@ onUnmounted(() => {
 .disciplines-container {
 
     background:
-
         radial-gradient(
             circle at 95% 5%,
             rgba(
@@ -821,7 +876,6 @@ onUnmounted(() => {
         50%;
 
     background:
-
         radial-gradient(
             circle,
             rgba(
@@ -830,12 +884,14 @@ onUnmounted(() => {
                 246,
                 0.13
             ) 0%,
+
             rgba(
                 6,
                 182,
                 212,
                 0.07
             ) 38%,
+
             transparent 72%
         );
 
@@ -858,7 +914,6 @@ onUnmounted(() => {
 .technology-container {
 
     background:
-
         radial-gradient(
             circle at 10% 10%,
             rgba(
@@ -915,7 +970,6 @@ onUnmounted(() => {
         50%;
 
     background:
-
         radial-gradient(
             circle,
             rgba(
@@ -924,12 +978,14 @@ onUnmounted(() => {
                 246,
                 0.13
             ) 0%,
+
             rgba(
                 59,
                 130,
                 246,
                 0.07
             ) 35%,
+
             transparent 72%
         );
 
@@ -952,7 +1008,6 @@ onUnmounted(() => {
 .cta-container {
 
     background:
-
         radial-gradient(
             circle at 35% 5%,
             rgba(
@@ -1009,7 +1064,6 @@ onUnmounted(() => {
         50%;
 
     background:
-
         radial-gradient(
             circle,
             rgba(
@@ -1018,12 +1072,14 @@ onUnmounted(() => {
                 246,
                 0.13
             ) 0%,
+
             rgba(
                 59,
                 130,
                 246,
                 0.07
             ) 35%,
+
             transparent 72%
         );
 
@@ -1230,7 +1286,6 @@ onUnmounted(() => {
         12px;
 
     background:
-
         linear-gradient(
             145deg,
             rgba(
@@ -1248,11 +1303,8 @@ onUnmounted(() => {
         );
 
     transition:
-
         transform 0.35s ease,
-
         border-color 0.35s ease,
-
         background 0.35s ease;
 
 }
@@ -1372,7 +1424,6 @@ onUnmounted(() => {
         translateY(40px);
 
     transition:
-
         opacity 700ms ease,
 
         transform 700ms
@@ -1551,18 +1602,4 @@ onUnmounted(() => {
 </style>
 ```
 
-**Belangrijk:** de enige functionele wijziging is de Samenwerken-sectie:
 
-```vue
-variant="cta"
-```
-
-in plaats van:
-
-```vue
-variant="split"
-```
-
-Daarnaast heb ik `.about-cta` in `AboutView.vue` zelf horizontaal gemaakt. De nieuwe `cta`-variant in `SectionLayout.vue` zorgt ervoor dat de **description rechts van de titel** terechtkomt.
-
-Als je dit nu combineert met de `SectionLayout.vue` van mijn vorige bericht, zou de desktopversie precies die indeling moeten krijgen die je beschreef.

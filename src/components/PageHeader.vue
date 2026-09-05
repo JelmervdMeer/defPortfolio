@@ -378,38 +378,7 @@ const particles = Array.from(
    LABEL
 ===================================== */
 
-.page-header-label {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    margin-bottom:
-        28px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.65
-        );
-
-    font-size:
-        0.75rem;
-
-    font-weight:
-        600;
-
-    letter-spacing:
-        0.22em;
-
-    text-transform:
-        uppercase;
-
-}
+.page-header-label { font-family: var(--font-heading); font-size: clamp( 1rem, 1.6vw, 3rem ); font-weight: 600; letter-spacing: 0.18em; color: #9b5cff; text-transform: uppercase; }
 
 
 .page-header-label::before {

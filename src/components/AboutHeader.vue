@@ -1,662 +1,876 @@
+```vue
 <script setup lang="ts">
+
+import {
+    onMounted,
+    onUnmounted
+} from 'vue';
+
+import PageHeader from '../components/PageHeader.vue';
+import SectionLayout from '../components/SectionLayout.vue';
+import WorkDisciplines from '../components/WorkDisciplines.vue';
+
+
+// =========================================
+// REVEAL ANIMATION
+// =========================================
+
+let revealObserver:
+    IntersectionObserver | null = null;
+
+
+onMounted(() => {
+
+    const elements =
+        document.querySelectorAll(
+            '.about-page .reveal'
+        );
+
+
+    if (!elements.length) return;
+
+
+    revealObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (!entry.isIntersecting) return;
+
+
+                    entry.target.classList.add(
+                        'is-visible'
+                    );
+
+
+                    revealObserver?.unobserve(
+                        entry.target
+                    );
+
+                });
+
+            },
+            {
+                threshold: 0.08,
+                rootMargin:
+                    '0px 0px -40px 0px'
+            }
+        );
+
+
+    elements.forEach(element => {
+
+        revealObserver?.observe(
+            element
+        );
+
+    });
+
+});
+
+
+onUnmounted(() => {
+
+    revealObserver?.disconnect();
+
+    revealObserver = null;
+
+});
+
 </script>
+
 
 <template>
 
-    <section class="about-header">
-
-        <!-- =====================================
-             BACKGROUND GLOW
-        ====================================== -->
-
-        <div
-            class="about-header-glow"
-            aria-hidden="true"
-        ></div>
+    <main class="about-page">
 
 
         <!-- =====================================
-             PARTICLES
+             PAGE HEADER
         ====================================== -->
 
-        <div
-            class="about-header-particles"
-            aria-hidden="true"
+        <PageHeader
+            label="OVER MIJ"
+            title="Wie ik ben"
+            accent="ik ben"
+            description="Ik ben een creatieve developer die graag techniek en creativiteit combineert om interactieve digitale ervaringen te bouwen."
+            :particles="true"
+        />
+
+
+        <!-- =====================================
+             MIJN WERKWIJZE
+        ====================================== -->
+
+        <SectionLayout
+            variant="split"
+            :reverse="true"
+            label="MIJN WERKWIJZE"
+            title="Hoe ik werk"
         >
 
-            <span
-                v-for="particle in 35"
-                :key="particle"
-                class="particle"
-                :style="{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * -8}s`,
-                    animationDuration: `${6 + Math.random() * 8}s`
-                }"
-            ></span>
+            <div class="about-work">
 
-        </div>
+                <div
+                    class="work-step reveal"
+                >
 
+                    <span class="work-step-number">
+                        01
+                    </span>
 
-        <div class="container">
+                    <div>
 
-            <div class="about-header-content">
+                        <h3>
+                            Luisteren
+                        </h3>
 
+                        <p>
+                            Eerst begrijpen wat er nodig is.
+                            Ik luister naar het idee, de
+                            uitdaging en het doel voordat
+                            ik begin te bouwen.
+                        </p>
 
-                <!-- =====================================
-                     LEFT - TITLE
-                ====================================== -->
-
-                <div class="about-header-title">
-
-                    <div class="about-header-label">
-                        OVER MIJ
                     </div>
-
-
-                    <h1 class="page-title">
-
-                        Wie
-
-                        <span class="animated-gradient-text">
-                            ik ben
-                        </span>
-
-                    </h1>
 
                 </div>
 
 
-                <!-- =====================================
-                     RIGHT - TEXT
-                ====================================== -->
+                <div
+                    class="work-step reveal"
+                >
 
-                <div class="about-header-description">
-
-                    <p>
-
-                        Ik ben een creatieve developer die
-                        graag techniek en creativiteit
-                        combineert om interactieve digitale
-                        ervaringen te bouwen.
-
-                    </p>
-
-
-                    <div class="about-header-line"></div>
-
-
-                    <span class="about-header-meta">
-
-                        CREATIEF · TECHNISCH · NIEUWSGIERIG
-
+                    <span class="work-step-number">
+                        02
                     </span>
+
+                    <div>
+
+                        <h3>
+                            Denken
+                        </h3>
+
+                        <p>
+                            Vervolgens vertaal ik het idee
+                            naar een duidelijke structuur
+                            en een oplossing die technisch
+                            én visueel klopt.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="work-step reveal"
+                >
+
+                    <span class="work-step-number">
+                        03
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Bouwen
+                        </h3>
+
+                        <p>
+                            Daarna komt het leukste gedeelte:
+                            ideeën omzetten in een werkende
+                            digitale ervaring.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="work-step reveal"
+                >
+
+                    <span class="work-step-number">
+                        04
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Verbeteren
+                        </h3>
+
+                        <p>
+                            Een project is nooit direct klaar.
+                            Ik blijf testen, verfijnen en
+                            verbeteren totdat alles klopt.
+                        </p>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </SectionLayout>
 
 
         <!-- =====================================
-             BOTTOM LINE
+             DISCIPLINES
         ====================================== -->
 
-        <div class="about-header-bottom"></div>
+        <SectionLayout
+            variant="split"
+            label="MIJN DISCIPLINES"
+            title="Vijf disciplines, één werkwijze."
+        >
 
-    </section>
+            <div class="disciplines-content reveal">
+
+                <WorkDisciplines />
+
+            </div>
+
+        </SectionLayout>
+
+
+        <!-- =====================================
+             TECHNOLOGIE
+        ====================================== -->
+
+        <SectionLayout
+            variant="split"
+            :reverse="true"
+            label="TECHNOLOGIE"
+            title="Techniek als gereedschap"
+        >
+
+            <div class="technology-content reveal">
+
+                <p class="technology-intro">
+
+                    Technologie is voor mij geen doel op
+                    zich. Het is het gereedschap waarmee
+                    ideeën tot leven komen.
+
+                </p>
+
+
+                <div class="technology-grid">
+
+                    <div class="technology-item">
+
+                        <span class="technology-number">
+                            01
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Front-end
+                            </h3>
+
+                            <p>
+                                Vue, TypeScript, JavaScript,
+                                HTML en CSS.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="technology-item">
+
+                        <span class="technology-number">
+                            02
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                3D & interactie
+                            </h3>
+
+                            <p>
+                                Three.js, WebGL en interactieve
+                                digitale ervaringen.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="technology-item">
+
+                        <span class="technology-number">
+                            03
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Development
+                            </h3>
+
+                            <p>
+                                Moderne development workflows
+                                met Vite, Git en component-based
+                                architectuur.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="technology-item">
+
+                        <span class="technology-number">
+                            04
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Backend
+                            </h3>
+
+                            <p>
+                                Laravel, REST API's en
+                                database-integratie.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </SectionLayout>
+
+
+        <!-- =====================================
+             CTA
+        ====================================== -->
+
+        <SectionLayout
+            variant="cta"
+            label="SAMENWERKEN"
+            title="Van idee naar ervaring"
+            description="Heb je een idee, een project of een digitale uitdaging? Laten we samen kijken hoe we er een sterke digitale ervaring van kunnen maken."
+        >
+
+            <div class="about-cta">
+
+                <a
+                    href="/contact"
+                    class="about-cta-button"
+                >
+                    Laten we samenwerken
+                </a>
+
+
+                <a
+                    href="/projects"
+                    class="about-cta-link"
+                >
+                    Bekijk mijn projecten
+                    <span aria-hidden="true">
+                        →
+                    </span>
+                </a>
+
+            </div>
+
+        </SectionLayout>
+
+
+    </main>
 
 </template>
 
 
 <style scoped>
 
-/* =====================================
-   ABOUT HEADER
-===================================== */
+/* =========================================
+   PAGE
+========================================= */
 
-.about-header {
+.about-page {
 
     position: relative;
 
-    padding:
-        190px
-        0
-        110px;
+    width: 100%;
 
     overflow: hidden;
 
-    background:
-
-        radial-gradient(
-            circle at 15% 30%,
-            rgba(
-                139,
-                92,
-                246,
-                0.12
-            ),
-            transparent 32%
-        ),
-
-        radial-gradient(
-            circle at 85% 65%,
-            rgba(
-                0,
-                212,
-                255,
-                0.06
-            ),
-            transparent 30%
-        ),
-
-        #08090d;
+    background: #08090d;
 
 }
 
 
-/* =====================================
-   CONTENT
-===================================== */
+/* =========================================
+   ABOUT WORK
+========================================= */
 
-.about-header-content {
+.about-work {
 
     position: relative;
 
-    z-index: 2;
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1.3fr)
-        minmax(280px, 0.7fr);
-
-    align-items: end;
-
-    gap: 100px;
-
-}
-
-
-/* =====================================
-   LABEL
-===================================== */
-
-.about-header-label {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    margin-bottom: 28px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.65
-        );
-
-    font-size:
-        0.75rem;
-
-    font-weight: 600;
-
-    letter-spacing:
-        0.22em;
-
-}
-
-
-.about-header-label::before {
-
-    content: "";
-
-    width: 28px;
-
-    height: 1px;
-
-    margin-right: 12px;
-
-    background:
-        #8b5cf6;
-
-    box-shadow:
-        0 0 12px
-        rgba(
-            139,
-            92,
-            246,
-            0.8
-        );
-
-}
-
-
-/* =====================================
-   TITLE
-===================================== */
-
-.about-header-title h1 {
-
-    margin: 0;
-
-    color:
-        #ffffff;
-
-    font-weight:
-        700;
-
-    line-height:
-        1;
-
-    letter-spacing:
-        -0.055em;
-
-}
-
-
-/* =====================================
-   DESCRIPTION
-===================================== */
-
-.about-header-description {
+    width: 100%;
 
     display: flex;
 
     flex-direction: column;
 
-    align-items: flex-start;
-
-    padding-bottom: 8px;
+    gap: 0;
 
 }
 
 
-.about-header-description p {
+.work-step {
 
-    max-width:
-        420px;
+    display: grid;
+
+    grid-template-columns: 60px minmax(0, 1fr);
+
+    gap: 28px;
+
+    padding: 34px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.08);
+
+}
+
+
+.work-step:first-child {
+
+    padding-top: 0;
+
+}
+
+
+.work-step:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.work-step-number {
+
+    padding-top: 4px;
+
+    color: #9b5cff;
+
+    font-family:
+        var(--font-heading);
+
+    font-size: 0.75rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+
+}
+
+
+.work-step h3 {
+
+    margin: 0 0 12px;
+
+    color: #ffffff;
+
+    font-family:
+        var(--font-heading);
+
+    font-size:
+        clamp(1.25rem, 1.8vw, 1.6rem);
+
+    font-weight: 600;
+
+    letter-spacing: -0.025em;
+
+}
+
+
+.work-step p {
+
+    max-width: 620px;
 
     margin: 0;
 
     color:
-        rgba(
-            255,
-            255,
-            255,
-            0.62
-        );
+        rgba(255,255,255,0.58);
 
-    font-size:
-        1.05rem;
+    font-size: 1rem;
 
-    line-height:
-        1.8;
+    line-height: 1.8;
 
 }
 
 
-/* =====================================
-   LINE
-===================================== */
+/* =========================================
+   DISCIPLINES
+========================================= */
 
-.about-header-line {
+.disciplines-content {
 
     width: 100%;
 
-    max-width:
-        420px;
+}
 
-    height: 1px;
 
-    margin:
-        32px
-        0
-        18px;
+/* =========================================
+   TECHNOLOGY
+========================================= */
 
-    background:
-        linear-gradient(
-            90deg,
+.technology-content {
 
-            rgba(
-                139,
-                92,
-                246,
-                0.8
-            ),
-
-            rgba(
-                255,
-                255,
-                255,
-                0.08
-            )
-        );
+    width: 100%;
 
 }
 
 
-/* =====================================
-   META
-===================================== */
+.technology-intro {
 
-.about-header-meta {
+    max-width: 680px;
+
+    margin: 0 0 50px;
 
     color:
-        rgba(
-            255,
-            255,
-            255,
-            0.35
-        );
-
-    font-family:
-        monospace;
+        rgba(255,255,255,0.62);
 
     font-size:
-        0.7rem;
+        clamp(1rem, 1.2vw, 1.25rem);
 
-    letter-spacing:
-        0.16em;
-
-}
-
-
-/* =====================================
-   BACKGROUND GLOW
-===================================== */
-
-.about-header-glow {
-
-    position: absolute;
-
-    top: 50%;
-
-    left: 40%;
-
-    width:
-        650px;
-
-    height:
-        650px;
-
-    transform:
-        translate(
-            -50%,
-            -50%
-        );
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.13
-            ) 0%,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.05
-            ) 40%,
-
-            transparent 70%
-        );
-
-    filter:
-        blur(30px);
-
-    pointer-events:
-        none;
+    line-height: 1.8;
 
 }
 
 
-/* =====================================
-   PARTICLES
-===================================== */
+.technology-grid {
 
-.about-header-particles {
+    display: grid;
 
-    position: absolute;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
 
-    inset: 0;
-
-    overflow: hidden;
-
-    pointer-events: none;
+    gap: 0;
 
 }
 
 
-.particle {
+.technology-item {
 
-    position: absolute;
+    display: grid;
 
-    width: 3px;
+    grid-template-columns: 48px minmax(0, 1fr);
 
-    height: 3px;
+    gap: 20px;
 
-    border-radius:
-        50%;
+    padding: 30px 0;
 
-    background:
-        #a78bfa;
-
-    opacity:
-        0.45;
-
-    box-shadow:
-
-        0 0 8px
-        rgba(
-            167,
-            139,
-            250,
-            0.8
-        ),
-
-        0 0 20px
-        rgba(
-            139,
-            92,
-            246,
-            0.4
-        );
-
-    animation:
-        particleFloat
-        linear
-        infinite;
+    border-top:
+        1px solid
+        rgba(255,255,255,0.08);
 
 }
 
 
-@keyframes particleFloat {
+.technology-number {
 
-    0% {
+    color: #9b5cff;
 
-        transform:
-            translate3d(
-                0,
-                0,
-                0
-            );
+    font-family:
+        var(--font-heading);
 
-    }
+    font-size: 0.72rem;
 
-    50% {
+    font-weight: 600;
 
-        transform:
-            translate3d(
-                25px,
-                -45px,
-                0
-            );
-
-    }
-
-    100% {
-
-        transform:
-            translate3d(
-                0,
-                0,
-                0
-            );
-
-    }
+    letter-spacing: 0.12em;
 
 }
 
 
-/* =====================================
-   BOTTOM BORDER
-===================================== */
+.technology-item h3 {
 
-.about-header-bottom {
+    margin: 0 0 10px;
 
-    position: absolute;
+    color: #ffffff;
 
-    bottom: 0;
+    font-family:
+        var(--font-heading);
 
-    left: 0;
+    font-size: 1.15rem;
+
+    font-weight: 600;
+
+}
+
+
+.technology-item p {
+
+    margin: 0;
+
+    color:
+        rgba(255,255,255,0.52);
+
+    font-size: 0.95rem;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================
+   CTA
+========================================= */
+
+.about-cta {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 28px;
 
     width: 100%;
 
-    height: 1px;
+}
+
+
+.about-cta-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 54px;
+
+    padding:
+        0 28px;
+
+    border:
+        1px solid
+        rgba(155,92,255,0.7);
+
+    border-radius: 999px;
 
     background:
         linear-gradient(
-            90deg,
-
-            transparent,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.45
-            ),
-
-            transparent
+            135deg,
+            #9b5cff,
+            #7c3aed
         );
+
+    color: #ffffff;
+
+    font-family:
+        var(--font-heading);
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        transform 250ms ease,
+        box-shadow 250ms ease;
 
 }
 
 
-/* =====================================
+.about-cta-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(139,92,246,0.25);
+
+}
+
+
+.about-cta-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color:
+        rgba(255,255,255,0.65);
+
+    font-family:
+        var(--font-heading);
+
+    font-size: 0.9rem;
+
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition:
+        color 200ms ease,
+        gap 200ms ease;
+
+}
+
+
+.about-cta-link:hover {
+
+    color: #ffffff;
+
+    gap: 15px;
+
+}
+
+
+/* =========================================
+   REVEAL
+========================================= */
+
+.reveal {
+
+    opacity: 0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        opacity 700ms ease,
+        transform 700ms
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+.reveal.is-visible {
+
+    opacity: 1;
+
+    transform:
+        translate3d(0,0,0);
+
+}
+
+
+/* =========================================
    TABLET
-===================================== */
+========================================= */
 
 @media (max-width: 991px) {
 
-    .about-header {
-
-        padding:
-            160px
-            0
-            90px;
-
-    }
-
-
-    .about-header-content {
+    .technology-grid {
 
         grid-template-columns:
             1fr;
 
-        gap:
-            45px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 576px) {
+
+    .work-step {
+
+        grid-template-columns:
+            42px minmax(0,1fr);
+
+        gap: 18px;
+
+        padding: 28px 0;
 
     }
 
 
-    .about-header-description p {
+    .technology-item {
 
-        max-width:
-            600px;
+        grid-template-columns:
+            42px minmax(0,1fr);
+
+        gap: 16px;
 
     }
 
 
-    .about-header-line {
+    .technology-intro {
 
-        max-width:
-            600px;
+        margin-bottom: 35px;
+
+    }
+
+
+    .about-cta {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 20px;
+
+    }
+
+
+    .about-cta-button {
+
+        width: 100%;
 
     }
 
 }
 
 
-/* =====================================
-   MOBILE
-===================================== */
+/* =========================================
+   REDUCED MOTION
+========================================= */
 
-@media (max-width: 576px) {
+@media (prefers-reduced-motion: reduce) {
 
-    .about-header {
+    .reveal {
 
-        padding:
-            130px
-            0
-            75px;
+        opacity: 1;
 
-    }
+        transform: none;
 
-
-    .about-header-content {
-
-        gap:
-            35px;
+        transition: none;
 
     }
 
 
-    .about-header-description p {
+    .about-cta-button,
+    .about-cta-link {
 
-        font-size:
-            1rem;
-
-        line-height:
-            1.7;
-
-    }
-
-
-    .about-header-label {
-
-        margin-bottom:
-            20px;
-
-    }
-
-
-    .about-header-glow {
-
-        width:
-            450px;
-
-        height:
-            450px;
-
-        left:
-            50%;
+        transition: none;
 
     }
 
 }
 
 </style>
+```
+
+[/code]

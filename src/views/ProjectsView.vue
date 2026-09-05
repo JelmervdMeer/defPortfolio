@@ -1,4 +1,4 @@
-kun je aan mijn projectsview ook reveal animaties toevoegen. gecorrigeerde bestand terugsturen: ```vue
+```vue
 <script setup lang="ts">
 
 import {
@@ -10,7 +10,7 @@ import {
 
 import { projects } from '../data/projects';
 
-import PageHeader from '../components/ProjectHeader.vue';
+import PageHeader from '../components/PageHeader.vue';
 
 
 // =====================================
@@ -39,7 +39,7 @@ async function setupRevealObserver() {
 
     const elements =
         document.querySelectorAll(
-            '.reveal'
+            '.projects-page .reveal'
         );
 
 
@@ -78,7 +78,10 @@ async function setupRevealObserver() {
             },
 
             {
-                threshold: 0.08
+                threshold: 0.08,
+
+                rootMargin:
+                    '0px 0px -40px 0px'
             }
 
         );
@@ -112,6 +115,8 @@ onUnmounted(() => {
 
     revealObserver?.disconnect();
 
+    revealObserver = null;
+
 });
 
 </script>
@@ -143,6 +148,10 @@ onUnmounted(() => {
 
                 <div class="row g-4">
 
+
+                    <!-- =====================================
+                         PROJECT CARD
+                    ====================================== -->
 
                     <div
                         v-for="(
@@ -204,6 +213,8 @@ onUnmounted(() => {
                                             :alt="
                                                 project.title
                                             "
+
+                                            loading="lazy"
                                         />
 
                                     </div>
@@ -837,13 +848,6 @@ onUnmounted(() => {
 }
 
 
-/*
-   Belangrijk:
-   De technology labels hebben hun
-   eigen hover en reageren niet op
-   de hover van de afbeelding.
-*/
-
 .technology:hover {
 
     color:
@@ -922,6 +926,28 @@ onUnmounted(() => {
 
 
 /* =====================================
+   REDUCED MOTION
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal {
+
+        opacity:
+            1;
+
+        transform:
+            none;
+
+        transition:
+            none;
+
+    }
+
+}
+
+
+/* =====================================
    MOBILE
 ===================================== */
 
@@ -948,3 +974,5 @@ onUnmounted(() => {
 
 </style>
 ```
+
+
