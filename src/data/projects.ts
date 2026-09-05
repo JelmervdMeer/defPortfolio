@@ -256,8 +256,8 @@ export const projects: Project[] = [
     images: [
         '/images/maggy/01.png',
         '/images/maggy/02.png',
-        '/images/maggy/03.png',
-        '/images/maggy/04.png'
+        '/images/maggy/09.png',
+        '/images/maggy/08.png'
     ],
 
     role: [

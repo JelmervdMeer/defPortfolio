@@ -1,4 +1,3 @@
-```vue
 <script setup lang="ts">
 
 import {
@@ -14,7 +13,7 @@ import {
 
 const props = withDefaults(
     defineProps<{
-        variant?: 'default' | 'split';
+        variant?: 'default' | 'split' | 'cta';
         reverse?: boolean;
         label?: string;
         title?: string;
@@ -222,6 +221,79 @@ onUnmounted(() => {
                         section-reveal-right
                     "
                 >
+
+                    <slot></slot>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================
+                 CTA LAYOUT
+            ====================================== -->
+
+            <div
+                v-else-if="variant === 'cta'"
+                class="section-layout-cta"
+            >
+
+                <!-- =============================
+                     CTA TITLE
+                ============================== -->
+
+                <div
+                    class="
+                        section-layout-text
+                        section-reveal
+                        section-reveal-left
+                    "
+                >
+
+                    <div
+                        v-if="label"
+                        class="section-label"
+                    >
+
+                        {{ label }}
+
+                    </div>
+
+
+                    <h2>
+
+                        <slot name="title">
+
+                            {{ title }}
+
+                        </slot>
+
+                    </h2>
+
+                </div>
+
+
+                <!-- =============================
+                     CTA CONTENT
+                ============================== -->
+
+                <div
+                    class="
+                        section-layout-content
+                        section-reveal
+                        section-reveal-right
+                    "
+                >
+
+                    <p
+                        v-if="description"
+                        class="section-layout-cta-description"
+                    >
+
+                        {{ description }}
+
+                    </p>
+
 
                     <slot></slot>
 
@@ -637,6 +709,97 @@ onUnmounted(() => {
 
 
 /* =========================================
+   CTA LAYOUT
+========================================= */
+
+.section-layout--cta
+.section-layout-cta {
+
+    display: grid;
+
+    grid-template-columns:
+
+        minmax(
+            0,
+            3fr
+        )
+
+        minmax(
+            0,
+            7fr
+        );
+
+    align-items:
+        center;
+
+    gap:
+        60px;
+
+    width:
+        100%;
+
+    min-width:
+        0;
+
+}
+
+
+/* =========================================
+   CTA TEXT
+========================================= */
+
+.section-layout--cta
+.section-layout-text {
+
+    justify-content:
+        center;
+
+}
+
+
+.section-layout--cta
+.section-layout-text h2 {
+
+    margin-top:
+        20px;
+
+}
+
+
+/* =========================================
+   CTA DESCRIPTION
+========================================= */
+
+.section-layout-cta-description {
+
+    max-width:
+        700px;
+
+    margin:
+        0 0 32px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.66
+        );
+
+    font-size:
+        clamp(
+            1rem,
+            1.2vw,
+            1.35rem
+        );
+
+    line-height:
+        1.8;
+
+}
+
+
+/* =========================================
    SECTION REVEAL
 ========================================= */
 
@@ -781,15 +944,31 @@ onUnmounted(() => {
 
 
 .section-layout-text p {
-    max-width: 620px;
-    margin: 30px 0 0;
-    color: rgba(255, 255, 255, 0.66);
-    font-size: clamp(
+
+    max-width:
+        620px;
+
+    margin:
+        30px 0 0;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.66
+        );
+
+    font-size:
+        clamp(
             1rem,
             1.2vw,
             1.35rem
         );
-    line-height: 1.8;
+
+    line-height:
+        1.8;
+
 }
 
 
@@ -878,6 +1057,47 @@ onUnmounted(() => {
 
 
 /* =========================================
+   CTA CONTENT
+========================================= */
+
+.section-layout--cta
+.section-layout-content {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        center;
+
+}
+
+
+.section-layout--cta
+.section-layout-content > * {
+
+    width:
+        100%;
+
+}
+
+
+.section-layout--cta
+.section-layout-content
+.about-cta {
+
+    width:
+        100%;
+
+}
+
+
+/* =========================================
    DEFAULT
 ========================================= */
 
@@ -933,8 +1153,12 @@ onUnmounted(() => {
 
 }
 
+
 :deep(.home-disciplines .section-layout-content) {
-    column-gap: 120px;
+
+    column-gap:
+        120px;
+
 }
 
 
@@ -1086,6 +1310,61 @@ onUnmounted(() => {
     }
 
 
+    /* =====================================
+       CTA TABLET
+    ====================================== */
+
+    .section-layout--cta
+    .section-layout-cta {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            40px;
+
+    }
+
+
+    .section-layout--cta
+    .section-layout-text {
+
+        text-align:
+            center;
+
+    }
+
+
+    .section-layout--cta
+    .section-layout-content {
+
+        align-items:
+            center;
+
+        padding:
+            20px
+            12px;
+
+    }
+
+
+    .section-layout-cta-description {
+
+        max-width:
+            700px;
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+
+        text-align:
+            center;
+
+    }
+
+
     /* -----------------------------
        MOBILE REVEAL
     ------------------------------ */
@@ -1185,7 +1464,37 @@ onUnmounted(() => {
 
     }
 
+
+    /* =====================================
+       CTA MOBILE
+    ====================================== */
+
+    .section-layout--cta
+    .section-layout-cta {
+
+        gap:
+            30px;
+
+    }
+
+
+    .section-layout--cta
+    .section-layout-content {
+
+        padding:
+            20px
+            8px;
+
+    }
+
+
+    .section-layout-cta-description {
+
+        margin-bottom:
+            28px;
+
+    }
+
 }
 
 </style>
-```

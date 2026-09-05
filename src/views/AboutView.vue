@@ -66,6 +66,7 @@ async function setupRevealObserver() {
 
         );
 
+
     elements.forEach(
         element => {
 
@@ -218,7 +219,7 @@ onUnmounted(() => {
                                 <p>
                                     Daarna vertaal ik het concept
                                     naar een technisch werkende
-                                    digitale ervaring.
+                                    digitale oplossing.
                                 </p>
 
                             </div>
@@ -437,7 +438,7 @@ onUnmounted(() => {
 
                 <SectionLayout
                     class="about-cta-section"
-                    variant="split"
+                    variant="cta"
                     label="SAMENWERKEN"
                     title="Van idee naar ervaring"
                     description="Ik werk graag aan projecten waarin ik kan meedenken, experimenteren en technologie kan inzetten om een idee daadwerkelijk vorm te geven."
@@ -449,8 +450,7 @@ onUnmounted(() => {
 
                         <span class="animated-gradient-text">
                             oplossing
-                        </span>
-                        .
+                        </span>.
 
                     </template>
 
@@ -512,21 +512,27 @@ onUnmounted(() => {
 
 <style scoped>
 
+
 /* =====================================
    PAGE
 ===================================== */
 
 .about-page {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 100vh;
+    min-height:
+        100vh;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    isolation: isolate;
+    isolation:
+        isolate;
 
     background:
         #08090d;
@@ -540,15 +546,20 @@ onUnmounted(() => {
 
 .about-sections {
 
-    position: relative;
+    position:
+        relative;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    gap: 40px;
+    gap:
+        40px;
 
-    width: 100%;
+    width:
+        100%;
 
     padding:
         40px
@@ -564,17 +575,20 @@ onUnmounted(() => {
 
 .about-section-container {
 
-    position: relative;
+    position:
+        relative;
 
-    width: min(
-        1400px,
-        calc(100% - 40px)
-    );
+    width:
+        min(
+            1600px,
+            calc(100% - 24px)
+        );
 
     margin:
         0 auto;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     border:
         1px solid
@@ -592,17 +606,14 @@ onUnmounted(() => {
         isolate;
 
     background:
-
         linear-gradient(
             135deg,
-
             rgba(
                 255,
                 255,
                 255,
                 0.018
             ),
-
             rgba(
                 255,
                 255,
@@ -612,7 +623,6 @@ onUnmounted(() => {
         );
 
     box-shadow:
-
         0 25px 80px
         rgba(
             0,
@@ -631,13 +641,17 @@ onUnmounted(() => {
 
 .about-section-container :deep(.section-layout) {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    min-width: 0;
+    min-width:
+        0;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     background:
         transparent;
@@ -659,27 +673,23 @@ onUnmounted(() => {
 
         radial-gradient(
             circle at 5% 10%,
-
             rgba(
                 168,
                 85,
                 247,
                 0.075
             ),
-
             transparent 34%
         ),
 
         radial-gradient(
             circle at 90% 90%,
-
             rgba(
                 217,
                 70,
                 239,
                 0.035
             ),
-
             transparent 35%
         ),
 
@@ -695,46 +705,54 @@ onUnmounted(() => {
 
 :deep(.about-work::before) {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: -140px;
-    left: -180px;
+    top:
+        -140px;
 
-    width: 520px;
-    height: 520px;
+    left:
+        -180px;
 
-    border-radius: 50%;
+    width:
+        520px;
+
+    height:
+        520px;
+
+    border-radius:
+        50%;
 
     background:
 
         radial-gradient(
             circle,
-
             rgba(
                 168,
                 85,
                 247,
                 0.14
             ) 0%,
-
             rgba(
                 217,
                 70,
                 239,
                 0.07
             ) 35%,
-
             transparent 72%
         );
 
     filter:
         blur(30px);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
-    z-index: -1;
+    z-index:
+        -1;
 
 }
 
@@ -749,27 +767,23 @@ onUnmounted(() => {
 
         radial-gradient(
             circle at 95% 5%,
-
             rgba(
                 59,
                 130,
                 246,
                 0.07
             ),
-
             transparent 34%
         ),
 
         radial-gradient(
             circle at 5% 90%,
-
             rgba(
                 6,
                 182,
                 212,
                 0.035
             ),
-
             transparent 35%
         ),
 
@@ -785,46 +799,54 @@ onUnmounted(() => {
 
 :deep(.about-disciplines::before) {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: -120px;
-    right: -180px;
+    top:
+        -120px;
 
-    width: 540px;
-    height: 540px;
+    right:
+        -180px;
 
-    border-radius: 50%;
+    width:
+        540px;
+
+    height:
+        540px;
+
+    border-radius:
+        50%;
 
     background:
 
         radial-gradient(
             circle,
-
             rgba(
                 59,
                 130,
                 246,
                 0.13
             ) 0%,
-
             rgba(
                 6,
                 182,
                 212,
                 0.07
             ) 38%,
-
             transparent 72%
         );
 
     filter:
         blur(30px);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
-    z-index: -1;
+    z-index:
+        -1;
 
 }
 
@@ -839,27 +861,23 @@ onUnmounted(() => {
 
         radial-gradient(
             circle at 10% 10%,
-
             rgba(
                 139,
                 92,
                 246,
                 0.075
             ),
-
             transparent 35%
         ),
 
         radial-gradient(
             circle at 90% 85%,
-
             rgba(
                 59,
                 130,
                 246,
                 0.045
             ),
-
             transparent 35%
         ),
 
@@ -875,46 +893,54 @@ onUnmounted(() => {
 
 :deep(.about-technology::before) {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    right: -160px;
-    top: -140px;
+    right:
+        -160px;
 
-    width: 540px;
-    height: 540px;
+    top:
+        -140px;
 
-    border-radius: 50%;
+    width:
+        540px;
+
+    height:
+        540px;
+
+    border-radius:
+        50%;
 
     background:
 
         radial-gradient(
             circle,
-
             rgba(
                 139,
                 92,
                 246,
                 0.13
             ) 0%,
-
             rgba(
                 59,
                 130,
                 246,
                 0.07
             ) 35%,
-
             transparent 72%
         );
 
     filter:
         blur(30px);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
-    z-index: -1;
+    z-index:
+        -1;
 
 }
 
@@ -929,27 +955,23 @@ onUnmounted(() => {
 
         radial-gradient(
             circle at 35% 5%,
-
             rgba(
                 139,
                 92,
                 246,
                 0.075
             ),
-
             transparent 35%
         ),
 
         radial-gradient(
             circle at 95% 90%,
-
             rgba(
                 59,
                 130,
                 246,
                 0.045
             ),
-
             transparent 35%
         ),
 
@@ -965,46 +987,54 @@ onUnmounted(() => {
 
 :deep(.about-cta-section::before) {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: -150px;
-    left: 35%;
+    top:
+        -150px;
 
-    width: 560px;
-    height: 560px;
+    left:
+        35%;
 
-    border-radius: 50%;
+    width:
+        560px;
+
+    height:
+        560px;
+
+    border-radius:
+        50%;
 
     background:
 
         radial-gradient(
             circle,
-
             rgba(
                 139,
                 92,
                 246,
                 0.13
             ) 0%,
-
             rgba(
                 59,
                 130,
                 246,
                 0.07
             ) 35%,
-
             transparent 72%
         );
 
     filter:
         blur(30px);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
-    z-index: -1;
+    z-index:
+        -1;
 
 }
 
@@ -1015,32 +1045,37 @@ onUnmounted(() => {
 
 .about-work-content {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    width: 100%;
+    width:
+        100%;
 
-    gap: 24px;
+    gap:
+        24px;
 
 }
 
 
 .about-work-item {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         60px
         1fr;
 
-    gap: 25px;
+    gap:
+        25px;
 
     padding:
         24px 0;
 
     border-bottom:
-
         1px solid
         rgba(
             255,
@@ -1093,10 +1128,10 @@ onUnmounted(() => {
 
 .about-work-item p {
 
-    margin: 0;
+    margin:
+        0;
 
     color:
-
         rgba(
             255,
             255,
@@ -1116,18 +1151,22 @@ onUnmounted(() => {
 
 .disciplines-content {
 
-    width: 100%;
+    width:
+        100%;
 
-    min-width: 0;
+    min-width:
+        0;
 
 }
 
 
 .disciplines-content :deep(.work-disciplines) {
 
-    width: 100%;
+    width:
+        100%;
 
-    min-width: 0;
+    min-width:
+        0;
 
 }
 
@@ -1138,39 +1177,47 @@ onUnmounted(() => {
 
 .technology-content {
 
-    width: 100%;
+    width:
+        100%;
 
 }
 
 
 .technology-grid {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-
         repeat(
             2,
-            minmax(0, 1fr)
+            minmax(
+                0,
+                1fr
+            )
         );
 
-    gap: 16px;
+    gap:
+        16px;
 
 }
 
 
 .technology-item {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    gap: 8px;
+    gap:
+        8px;
 
-    padding: 24px;
+    padding:
+        24px;
 
     border:
-
         1px solid
         rgba(
             255,
@@ -1186,14 +1233,12 @@ onUnmounted(() => {
 
         linear-gradient(
             145deg,
-
             rgba(
                 255,
                 255,
                 255,
                 0.045
             ),
-
             rgba(
                 139,
                 92,
@@ -1205,7 +1250,9 @@ onUnmounted(() => {
     transition:
 
         transform 0.35s ease,
+
         border-color 0.35s ease,
+
         background 0.35s ease;
 
 }
@@ -1217,7 +1264,6 @@ onUnmounted(() => {
         translateY(-5px);
 
     border-color:
-
         rgba(
             139,
             92,
@@ -1237,7 +1283,7 @@ onUnmounted(() => {
         monospace;
 
     font-size:
-        0.7rem;
+        1rem;
 
     letter-spacing:
         0.12em;
@@ -1259,7 +1305,6 @@ onUnmounted(() => {
 .technology-item span:last-child {
 
     color:
-
         rgba(
             255,
             255,
@@ -1279,28 +1324,37 @@ onUnmounted(() => {
 
 .about-cta {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        row;
 
-    justify-content: center;
+    align-items:
+        center;
 
-    align-items: flex-end;
+    justify-content:
+        flex-start;
 
-    gap: 20px;
+    gap:
+        16px;
 
-    width: 100%;
+    width:
+        100%;
 
-    margin-top: 20px;
+    margin-top:
+        0;
 
 }
 
 
 .about-cta .btn {
 
-    width: 100%;
+    width:
+        auto;
 
-    max-width: 320px;
+    max-width:
+        none;
 
 }
 
@@ -1311,7 +1365,8 @@ onUnmounted(() => {
 
 .reveal {
 
-    opacity: 0;
+    opacity:
+        0;
 
     transform:
         translateY(40px);
@@ -1333,63 +1388,12 @@ onUnmounted(() => {
 
 .reveal.is-visible {
 
-    opacity: 1;
+    opacity:
+        1;
 
     transform:
         translateY(0);
 
-}
-
-.about-section-container {
-    position: relative;
-    width: min(
-        1600px,
-        calc(100% - 24px)
-    );
-    margin: 0 auto;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.055
-        );
-
-    border-radius:
-        28px;
-
-    isolation:
-        isolate;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(
-                255,
-                255,
-                255,
-                0.018
-            ),
-            rgba(
-                255,
-                255,
-                255,
-                0.006
-            )
-        );
-
-    box-shadow:
-        0 25px 80px
-        rgba(
-            0,
-            0,
-            0,
-            0.18
-        );
 }
 
 
@@ -1401,7 +1405,8 @@ onUnmounted(() => {
 
     .about-sections {
 
-        gap: 28px;
+        gap:
+            28px;
 
         padding:
             28px
@@ -1438,6 +1443,14 @@ onUnmounted(() => {
 
     }
 
+
+    .about-cta {
+
+        justify-content:
+            center;
+
+    }
+
 }
 
 
@@ -1449,7 +1462,8 @@ onUnmounted(() => {
 
     .about-sections {
 
-        gap: 18px;
+        gap:
+            18px;
 
         padding:
             18px
@@ -1485,7 +1499,8 @@ onUnmounted(() => {
             45px
             1fr;
 
-        gap: 15px;
+        gap:
+            15px;
 
         padding:
             20px 0;
@@ -1495,15 +1510,19 @@ onUnmounted(() => {
 
     .technology-item {
 
-        padding: 20px;
+        padding:
+            20px;
 
     }
 
 
     .about-cta {
 
+        flex-direction:
+            column;
+
         align-items:
-            center;
+            stretch;
 
         width:
             100%;
@@ -1519,9 +1538,31 @@ onUnmounted(() => {
         max-width:
             320px;
 
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+
     }
 
 }
 
 </style>
 ```
+
+**Belangrijk:** de enige functionele wijziging is de Samenwerken-sectie:
+
+```vue
+variant="cta"
+```
+
+in plaats van:
+
+```vue
+variant="split"
+```
+
+Daarnaast heb ik `.about-cta` in `AboutView.vue` zelf horizontaal gemaakt. De nieuwe `cta`-variant in `SectionLayout.vue` zorgt ervoor dat de **description rechts van de titel** terechtkomt.
+
+Als je dit nu combineert met de `SectionLayout.vue` van mijn vorige bericht, zou de desktopversie precies die indeling moeten krijgen die je beschreef.

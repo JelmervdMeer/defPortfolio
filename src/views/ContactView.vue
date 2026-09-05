@@ -7,7 +7,7 @@ import {
     ref
 } from 'vue';
 
-import PageHeader from '../components/ProjectHeader.vue';
+import PageHeader from '../components/PageHeader.vue';
 import SectionLayout from '../components/SectionLayout.vue';
 
 
@@ -135,10 +135,10 @@ onUnmounted(() => {
 
         <PageHeader
             label="CONTACT"
-            title="Laten we iets"
-            accent="moois bouwen."
+            title="Laten we iets moois bouwen."
+            accent="moois"
             description="Heb je een idee, een project of een digitale uitdaging? Ik denk graag met je mee over een passende digitale oplossing."
-            bottom-label="BESCHIKBAAR VOOR NIEUWE PROJECTEN"
+            :particles="false"
         />
 
 
@@ -1603,7 +1603,7 @@ onUnmounted(() => {
    ANIMATED GRADIENT
 ========================================= */
 
-.animated-gradient-text {
+/*.animated-gradient-text {
 
     display:
         inline-block;
@@ -1650,6 +1650,7 @@ onUnmounted(() => {
         background-position;
 
 }
+*/
 
 
 /* =========================================
@@ -1889,3 +1890,5 @@ onUnmounted(() => {
 
 </style>
 ```
+
+
