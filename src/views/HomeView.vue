@@ -1,10 +1,5 @@
 <script setup lang="ts">
 
-import {
-    onMounted,
-    onUnmounted,
-    ref
-} from 'vue';
 
 import WorkDisciplines from '../components/WorkDisciplines.vue';
 import SectionLayout from '../components/SectionLayout.vue';
@@ -706,14 +701,14 @@ onUnmounted(() => {
                              MOBILE TIMELINE
                         ================================== -->
 
-                        <div class="discipline-mobile">
+                      <!--  <div class="discipline-mobile">
 
                             <div class="mobile-discipline-list">
 
-
+                            -->
                                 <!-- 01 -->
 
-                                <div class="mobile-discipline">
+                                <!--<div class="mobile-discipline">
 
                                     <div class="mobile-discipline-marker">
 
@@ -745,12 +740,12 @@ onUnmounted(() => {
 
                                     </div>
 
-                                </div>
+                                </div>-->
 
 
                                 <!-- 02 -->
 
-                                <div class="mobile-discipline">
+                                <!--<div class="mobile-discipline">
 
                                     <div class="mobile-discipline-marker">
 
@@ -782,10 +777,10 @@ onUnmounted(() => {
 
                                     </div>
 
-                                </div>
+                                </div> -->
 
 
-                                <!-- 03 -->
+                                <!-- 03 
 
                                 <div class="mobile-discipline">
 
@@ -819,12 +814,12 @@ onUnmounted(() => {
 
                                     </div>
 
-                                </div>
+                                </div> -->
 
 
                                 <!-- 04 -->
 
-                                <div class="mobile-discipline">
+                                <!--<div class="mobile-discipline">
 
                                     <div class="mobile-discipline-marker">
 
@@ -856,12 +851,12 @@ onUnmounted(() => {
 
                                     </div>
 
-                                </div>
+                                </div> -->
 
 
                                 <!-- 05 -->
 
-                                <div class="mobile-discipline">
+                              <!--  <div class="mobile-discipline">
 
                                     <div class="mobile-discipline-marker">
 
@@ -897,7 +892,7 @@ onUnmounted(() => {
 
                             </div>
 
-                        </div>
+                        </div> -->
 
                     </div>
 
@@ -1223,311 +1218,7 @@ onUnmounted(() => {
 
 
 /* =========================================
-   DISCIPLINES CONTAINER
-========================================= */
 
-.disciplines-container {
-    background:
-        radial-gradient(
-            circle at 95% 5%,
-            rgba(59, 130, 246, 0.07),
-            transparent 34%
-        ),
-        radial-gradient(
-            circle at 5% 90%,
-            rgba(6, 182, 212, 0.035),
-            transparent 35%
-        ),
-        rgba(7, 11, 18, 0.72);
-}
-
-
-:deep(.home-disciplines::before) {
-    content: "";
-
-    position: absolute;
-
-    top: -120px;
-    right: -180px;
-
-    width: 540px;
-    height: 540px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(59, 130, 246, 0.13) 0%,
-            rgba(6, 182, 212, 0.07) 38%,
-            transparent 72%
-        );
-
-    filter: blur(30px);
-
-    pointer-events: none;
-
-    z-index: -1;
-}
-
-
-:deep(.home-disciplines::after) {
-    content: "";
-
-    position: absolute;
-
-    left: -180px;
-    bottom: -160px;
-
-    width: 500px;
-    height: 500px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(14, 165, 233, 0.08) 0%,
-            rgba(59, 130, 246, 0.045) 40%,
-            transparent 72%
-        );
-
-    filter: blur(30px);
-
-    pointer-events: none;
-
-    z-index: -1;
-}
-
-
-/* =========================================
-   DISCIPLINE RESPONSIVE SYSTEM
-========================================= */
-
-.discipline-desktop {
-    display: block;
-
-    width: 100%;
-}
-
-
-.discipline-mobile {
-    display: none;
-}
-
-
-/* =========================================
-   MOBILE DISCIPLINE TIMELINE
-========================================= */
-
-.mobile-discipline-list {
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-    max-width: 600px;
-
-    margin: 0 auto;
-
-    padding: 10px 0;
-}
-
-
-.mobile-discipline-list::before {
-    content: "";
-
-    position: absolute;
-
-    top: 35px;
-    bottom: 35px;
-    left: 26px;
-
-    width: 2px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(139, 92, 246, 0.25),
-            var(--color-primary),
-            rgba(139, 92, 246, 0.25)
-        );
-
-    box-shadow:
-        0 0 12px
-        rgba(139, 92, 246, 0.35);
-
-    pointer-events: none;
-}
-
-
-.mobile-discipline {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-
-    width: 100%;
-    min-height: 105px;
-}
-
-
-.mobile-discipline-marker {
-    position: relative;
-    z-index: 2;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex: 0 0 54px;
-
-    width: 54px;
-    height: 54px;
-
-    border:
-        1px solid
-        rgba(139, 92, 246, 0.7);
-
-    border-radius: 50%;
-
-    background: var(--color-bg);
-
-    box-shadow:
-        0 0 20px
-        rgba(139, 92, 246, 0.2);
-}
-
-
-.mobile-discipline-marker::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 5px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(139, 92, 246, 0.25),
-            rgba(139, 92, 246, 0.05)
-        );
-
-    z-index: -1;
-}
-
-
-.mobile-discipline-marker span {
-    color: var(--color-primary-light);
-
-    font-family: monospace;
-
-    font-size: 0.68rem;
-
-    font-weight: 600;
-
-    letter-spacing: 0.08em;
-}
-
-
-.mobile-discipline-content {
-    display: flex;
-    align-items: center;
-
-    flex: 1;
-
-    min-width: 0;
-
-    gap: 18px;
-
-    margin-left: 22px;
-
-    padding: 18px 20px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.07);
-
-    border-radius: 16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.045),
-            rgba(255, 255, 255, 0.012)
-        );
-
-    box-shadow:
-        0 15px 40px
-        rgba(0, 0, 0, 0.15);
-
-    transition:
-        transform 250ms ease,
-        border-color 250ms ease,
-        box-shadow 250ms ease;
-}
-
-
-.mobile-discipline-content:hover {
-    transform: translateX(5px);
-
-    border-color:
-        rgba(139, 92, 246, 0.45);
-
-    box-shadow:
-        0 15px 40px
-        rgba(139, 92, 246, 0.12);
-}
-
-
-.mobile-discipline-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex: 0 0 46px;
-
-    width: 46px;
-    height: 46px;
-
-    border-radius: 50%;
-
-    color: var(--color-primary-light);
-
-    background:
-        rgba(139, 92, 246, 0.1);
-
-    font-size: 1.15rem;
-}
-
-
-.mobile-discipline-content h3 {
-    margin: 0;
-
-    color: #ffffff;
-
-    font-size: 1.5rem;
-
-    font-weight: 700;
-
-    letter-spacing: 0.08em;
-}
-
-
-.mobile-discipline-content span {
-    display: block;
-
-    margin-top: 6px;
-
-    color: rgba(255, 255, 255, 0.45);
-
-    font-size: 1rem;
-
-    line-height: 1.4;
-}
 
 
 /* =========================================
@@ -1795,33 +1486,6 @@ onUnmounted(() => {
 
 @media (max-width: 991px) {
 
-    .hero {
-        padding-top: 170px;
-    }
-
-
-    .hero-content {
-        flex-direction: column;
-        align-items: center;
-
-        gap: 40px;
-
-        text-align: center;
-    }
-
-
-    .hero-title-content {
-        width: 100%;
-    }
-
-
-    .hero-actions {
-        width: 100%;
-        max-width: 380px;
-
-        flex: none;
-    }
-
 
     .home-sections {
         gap: 40px;
@@ -1916,121 +1580,7 @@ onUnmounted(() => {
 
 }
 
-
-/* =========================================
-   TABLET / MOBILE HERO
-========================================= */
-
-@media (max-width: 768px) {
-
-    .hero {
-        min-height: 90vh;
-
-        padding-top: 150px;
-    }
-
-
-    .hero-content {
-        gap: 40px;
-    }
-
-
-    .hero-actions {
-        width: 100%;
-        max-width: 320px;
-
-        align-items: center;
-    }
-
-
-    .hero-buttons {
-        width: 100%;
-        max-width: 320px;
-
-        align-items: stretch;
-    }
-
-
-    .hero h1 {
-        font-size:
-            clamp(
-                3.2rem,
-                14vw,
-                5rem
-            );
-
-        letter-spacing: -2px;
-    }
-
-
-    /* =================================
-       MOBILE 3D TITLE
-    ================================= */
-
-    .hero-title {
-        display: block;
-
-        width: 100%;
-    }
-
-
-    .hero-title .page-title {
-        margin-bottom: 0;
-    }
-
-
-    .hero-3d-word {
-        width: 100%;
-        height: 110px;
-
-        margin:
-            5px
-            0
-            0;
-    }
-
-
-    .hero-title-period {
-        display: inline;
-    }
-
-
-    .hero-text {
-        margin-top: 28px;
-
-        font-size: 1rem;
-    }
-
-
-    .hero::before {
-        width: 400px;
-        height: 400px;
-    }
-
-
-    .hero::after {
-        width: 300px;
-        height: 300px;
-    }
-
-
-    .home-sections {
-        gap: 32px;
-
-        padding:
-            32px
-            0
-            60px;
-    }
-
-
-    .home-section-container {
-        width: calc(100% - 20px);
-
-        border-radius: 22px;
-    }
-
-}
+ 
 
 
 /* =========================================
@@ -2039,39 +1589,7 @@ onUnmounted(() => {
 
 @media (max-width: 576px) {
 
-    .hero {
-        padding-top: 125px;
-    }
 
-
-    .hero-content {
-        gap: 35px;
-    }
-
-
-    .hero-actions {
-        max-width: 100%;
-    }
-
-
-    .hero-buttons {
-        max-width: 320px;
-    }
-
-
-    .hero-3d-word {
-        height: 95px;
-    }
-
-
-    .home-sections {
-        gap: 24px;
-
-        padding:
-            24px
-            0
-            45px;
-    }
 
 
     .home-section-container {
