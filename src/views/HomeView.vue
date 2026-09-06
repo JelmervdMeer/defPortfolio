@@ -1,4 +1,3 @@
-```vue
 <script setup lang="ts">
 
 import {
@@ -11,9 +10,9 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 import SectionLayout from '../components/SectionLayout.vue';
 import ProjectScrollShowcase from '../components/ProjectScroll.vue';
 import ContactScene from '../components/ContactScene.vue';
-import ThreeHeading from '../components/ThreeHeading.vue';
+import HomeHero from '../components/HomeHero.vue';
 
-
+/*
 // =====================================
 // PARTICLE SYSTEM
 // =====================================
@@ -606,7 +605,7 @@ onUnmounted(() => {
     particles.length = 0;
 
 });
-
+*/
 </script>
 
 
@@ -615,262 +614,7 @@ onUnmounted(() => {
     <main class="home-page">
 
 
-        <!-- =====================================
-             HERO
-        ====================================== -->
-
-        <section class="hero">
-
-            <div
-                ref="heroParticles"
-                class="hero-particles"
-                aria-hidden="true"
-            ></div>
-
-
-            
-<div class="container">
-
-    <div class="hero-content">
-
-        <!-- =================================
-             HERO TITLE
-        ================================== -->
-
-        <div class="hero-title-content">
-
-            <div class="hero-3d-label">
-
-                <div class="hero-label reveal">
-                    Freelance Web Developer
-                </div>
-
-            </div>
-
-
-            <div class="hero-title">
-
-                <h1 class="page-title">
-
-                    Ik maak digitale
-                    <span class="animated-gradient-text">
-
-                        oplossingen
-                    </span>
-                    .
-
-                </h1>
-                
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================
-             HERO ACTIONS
-        ================================== -->
-
-        <div class="hero-actions">
-
-            <p class="hero-text reveal">
-
-                Ik ontwerp en ontwikkel interactieve
-                websites, 3D-ervaringen en software
-                waarin techniek en creativiteit
-                samenkomen.
-
-            </p>
-
-
-            <div class="hero-buttons reveal">
-
-                <RouterLink
-                    to="/projects"
-                    class="btn btn-primary btn-lg"
-                >
-
-                    Bekijk mijn projecten
-
-                    <i
-                        class="bi bi-arrow-right ms-2"
-                    ></i>
-
-                </RouterLink>
-
-
-                <RouterLink
-                    to="/contact"
-                    class="btn btn-outline-light btn-lg"
-                >
-
-                    Neem contact op
-
-                </RouterLink>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-```
-
-
-
-            <!-- =====================================
-                 TECHNOLOGY MARQUEE
-            ====================================== -->
-
-            <div class="tech-marquee">
-
-                <div class="tech-marquee-track">
-
-
-                    <!-- FIRST GROUP -->
-
-                    <div class="tech-marquee-group">
-
-                        <span>THREE.JS</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>TYPESCRIPT</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>VUE</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>LARAVEL</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>JAVASCRIPT</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>BLENDER</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>PHP</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>SQL</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>UML</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>PYTHON</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                    </div>
-
-
-                    <!-- SECOND GROUP -->
-
-                    <div
-                        class="tech-marquee-group"
-                        aria-hidden="true"
-                    >
-
-                        <span>THREE.JS</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>TYPESCRIPT</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>VUE</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>LARAVEL</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>JAVASCRIPT</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>BLENDER</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>PHP</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>SQL</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>UML</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                        <span>PYTHON</span>
-
-                        <span class="tech-marquee-dot">
-                            •
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
+        <HomeHero />
         <!-- =====================================
              HOME CONTENT
         ====================================== -->
@@ -897,18 +641,14 @@ onUnmounted(() => {
 
                         Een selectie van mijn
 
-                        <span class="animated-gradient-text">
-
+                        <span class="heading-accent">
                             werk
-
                         </span>.
 
                     </template>
 
 
-                    <div
-                        class="section-reveal reveal"
-                    >
+                    <div class="section-reveal reveal">
 
                         <ProjectScrollShowcase />
 
@@ -929,7 +669,7 @@ onUnmounted(() => {
                     class="home-disciplines"
                     variant="split"
                     label="MIJN WERKWIJZE"
-                    title="Vijf disciplines,één manier van werken"
+                    title="Vijf disciplines, één manier van werken"
                     description="Verschillende disciplines komen samen in één manier van werken. Door techniek, creativiteit, communicatie, vernieuwing en een doelgerichte aanpak te combineren, ontstaan digitale oplossingen die zowel doordacht als bruikbaar zijn."
                 >
 
@@ -937,10 +677,8 @@ onUnmounted(() => {
 
                         Vijf
 
-                        <span class="animated-gradient-text">
-
+                        <span class="heading-accent">
                             disciplines
-
                         </span>
 
                         een werkwijze.
@@ -948,9 +686,7 @@ onUnmounted(() => {
                     </template>
 
 
-                    <div
-                        class="section-reveal reveal"
-                    >
+                    <div class="section-reveal reveal">
 
 
                         <!-- =================================
@@ -981,9 +717,7 @@ onUnmounted(() => {
 
                                     <div class="mobile-discipline-marker">
 
-                                        <span>
-                                            01
-                                        </span>
+                                        <span>01</span>
 
                                     </div>
 
@@ -1020,9 +754,7 @@ onUnmounted(() => {
 
                                     <div class="mobile-discipline-marker">
 
-                                        <span>
-                                            02
-                                        </span>
+                                        <span>02</span>
 
                                     </div>
 
@@ -1059,9 +791,7 @@ onUnmounted(() => {
 
                                     <div class="mobile-discipline-marker">
 
-                                        <span>
-                                            03
-                                        </span>
+                                        <span>03</span>
 
                                     </div>
 
@@ -1098,9 +828,7 @@ onUnmounted(() => {
 
                                     <div class="mobile-discipline-marker">
 
-                                        <span>
-                                            04
-                                        </span>
+                                        <span>04</span>
 
                                     </div>
 
@@ -1137,9 +865,7 @@ onUnmounted(() => {
 
                                     <div class="mobile-discipline-marker">
 
-                                        <span>
-                                            05
-                                        </span>
+                                        <span>05</span>
 
                                     </div>
 
@@ -1199,10 +925,8 @@ onUnmounted(() => {
 
                         Samen iets
 
-                        <span class="animated-gradient-text">
-
+                        <span class="heading-accent">
                             geweldigs
-
                         </span>
 
                         <br />
@@ -1296,7 +1020,6 @@ onUnmounted(() => {
 ========================================= */
 
 .home-page {
-
     position: relative;
 
     width: 100%;
@@ -1304,9 +1027,7 @@ onUnmounted(() => {
 
     overflow-x: clip;
 
-    background:
-        #08090d;
-
+    background: var(--color-bg);
 }
 
 
@@ -1314,566 +1035,41 @@ onUnmounted(() => {
    HERO
 ========================================= */
 
-.hero {
 
-    --cursor-x: 50%;
-    --cursor-y: 50%;
-
-    display: grid;
-
-    grid-template-rows:
-        1fr auto;
-
-    position: relative;
-
-    min-height: 100vh;
-
-    padding:
-        190px
-        0
-        0;
-
-    overflow: hidden;
-
-    isolation: isolate;
-
-    background:
-
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(
-                108,
-                99,
-                255,
-                0.16
-            ),
-            transparent 35%
-        ),
-
-        radial-gradient(
-            circle at 80% 70%,
-            rgba(
-                0,
-                212,
-                255,
-                0.08
-            ),
-            transparent 35%
-        ),
-
-        #08090d;
-
-}
-
-
-.hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: 45%;
-    left: 50%;
-
-    width: 700px;
-    height: 700px;
-
-    transform:
-        translate(
-            -50%,
-            -50%
-        );
-
-    border-radius: 50%;
-
-    background:
-
-        radial-gradient(
-            circle,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.14
-            ) 0%,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.06
-            ) 35%,
-
-            transparent 70%
-        );
-
-    filter:
-        blur(20px);
-
-    pointer-events: none;
-
-    z-index: -1;
-
-}
-
-
-.hero::after {
-
-    content: "";
-
-    position: absolute;
-
-    top: var(--cursor-y);
-    left: var(--cursor-x);
-
-    width: 420px;
-    height: 420px;
-
-    transform:
-        translate(
-            -50%,
-            -50%
-        );
-
-    border-radius: 50%;
-
-    background:
-
-        radial-gradient(
-            circle,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.16
-            ) 0%,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.07
-            ) 30%,
-
-            transparent 70%
-        );
-
-    filter:
-        blur(15px);
-
-    pointer-events: none;
-
-    transition:
-
-        left 0.15s ease-out,
-        top 0.15s ease-out;
-
-    z-index: -1;
-
-}
-
-
-/* =========================================
-   HERO CONTENT
-========================================= */
-
-.hero .container {
-
-    position: relative;
-
-    z-index: 5;
-
-    width: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-}
-
-
-.hero-content {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 80px;
-
-    width: 100%;
-
-}
-
-
-.hero-title-content {
-
-    flex: 1;
-
-    min-width: 0;
-
-}
-
-
-.hero-actions {
-
-    flex:
-        0 0 380px;
-
-    width: 380px;
-
-    min-width: 0;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 50px;
-
-}
-
-
-.hero-text {
-
-    max-width: 650px;
-
-    margin:
-        38px
-        0
-        0;
-
-    color:
-
-        rgba(
-            255,
-            255,
-            255,
-            0.62
-        );
-
-    line-height: 1.8;
-
-}
-
-
-.hero-buttons {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 24px;
-
-}
-
-
-.hero-buttons .btn {
-
-    width: 100%;
-
-}
-
-
-/* =========================================
-   BUTTON HOVER
-========================================= */
-
-.hero-buttons .btn {
-
-    transition:
-
-        transform 250ms ease,
-        box-shadow 250ms ease,
-        background-color 250ms ease,
-        border-color 250ms ease;
-
-    will-change:
-        transform;
-
-}
-
-
-.hero-buttons .btn:hover {
-
-    transform:
-        translateY(-4px);
-
-}
-
-
-.hero-buttons .btn-primary:hover {
-
-    box-shadow:
-
-        0 10px 35px
-        rgba(
-            139,
-            92,
-            246,
-            0.32
-        );
-
-}
-
-
-.hero-buttons .btn-outline-light:hover {
-
-    box-shadow:
-
-        0 10px 30px
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
-
-}
-
-
-/* =========================================
-   HERO LABEL
-========================================= */
-
-.hero-label {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    margin-bottom: 28px;
-
-    font-weight: 600;
-
-    letter-spacing: 0.22em;
-
-    text-transform: uppercase;
-
-}
-
-
-.hero-label::before {
-
-    content: "";
-
-    width: 28px;
-
-    height: 1px;
-
-    margin-right: 12px;
-
-    background:
-        #8b5cf6;
-
-    box-shadow:
-
-        0 0 10px
-        rgba(
-            139,
-            92,
-            246,
-            0.8
-        );
-
-}
-
-
-/* =========================================
-   HERO TITLE
-========================================= */
-
-.hero-title {
-
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    width: 100%;
-
-}
-
-
-.hero-title .page-title {
-
-    max-width: none;
-
-    margin: 0;
-
-}
-
-
-.hero h1 {
-
-    color:
-        #ffffff;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.20;
-
-    letter-spacing:
-        -0.055em;
-
-}
-
-
-.hero-3d-word {
-
-    position: relative;
-
-    width: 520px;
-
-    height: 130px;
-
-    margin-left: 10px;
-
-    flex-shrink: 1;
-
-}
-
-
-.hero-title-period {
-
-    display: inline-block;
-
-    line-height: 1;
-
-}
-
-
-/* =========================================
-   PARTICLES
-========================================= */
-
-.hero-particles {
-
-    position: absolute;
-
-    inset: 0;
-
-    overflow: hidden;
-
-    pointer-events: none;
-
-    z-index: 1;
-
-}
-
-
-.hero-particles :deep(.hero-particle) {
-
-    position: absolute;
-
-    border-radius: 50%;
-
-    background:
-        #a78bfa;
-
-    pointer-events: none;
-
-    z-index: 1;
-
-    will-change:
-        left,
-        top,
-        transform;
-
-}
-
-
-/* =========================================
-   REVEAL
-========================================= */
-
-.hero-label.reveal {
-
-    transition-delay:
-        0ms;
-
-}
-
-
-.hero-text.reveal {
-
-    transition-delay:
-        200ms;
-
-}
-
-
-.hero-buttons.reveal {
-
-    transition-delay:
-        300ms;
-
-}
 
 
 .reveal,
 .reveal-left,
 .reveal-right {
-
     opacity: 0;
 
     transition:
-
         opacity 700ms ease,
-
-        transform 700ms
-        cubic-bezier(
-            .2,
-            .8,
-            .2,
-            1
-        );
-
+        transform 700ms cubic-bezier(.2, .8, .2, 1);
 }
 
 
 .reveal {
-
-    transform:
-        translateY(50px);
-
+    transform: translateY(50px);
 }
 
 
 .reveal-left {
-
-    transform:
-        translateX(-50px);
-
+    transform: translateX(-50px);
 }
 
 
 .reveal-right {
-
-    transform:
-        translateX(50px);
-
+    transform: translateX(50px);
 }
 
 
 .reveal.is-visible,
 .reveal-left.is-visible,
 .reveal-right.is-visible {
-
     opacity: 1;
 
-    transform:
-        translate3d(
-            0,
-            0,
-            0
-        );
-
+    transform: translate3d(0, 0, 0);
 }
 
 
@@ -1881,227 +1077,7 @@ onUnmounted(() => {
    TECHNOLOGY MARQUEE
 ========================================= */
 
-.tech-marquee {
 
-    position: relative;
-
-    width: 100%;
-
-    overflow: hidden;
-
-    margin-top: 120px;
-
-    padding: 18px 0;
-
-    flex-shrink: 0;
-
-    border-top:
-
-        1px solid
-
-        rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
-
-    border-bottom:
-
-        1px solid
-
-        rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
-
-    background:
-
-        rgba(
-            8,
-            9,
-            13,
-            0.35
-        );
-
-    backdrop-filter:
-        blur(8px);
-
-    z-index: 5;
-
-}
-
-
-.tech-marquee-track {
-
-    display: flex;
-
-    width: max-content;
-
-    flex-wrap: nowrap;
-
-    animation:
-
-        techMarqueeMove
-        20s
-        linear
-        infinite;
-
-    will-change:
-        transform;
-
-}
-
-
-.tech-marquee-group {
-
-    display: flex;
-
-    align-items: center;
-
-    flex: 0 0 auto;
-
-    white-space: nowrap;
-
-}
-
-
-.tech-marquee-group span {
-
-    display: inline-block;
-
-    flex: 0 0 auto;
-
-    margin:
-        0 25px;
-
-    color:
-
-        rgba(
-            255,
-            255,
-            255,
-            0.55
-        );
-
-    font-family:
-        monospace;
-
-    font-size:
-        1rem;
-
-    letter-spacing:
-        0.12em;
-
-    text-transform:
-        uppercase;
-
-    transition:
-
-        transform 250ms ease,
-        color 250ms ease,
-        text-shadow 250ms ease;
-
-}
-
-
-.tech-marquee-group span:not(.tech-marquee-dot):hover {
-
-    color:
-        #ffffff;
-
-    transform:
-        scale(1.12);
-
-    text-shadow:
-
-        0 0 10px
-        rgba(
-            139,
-            92,
-            246,
-            0.8
-        ),
-
-        0 0 22px
-        rgba(
-            139,
-            92,
-            246,
-            0.35
-        );
-
-}
-
-
-.tech-marquee-group
-span.tech-marquee-dot {
-
-    flex: 0 0 auto;
-
-    margin:
-        0 10px !important;
-
-    color:
-        #8b5cf6 !important;
-
-    font-size:
-        0.9rem;
-
-    letter-spacing:
-        0;
-
-    text-shadow:
-
-        0 0 8px
-        rgba(
-            139,
-            92,
-            246,
-            0.8
-        ),
-
-        0 0 16px
-        rgba(
-            139,
-            92,
-            246,
-            0.35
-        );
-
-    -webkit-text-fill-color:
-        #8b5cf6;
-
-}
-
-
-@keyframes techMarqueeMove {
-
-    from {
-
-        transform:
-            translate3d(
-                0,
-                0,
-                0
-            );
-
-    }
-
-    to {
-
-        transform:
-            translate3d(
-                -50%,
-                0,
-                0
-            );
-
-    }
-
-}
 
 
 /* =========================================
@@ -2109,22 +1085,14 @@ span.tech-marquee-dot {
 ========================================= */
 
 .home-sections {
-
     position: relative;
 
     display: flex;
-
     flex-direction: column;
 
     gap: 60px;
 
     width: 100%;
-
-    padding:
-        60px
-        0
-        100px;
-
 }
 
 
@@ -2133,106 +1101,47 @@ span.tech-marquee-dot {
 ========================================= */
 
 .home-section-container {
-
     position: relative;
 
-    width:
-        calc(100% - 20px);
+    width: calc(100% - 20px);
+    max-width: 1600px;
 
-    max-width:
-        1600px;
-
-    margin:
-        0 auto;
+    margin: 0 auto;
 
     overflow: hidden;
 
     border:
-
         1px solid
+        rgba(255, 255, 255, 0.055);
 
-        rgba(
-            255,
-            255,
-            255,
-            0.055
-        );
-
-    border-radius:
-        28px;
+    border-radius: 28px;
 
     isolation: isolate;
 
     background:
-
         linear-gradient(
             135deg,
-            rgba(
-                255,
-                255,
-                255,
-                0.018
-            ),
-            rgba(
-                255,
-                255,
-                255,
-                0.006
-            )
+            rgba(255, 255, 255, 0.018),
+            rgba(255, 255, 255, 0.006)
         );
 
     box-shadow:
-
         0 25px 80px
-        rgba(
-            0,
-            0,
-            0,
-            0.18
-        );
-
+        rgba(0, 0, 0, 0.18);
 }
 
 
-/* =========================================
-   SECTION CONTENT
-========================================= */
+/*
+    SECTION PADDING
 
-.home-section-container
-:deep(.section-layout > .container) {
+    De verticale en horizontale padding
+    wordt volledig centraal geregeld door
+    SectionLayout.vue.
 
-    width: 100%;
-
-    max-width: none;
-
-    padding-left:
-        70px;
-
-    padding-right:
-        70px;
-
-}
-
-
-.home-section-container
-:deep(.section-layout) {
-
-    position: relative;
-
-    width: 100%;
-
-    max-width: none;
-
-    overflow: hidden;
-
-    background:
-        transparent;
-
-    padding:
-        100px
-        70px;
-
-}
+    Er staan hier bewust geen overrides
+    meer op .section-layout of de
+    directe .container.
+*/
 
 
 /* =========================================
@@ -2240,43 +1149,22 @@ span.tech-marquee-dot {
 ========================================= */
 
 .projects-container {
-
     background:
-
         radial-gradient(
             circle at 5% 10%,
-            rgba(
-                168,
-                85,
-                247,
-                0.075
-            ),
+            rgba(168, 85, 247, 0.075),
             transparent 34%
         ),
-
         radial-gradient(
             circle at 90% 90%,
-            rgba(
-                217,
-                70,
-                239,
-                0.035
-            ),
+            rgba(217, 70, 239, 0.035),
             transparent 35%
         ),
-
-        rgba(
-            10,
-            9,
-            17,
-            0.7
-        );
-
+        rgba(10, 9, 17, 0.7);
 }
 
 
 :deep(.home-projects::before) {
-
     content: "";
 
     position: absolute;
@@ -2290,39 +1178,22 @@ span.tech-marquee-dot {
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-
-            rgba(
-                168,
-                85,
-                247,
-                0.14
-            ) 0%,
-
-            rgba(
-                217,
-                70,
-                239,
-                0.07
-            ) 35%,
-
+            rgba(168, 85, 247, 0.14) 0%,
+            rgba(217, 70, 239, 0.07) 35%,
             transparent 72%
         );
 
-    filter:
-        blur(30px);
+    filter: blur(30px);
 
     pointer-events: none;
 
     z-index: -1;
-
 }
 
 
 :deep(.home-projects::after) {
-
     content: "";
 
     position: absolute;
@@ -2336,34 +1207,18 @@ span.tech-marquee-dot {
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-
-            rgba(
-                236,
-                72,
-                153,
-                0.09
-            ) 0%,
-
-            rgba(
-                168,
-                85,
-                247,
-                0.05
-            ) 38%,
-
+            rgba(236, 72, 153, 0.09) 0%,
+            rgba(168, 85, 247, 0.05) 38%,
             transparent 72%
         );
 
-    filter:
-        blur(30px);
+    filter: blur(30px);
 
     pointer-events: none;
 
     z-index: -1;
-
 }
 
 
@@ -2372,43 +1227,22 @@ span.tech-marquee-dot {
 ========================================= */
 
 .disciplines-container {
-
     background:
-
         radial-gradient(
             circle at 95% 5%,
-            rgba(
-                59,
-                130,
-                246,
-                0.07
-            ),
+            rgba(59, 130, 246, 0.07),
             transparent 34%
         ),
-
         radial-gradient(
             circle at 5% 90%,
-            rgba(
-                6,
-                182,
-                212,
-                0.035
-            ),
+            rgba(6, 182, 212, 0.035),
             transparent 35%
         ),
-
-        rgba(
-            7,
-            11,
-            18,
-            0.72
-        );
-
+        rgba(7, 11, 18, 0.72);
 }
 
 
 :deep(.home-disciplines::before) {
-
     content: "";
 
     position: absolute;
@@ -2422,39 +1256,22 @@ span.tech-marquee-dot {
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-
-            rgba(
-                59,
-                130,
-                246,
-                0.13
-            ) 0%,
-
-            rgba(
-                6,
-                182,
-                212,
-                0.07
-            ) 38%,
-
+            rgba(59, 130, 246, 0.13) 0%,
+            rgba(6, 182, 212, 0.07) 38%,
             transparent 72%
         );
 
-    filter:
-        blur(30px);
+    filter: blur(30px);
 
     pointer-events: none;
 
     z-index: -1;
-
 }
 
 
 :deep(.home-disciplines::after) {
-
     content: "";
 
     position: absolute;
@@ -2468,34 +1285,18 @@ span.tech-marquee-dot {
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-
-            rgba(
-                14,
-                165,
-                233,
-                0.08
-            ) 0%,
-
-            rgba(
-                59,
-                130,
-                246,
-                0.045
-            ) 40%,
-
+            rgba(14, 165, 233, 0.08) 0%,
+            rgba(59, 130, 246, 0.045) 40%,
             transparent 72%
         );
 
-    filter:
-        blur(30px);
+    filter: blur(30px);
 
     pointer-events: none;
 
     z-index: -1;
-
 }
 
 
@@ -2504,18 +1305,14 @@ span.tech-marquee-dot {
 ========================================= */
 
 .discipline-desktop {
-
     display: block;
 
     width: 100%;
-
 }
 
 
 .discipline-mobile {
-
     display: none;
-
 }
 
 
@@ -2524,136 +1321,86 @@ span.tech-marquee-dot {
 ========================================= */
 
 .mobile-discipline-list {
-
     position: relative;
 
     display: flex;
-
     flex-direction: column;
 
     width: 100%;
-
     max-width: 600px;
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
-    padding:
-        10px
-        0;
-
+    padding: 10px 0;
 }
 
 
 .mobile-discipline-list::before {
-
     content: "";
 
     position: absolute;
 
     top: 35px;
     bottom: 35px;
-
     left: 26px;
 
     width: 2px;
 
     background:
-
         linear-gradient(
             to bottom,
-            rgba(
-                139,
-                92,
-                246,
-                0.25
-            ),
-            #8b5cf6,
-            rgba(
-                139,
-                92,
-                246,
-                0.25
-            )
+            rgba(139, 92, 246, 0.25),
+            var(--color-primary),
+            rgba(139, 92, 246, 0.25)
         );
 
     box-shadow:
-
         0 0 12px
-        rgba(
-            139,
-            92,
-            246,
-            0.35
-        );
+        rgba(139, 92, 246, 0.35);
 
     pointer-events: none;
-
 }
 
 
 .mobile-discipline {
-
     position: relative;
 
     display: flex;
-
     align-items: center;
 
-    min-height: 105px;
-
     width: 100%;
-
+    min-height: 105px;
 }
 
 
 .mobile-discipline-marker {
-
     position: relative;
-
     z-index: 2;
 
-    flex:
-        0 0 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 54px;
 
     width: 54px;
     height: 54px;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
     border:
         1px solid
-        rgba(
-            139,
-            92,
-            246,
-            0.7
-        );
+        rgba(139, 92, 246, 0.7);
 
     border-radius: 50%;
 
-    background:
-        #08090d;
+    background: var(--color-bg);
 
     box-shadow:
-
         0 0 20px
-        rgba(
-            139,
-            92,
-            246,
-            0.2
-        );
-
+        rgba(139, 92, 246, 0.2);
 }
 
 
 .mobile-discipline-marker::before {
-
     content: "";
 
     position: absolute;
@@ -2663,219 +1410,123 @@ span.tech-marquee-dot {
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-            rgba(
-                139,
-                92,
-                246,
-                0.25
-            ),
-            rgba(
-                139,
-                92,
-                246,
-                0.05
-            )
+            rgba(139, 92, 246, 0.25),
+            rgba(139, 92, 246, 0.05)
         );
 
     z-index: -1;
-
 }
 
 
 .mobile-discipline-marker span {
+    color: var(--color-primary-light);
 
-    color:
-        #a78bfa;
+    font-family: monospace;
 
-    font-family:
-        monospace;
+    font-size: 0.68rem;
 
-    font-size:
-        0.68rem;
+    font-weight: 600;
 
-    font-weight:
-        600;
-
-    letter-spacing:
-        0.08em;
-
+    letter-spacing: 0.08em;
 }
 
 
 .mobile-discipline-content {
-
     display: flex;
-
     align-items: center;
-
-    gap: 18px;
-
-    min-width: 0;
-
-    margin-left: 22px;
-
-    padding:
-        18px
-        20px;
 
     flex: 1;
 
+    min-width: 0;
+
+    gap: 18px;
+
+    margin-left: 22px;
+
+    padding: 18px 20px;
+
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.07
-        );
+        rgba(255, 255, 255, 0.07);
 
-    border-radius:
-        16px;
+    border-radius: 16px;
 
     background:
-
         linear-gradient(
             135deg,
-            rgba(
-                255,
-                255,
-                255,
-                0.045
-            ),
-            rgba(
-                255,
-                255,
-                255,
-                0.012
-            )
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.012)
         );
 
     box-shadow:
-
         0 15px 40px
-        rgba(
-            0,
-            0,
-            0,
-            0.15
-        );
+        rgba(0, 0, 0, 0.15);
 
     transition:
-
         transform 250ms ease,
         border-color 250ms ease,
         box-shadow 250ms ease;
-
 }
 
 
 .mobile-discipline-content:hover {
-
-    transform:
-        translateX(5px);
+    transform: translateX(5px);
 
     border-color:
-
-        rgba(
-            139,
-            92,
-            246,
-            0.45
-        );
+        rgba(139, 92, 246, 0.45);
 
     box-shadow:
-
         0 15px 40px
-        rgba(
-            139,
-            92,
-            246,
-            0.12
-        );
-
+        rgba(139, 92, 246, 0.12);
 }
 
 
 .mobile-discipline-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    flex:
-        0 0 46px;
+    flex: 0 0 46px;
 
     width: 46px;
     height: 46px;
 
-    display: flex;
+    border-radius: 50%;
 
-    align-items: center;
-
-    justify-content: center;
-
-    color:
-        #a78bfa;
-
-    border-radius:
-        50%;
+    color: var(--color-primary-light);
 
     background:
+        rgba(139, 92, 246, 0.1);
 
-        rgba(
-            139,
-            92,
-            246,
-            0.1
-        );
-
-    font-size:
-        1.15rem;
-
+    font-size: 1.15rem;
 }
 
 
 .mobile-discipline-content h3 {
+    margin: 0;
 
-    margin:
-        0;
+    color: #ffffff;
 
-    color:
-        #ffffff;
+    font-size: 1.5rem;
 
-    font-size:
-        1.5rem;
+    font-weight: 700;
 
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.08em;
-
+    letter-spacing: 0.08em;
 }
 
 
 .mobile-discipline-content span {
-
     display: block;
 
-    margin-top:
-        6px;
+    margin-top: 6px;
 
-    color:
+    color: rgba(255, 255, 255, 0.45);
 
-        rgba(
-            255,
-            255,
-            255,
-            0.45
-        );
+    font-size: 1rem;
 
-    font-size:
-        1rem;
-
-    line-height:
-        1.4;
-
+    line-height: 1.4;
 }
 
 
@@ -2884,43 +1535,22 @@ span.tech-marquee-dot {
 ========================================= */
 
 .contact-container {
-
     background:
-
         radial-gradient(
             circle at 35% 5%,
-            rgba(
-                139,
-                92,
-                246,
-                0.075
-            ),
+            rgba(139, 92, 246, 0.075),
             transparent 35%
         ),
-
         radial-gradient(
             circle at 95% 90%,
-            rgba(
-                59,
-                130,
-                246,
-                0.045
-            ),
+            rgba(59, 130, 246, 0.045),
             transparent 35%
         ),
-
-        rgba(
-            9,
-            9,
-            17,
-            0.72
-        );
-
+        rgba(9, 9, 17, 0.72);
 }
 
 
 :deep(.home-contact::before) {
-
     content: "";
 
     position: absolute;
@@ -2934,39 +1564,22 @@ span.tech-marquee-dot {
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.13
-            ) 0%,
-
-            rgba(
-                59,
-                130,
-                246,
-                0.07
-            ) 35%,
-
+            rgba(139, 92, 246, 0.13) 0%,
+            rgba(59, 130, 246, 0.07) 35%,
             transparent 72%
         );
 
-    filter:
-        blur(30px);
+    filter: blur(30px);
 
     pointer-events: none;
 
     z-index: -1;
-
 }
 
 
 :deep(.home-contact::after) {
-
     content: "";
 
     position: absolute;
@@ -2980,34 +1593,18 @@ span.tech-marquee-dot {
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-
-            rgba(
-                59,
-                130,
-                246,
-                0.08
-            ) 0%,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.05
-            ) 38%,
-
+            rgba(59, 130, 246, 0.08) 0%,
+            rgba(139, 92, 246, 0.05) 38%,
             transparent 72%
         );
 
-    filter:
-        blur(30px);
+    filter: blur(30px);
 
     pointer-events: none;
 
     z-index: -1;
-
 }
 
 
@@ -3016,39 +1613,29 @@ span.tech-marquee-dot {
 ========================================= */
 
 .contact-content-wrapper {
-
     position: relative;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
     width: 100%;
-
 }
 
 
 .contact-scene-wrapper {
-
     position: relative;
 
-    width: 100%;
-
-    min-height: 280px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
+    width: 100%;
+    min-height: 280px;
 }
 
 
 .contact-scene-wrapper::before {
-
     content: "";
 
     position: absolute;
@@ -3059,101 +1646,57 @@ span.tech-marquee-dot {
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.18
-            ) 0%,
-
-            rgba(
-                0,
-                212,
-                255,
-                0.08
-            ) 38%,
-
+            rgba(139, 92, 246, 0.18) 0%,
+            rgba(0, 212, 255, 0.08) 38%,
             transparent 72%
         );
 
-    filter:
-        blur(30px);
+    filter: blur(30px);
 
     pointer-events: none;
-
 }
 
 
 .contact-cta {
-
     display: flex;
-
     flex-wrap: wrap;
-
     justify-content: center;
-
-    gap: 16px;
 
     width: 100%;
 
     margin-top: 10px;
 
+    gap: 16px;
 }
 
 
 .contact-cta .btn {
-
     min-width: 190px;
 
     transition:
-
         transform 250ms ease,
         box-shadow 250ms ease;
-
 }
 
 
 .contact-cta .btn:hover {
-
-    transform:
-        translateY(-4px);
-
+    transform: translateY(-4px);
 }
 
 
 .contact-primary-button:hover {
-
     box-shadow:
-
         0 12px 35px
-
-        rgba(
-            139,
-            92,
-            246,
-            0.3
-        );
-
+        rgba(139, 92, 246, 0.3);
 }
 
 
 .contact-secondary-button:hover {
-
     box-shadow:
-
         0 10px 30px
-
-        rgba(
-            255,
-            255,
-            255,
-            0.1
-        );
-
+        rgba(255, 255, 255, 0.1);
 }
 
 
@@ -3164,25 +1707,18 @@ span.tech-marquee-dot {
 :deep(.project-card),
 :deep(.project-preview-card),
 :deep(.project-item) {
-
     transition:
-
         transform 300ms ease,
         box-shadow 300ms ease;
 
-    will-change:
-        transform;
-
+    will-change: transform;
 }
 
 
 :deep(.project-card:hover),
 :deep(.project-preview-card:hover),
 :deep(.project-item:hover) {
-
-    transform:
-        translateY(-6px);
-
+    transform: translateY(-6px);
 }
 
 
@@ -3195,20 +1731,10 @@ span.tech-marquee-dot {
 :deep(.project-item img),
 :deep(.project-image img),
 :deep(.project-preview img) {
-
     transition:
+        transform 450ms cubic-bezier(.2, .8, .2, 1);
 
-        transform 450ms
-        cubic-bezier(
-            0.2,
-            0.8,
-            0.2,
-            1
-        );
-
-    will-change:
-        transform;
-
+    will-change: transform;
 }
 
 
@@ -3217,10 +1743,7 @@ span.tech-marquee-dot {
 :deep(.project-item:hover img),
 :deep(.project-image:hover img),
 :deep(.project-preview:hover img) {
-
-    transform:
-        scale(1.06);
-
+    transform: scale(1.06);
 }
 
 
@@ -3232,9 +1755,7 @@ span.tech-marquee-dot {
 :deep(.project-preview-card .project-image),
 :deep(.project-item .project-image),
 :deep(.project-preview) {
-
     overflow: hidden;
-
 }
 
 
@@ -3246,14 +1767,11 @@ span.tech-marquee-dot {
 :deep(.tech-tag),
 :deep(.project-tech span),
 :deep(.project-technologies span) {
-
     transition:
-
         transform 220ms ease,
         color 220ms ease,
         background-color 220ms ease,
         box-shadow 220ms ease;
-
 }
 
 
@@ -3261,23 +1779,13 @@ span.tech-marquee-dot {
 :deep(.tech-tag:hover),
 :deep(.project-tech span:hover),
 :deep(.project-technologies span:hover) {
-
     transform:
-
         scale(1.08)
         translateY(-2px);
 
     box-shadow:
-
         0 5px 18px
-
-        rgba(
-            139,
-            92,
-            246,
-            0.20
-        );
-
+        rgba(139, 92, 246, 0.2);
 }
 
 
@@ -3288,95 +1796,47 @@ span.tech-marquee-dot {
 @media (max-width: 991px) {
 
     .hero {
-
-        padding-top:
-            170px;
-
+        padding-top: 170px;
     }
 
 
     .hero-content {
+        flex-direction: column;
+        align-items: center;
 
-        flex-direction:
-            column;
+        gap: 40px;
 
-        align-items:
-            center;
-
-        gap:
-            40px;
-
-        text-align:
-            center;
-
+        text-align: center;
     }
 
 
     .hero-title-content {
-
-        width:
-            100%;
-
+        width: 100%;
     }
 
 
     .hero-actions {
+        width: 100%;
+        max-width: 380px;
 
-        width:
-            100%;
-
-        max-width:
-            380px;
-
-        flex:
-            none;
-
+        flex: none;
     }
 
 
     .home-sections {
-
-        gap:
-            40px;
+        gap: 40px;
 
         padding:
             40px
             20px
             70px;
-
     }
 
 
     .home-section-container {
+        width: calc(100% - 28px);
 
-        width:
-            calc(100% - 28px);
-
-        border-radius:
-            24px;
-
-    }
-
-
-    .home-section-container
-    :deep(.section-layout > .container) {
-
-        padding-left:
-            30px;
-
-        padding-right:
-            30px;
-
-    }
-
-
-    .home-section-container
-    :deep(.section-layout) {
-
-        padding:
-            75px
-            30px;
-
+        border-radius: 24px;
     }
 
 
@@ -3385,118 +1845,73 @@ span.tech-marquee-dot {
     ================================= */
 
     .discipline-desktop {
-
-        display:
-            none;
-
+        display: none;
     }
 
 
     .discipline-mobile {
-
-        display:
-            block;
-
+        display: block;
     }
 
 
     .mobile-discipline-list {
+        max-width: 100%;
 
-        max-width:
-            100%;
-
-        padding:
-            5px
-            0;
-
+        padding: 5px 0;
     }
 
 
     .mobile-discipline-list::before {
-
-        left:
-            23px;
-
+        left: 23px;
     }
 
 
     .mobile-discipline {
-
-        min-height:
-            95px;
-
+        min-height: 95px;
     }
 
 
     .mobile-discipline-marker {
+        flex-basis: 48px;
 
-        flex-basis:
-            48px;
-
-        width:
-            48px;
-
-        height:
-            48px;
-
+        width: 48px;
+        height: 48px;
     }
 
 
     .mobile-discipline-marker span {
-
-        font-size:
-            0.6rem;
-
+        font-size: 0.6rem;
     }
 
 
     .mobile-discipline-content {
+        gap: 12px;
 
-        gap:
-            12px;
+        margin-left: 15px;
 
-        margin-left:
-            15px;
+        padding: 14px;
 
-        padding:
-            14px;
-
-        border-radius:
-            14px;
-
+        border-radius: 14px;
     }
 
 
     .mobile-discipline-icon {
+        flex-basis: 40px;
 
-        flex-basis:
-            40px;
+        width: 40px;
+        height: 40px;
 
-        width:
-            40px;
-
-        height:
-            40px;
-
-        font-size:
-            1rem;
-
+        font-size: 1rem;
     }
 
 
     .mobile-discipline-content h3 {
-
-        font-size:
-            0.72rem;
-
+        font-size: 0.72rem;
     }
 
 
     .mobile-discipline-content span {
-
-        font-size:
-            0.62rem;
-
+        font-size: 0.62rem;
     }
 
 }
@@ -3509,65 +1924,42 @@ span.tech-marquee-dot {
 @media (max-width: 768px) {
 
     .hero {
+        min-height: 90vh;
 
-        min-height:
-            90vh;
-
-        padding-top:
-            150px;
-
+        padding-top: 150px;
     }
 
 
     .hero-content {
-
-        gap:
-            40px;
-
+        gap: 40px;
     }
 
 
     .hero-actions {
+        width: 100%;
+        max-width: 320px;
 
-        width:
-            100%;
-
-        max-width:
-            320px;
-
-        align-items:
-            center;
-
+        align-items: center;
     }
 
 
     .hero-buttons {
+        width: 100%;
+        max-width: 320px;
 
-        width:
-            100%;
-
-        max-width:
-            320px;
-
-        align-items:
-            stretch;
-
+        align-items: stretch;
     }
 
 
     .hero h1 {
-
         font-size:
-
             clamp(
                 3.2rem,
                 14vw,
                 5rem
             );
 
-        letter-spacing:
-            -2px;
-
+        letter-spacing: -2px;
     }
 
 
@@ -3576,124 +1968,66 @@ span.tech-marquee-dot {
     ================================= */
 
     .hero-title {
+        display: block;
 
-        display:
-            block;
-
-        width:
-            100%;
-
+        width: 100%;
     }
 
 
     .hero-title .page-title {
-
-        margin-bottom:
-            0;
-
+        margin-bottom: 0;
     }
 
 
     .hero-3d-word {
-
-        width:
-            100%;
-
-        height:
-            110px;
+        width: 100%;
+        height: 110px;
 
         margin:
             5px
             0
             0;
-
     }
 
 
     .hero-title-period {
-
-        display:
-            inline;
-
+        display: inline;
     }
 
 
     .hero-text {
+        margin-top: 28px;
 
-        margin-top:
-            28px;
-
-        font-size:
-            1rem;
-
+        font-size: 1rem;
     }
 
 
     .hero::before {
-
-        width:
-            400px;
-
-        height:
-            400px;
-
+        width: 400px;
+        height: 400px;
     }
 
 
     .hero::after {
-
-        width:
-            300px;
-
-        height:
-            300px;
-
+        width: 300px;
+        height: 300px;
     }
 
 
     .home-sections {
-
-        gap:
-            32px;
+        gap: 32px;
 
         padding:
             32px
             0
             60px;
-
     }
 
 
     .home-section-container {
+        width: calc(100% - 20px);
 
-        width:
-            calc(100% - 20px);
-
-        border-radius:
-            22px;
-
-    }
-
-
-    .home-section-container
-    :deep(.section-layout > .container) {
-
-        padding-left:
-            24px;
-
-        padding-right:
-            24px;
-
-    }
-
-
-    .home-section-container
-    :deep(.section-layout) {
-
-        padding:
-            60px
-            24px;
-
+        border-radius: 22px;
     }
 
 }
@@ -3706,115 +2040,60 @@ span.tech-marquee-dot {
 @media (max-width: 576px) {
 
     .hero {
-
-        padding-top:
-            125px;
-
+        padding-top: 125px;
     }
 
 
     .hero-content {
-
-        gap:
-            35px;
-
+        gap: 35px;
     }
 
 
     .hero-actions {
-
-        max-width:
-            100%;
-
+        max-width: 100%;
     }
 
 
     .hero-buttons {
-
-        max-width:
-            320px;
-
+        max-width: 320px;
     }
 
 
     .hero-3d-word {
-
-        height:
-            95px;
-
+        height: 95px;
     }
 
 
     .home-sections {
-
-        gap:
-            24px;
+        gap: 24px;
 
         padding:
             24px
             0
             45px;
-
     }
 
 
     .home-section-container {
+        width: calc(100% - 12px);
 
-        width:
-            calc(100% - 12px);
-
-        border-radius:
-            18px;
-
-    }
-
-
-    .home-section-container
-    :deep(.section-layout > .container) {
-
-        padding-left:
-            18px;
-
-        padding-right:
-            18px;
-
-    }
-
-
-    .home-section-container
-    :deep(.section-layout) {
-
-        padding:
-            50px
-            18px;
-
+        border-radius: 18px;
     }
 
 
     .contact-cta {
-
-        flex-direction:
-            column;
-
-        align-items:
-            stretch;
-
+        flex-direction: column;
+        align-items: stretch;
     }
 
 
     .contact-cta .btn {
-
-        width:
-            100%;
-
+        width: 100%;
     }
 
 
     .contact-scene-wrapper {
-
-        min-height:
-            230px;
-
+        min-height: 230px;
     }
 
 
@@ -3823,105 +2102,65 @@ span.tech-marquee-dot {
     ================================= */
 
     .mobile-discipline-list {
+        max-width: 100%;
 
-        max-width:
-            100%;
-
-        padding:
-            5px
-            0;
-
+        padding: 5px 0;
     }
 
 
     .mobile-discipline-list::before {
-
-        left:
-            23px;
-
+        left: 23px;
     }
 
 
     .mobile-discipline {
-
-        min-height:
-            95px;
-
+        min-height: 95px;
     }
 
 
     .mobile-discipline-marker {
+        flex-basis: 48px;
 
-        flex-basis:
-            48px;
-
-        width:
-            48px;
-
-        height:
-            48px;
-
+        width: 48px;
+        height: 48px;
     }
 
 
     .mobile-discipline-marker span {
-
-        font-size:
-            0.6rem;
-
+        font-size: 0.6rem;
     }
 
 
     .mobile-discipline-content {
+        gap: 12px;
 
-        gap:
-            12px;
+        margin-left: 15px;
 
-        margin-left:
-            15px;
+        padding: 14px;
 
-        padding:
-            14px;
-
-        border-radius:
-            14px;
-
+        border-radius: 14px;
     }
 
 
     .mobile-discipline-icon {
+        flex-basis: 40px;
 
-        flex-basis:
-            40px;
+        width: 40px;
+        height: 40px;
 
-        width:
-            40px;
-
-        height:
-            40px;
-
-        font-size:
-            1rem;
-
+        font-size: 1rem;
     }
 
 
     .mobile-discipline-content h3 {
-
-        font-size:
-            0.72rem;
-
+        font-size: 0.72rem;
     }
 
 
     .mobile-discipline-content span {
-
-        font-size:
-            0.62rem;
-
+        font-size: 0.62rem;
     }
 
 }
 
 </style>
-```

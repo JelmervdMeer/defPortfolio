@@ -379,21 +379,20 @@ onUnmounted(() => {
 
 .section-layout {
 
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+    width: 100%;
 
-    padding:
-        110px
-        0;
+    /*
+        Centrale verticale section-padding.
+        HomeView overschrijft deze niet.
+    */
 
-    overflow:
-        hidden;
+    padding: 20px 70px;
 
-    isolation:
-        isolate;
+    overflow: hidden;
+
+    isolation: isolate;
 
     background:
 
@@ -584,7 +583,7 @@ onUnmounted(() => {
    CONTAINER
 ========================================= */
 
-.section-layout > .container {
+/*.section-layout > .container {
 
     position: relative;
 
@@ -592,35 +591,21 @@ onUnmounted(() => {
 
     width: 100%;
 
-    max-width:
-        1600px;
+   
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
-    padding-left:
-        10px;
-
-    padding-right:
-        10px;
-
-}
-
-
+    /*
+        Centrale horizontale section-padding.
+    */
 /*
-    Bootstrap gebruikt standaard extra
-    horizontale padding op .container.
+    padding-left: 10px;
 
-    Deze regel zorgt ervoor dat onze
-    section-container daadwerkelijk
-    de beschikbare breedte gebruikt.
-*/
-
-.section-layout > .container {
+    padding-right: 10px;
 
     --bs-gutter-x: 0;
 
-}
+}*/
 
 
 /* =========================================
@@ -644,17 +629,13 @@ onUnmounted(() => {
             7fr
         );
 
-    align-items:
-        stretch;
+    align-items: stretch;
 
-    gap:
-        60px;
+    gap: 60px;
 
-    width:
-        100%;
+    width: 100%;
 
-    min-width:
-        0;
+    min-width: 0;
 
 }
 
@@ -689,8 +670,7 @@ onUnmounted(() => {
 .section-layout-split
 .section-layout-text {
 
-    grid-column:
-        2;
+    grid-column: 2;
 
 }
 
@@ -699,11 +679,9 @@ onUnmounted(() => {
 .section-layout-split
 .section-layout-content {
 
-    grid-column:
-        1;
+    grid-column: 1;
 
-    grid-row:
-        1;
+    grid-row: 1;
 
 }
 
@@ -729,17 +707,13 @@ onUnmounted(() => {
             7fr
         );
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        60px;
+    gap: 60px;
 
-    width:
-        100%;
+    width: 100%;
 
-    min-width:
-        0;
+    min-width: 0;
 
 }
 
@@ -751,8 +725,7 @@ onUnmounted(() => {
 .section-layout--cta
 .section-layout-text {
 
-    justify-content:
-        center;
+    justify-content: center;
 
 }
 
@@ -760,8 +733,7 @@ onUnmounted(() => {
 .section-layout--cta
 .section-layout-text h2 {
 
-    margin-top:
-        20px;
+    margin-top: 20px;
 
 }
 
@@ -772,13 +744,12 @@ onUnmounted(() => {
 
 .section-layout-cta-description {
 
-    max-width:
-        700px;
+    max-width: 700px;
 
-    margin:
-        0 0 32px;
+    margin: 0 0 32px;
 
     color:
+
         rgba(
             255,
             255,
@@ -787,14 +758,14 @@ onUnmounted(() => {
         );
 
     font-size:
+
         clamp(
             1rem,
             1.2vw,
             1.35rem
         );
 
-    line-height:
-        1.8;
+    line-height: 1.8;
 
 }
 
@@ -805,8 +776,7 @@ onUnmounted(() => {
 
 .section-reveal {
 
-    opacity:
-        0;
+    opacity: 0;
 
     transition:
 
@@ -853,8 +823,7 @@ onUnmounted(() => {
 
 .section-reveal.is-visible {
 
-    opacity:
-        1;
+    opacity: 1;
 
     transform:
         translate3d(
@@ -894,34 +863,26 @@ onUnmounted(() => {
 
 .section-layout-text {
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    min-width:
-        0;
+    min-width: 0;
 
-    width:
-        100%;
+    width: 100%;
 
-    text-align:
-        left;
+    text-align: left;
 
 }
 
 
 .section-layout-text h2 {
 
-    margin:
-        20px 0 0;
+    margin: 20px 0 0;
 
-    color:
-        #ffffff;
+    color: #ffffff;
 
     font-size:
 
@@ -931,27 +892,23 @@ onUnmounted(() => {
             5.5rem
         );
 
-    font-weight:
-        600;
+    font-weight: 600;
 
-    line-height:
-        1.10;
+    line-height: 1.10;
 
-    letter-spacing:
-        -0.05em;
+    letter-spacing: -0.05em;
 
 }
 
 
 .section-layout-text p {
 
-    max-width:
-        620px;
+    max-width: 620px;
 
-    margin:
-        30px 0 0;
+    margin: 30px 0 0;
 
     color:
+
         rgba(
             255,
             255,
@@ -960,14 +917,14 @@ onUnmounted(() => {
         );
 
     font-size:
+
         clamp(
             1rem,
             1.2vw,
             1.35rem
         );
 
-    line-height:
-        1.8;
+    line-height: 1.8;
 
 }
 
@@ -978,27 +935,22 @@ onUnmounted(() => {
 
 .section-layout-content {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        stretch;
+    align-items: stretch;
 
-    justify-content:
-        stretch;
+    justify-content: stretch;
 
-    min-width:
-        0;
+    min-width: 0;
 
-    width:
-        100%;
+    width: 100%;
 
-    max-width:
-        none;
+    max-width: none;
 
     /*
-        Extra ruimte rondom de inhoud
-        van iedere section.
+        Centrale interne content-padding.
+        Ook deze wordt nergens vanuit HomeView
+        overschreven.
     */
 
     padding:
@@ -1018,40 +970,28 @@ onUnmounted(() => {
 }
 
 
-/*
-    Het eerste component in de contentkolom
-    mag de volledige breedte gebruiken.
-*/
+/* =========================================
+   CONTENT CHILD
+========================================= */
 
 .section-layout-content > * {
 
-    width:
-        100%;
+    width: 100%;
 
-    max-width:
-        none;
+    max-width: none;
 
-    min-width:
-        0;
+    min-width: 0;
 
 }
 
 
-/*
-    Ook de reveal-wrapper mag niet
-    kleiner worden dan de contentkolom.
-*/
-
 .section-layout-content > .section-reveal {
 
-    width:
-        100%;
+    width: 100%;
 
-    max-width:
-        none;
+    max-width: none;
 
-    min-width:
-        0;
+    min-width: 0;
 
 }
 
@@ -1063,17 +1003,13 @@ onUnmounted(() => {
 .section-layout--cta
 .section-layout-content {
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    align-items:
-        flex-start;
+    align-items: flex-start;
 
-    justify-content:
-        center;
+    justify-content: center;
 
 }
 
@@ -1081,8 +1017,7 @@ onUnmounted(() => {
 .section-layout--cta
 .section-layout-content > * {
 
-    width:
-        100%;
+    width: 100%;
 
 }
 
@@ -1091,8 +1026,7 @@ onUnmounted(() => {
 .section-layout-content
 .about-cta {
 
-    width:
-        100%;
+    width: 100%;
 
 }
 
@@ -1103,17 +1037,13 @@ onUnmounted(() => {
 
 .section-layout-default {
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    width:
-        100%;
+    width: 100%;
 
-    min-width:
-        0;
+    min-width: 0;
 
 }
 
@@ -1121,14 +1051,11 @@ onUnmounted(() => {
 .section-layout-default
 .section-layout-text {
 
-    max-width:
-        850px;
+    max-width: 850px;
 
-    margin:
-        0 auto 80px;
+    margin: 0 auto 80px;
 
-    text-align:
-        center;
+    text-align: center;
 
 }
 
@@ -1136,11 +1063,9 @@ onUnmounted(() => {
 .section-layout-default
 .section-layout-text p {
 
-    margin-left:
-        auto;
+    margin-left: auto;
 
-    margin-right:
-        auto;
+    margin-right: auto;
 
 }
 
@@ -1148,20 +1073,20 @@ onUnmounted(() => {
 .section-layout-default
 .section-layout-content {
 
-    width:
-        100%;
+    width: 100%;
 
 }
 
+
+/* =========================================
+   DISCIPLINES
+========================================= */
 
 :deep(.home-disciplines .section-layout-content) {
 
-    column-gap:
-        120px;
+    column-gap: 120px;
 
 }
-
-/* ========================================= SECTION LABEL ========================================= */ .section-label { display: inline-flex; align-items: center; margin-bottom: 28px; font-family: var(--font-heading); font-size: clamp( 1rem, 1.6vw, 3rem ); font-weight: 600; letter-spacing: 0.18em; line-height: 1.2; color: #9b5cff; text-transform: uppercase; }
 
 
 /* =========================================
@@ -1172,31 +1097,25 @@ onUnmounted(() => {
 
     .section-layout {
 
-        padding:
-            90px
-            0;
+        padding: 90px 0;
 
     }
 
 
     .section-layout > .container {
 
-        max-width:
-            100%;
+        max-width: 100%;
 
-        padding-left:
-            16px;
+        padding-left: 16px;
 
-        padding-right:
-            16px;
+        padding-right: 16px;
 
     }
 
 
-    /*
-        Op tablet en mobiel wordt
-        de split één kolom.
-    */
+    /* =====================================
+       SPLIT → SINGLE COLUMN
+    ====================================== */
 
     .section-layout--split
     .section-layout-split,
@@ -1204,39 +1123,32 @@ onUnmounted(() => {
     .section-layout--split.section-layout--reverse
     .section-layout-split {
 
-        display:
-            grid;
+        display: grid;
 
         grid-template-columns:
-
             minmax(
                 0,
                 1fr
             );
 
-        gap:
-            60px;
+        gap: 60px;
 
-        width:
-            100%;
+        width: 100%;
 
     }
 
 
-    /*
-        Reverse heeft op mobiel
-        geen aparte kolommen meer.
-    */
+    /* =====================================
+       REVERSE MOBILE
+    ====================================== */
 
     .section-layout--split.section-layout--reverse
     .section-layout-split
     .section-layout-text {
 
-        grid-column:
-            auto;
+        grid-column: auto;
 
-        grid-row:
-            auto;
+        grid-row: auto;
 
     }
 
@@ -1245,20 +1157,21 @@ onUnmounted(() => {
     .section-layout-split
     .section-layout-content {
 
-        grid-column:
-            auto;
+        grid-column: auto;
 
-        grid-row:
-            auto;
+        grid-row: auto;
 
     }
 
 
+    /* =====================================
+       SPLIT TEXT
+    ====================================== */
+
     .section-layout--split
     .section-layout-text {
 
-        text-align:
-            center;
+        text-align: center;
 
     }
 
@@ -1266,23 +1179,23 @@ onUnmounted(() => {
     .section-layout--split
     .section-layout-text p {
 
-        margin-left:
-            auto;
+        margin-left: auto;
 
-        margin-right:
-            auto;
+        margin-right: auto;
 
     }
 
 
+    /* =====================================
+       SPLIT CONTENT
+    ====================================== */
+
     .section-layout--split
     .section-layout-content {
 
-        width:
-            100%;
+        width: 100%;
 
-        justify-content:
-            stretch;
+        justify-content: stretch;
 
         padding:
 
@@ -1303,11 +1216,9 @@ onUnmounted(() => {
 
     .section-layout-content > * {
 
-        width:
-            100%;
+        width: 100%;
 
-        max-width:
-            none;
+        max-width: none;
 
     }
 
@@ -1319,11 +1230,9 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-cta {
 
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
 
-        gap:
-            40px;
+        gap: 40px;
 
     }
 
@@ -1331,8 +1240,7 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-text {
 
-        text-align:
-            center;
+        text-align: center;
 
     }
 
@@ -1340,36 +1248,29 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-content {
 
-        align-items:
-            center;
+        align-items: center;
 
-        padding:
-            20px
-            12px;
+        padding: 20px 12px;
 
     }
 
 
     .section-layout-cta-description {
 
-        max-width:
-            700px;
+        max-width: 700px;
 
-        margin-left:
-            auto;
+        margin-left: auto;
 
-        margin-right:
-            auto;
+        margin-right: auto;
 
-        text-align:
-            center;
+        text-align: center;
 
     }
 
 
-    /* -----------------------------
+    /* =====================================
        MOBILE REVEAL
-    ------------------------------ */
+    ====================================== */
 
     .section-reveal-left,
 
@@ -1409,20 +1310,16 @@ onUnmounted(() => {
 
     .section-layout {
 
-        padding:
-            75px
-            0;
+        padding: 75px 0;
 
     }
 
 
     .section-layout > .container {
 
-        padding-left:
-            12px;
+        padding-left: 12px;
 
-        padding-right:
-            12px;
+        padding-right: 12px;
 
     }
 
@@ -1433,23 +1330,18 @@ onUnmounted(() => {
     .section-layout--split.section-layout--reverse
     .section-layout-split {
 
-        gap:
-            45px;
+        gap: 45px;
 
     }
 
 
-    /*
-        Compactere padding op mobiel,
-        zodat de content niet te veel
-        horizontale ruimte verliest.
-    */
+    /* =====================================
+       CONTENT
+    ====================================== */
 
     .section-layout-content {
 
-        padding:
-            20px
-            8px;
+        padding: 20px 8px;
 
     }
 
@@ -1474,8 +1366,7 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-cta {
 
-        gap:
-            30px;
+        gap: 30px;
 
     }
 
@@ -1483,17 +1374,14 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-content {
 
-        padding:
-            20px
-            8px;
+        padding: 20px 8px;
 
     }
 
 
     .section-layout-cta-description {
 
-        margin-bottom:
-            28px;
+        margin-bottom: 28px;
 
     }
 

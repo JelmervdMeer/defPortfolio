@@ -1,42 +1,243 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
-
 /* =========================================
-   GLOBAL
+   DESIGN TOKENS
 ========================================= */
 
 :root {
 
+    /* =====================================
+       COLORS
+    ===================================== */
+
+    --color-bg: #08090d;
+    --color-surface: #11131a;
+
+    --color-text: #f5f5f7;
+    --color-text-muted: #a8adbd;
+
+    /* Brand colors */
+    --color-primary: #8b5cf6;
+    --color-primary-light: #a78bfa;
+    --color-primary-dark: #6c63ff;
+    --color-secondary: #22d3ee;
+
+    --color-border: rgba(255, 255, 255, 0.08);
+
+
+    /* =====================================
+       TYPOGRAPHY
+    ===================================== */
+
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'DM Sans', sans-serif;
 
-    color: #f5f5f7;
-    background: #08090d;
+
+    /* =====================================
+       LABELS
+    ===================================== */
+
+    --label-color: var(--color-secondary);
+
+    --label-size: clamp(
+        0.8rem,
+        1vw,
+        1rem
+    );
+
+    --label-weight: 600;
+    --label-spacing: 0.18em;
+
+
+    /* =====================================
+       HEADINGS
+    ===================================== */
+
+    --heading-weight: 700;
+    --heading-letter-spacing: -0.05em;
+
+
+    /* =====================================
+       ANIMATION
+    ===================================== */
+
+    --ease-out: cubic-bezier(
+        0.16,
+        1,
+        0.3,
+        1
+    );
+
+
+    /* =====================================
+       ROOT
+    ===================================== */
+
+    color: var(--color-text);
+    background: var(--color-bg);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
 }
 
 
-.heading-accent {
+/* =========================================
+   RESET / BASIS
+========================================= */
 
-    color: #8b5cf6;
-
+* {
+    box-sizing: border-box;
 }
 
 
-.animated-gradient-text {
+html {
+    width: 100%;
+    max-width: 100%;
 
+    font-size: 16px;
+
+    scroll-behavior: smooth;
+
+    overflow-x: clip;
+}
+
+
+body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 320px;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--color-bg);
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+
+    font-size: clamp(
+        1rem,
+        1vw,
+        1.15rem
+    );
+
+    font-weight: 400;
+
+    position: relative;
+
+    overflow-x: clip;
+}
+
+
+#app {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    position: relative;
+
+    overflow-x: clip;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================
+   TYPOGRAPHY
+========================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+
+    font-family: var(--font-heading);
+}
+
+
+h1,
+h2 {
+    font-weight: var(--heading-weight);
+    letter-spacing: var(--heading-letter-spacing);
+}
+
+
+/* =========================================
+   LARGE HEADINGS
+========================================= */
+
+h1 {
+    font-size: clamp(
+        3rem,
+        7vw,
+        8rem
+    );
+
+    line-height: 0.95;
+}
+
+
+h2 {
+    font-size: clamp(
+        2.5rem,
+        5vw,
+        5.5rem
+    );
+
+    line-height: 1.05;
+}
+
+
+h3 {
+    font-size: clamp(
+        1.4rem,
+        2vw,
+        2rem
+    );
+
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
+h4,
+h5,
+h6 {
+    font-weight: 600;
+}
+
+
+/* =========================================
+   HEADING ACCENT
+   Static primary color
+========================================= */
+
+.heading-accent {
+    color: var(--color-primary);
+}
+
+
+/* =========================================
+   ANIMATED GRADIENT TEXT
+   Primary → Primary Light → Secondary
+========================================= */
+
+.animated-gradient-text {
     display: inline-block;
 
     background: linear-gradient(
         90deg,
-        #6c63ff,
-        #9b5cff,
-        #00d4ff,
-        #c084fc,
-        #6c63ff,
-        #9b5cff
+        var(--color-primary),
+        var(--color-primary-light),
+        var(--color-secondary),
+        var(--color-primary)
     );
 
     background-size: 300% 100%;
@@ -50,8 +251,10 @@
     color: transparent;
 
     animation:
-        gradientMove 5s ease-in-out infinite;
-
+        gradientMove
+        6s
+        ease-in-out
+        infinite;
 }
 
 
@@ -68,183 +271,6 @@
     100% {
         background-position: 0% 50%;
     }
-
-}
-
-
-/* =========================================
-   RESET / BASIS
-========================================= */
-
-* {
-
-    box-sizing: border-box;
-
-}
-
-
-html {
-
-    width: 100%;
-    max-width: 100%;
-
-    font-size: 16px;
-
-    scroll-behavior: smooth;
-
-    overflow-x: clip;
-
-}
-
-
-body {
-
-    width: 100%;
-    max-width: 100%;
-
-    min-width: 320px;
-
-    margin: 0;
-
-    padding: 0;
-
-    background: #08090d;
-
-    color: #f5f5f7;
-
-    font-family: var(--font-body);
-
-    font-size:
-        clamp(
-            1rem,
-            1vw,
-            1.15rem
-        );
-
-    font-weight: 400;
-
-    position: relative;
-
-    overflow-x: clip;
-
-}
-
-
-#app {
-
-    width: 100%;
-    max-width: 100%;
-
-    margin: 0;
-    padding: 0;
-
-    position: relative;
-
-    overflow-x: clip;
-
-}
-
-
-a {
-
-    text-decoration: none;
-
-}
-
-
-/* =========================================
-   TYPOGRAPHY
-========================================= */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-
-    margin-top: 0;
-
-}
-
-
-h1,
-h2 {
-
-    font-family: var(--font-heading);
-
-    font-weight: 700;
-
-}
-
-
-h3,
-h4,
-h5,
-h6 {
-
-    font-family: var(--font-heading);
-
-    font-weight: 600;
-
-}
-
-
-/* =========================================
-   H1
-========================================= */
-
-h1 {
-
-    font-size:
-        clamp(
-            3rem,
-            7vw,
-            8rem
-        );
-
-    line-height: 1.1;
-
-    letter-spacing: -0.05em;
-
-}
-
-
-/* =========================================
-   H2
-========================================= */
-
-h2 {
-
-    font-size:
-        clamp(
-            2.5rem,
-            5vw,
-            5.5rem
-        );
-
-    line-height: 1.05;
-
-    letter-spacing: -0.045em;
-
-}
-
-
-/* =========================================
-   H3
-========================================= */
-
-h3 {
-
-    font-size:
-        clamp(
-            1.4rem,
-            2vw,
-            2rem
-        );
-
-    line-height: 1.2;
-
 }
 
 
@@ -253,52 +279,81 @@ h3 {
 ========================================= */
 
 p {
-
-    font-size:
-        clamp(
-            1rem,
-            1.2vw,
-            1.35rem
-        );
+    font-size: clamp(
+        1rem,
+        1.2vw,
+        1.35rem
+    );
 
     line-height: 1.8;
-
 }
 
 
 /* =========================================
-   SECTION LABELS
+   GLOBAL LABELS
 ========================================= */
+
+/*
+   Alle kleine labels gebruiken dezelfde
+   kleur, font, grootte en letter-spacing.
+
+   Voorbeelden:
+
+   PORTFOLIO
+   OVER MIJ
+   CONTACT
+   MIJN WERKWIJZE
+   TECHNOLOGIE
+   SAMENWERKEN
+*/
 
 .section-label,
 .hero-label,
-.footer-label {
-
+.footer-label,
+.page-header-label,
+.project-category {
     font-family: var(--font-heading);
 
-    font-size:
-        clamp(
-            1rem,
-            1.6vw,
-            3rem
+    font-size: var(--label-size);
+    font-weight: var(--label-weight);
+
+    line-height: 1.2;
+
+    letter-spacing: var(--label-spacing);
+
+    color: var(--label-color);
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   LABEL LINE
+========================================= */
+
+.section-label::before,
+.page-header-label::before {
+    content: "";
+
+    display: inline-block;
+
+    width: 28px;
+    height: 1px;
+
+    margin-right: 12px;
+
+    vertical-align: middle;
+
+    background: var(--color-secondary);
+
+    box-shadow:
+        0 0 10px
+        rgba(
+            34,
+            211,
+            238,
+            0.6
         );
-
-    font-weight: 600;
-
-    letter-spacing: 0.18em;
-
-    background:#9b5cff;
-           
-        
-
-    background-clip: text;
-
-    -webkit-background-clip: text;
-
-    color: transparent;
-
-    -webkit-text-fill-color: transparent;
-
 }
 
 
@@ -307,22 +362,19 @@ p {
 ========================================= */
 
 .btn {
-
     font-family: var(--font-heading);
 
     font-weight: 600;
 
     transition:
-        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-        background 0.3s ease,
+        transform 0.3s var(--ease-out),
+        background-color 0.3s ease,
         border-color 0.3s ease,
         box-shadow 0.3s ease;
-
 }
 
 
 .btn:hover {
-
     transform:
         translateY(-5px)
         scale(1.03);
@@ -335,25 +387,19 @@ p {
             0,
             0.25
         );
-
 }
 
 
 .btn-primary {
+    background: var(--color-primary-dark);
 
-    background: #6c63ff;
-
-    border-color: #6c63ff;
-
+    border-color: var(--color-primary-dark);
 }
 
 
 .btn-primary:hover {
-
     background: #8179ff;
-
     border-color: #8179ff;
-
 }
 
 
@@ -362,7 +408,6 @@ p {
 ========================================= */
 
 .technology {
-
     display: inline-flex;
 
     align-items: center;
@@ -371,13 +416,12 @@ p {
         7px
         13px;
 
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.75
-        );
+    color: rgba(
+        255,
+        255,
+        255,
+        0.75
+    );
 
     border:
         1px solid
@@ -398,20 +442,20 @@ p {
             0.06
         );
 
-    font-size:
-        clamp(
-            0.8rem,
-            0.9vw,
-            0.95rem
-        );
+    font-family: var(--font-body);
+
+    font-size: clamp(
+        0.8rem,
+        0.9vw,
+        0.95rem
+    );
 
     line-height: 1;
 
     transition:
         transform 0.25s ease,
-        background 0.25s ease,
+        background-color 0.25s ease,
         border-color 0.25s ease;
-
 }
 
 
@@ -419,9 +463,7 @@ p {
    TECHNOLOGY HOVER
 ========================================= */
 
-.project-card-scene
-.technology:hover {
-
+.project-card-scene .technology:hover {
     transform:
         translateY(-2px)
         scale(1.04);
@@ -441,7 +483,6 @@ p {
             246,
             0.08
         );
-
 }
 
 
@@ -450,44 +491,36 @@ p {
 ========================================= */
 
 .page-section {
-
     min-height: 100vh;
 
     padding:
         160px
         0
         100px;
-
 }
 
 
 .page-section h1 {
-
-    font-size:
-        clamp(
-            3rem,
-            6vw,
-            5rem
-        );
-
+    font-size: clamp(
+        3rem,
+        6vw,
+        5rem
+    );
 }
 
 
 .page-section p {
-
     max-width: 700px;
 
-    color: #a8adbd;
+    color: var(--color-text-muted);
 
-    font-size:
-        clamp(
-            1rem,
-            1.2vw,
-            1.35rem
-        );
+    font-size: clamp(
+        1rem,
+        1.2vw,
+        1.35rem
+    );
 
     line-height: 1.8;
-
 }
 
 
@@ -496,9 +529,7 @@ p {
 ========================================= */
 
 .detail-technologies {
-
     margin-top: 20px;
-
 }
 
 
@@ -507,9 +538,7 @@ p {
 ========================================= */
 
 .project-back {
-
     padding-top: 30px;
-
     padding-bottom: 100px;
 
     border-top:
@@ -520,7 +549,6 @@ p {
             255,
             0.06
         );
-
 }
 
 
@@ -531,95 +559,20 @@ p {
 @keyframes fadeUp {
 
     from {
-
         opacity: 0;
 
         transform:
             translateY(80px)
             scale(0.94);
-
     }
 
     to {
-
         opacity: 1;
 
         transform:
             translateY(0)
             scale(1);
-
     }
-
 }
 
-
-/* =========================================
-   RESPONSIVE - TABLET
-========================================= */
-
-/*
-@media (max-width: 991px) {
-
-    .portfolio-footer {
-
-        padding-top: 90px;
-
-    }
-
-    .footer-main {
-
-        grid-template-columns:
-            1fr 1fr;
-
-        gap: 50px;
-
-    }
-
-    .footer-brand {
-
-        grid-column:
-            1 / -1;
-
-        max-width: 600px;
-
-    }
-
-}
-*/
-
-
-/* =========================================
-   RESPONSIVE - MOBILE
-========================================= */
-
-/*
-@media (max-width: 576px) {
-
-    .portfolio-footer {
-
-        padding:
-            80px
-            0
-            25px;
-
-    }
-
-    .footer-main {
-
-        gap: 40px;
-
-    }
-
-    .footer-bottom {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 8px;
-
-    }
-
-}
-*/
 

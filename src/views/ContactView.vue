@@ -179,7 +179,7 @@ onUnmounted(() => {
 
                         Neem
 
-                        <span class="animated-gradient-text">
+                        <span class="heading-accent">
                             contact
                         </span>
 
@@ -326,7 +326,7 @@ onUnmounted(() => {
 
                         Vertel me over je
 
-                        <span class="animated-gradient-text">
+                        <span class="heading-accent">
                             idee
                         </span>
                         .
@@ -598,7 +598,7 @@ onUnmounted(() => {
    aan de labels in de overige secties.
 */
 
-.contact-page :deep(.page-header-label),
+/*.contact-page :deep(.page-header-label),
 .contact-page :deep(.hero-label),
 .contact-page :deep(.section-label) {
 
@@ -624,7 +624,7 @@ onUnmounted(() => {
     text-transform:
         uppercase;
 
-}
+}*/
 
 
 /* =========================================

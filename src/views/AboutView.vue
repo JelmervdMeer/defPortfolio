@@ -152,12 +152,12 @@ onUnmounted(() => {
                     reverse
                     label="MIJN WERKWIJZE"
                     title="Hoe ik werk"
-                    description="Een goede digitale oplossing begint voor mij met begrijpen wat het doel is. Vanuit daar combineer ik techniek, creativiteit en communicatie."
+                    description="Een goede digitale oplossing begint voor mij met begrijpen wat het doel is. Vanuit daar combineer ik techniek en creativiteit voor het maken van een functioneel product dat getest en verbeterd kan worden ."
                 >
 
                     <template #title>
 
-                        <span class="animated-gradient-text">
+                        <span class="heading-accent">
                             Hoe
                         </span>
 
@@ -298,7 +298,7 @@ onUnmounted(() => {
 
                         Vijf
 
-                        <span class="animated-gradient-text">
+                        <span class="heading-accent">
                             disciplines
                         </span>
 
@@ -350,7 +350,7 @@ onUnmounted(() => {
 
                         Techniek als
 
-                        <span class="animated-gradient-text">
+                        <span class="heading-accent">
                             tool
                         </span>.
 
@@ -467,7 +467,7 @@ onUnmounted(() => {
 
                         Van idee naar
 
-                        <span class="animated-gradient-text">
+                        <span class="heading-accent">
                             oplossing
                         </span>.
 
@@ -564,7 +564,7 @@ onUnmounted(() => {
    ZELFDE STYLING ALS ANDERE LABELS
 ===================================== */
 
-.about-page :deep(.section-label),
+/*.about-page :deep(.section-label),
 .about-page :deep(.page-header-label),
 .about-page :deep(.hero-label) {
 
@@ -593,7 +593,7 @@ onUnmounted(() => {
     text-transform:
         uppercase;
 
-}
+}*/
 
 
 /* =====================================

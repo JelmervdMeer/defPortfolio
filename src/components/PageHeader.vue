@@ -378,7 +378,7 @@ const particles = Array.from(
    LABEL
 ===================================== */
 
-.page-header-label { font-family: var(--font-heading); font-size: clamp( 1rem, 1.6vw, 3rem ); font-weight: 600; letter-spacing: 0.18em; color: #9b5cff; text-transform: uppercase; }
+/*.page-header-label { font-family: var(--font-heading); font-size: clamp( 1rem, 1.6vw, 3rem ); font-weight: 600; letter-spacing: 0.18em; color: var(--color-secondary); text-transform: uppercase; }*/
 
 
 .page-header-label::before {
@@ -394,19 +394,7 @@ const particles = Array.from(
     margin-right:
         12px;
 
-    background:
-        #8b5cf6;
-
-    box-shadow:
-
-        0 0 12px
-
-        rgba(
-            139,
-            92,
-            246,
-            0.8
-        );
+ 
 
 }
 
@@ -519,25 +507,7 @@ const particles = Array.from(
         0
         18px;
 
-    background:
-
-        linear-gradient(
-            90deg,
-
-            rgba(
-                139,
-                92,
-                246,
-                0.8
-            ),
-
-            rgba(
-                255,
-                255,
-                255,
-                0.08
-            )
-        );
+  
 
 }
 
