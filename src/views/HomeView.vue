@@ -1,6 +1,4 @@
 <script setup lang="ts">
-
-
 import WorkDisciplines from '../components/WorkDisciplines.vue';
 import SectionLayout from '../components/SectionLayout.vue';
 import ProjectScrollShowcase from '../components/ProjectScroll.vue';
