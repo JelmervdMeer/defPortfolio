@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import SectionLayout from './SectionLayout.vue';
-import WorkDisciplines from './WorkDisciplines.vue';
+
 
 </script>
 
@@ -21,9 +21,7 @@ import WorkDisciplines from './WorkDisciplines.vue';
             </template>
 
             <div class="section-reveal reveal">
-                <div class="discipline-desktop">
-                    <WorkDisciplines variant="home" />
-                </div>
+                
 
                 <div class="discipline-mobile">
                     <div class="mobile-discipline-list">
@@ -41,24 +39,9 @@ import WorkDisciplines from './WorkDisciplines.vue';
 
 <style scoped>
 
-/* Homepage-specifieke styling */
 
-.discipline-desktop {
-    display: block;
-}
 
-.discipline-mobile {
-    display: none;
-}
-
-@media (max-width: 991px) {
-    .discipline-desktop {
-        display: none;
-    }
-
-    .discipline-mobile {
-        display: block;
-    }
+   
 
      /* =================================
        MOBILE DISCIPLINE TIMELINE
@@ -134,8 +117,8 @@ import WorkDisciplines from './WorkDisciplines.vue';
         font-size: 0.62rem;
     }
 
-}
 
-}
+
+
 
 </style>

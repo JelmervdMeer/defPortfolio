@@ -1,606 +1,12 @@
 <script setup lang="ts">
-import WorkDisciplines from '../components/WorkDisciplines.vue';
+
 import SectionLayout from '../components/SectionLayout.vue';
 import ProjectScrollShowcase from '../components/ProjectScroll.vue';
 import ContactScene from '../components/ContactScene.vue';
 import HomeHero from '../components/HomeHero.vue';
+import WorkDisciplines from '../components/WorkDisciplines.vue';
 
-/*
-// =====================================
-// PARTICLE SYSTEM
-// =====================================
-
-interface Particle {
-
-    element: HTMLDivElement;
-
-    x: number;
-    y: number;
-
-    baseX: number;
-    baseY: number;
-
-    phaseX: number;
-    phaseY: number;
-
-    speedX: number;
-    speedY: number;
-
-    amplitudeX: number;
-    amplitudeY: number;
-
-}
-
-
-// =====================================
-// PARTICLE STATE
-// =====================================
-
-const heroParticles =
-    ref<HTMLDivElement | null>(null);
-
-const particles: Particle[] = [];
-
-let particleAnimationFrame:
-    number | null = null;
-
-
-// =====================================
-// MOUSE STATE
-// =====================================
-
-let mouseX = 0;
-let mouseY = 0;
-
-let targetMouseX = 0;
-let targetMouseY = 0;
-
-
-// =====================================
-// PARTICLE SETTINGS
-// =====================================
-
-const PARTICLE_COUNT = 45;
-
-const MOUSE_RADIUS = 180;
-
-const MOUSE_FORCE = 0.035;
-
-
-// =====================================
-// CREATE PARTICLES
-// =====================================
-
-function createParticles() {
-
-    if (!heroParticles.value) {
-        return;
-    }
-
-    const container =
-        heroParticles.value;
-
-    particles.length = 0;
-
-    for (
-        let i = 0;
-        i < PARTICLE_COUNT;
-        i++
-    ) {
-
-        const element =
-            document.createElement('div');
-
-        element.className =
-            'hero-particle';
-
-        const size =
-            Math.random() * 4 + 1;
-
-        const glow =
-            Math.random();
-
-        element.style.boxShadow = `
-            0 0 ${4 + glow * 4}px
-            rgba(
-                255,
-                255,
-                255,
-                ${0.5 + glow * 0.5}
-            ),
-
-            0 0 ${8 + glow * 8}px
-            rgba(
-                167,
-                139,
-                250,
-                ${0.6 + glow * 0.4}
-            ),
-
-            0 0 ${18 + glow * 20}px
-            rgba(
-                139,
-                92,
-                246,
-                ${0.4 + glow * 0.4}
-            )
-        `;
-
-        const x =
-            Math.random() * 100;
-
-        const y =
-            Math.random() * 100;
-
-        const phaseX =
-            Math.random() *
-            Math.PI *
-            2;
-
-        const phaseY =
-            Math.random() *
-            Math.PI *
-            2;
-
-        const speedX =
-            Math.random() * 0.012 +
-            0.003;
-
-        const speedY =
-            Math.random() * 0.012 +
-            0.003;
-
-        const amplitudeX =
-            Math.random() * 35 +
-            15;
-
-        const amplitudeY =
-            Math.random() * 35 +
-            15;
-
-        element.style.width =
-            `${size}px`;
-
-        element.style.height =
-            `${size}px`;
-
-        element.style.left =
-            `${x}%`;
-
-        element.style.top =
-            `${y}%`;
-
-        element.style.opacity =
-            `${Math.random() * 0.45 + 0.2}`;
-
-        container.appendChild(
-            element
-        );
-
-        particles.push({
-
-            element,
-
-            x,
-            y,
-
-            baseX: x,
-            baseY: y,
-
-            phaseX,
-            phaseY,
-
-            speedX,
-            speedY,
-
-            amplitudeX,
-            amplitudeY
-
-        });
-
-    }
-
-}
-
-
-// =====================================
-// PARTICLE ANIMATION
-// =====================================
-
-function animateParticles() {
-
-    if (!heroParticles.value) {
-        return;
-    }
-
-    const container =
-        heroParticles.value;
-
-    mouseX +=
-        (
-            targetMouseX -
-            mouseX
-        ) * 0.08;
-
-    mouseY +=
-        (
-            targetMouseY -
-            mouseY
-        ) * 0.08;
-
-    const rect =
-        container.getBoundingClientRect();
-
-    if (
-        rect.width === 0 ||
-        rect.height === 0
-    ) {
-
-        particleAnimationFrame =
-            requestAnimationFrame(
-                animateParticles
-            );
-
-        return;
-
-    }
-
-    const cursorX =
-        (
-            mouseX -
-            rect.left
-        ) /
-        rect.width *
-        100;
-
-    const cursorY =
-        (
-            mouseY -
-            rect.top
-        ) /
-        rect.height *
-        100;
-
-    particles.forEach(
-        particle => {
-
-            particle.phaseX +=
-                particle.speedX;
-
-            particle.phaseY +=
-                particle.speedY;
-
-            const movementX =
-                Math.sin(
-                    particle.phaseX
-                ) *
-                particle.amplitudeX;
-
-            const movementY =
-                Math.cos(
-                    particle.phaseY
-                ) *
-                particle.amplitudeY;
-
-            let targetX =
-                particle.baseX;
-
-            let targetY =
-                particle.baseY;
-
-            const dx =
-                cursorX -
-                particle.baseX;
-
-            const dy =
-                cursorY -
-                particle.baseY;
-
-            const distance =
-                Math.sqrt(
-                    dx * dx +
-                    dy * dy
-                );
-
-            const radius =
-                (
-                    MOUSE_RADIUS /
-                    rect.width
-                ) *
-                100;
-
-            if (
-                distance < radius
-            ) {
-
-                const force =
-                    (
-                        1 -
-                        distance / radius
-                    ) *
-                    MOUSE_FORCE;
-
-                targetX +=
-                    dx *
-                    force *
-                    100;
-
-                targetY +=
-                    dy *
-                    force *
-                    100;
-
-            }
-
-            particle.element.style.left =
-                `${targetX}%`;
-
-            particle.element.style.top =
-                `${targetY}%`;
-
-            particle.element.style.transform =
-                `translate3d(
-                    ${movementX}px,
-                    ${movementY}px,
-                    0
-                )`;
-
-        }
-    );
-
-    particleAnimationFrame =
-        requestAnimationFrame(
-            animateParticles
-        );
-
-}
-
-
-// =====================================
-// MOUSE MOVE
-// =====================================
-
-function handleMouseMove(
-    event: MouseEvent
-) {
-
-    targetMouseX =
-        event.clientX;
-
-    targetMouseY =
-        event.clientY;
-
-    if (!heroParticles.value) {
-        return;
-    }
-
-    const hero =
-        heroParticles.value.parentElement;
-
-    if (!hero) {
-        return;
-    }
-
-    const rect =
-        hero.getBoundingClientRect();
-
-    const x =
-        (
-            (
-                event.clientX -
-                rect.left
-            ) /
-            rect.width
-        ) *
-        100;
-
-    const y =
-        (
-            (
-                event.clientY -
-                rect.top
-            ) /
-            rect.height
-        ) *
-        100;
-
-    hero.style.setProperty(
-        '--cursor-x',
-        `${x}%`
-    );
-
-    hero.style.setProperty(
-        '--cursor-y',
-        `${y}%`
-    );
-
-}
-
-
-// =====================================
-// MOUSE LEAVE
-// =====================================
-
-function handleMouseLeave() {
-
-    if (!heroParticles.value) {
-        return;
-    }
-
-    const rect =
-        heroParticles.value
-            .getBoundingClientRect();
-
-    targetMouseX =
-        rect.left +
-        rect.width / 2;
-
-    targetMouseY =
-        rect.top +
-        rect.height / 2;
-
-}
-
-
-// =====================================
-// SCROLL REVEAL
-// =====================================
-
-let revealObserver:
-    IntersectionObserver | null = null;
-
-
-function setupRevealObserver() {
-
-    const revealElements =
-        document.querySelectorAll(
-            '.reveal'
-        );
-
-    if (!revealElements.length) {
-        return;
-    }
-
-    revealObserver =
-        new IntersectionObserver(
-
-            entries => {
-
-                entries.forEach(
-                    entry => {
-
-                        if (
-                            !entry.isIntersecting
-                        ) {
-                            return;
-                        }
-
-                        entry.target.classList.add(
-                            'is-visible'
-                        );
-
-                        revealObserver?.unobserve(
-                            entry.target
-                        );
-
-                    }
-                );
-
-            },
-
-            {
-                threshold: 0.15
-            }
-
-        );
-
-    revealElements.forEach(
-        element => {
-
-            revealObserver?.observe(
-                element
-            );
-
-        }
-    );
-
-}
-
-
-// =====================================
-// LIFECYCLE
-// =====================================
-
-onMounted(() => {
-
-    createParticles();
-
-    setupRevealObserver();
-
-    if (heroParticles.value) {
-
-        const rect =
-            heroParticles.value
-                .getBoundingClientRect();
-
-        mouseX =
-            rect.left +
-            rect.width / 2;
-
-        mouseY =
-            rect.top +
-            rect.height / 2;
-
-        targetMouseX =
-            mouseX;
-
-        targetMouseY =
-            mouseY;
-
-    }
-
-    window.addEventListener(
-        'mousemove',
-        handleMouseMove
-    );
-
-    window.addEventListener(
-        'mouseleave',
-        handleMouseLeave
-    );
-
-    particleAnimationFrame =
-        requestAnimationFrame(
-            animateParticles
-        );
-
-});
-
-
-// =====================================
-// CLEANUP
-// =====================================
-
-onUnmounted(() => {
-
-    window.removeEventListener(
-        'mousemove',
-        handleMouseMove
-    );
-
-    window.removeEventListener(
-        'mouseleave',
-        handleMouseLeave
-    );
-
-    if (
-        particleAnimationFrame !== null
-    ) {
-
-        cancelAnimationFrame(
-            particleAnimationFrame
-        );
-
-        particleAnimationFrame = null;
-
-    }
-
-    revealObserver?.disconnect();
-
-    particles.forEach(
-        particle => {
-
-            particle.element.remove();
-
-        }
-    );
-
-    particles.length = 0;
-
-});
-*/
 </script>
-
 
 <template>
 
@@ -608,6 +14,8 @@ onUnmounted(() => {
 
 
         <HomeHero />
+
+
         <!-- =====================================
              HOME CONTENT
         ====================================== -->
@@ -658,245 +66,29 @@ onUnmounted(() => {
 
             <div class="home-section-container disciplines-container">
 
-                <SectionLayout
-                    class="home-disciplines"
-                    variant="split"
-                    label="MIJN WERKWIJZE"
-                    title="Vijf disciplines, één manier van werken"
-                    description="Verschillende disciplines komen samen in één manier van werken. Door techniek, creativiteit, communicatie, vernieuwing en een doelgerichte aanpak te combineren, ontstaan digitale oplossingen die zowel doordacht als bruikbaar zijn."
-                >
-
-                    <template #title>
-
-                        Vijf
-
-                        <span class="heading-accent">
-                            disciplines
-                        </span>
-
-                        een werkwijze.
-
-                    </template>
-
-
-                    <div class="section-reveal reveal">
-
-
-                        <!-- =================================
-                             DESKTOP FIGURE
-                        ================================== -->
-
-                        <div class="discipline-desktop">
-
-                            <WorkDisciplines
-                                variant="home"
-                            />
-
-                        </div>
-
-
-                        <!-- =================================
-                             MOBILE TIMELINE
-                        ================================== -->
-
-                      <!--  <div class="discipline-mobile">
-
-                            <div class="mobile-discipline-list">
-
-                            -->
-                                <!-- 01 -->
-
-                                <!--<div class="mobile-discipline">
-
-                                    <div class="mobile-discipline-marker">
-
-                                        <span>01</span>
-
-                                    </div>
-
-
-                                    <div class="mobile-discipline-content">
-
-                                        <div class="mobile-discipline-icon">
-
-                                            <i class="bi bi-book"></i>
-
-                                        </div>
-
-
-                                        <div>
-
-                                            <h3>
-                                                VERNIEUWING
-                                            </h3>
-
-                                            <span>
-                                                Blijven ontdekken
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>-->
-
-
-                                <!-- 02 -->
-
-                                <!--<div class="mobile-discipline">
-
-                                    <div class="mobile-discipline-marker">
-
-                                        <span>02</span>
-
-                                    </div>
-
-
-                                    <div class="mobile-discipline-content">
-
-                                        <div class="mobile-discipline-icon">
-
-                                            <i class="bi bi-code-slash"></i>
-
-                                        </div>
-
-
-                                        <div>
-
-                                            <h3>
-                                                TECHNISCH
-                                            </h3>
-
-                                            <span>
-                                                Architectuur & structuur
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div> -->
-
-
-                                <!-- 03 
-
-                                <div class="mobile-discipline">
-
-                                    <div class="mobile-discipline-marker">
-
-                                        <span>03</span>
-
-                                    </div>
-
-
-                                    <div class="mobile-discipline-content">
-
-                                        <div class="mobile-discipline-icon">
-
-                                            <i class="bi bi-gear"></i>
-
-                                        </div>
-
-
-                                        <div>
-
-                                            <h3>
-                                                PRAKTISCH
-                                            </h3>
-
-                                            <span>
-                                                Van idee naar resultaat
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div> -->
-
-
-                                <!-- 04 -->
-
-                                <!--<div class="mobile-discipline">
-
-                                    <div class="mobile-discipline-marker">
-
-                                        <span>04</span>
-
-                                    </div>
-
-
-                                    <div class="mobile-discipline-content">
-
-                                        <div class="mobile-discipline-icon">
-
-                                            <i class="bi bi-brush"></i>
-
-                                        </div>
-
-
-                                        <div>
-
-                                            <h3>
-                                                CREATIEF
-                                            </h3>
-
-                                            <span>
-                                                Denken buiten de standaard
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div> -->
-
-
-                                <!-- 05 -->
-
-                              <!--  <div class="mobile-discipline">
-
-                                    <div class="mobile-discipline-marker">
-
-                                        <span>05</span>
-
-                                    </div>
-
-
-                                    <div class="mobile-discipline-content">
-
-                                        <div class="mobile-discipline-icon">
-
-                                            <i class="bi bi-chat-square-text"></i>
-
-                                        </div>
-
-
-                                        <div>
-
-                                            <h3>
-                                                COMMUNICATIE
-                                            </h3>
-
-                                            <span>
-                                                Techniek begrijpelijk maken
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div> -->
-
-                    </div>
-
-                </SectionLayout>
-
+                  <SectionLayout
+    class="home-disciplines"
+    variant="split"
+    label="MIJN WERKWIJZE"
+    title="Vijf disciplines, één manier van werken"
+    description="Verschillende disciplines komen samen in één manier van werken. Door techniek, creativiteit, communicatie, vernieuwing en een doelgerichte aanpak te combineren, ontstaan digitale oplossingen die zowel doordacht als bruikbaar zijn."
+>
+    <template #title>
+        Vijf
+        <span class="heading-accent">disciplines</span>
+        een werkwijze.
+    </template>
+
+    <div class="section-reveal reveal">
+        <WorkDisciplines />
+    </div>
+</SectionLayout>
             </div>
+                        
+
+                
+
+            
 
 
             <!-- =====================================
@@ -999,6 +191,7 @@ onUnmounted(() => {
 
             </div>
 
+
         </div>
 
     </main>
@@ -1025,11 +218,8 @@ onUnmounted(() => {
 
 
 /* =========================================
-   HERO
+   REVEAL
 ========================================= */
-
-
-
 
 .reveal,
 .reveal-left,
@@ -1064,13 +254,6 @@ onUnmounted(() => {
 
     transform: translate3d(0, 0, 0);
 }
-
-
-/* =========================================
-   TECHNOLOGY MARQUEE
-========================================= */
-
-
 
 
 /* =========================================
@@ -1213,10 +396,6 @@ onUnmounted(() => {
 
     z-index: -1;
 }
-
-
-/* =========================================
-
 
 
 /* =========================================
@@ -1484,7 +663,6 @@ onUnmounted(() => {
 
 @media (max-width: 991px) {
 
-
     .home-sections {
         gap: 40px;
 
@@ -1501,84 +679,7 @@ onUnmounted(() => {
         border-radius: 24px;
     }
 
-
-    /* =================================
-       MOBILE DISCIPLINE TIMELINE
-    ================================= */
-
-    .discipline-desktop {
-        display: none;
-    }
-
-
-    .discipline-mobile {
-        display: block;
-    }
-
-
-    .mobile-discipline-list {
-        max-width: 100%;
-
-        padding: 5px 0;
-    }
-
-
-    .mobile-discipline-list::before {
-        left: 23px;
-    }
-
-
-    .mobile-discipline {
-        min-height: 95px;
-    }
-
-
-    .mobile-discipline-marker {
-        flex-basis: 48px;
-
-        width: 48px;
-        height: 48px;
-    }
-
-
-    .mobile-discipline-marker span {
-        font-size: 0.6rem;
-    }
-
-
-    .mobile-discipline-content {
-        gap: 12px;
-
-        margin-left: 15px;
-
-        padding: 14px;
-
-        border-radius: 14px;
-    }
-
-
-    .mobile-discipline-icon {
-        flex-basis: 40px;
-
-        width: 40px;
-        height: 40px;
-
-        font-size: 1rem;
-    }
-
-
-    .mobile-discipline-content h3 {
-        font-size: 0.72rem;
-    }
-
-
-    .mobile-discipline-content span {
-        font-size: 0.62rem;
-    }
-
 }
-
- 
 
 
 /* =========================================
@@ -1586,9 +687,6 @@ onUnmounted(() => {
 ========================================= */
 
 @media (max-width: 576px) {
-
-
-
 
     .home-section-container {
         width: calc(100% - 12px);
@@ -1610,71 +708,6 @@ onUnmounted(() => {
 
     .contact-scene-wrapper {
         min-height: 230px;
-    }
-
-
-    /* =================================
-       SMALL MOBILE DISCIPLINES
-    ================================= */
-
-    .mobile-discipline-list {
-        max-width: 100%;
-
-        padding: 5px 0;
-    }
-
-
-    .mobile-discipline-list::before {
-        left: 23px;
-    }
-
-
-    .mobile-discipline {
-        min-height: 95px;
-    }
-
-
-    .mobile-discipline-marker {
-        flex-basis: 48px;
-
-        width: 48px;
-        height: 48px;
-    }
-
-
-    .mobile-discipline-marker span {
-        font-size: 0.6rem;
-    }
-
-
-    .mobile-discipline-content {
-        gap: 12px;
-
-        margin-left: 15px;
-
-        padding: 14px;
-
-        border-radius: 14px;
-    }
-
-
-    .mobile-discipline-icon {
-        flex-basis: 40px;
-
-        width: 40px;
-        height: 40px;
-
-        font-size: 1rem;
-    }
-
-
-    .mobile-discipline-content h3 {
-        font-size: 0.72rem;
-    }
-
-
-    .mobile-discipline-content span {
-        font-size: 0.62rem;
     }
 
 }
