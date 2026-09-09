@@ -1,4 +1,3 @@
-```vue
 <script setup lang="ts">
 
 import {
@@ -21,17 +20,126 @@ const subject = ref('');
 const message = ref('');
 
 const submitted = ref(false);
+const submitting = ref(false);
+const submitError = ref('');
 
 
 // =====================================
 // FORM SUBMIT
 // =====================================
 
-const handleSubmit = () => {
+const handleSubmit =
+    async () => {
 
-    submitted.value = true;
+        // Voorkomt dubbel verzenden
+        if (submitting.value) {
+            return;
+        }
 
-};
+
+        submitted.value = false;
+        submitting.value = true;
+        submitError.value = '';
+
+
+        try {
+
+            const response =
+                await fetch(
+                    '/api/contact',
+                    {
+                        method:
+                            'POST',
+
+                        headers: {
+                            'Content-Type':
+                                'application/json'
+                        },
+
+                        body:
+                            JSON.stringify({
+                                name:
+                                    name.value,
+
+                                email:
+                                    email.value,
+
+                                subject:
+                                    subject.value,
+
+                                message:
+                                    message.value
+                            })
+                    }
+                );
+
+
+            let data:
+                {
+                    success?: boolean;
+                    message?: string;
+                } = {};
+
+
+            try {
+
+                data =
+                    await response.json();
+
+            }
+            catch {
+
+                // Response bevatte geen geldige JSON.
+                data = {};
+
+            }
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    'Het bericht kon niet worden verzonden.'
+                );
+
+            }
+
+
+            // =====================================
+            // SUCCESS
+            // =====================================
+
+            submitted.value = true;
+
+
+            // Formulier leegmaken
+            name.value = '';
+            email.value = '';
+            subject.value = '';
+            message.value = '';
+
+        }
+        catch (error) {
+
+            console.error(
+                'Contactformulier fout:',
+                error
+            );
+
+
+            submitError.value =
+                error instanceof Error
+                    ? error.message
+                    : 'Het bericht kon niet worden verzonden. Probeer het later opnieuw.';
+
+        }
+        finally {
+
+            submitting.value = false;
+
+        }
+
+    };
 
 
 // =====================================
@@ -85,7 +193,8 @@ function setupRevealObserver() {
             },
 
             {
-                threshold: 0.08,
+                threshold:
+                    0.08,
 
                 rootMargin:
                     '0px 0px -40px 0px'
@@ -205,7 +314,7 @@ onUnmounted(() => {
                             <!-- E-MAIL -->
 
                             <a
-                                href="mailto:jelmervandermeer02@gmail.com"
+                                href="mailto:jelmer@jelmervandermeer.nl"
                                 class="contact-detail"
                             >
 
@@ -223,7 +332,7 @@ onUnmounted(() => {
                                     </small>
 
                                     <span>
-                                        jelmervandermeer02@gmail.com
+                                        jelmer@jelmervandermeer.nl
                                     </span>
 
                                 </div>
@@ -412,6 +521,8 @@ onUnmounted(() => {
                                             type="text"
                                             class="form-control"
                                             placeholder="Je naam"
+                                            autocomplete="name"
+                                            :disabled="submitting"
                                             required
                                         />
 
@@ -438,6 +549,8 @@ onUnmounted(() => {
                                             type="email"
                                             class="form-control"
                                             placeholder="je@email.nl"
+                                            autocomplete="email"
+                                            :disabled="submitting"
                                             required
                                         />
 
@@ -464,6 +577,7 @@ onUnmounted(() => {
                                             type="text"
                                             class="form-control"
                                             placeholder="Waar gaat je bericht over?"
+                                            :disabled="submitting"
                                             required
                                         />
 
@@ -490,8 +604,38 @@ onUnmounted(() => {
                                             class="form-control"
                                             rows="7"
                                             placeholder="Vertel iets over je idee of project..."
+                                            :disabled="submitting"
                                             required
                                         ></textarea>
+
+                                    </div>
+
+
+                                    <!-- ERROR -->
+
+                                    <div
+                                        v-if="submitError"
+                                        class="col-12"
+                                    >
+
+                                        <div
+                                            class="contact-error"
+                                            role="alert"
+                                        >
+
+                                            <i
+                                                class="
+                                                    bi
+                                                    bi-exclamation-circle
+                                                "
+                                            ></i>
+
+
+                                            <span>
+                                                {{ submitError }}
+                                            </span>
+
+                                        </div>
 
                                     </div>
 
@@ -508,17 +652,39 @@ onUnmounted(() => {
                                                 btn-lg
                                                 contact-submit
                                             "
+                                            :disabled="submitting"
                                         >
 
-                                            Verstuur bericht
+                                            <template v-if="submitting">
 
-                                            <i
-                                                class="
-                                                    bi
-                                                    bi-arrow-up-right
-                                                    ms-2
-                                                "
-                                            ></i>
+                                                Versturen...
+
+                                                <span
+                                                    class="
+                                                        spinner-border
+                                                        spinner-border-sm
+                                                        ms-2
+                                                    "
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                ></span>
+
+                                            </template>
+
+
+                                            <template v-else>
+
+                                                Verstuur bericht
+
+                                                <i
+                                                    class="
+                                                        bi
+                                                        bi-arrow-up-right
+                                                        ms-2
+                                                    "
+                                                ></i>
+
+                                            </template>
 
                                         </button>
 
@@ -587,44 +753,6 @@ onUnmounted(() => {
         #08090d;
 
 }
-
-
-/* =========================================
-   PAGE HEADER LABEL
-========================================= */
-
-/*
-   Houdt het label van PageHeader gelijk
-   aan de labels in de overige secties.
-*/
-
-/*.contact-page :deep(.page-header-label),
-.contact-page :deep(.hero-label),
-.contact-page :deep(.section-label) {
-
-    font-family:
-        var(--font-heading);
-
-    font-size:
-        clamp(
-            1rem,
-            1.6vw,
-            3rem
-        );
-
-    font-weight:
-        600;
-
-    letter-spacing:
-        0.18em;
-
-    color:
-        #9b5cff;
-
-    text-transform:
-        uppercase;
-
-}*/
 
 
 /* =========================================
@@ -741,9 +869,6 @@ onUnmounted(() => {
     max-width:
         none;
 
-    padding:
-        70px;
-
     overflow:
         hidden;
 
@@ -765,12 +890,6 @@ onUnmounted(() => {
 
     max-width:
         none;
-
-    padding-left:
-        70px;
-
-    padding-right:
-        70px;
 
 }
 
@@ -1382,7 +1501,8 @@ onUnmounted(() => {
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease,
-        background-color 0.2s ease;
+        background-color 0.2s ease,
+        opacity 0.2s ease;
 
 }
 
@@ -1418,6 +1538,17 @@ onUnmounted(() => {
 }
 
 
+.contact-form .form-control:disabled {
+
+    opacity:
+        0.6;
+
+    cursor:
+        not-allowed;
+
+}
+
+
 .contact-form textarea.form-control {
 
     resize:
@@ -1425,6 +1556,70 @@ onUnmounted(() => {
 
     min-height:
         180px;
+
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.contact-error {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    padding:
+        16px 18px;
+
+    border:
+        1px solid
+        rgba(
+            239,
+            68,
+            68,
+            0.35
+        );
+
+    border-radius:
+        10px;
+
+    color:
+        #fecaca;
+
+    background:
+        rgba(
+            239,
+            68,
+            68,
+            0.08
+        );
+
+    font-size:
+        0.9rem;
+
+    line-height:
+        1.5;
+
+}
+
+
+.contact-error i {
+
+    flex-shrink:
+        0;
+
+    color:
+        #f87171;
+
+    font-size:
+        1.2rem;
 
 }
 
@@ -1438,14 +1633,18 @@ onUnmounted(() => {
     margin-top:
         10px;
 
+    min-width:
+        190px;
+
     transition:
         transform 0.25s ease,
-        box-shadow 0.25s ease;
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
 
 }
 
 
-.contact-submit:hover {
+.contact-submit:hover:not(:disabled) {
 
     transform:
         translateY(-3px);
@@ -1458,6 +1657,20 @@ onUnmounted(() => {
             246,
             0.3
         );
+
+}
+
+
+.contact-submit:disabled {
+
+    opacity:
+        0.65;
+
+    cursor:
+        not-allowed;
+
+    transform:
+        none;
 
 }
 
@@ -1642,61 +1855,6 @@ onUnmounted(() => {
 
 
 /* =========================================
-   ANIMATED GRADIENT
-========================================= */
-
-/*
-.animated-gradient-text {
-
-    display:
-        inline-block;
-
-    background-image:
-        linear-gradient(
-            90deg,
-            #6c63ff 0%,
-            #9b5cff 20%,
-            #00d4ff 40%,
-            #c084fc 60%,
-            #6c63ff 80%,
-            #9b5cff 100%
-        );
-
-    background-size:
-        200% 100%;
-
-    background-position:
-        0% 50%;
-
-    background-repeat:
-        no-repeat;
-
-    background-clip:
-        text;
-
-    -webkit-background-clip:
-        text;
-
-    color:
-        transparent;
-
-    -webkit-text-fill-color:
-        transparent;
-
-    animation:
-        gradientMove
-        6s
-        ease-in-out
-        infinite;
-
-    will-change:
-        background-position;
-
-}
-*/
-
-
-/* =========================================
    REVEAL
 ========================================= */
 
@@ -1787,28 +1945,6 @@ onUnmounted(() => {
 
     }
 
-
-    .contact-section-container
-    :deep(.section-layout) {
-
-        padding:
-            60px
-            30px;
-
-    }
-
-
-    .contact-section-container
-    :deep(.section-layout > .container) {
-
-        padding-left:
-            0;
-
-        padding-right:
-            0;
-
-    }
-
 }
 
 
@@ -1834,16 +1970,6 @@ onUnmounted(() => {
 
         border-radius:
             22px;
-
-    }
-
-
-    .contact-section-container
-    :deep(.section-layout) {
-
-        padding:
-            50px
-            24px;
 
     }
 
@@ -1900,28 +2026,6 @@ onUnmounted(() => {
     }
 
 
-    .contact-section-container
-    :deep(.section-layout) {
-
-        padding:
-            45px
-            18px;
-
-    }
-
-
-    .contact-section-container
-    :deep(.section-layout > .container) {
-
-        padding-left:
-            0;
-
-        padding-right:
-            0;
-
-    }
-
-
     .contact-form {
 
         padding:
@@ -1951,9 +2055,22 @@ onUnmounted(() => {
 
     }
 
+
+    .contact-error {
+
+        padding:
+            14px;
+
+    }
+
+
+    .contact-submit {
+
+        width:
+            100%;
+
+    }
+
 }
 
 </style>
-```
-
-

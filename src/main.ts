@@ -12,6 +12,7 @@ import './style.css';
 import '@fontsource-variable/space-grotesk/wght.css';
 import '@fontsource-variable/dm-sans/wght.css';
 
+
 createApp(App)
     .use(router)
     .mount('#app');

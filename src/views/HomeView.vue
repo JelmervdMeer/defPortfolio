@@ -656,6 +656,41 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
         rgba(139, 92, 246, 0.2);
 }
 
+:deep(.home-contact .section-layout-content) {
+    align-self: flex-start;
+}
+
+.home-contact-scene {
+    margin-top: -35px;
+}
+
+/* =========================================
+   HOME CONTACT COLUMN RATIO
+========================================= */
+
+:deep(
+    .home-contact.section-layout--reverse
+    .section-layout-split
+) {
+    grid-template-columns:
+        minmax(0, 6fr)
+        minmax(0, 4fr);
+}
+
+/* =========================================
+   HOME CONTACT TEXT
+========================================= */
+
+:deep(
+    .home-contact
+    .section-layout-text
+) {
+    padding-right:
+        50px;
+
+    box-sizing:
+        border-box;
+}
 
 /* =========================================
    RESPONSIVE

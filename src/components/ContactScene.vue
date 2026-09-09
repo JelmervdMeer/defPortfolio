@@ -274,9 +274,13 @@ function initScene() {
                 'Samenwerken model geladen'
             );
 
+             
+
 
             model =
                 gltf.scene;
+
+                model.position.y = -2;
 
 
             // =================================

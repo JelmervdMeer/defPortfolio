@@ -629,9 +629,9 @@ onUnmounted(() => {
             7fr
         );
 
-    align-items: stretch;
+   /* align-items: stretch;*/
 
-    gap: 60px;
+    gap: 40px;
 
     width: 100%;
 
@@ -1086,6 +1086,22 @@ onUnmounted(() => {
 
     column-gap: 120px;
 
+}
+
+/* =========================================
+   CONTACT LAYOUT
+========================================= */
+
+:deep(
+    .home-contact.section-layout--reverse
+    .section-layout-split
+) {
+    grid-template-columns:
+        minmax(0, 55fr)
+        minmax(0, 45fr);
+
+    gap:
+        60px;
 }
 
 

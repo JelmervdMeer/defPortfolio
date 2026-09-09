@@ -90,10 +90,15 @@ const disciplines: Discipline[] = [
    ===================================== */
 
 .discipline-list {
-    position: relative;
     display: flex;
     flex-direction: column;
+
     width: 100%;
+    max-width: 520px;
+
+    margin: 0 auto;
+
+    gap: 1px;
 }
 
 

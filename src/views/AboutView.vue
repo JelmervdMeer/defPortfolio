@@ -1,4 +1,3 @@
-```vue
 <script setup lang="ts">
 
 import {
@@ -12,12 +11,92 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
 
 // =====================================
+// TYPES
+// =====================================
+
+interface WorkStep {
+    number: string;
+    title: string;
+    description: string;
+}
+
+interface Technology {
+    number: string;
+    title: string;
+    technologies: string;
+}
+
+
+// =====================================
+// WORK STEPS
+// =====================================
+
+const workSteps: WorkStep[] = [
+    {
+        number: '01',
+        title: 'Begrijpen',
+        description:
+            'Eerst breng ik het probleem, de wensen en het doel van een project in kaart.'
+    },
+    {
+        number: '02',
+        title: 'Ontwerpen',
+        description:
+            'Vervolgens zoek ik naar een oplossing die logisch, aantrekkelijk en praktisch bruikbaar is.'
+    },
+    {
+        number: '03',
+        title: 'Bouwen',
+        description:
+            'Daarna vertaal ik het concept naar een technisch werkende digitale oplossing.'
+    },
+    {
+        number: '04',
+        title: 'Verbeteren',
+        description:
+            'Door te testen en itereren verbeter ik de oplossing totdat techniek en gebruikerservaring goed samenkomen.'
+    }
+];
+
+
+// =====================================
+// TECHNOLOGIES
+// =====================================
+
+const technologies: Technology[] = [
+    {
+        number: '01',
+        title: 'Front-end',
+        technologies:
+            'Vue · TypeScript · JavaScript'
+    },
+    {
+        number: '02',
+        title: '3D & interactie',
+        technologies:
+            'Three.js · Blender · WebGL'
+    },
+    {
+        number: '03',
+        title: 'Back-end',
+        technologies:
+            'Laravel · PHP · SQL'
+    },
+    {
+        number: '04',
+        title: 'Development',
+        technologies:
+            'Git · Vite · REST API'
+    }
+];
+
+
+// =====================================
 // REVEAL ANIMATION
 // =====================================
 
 let revealObserver:
     IntersectionObserver | null = null;
-
 
 function setupRevealObserver() {
 
@@ -26,17 +105,12 @@ function setupRevealObserver() {
             '.about-page .reveal'
         );
 
-
     if (!elements.length) {
-
         return;
-
     }
-
 
     revealObserver =
         new IntersectionObserver(
-
             entries => {
 
                 entries.forEach(
@@ -45,16 +119,12 @@ function setupRevealObserver() {
                         if (
                             !entry.isIntersecting
                         ) {
-
                             return;
-
                         }
-
 
                         entry.target.classList.add(
                             'is-visible'
                         );
-
 
                         revealObserver?.unobserve(
                             entry.target
@@ -64,24 +134,18 @@ function setupRevealObserver() {
                 );
 
             },
-
             {
                 threshold: 0.08,
-
                 rootMargin:
                     '0px 0px -40px 0px'
             }
-
         );
-
 
     elements.forEach(
         element => {
-
             revealObserver?.observe(
                 element
             );
-
         }
     );
 
@@ -93,11 +157,8 @@ function setupRevealObserver() {
 // =====================================
 
 onMounted(() => {
-
     setupRevealObserver();
-
 });
-
 
 onUnmounted(() => {
 
@@ -113,7 +174,6 @@ onUnmounted(() => {
 <template>
 
     <main class="about-page">
-
 
         <!-- =====================================
              HERO
@@ -151,8 +211,8 @@ onUnmounted(() => {
                     variant="split"
                     reverse
                     label="MIJN WERKWIJZE"
-                    title="Hoe ik werk"
-                    description="Een goede digitale oplossing begint voor mij met begrijpen wat het doel is. Vanuit daar combineer ik techniek en creativiteit voor het maken van een functioneel product dat getest en verbeterd kan worden ."
+                    title="Hoe ik werk."
+                    description="Een goede digitale oplossing begint voor mij met begrijpen wat het doel is. Vanuit daar combineer ik techniek en creativiteit voor het maken van een functioneel product dat getest en verbeterd kan worden."
                 >
 
                     <template #title>
@@ -162,8 +222,6 @@ onUnmounted(() => {
                         </span>
 
                         ik werk.
-
-                        
 
                     </template>
 
@@ -175,93 +233,24 @@ onUnmounted(() => {
                         "
                     >
 
-                        <div class="about-work-item">
+                        <div
+                            v-for="step in workSteps"
+                            :key="step.number"
+                            class="about-work-item"
+                        >
 
                             <span class="about-work-number">
-                                01
+                                {{ step.number }}
                             </span>
 
                             <div>
 
                                 <h3>
-                                    Begrijpen
+                                    {{ step.title }}
                                 </h3>
 
                                 <p>
-                                    Eerst breng ik het probleem,
-                                    de wensen en het doel van een
-                                    project in kaart.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="about-work-item">
-
-                            <span class="about-work-number">
-                                02
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Ontwerpen
-                                </h3>
-
-                                <p>
-                                    Vervolgens zoek ik naar een
-                                    oplossing die logisch,
-                                    aantrekkelijk en praktisch
-                                    bruikbaar is.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="about-work-item">
-
-                            <span class="about-work-number">
-                                03
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Bouwen
-                                </h3>
-
-                                <p>
-                                    Daarna vertaal ik het concept
-                                    naar een technisch werkende
-                                    digitale oplossing.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="about-work-item">
-
-                            <span class="about-work-number">
-                                04
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Verbeteren
-                                </h3>
-
-                                <p>
-                                    Door te testen en itereren
-                                    verbeter ik de oplossing totdat
-                                    techniek en gebruikerservaring
-                                    goed samenkomen.
+                                    {{ step.description }}
                                 </p>
 
                             </div>
@@ -300,7 +289,7 @@ onUnmounted(() => {
 
                         <span class="heading-accent">
                             disciplines
-                        </span>
+                        </span>,
 
                         één werkwijze.
 
@@ -310,7 +299,6 @@ onUnmounted(() => {
                     <div
                         class="
                             disciplines-content
-                            section-reveal
                             reveal
                         "
                     >
@@ -342,7 +330,7 @@ onUnmounted(() => {
                     variant="split"
                     reverse
                     label="TECHNOLOGIE"
-                    title="Techniek als gereedschap"
+                    title="Techniek als tool."
                     description="Ik gebruik technologie als middel om ideeën werkelijkheid te maken."
                 >
 
@@ -366,74 +354,25 @@ onUnmounted(() => {
 
                         <div class="technology-grid">
 
-
-                            <div class="technology-item">
+                            <div
+                                v-for="technology in technologies"
+                                :key="technology.number"
+                                class="technology-item"
+                            >
 
                                 <span class="technology-number">
-                                    01
+                                    {{ technology.number }}
                                 </span>
 
                                 <strong>
-                                    Front-end
+                                    {{ technology.title }}
                                 </strong>
 
                                 <span>
-                                    Vue · TypeScript · JavaScript
+                                    {{ technology.technologies }}
                                 </span>
 
                             </div>
-
-
-                            <div class="technology-item">
-
-                                <span class="technology-number">
-                                    02
-                                </span>
-
-                                <strong>
-                                    3D & interactie
-                                </strong>
-
-                                <span>
-                                    Three.js · Blender · WebGL
-                                </span>
-
-                            </div>
-
-
-                            <div class="technology-item">
-
-                                <span class="technology-number">
-                                    03
-                                </span>
-
-                                <strong>
-                                    Back-end
-                                </strong>
-
-                                <span>
-                                    Laravel · PHP · SQL
-                                </span>
-
-                            </div>
-
-
-                            <div class="technology-item">
-
-                                <span class="technology-number">
-                                    04
-                                </span>
-
-                                <strong>
-                                    Development
-                                </strong>
-
-                                <span>
-                                    Git · Vite · REST API
-                                </span>
-
-                            </div>
-
 
                         </div>
 
@@ -459,7 +398,7 @@ onUnmounted(() => {
                     class="about-cta-section"
                     variant="cta"
                     label="SAMENWERKEN"
-                    title="Van idee naar ervaring"
+                    title="Van idee naar oplossing."
                     description="Ik werk graag aan projecten waarin ik kan meedenken, experimenteren en technologie kan inzetten om een idee daadwerkelijk vorm te geven."
                 >
 
@@ -489,7 +428,6 @@ onUnmounted(() => {
                                 btn-lg
                             "
                         >
-
                             Bekijk mijn projecten
 
                             <i
@@ -511,9 +449,7 @@ onUnmounted(() => {
                                 btn-lg
                             "
                         >
-
                             Neem contact op
-
                         </RouterLink>
 
                     </div>
@@ -521,7 +457,6 @@ onUnmounted(() => {
                 </SectionLayout>
 
             </div>
-
 
         </div>
 
@@ -538,20 +473,14 @@ onUnmounted(() => {
 
 .about-page {
 
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+    width: 100%;
+    min-height: 100vh;
 
-    min-height:
-        100vh;
+    overflow: hidden;
 
-    overflow:
-        hidden;
-
-    isolation:
-        isolate;
+    isolation: isolate;
 
     background:
         #08090d;
@@ -560,62 +489,19 @@ onUnmounted(() => {
 
 
 /* =====================================
-   SECTION LABELS
-   ZELFDE STYLING ALS ANDERE LABELS
-===================================== */
-
-/*.about-page :deep(.section-label),
-.about-page :deep(.page-header-label),
-.about-page :deep(.hero-label) {
-
-    font-family:
-        var(--font-heading);
-
-    font-size:
-        clamp(
-            1rem,
-            1.6vw,
-            3rem
-        );
-
-    font-weight:
-        600;
-
-    letter-spacing:
-        0.18em;
-
-    line-height:
-        1.2;
-
-    color:
-        #9b5cff;
-
-    text-transform:
-        uppercase;
-
-}*/
-
-
-/* =====================================
    ABOUT SECTIONS
 ===================================== */
 
 .about-sections {
 
-    position:
-        relative;
+    position: relative;
 
-    display:
-        flex;
+    display: flex;
+    flex-direction: column;
 
-    flex-direction:
-        column;
+    gap: 40px;
 
-    gap:
-        40px;
-
-    width:
-        100%;
+    width: 100%;
 
     padding:
         40px
@@ -631,8 +517,7 @@ onUnmounted(() => {
 
 .about-section-container {
 
-    position:
-        relative;
+    position: relative;
 
     width:
         min(
@@ -643,8 +528,7 @@ onUnmounted(() => {
     margin:
         0 auto;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     border:
         1px solid
@@ -691,36 +575,74 @@ onUnmounted(() => {
 
 
 /* =====================================
-   SECTION LAYOUT
-   EXTRA RUIMTE VOOR KINDEREN
+   SECTION GLOW
 ===================================== */
 
-.about-section-container :deep(.section-layout) {
+:deep(.about-work),
+:deep(.about-disciplines),
+:deep(.about-technology),
+:deep(.about-cta-section) {
 
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+}
 
-    min-width:
-        0;
 
-    overflow:
-        hidden;
+:deep(.about-work::before),
+:deep(.about-disciplines::before),
+:deep(.about-technology::before),
+:deep(.about-cta-section::before) {
+
+    content: "";
+
+    position: absolute;
+
+    width: var(--glow-size, 540px);
+    height: var(--glow-size, 540px);
+
+    border-radius: 50%;
 
     background:
-        transparent;
+        radial-gradient(
+            circle,
+            var(
+                --glow-primary,
+                rgba(
+                    139,
+                    92,
+                    246,
+                    0.13
+                )
+            )
+            0%,
+            var(
+                --glow-secondary,
+                rgba(
+                    59,
+                    130,
+                    246,
+                    0.07
+                )
+            )
+            35%,
+            transparent
+            72%
+        );
 
-    padding:
-        90px
-        80px;
+    filter:
+        blur(30px);
+
+    pointer-events:
+        none;
+
+    z-index:
+        -1;
 
 }
 
 
 /* =====================================
-   WORK CONTAINER
+   WORK
 ===================================== */
 
 .work-container {
@@ -734,9 +656,9 @@ onUnmounted(() => {
                 247,
                 0.075
             ),
-            transparent 34%
+            transparent
+            34%
         ),
-
         radial-gradient(
             circle at 90% 90%,
             rgba(
@@ -745,9 +667,9 @@ onUnmounted(() => {
                 239,
                 0.035
             ),
-            transparent 35%
+            transparent
+            35%
         ),
-
         rgba(
             10,
             9,
@@ -758,13 +680,31 @@ onUnmounted(() => {
 }
 
 
+:deep(.about-work) {
+
+    --glow-size:
+        520px;
+
+    --glow-primary:
+        rgba(
+            168,
+            85,
+            247,
+            0.14
+        );
+
+    --glow-secondary:
+        rgba(
+            217,
+            70,
+            239,
+            0.07
+        );
+
+}
+
+
 :deep(.about-work::before) {
-
-    content:
-        "";
-
-    position:
-        absolute;
 
     top:
         -140px;
@@ -772,49 +712,11 @@ onUnmounted(() => {
     left:
         -180px;
 
-    width:
-        520px;
-
-    height:
-        520px;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(
-                168,
-                85,
-                247,
-                0.14
-            ) 0%,
-
-            rgba(
-                217,
-                70,
-                239,
-                0.07
-            ) 35%,
-
-            transparent 72%
-        );
-
-    filter:
-        blur(30px);
-
-    pointer-events:
-        none;
-
-    z-index:
-        -1;
-
 }
 
 
 /* =====================================
-   DISCIPLINES CONTAINER
+   DISCIPLINES
 ===================================== */
 
 .disciplines-container {
@@ -828,9 +730,9 @@ onUnmounted(() => {
                 246,
                 0.07
             ),
-            transparent 34%
+            transparent
+            34%
         ),
-
         radial-gradient(
             circle at 5% 90%,
             rgba(
@@ -839,9 +741,9 @@ onUnmounted(() => {
                 212,
                 0.035
             ),
-            transparent 35%
+            transparent
+            35%
         ),
-
         rgba(
             7,
             11,
@@ -852,13 +754,28 @@ onUnmounted(() => {
 }
 
 
+:deep(.about-disciplines) {
+
+    --glow-primary:
+        rgba(
+            59,
+            130,
+            246,
+            0.13
+        );
+
+    --glow-secondary:
+        rgba(
+            6,
+            182,
+            212,
+            0.07
+        );
+
+}
+
+
 :deep(.about-disciplines::before) {
-
-    content:
-        "";
-
-    position:
-        absolute;
 
     top:
         -120px;
@@ -866,49 +783,11 @@ onUnmounted(() => {
     right:
         -180px;
 
-    width:
-        540px;
-
-    height:
-        540px;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(
-                59,
-                130,
-                246,
-                0.13
-            ) 0%,
-
-            rgba(
-                6,
-                182,
-                212,
-                0.07
-            ) 38%,
-
-            transparent 72%
-        );
-
-    filter:
-        blur(30px);
-
-    pointer-events:
-        none;
-
-    z-index:
-        -1;
-
 }
 
 
 /* =====================================
-   TECHNOLOGY CONTAINER
+   TECHNOLOGY
 ===================================== */
 
 .technology-container {
@@ -922,9 +801,9 @@ onUnmounted(() => {
                 246,
                 0.075
             ),
-            transparent 35%
+            transparent
+            35%
         ),
-
         radial-gradient(
             circle at 90% 85%,
             rgba(
@@ -933,9 +812,9 @@ onUnmounted(() => {
                 246,
                 0.045
             ),
-            transparent 35%
+            transparent
+            35%
         ),
-
         rgba(
             9,
             9,
@@ -948,55 +827,11 @@ onUnmounted(() => {
 
 :deep(.about-technology::before) {
 
-    content:
-        "";
-
-    position:
-        absolute;
-
-    right:
-        -160px;
-
     top:
         -140px;
 
-    width:
-        540px;
-
-    height:
-        540px;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(
-                139,
-                92,
-                246,
-                0.13
-            ) 0%,
-
-            rgba(
-                59,
-                130,
-                246,
-                0.07
-            ) 35%,
-
-            transparent 72%
-        );
-
-    filter:
-        blur(30px);
-
-    pointer-events:
-        none;
-
-    z-index:
-        -1;
+    right:
+        -160px;
 
 }
 
@@ -1016,9 +851,9 @@ onUnmounted(() => {
                 246,
                 0.075
             ),
-            transparent 35%
+            transparent
+            35%
         ),
-
         radial-gradient(
             circle at 95% 90%,
             rgba(
@@ -1027,9 +862,9 @@ onUnmounted(() => {
                 246,
                 0.045
             ),
-            transparent 35%
+            transparent
+            35%
         ),
-
         rgba(
             9,
             9,
@@ -1040,57 +875,21 @@ onUnmounted(() => {
 }
 
 
+:deep(.about-cta-section) {
+
+    --glow-size:
+        560px;
+
+}
+
+
 :deep(.about-cta-section::before) {
-
-    content:
-        "";
-
-    position:
-        absolute;
 
     top:
         -150px;
 
     left:
         35%;
-
-    width:
-        560px;
-
-    height:
-        560px;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(
-                139,
-                92,
-                246,
-                0.13
-            ) 0%,
-
-            rgba(
-                59,
-                130,
-                246,
-                0.07
-            ) 35%,
-
-            transparent 72%
-        );
-
-    filter:
-        blur(30px);
-
-    pointer-events:
-        none;
-
-    z-index:
-        -1;
 
 }
 
@@ -1122,8 +921,7 @@ onUnmounted(() => {
         grid;
 
     grid-template-columns:
-        60px
-        1fr;
+        60px 1fr;
 
     gap:
         25px;
@@ -1151,7 +949,8 @@ onUnmounted(() => {
 }
 
 
-.about-work-number {
+.about-work-number,
+.technology-number {
 
     color:
         #8b5cf6;
@@ -1159,11 +958,16 @@ onUnmounted(() => {
     font-family:
         monospace;
 
-    font-size:
-        0.8rem;
-
     letter-spacing:
         0.12em;
+
+}
+
+
+.about-work-number {
+
+    font-size:
+        0.8rem;
 
 }
 
@@ -1228,7 +1032,7 @@ onUnmounted(() => {
 
 
 /* =====================================
-   TECHNOLOGY
+   TECHNOLOGY CONTENT
 ===================================== */
 
 .technology-content {
@@ -1303,9 +1107,14 @@ onUnmounted(() => {
         );
 
     transition:
-        transform 0.35s ease,
-        border-color 0.35s ease,
-        background 0.35s ease;
+        transform
+        0.35s ease,
+
+        border-color
+        0.35s ease,
+
+        background
+        0.35s ease;
 
 }
 
@@ -1328,17 +1137,8 @@ onUnmounted(() => {
 
 .technology-number {
 
-    color:
-        #8b5cf6;
-
-    font-family:
-        monospace;
-
     font-size:
         1rem;
-
-    letter-spacing:
-        0.12em;
 
 }
 
@@ -1394,9 +1194,6 @@ onUnmounted(() => {
     width:
         100%;
 
-    margin-top:
-        0;
-
 }
 
 
@@ -1424,9 +1221,11 @@ onUnmounted(() => {
         translateY(40px);
 
     transition:
-        opacity 700ms ease,
+        opacity
+        700ms ease,
 
-        transform 700ms
+        transform
+        700ms
         cubic-bezier(
             0.2,
             0.8,
@@ -1474,15 +1273,6 @@ onUnmounted(() => {
 
         border-radius:
             24px;
-
-    }
-
-
-    .about-section-container :deep(.section-layout) {
-
-        padding:
-            70px
-            50px;
 
     }
 
@@ -1535,20 +1325,10 @@ onUnmounted(() => {
     }
 
 
-    .about-section-container :deep(.section-layout) {
-
-        padding:
-            50px
-            24px;
-
-    }
-
-
     .about-work-item {
 
         grid-template-columns:
-            45px
-            1fr;
+            45px 1fr;
 
         gap:
             15px;
@@ -1575,9 +1355,6 @@ onUnmounted(() => {
         align-items:
             stretch;
 
-        width:
-            100%;
-
     }
 
 
@@ -1589,17 +1366,11 @@ onUnmounted(() => {
         max-width:
             320px;
 
-        margin-left:
-            auto;
-
-        margin-right:
-            auto;
+        margin:
+            0 auto;
 
     }
 
 }
 
 </style>
-```
-
-
