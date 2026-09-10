@@ -1,31 +1,17 @@
-```vue
 <script setup lang="ts">
 
 import {
-    computed,
     nextTick,
     onMounted,
     onUnmounted
 } from 'vue';
 
 import { projects } from '../data/projects';
-
 import PageHeader from '../components/PageHeader.vue';
 
 
 // =====================================
-// PROJECTS
-// =====================================
-
-const projectList = computed(() => {
-
-    return projects;
-
-});
-
-
-// =====================================
-// REVEAL ANIMATION
+// REVEAL
 // =====================================
 
 let revealObserver:
@@ -36,65 +22,45 @@ async function setupRevealObserver() {
 
     await nextTick();
 
-
     const elements =
         document.querySelectorAll(
             '.projects-page .reveal'
         );
 
-
     if (!elements.length) {
         return;
     }
 
-
     revealObserver =
         new IntersectionObserver(
-
             entries => {
 
-                entries.forEach(
-                    entry => {
+                entries.forEach(entry => {
 
-                        if (
-                            !entry.isIntersecting
-                        ) {
-                            return;
-                        }
-
-
-                        entry.target.classList.add(
-                            'is-visible'
-                        );
-
-
-                        revealObserver?.unobserve(
-                            entry.target
-                        );
-
+                    if (!entry.isIntersecting) {
+                        return;
                     }
-                );
+
+                    entry.target.classList.add(
+                        'is-visible'
+                    );
+
+                    revealObserver?.unobserve(
+                        entry.target
+                    );
+
+                });
 
             },
-
             {
                 threshold: 0.08,
-
                 rootMargin:
                     '0px 0px -40px 0px'
             }
-
         );
 
-
-    elements.forEach(
-        element => {
-
-            revealObserver?.observe(
-                element
-            );
-
-        }
+    elements.forEach(element =>
+        revealObserver?.observe(element)
     );
 
 }
@@ -104,11 +70,9 @@ async function setupRevealObserver() {
 // LIFECYCLE
 // =====================================
 
-onMounted(() => {
-
-    setupRevealObserver();
-
-});
+onMounted(
+    setupRevealObserver
+);
 
 
 onUnmounted(() => {
@@ -126,9 +90,8 @@ onUnmounted(() => {
 
     <main class="projects-page">
 
-
         <!-- =====================================
-             PAGE HEADER
+             HEADER
         ====================================== -->
 
         <PageHeader
@@ -148,23 +111,10 @@ onUnmounted(() => {
 
                 <div class="row g-4">
 
-
-                    <!-- =====================================
-                         PROJECT CARD
-                    ====================================== -->
-
                     <div
-                        v-for="(
-                            project,
-                            index
-                        ) in projectList"
-
+                        v-for="(project, index) in projects"
                         :key="project.slug"
-
-                        class="
-                            col-md-6
-                            d-flex
-                        "
+                        class="col-md-6 d-flex"
                     >
 
                         <article
@@ -174,7 +124,6 @@ onUnmounted(() => {
                                 h-100
                                 w-100
                             "
-
                             :style="{
                                 transitionDelay:
                                     `${index * 120}ms`
@@ -182,56 +131,33 @@ onUnmounted(() => {
                         >
 
                             <RouterLink
-                                :to="
-                                    `/projects/${project.slug}`
-                                "
-
+                                :to="`/projects/${project.slug}`"
                                 class="
                                     project-card-link
                                     h-100
                                 "
                             >
 
-
-                                <!-- =====================================
-                                     IMAGE
-                                ====================================== -->
+                                <!-- IMAGE -->
 
                                 <div class="project-image">
 
-                                    <div
-                                        class="
-                                            project-image-inner
-                                        "
-                                    >
+                                    <div class="project-image-inner">
 
                                         <img
-                                            :src="
-                                                project.image
-                                            "
-
-                                            :alt="
-                                                project.title
-                                            "
-
+                                            :src="project.image"
+                                            :alt="project.title"
                                             loading="lazy"
                                         />
 
                                     </div>
 
 
-                                    <!-- =====================================
-                                         OVERLAY
-                                    ====================================== -->
+                                    <!-- OVERLAY -->
 
-                                    <div
-                                        class="
-                                            project-overlay
-                                        "
-                                    >
+                                    <div class="project-overlay">
 
                                         <span>
-
                                             Bekijk project
 
                                             <i
@@ -241,29 +167,21 @@ onUnmounted(() => {
                                                     ms-2
                                                 "
                                             ></i>
-
                                         </span>
 
                                     </div>
 
 
-                                    <!-- =====================================
-                                         PROJECT NUMBER
-                                    ====================================== -->
+                                    <!-- NUMBER -->
 
-                                    <div
-                                        class="
-                                            project-number
-                                        "
-                                    >
+                                    <div class="project-number">
 
                                         {{
-                                            String(
-                                                index + 1
-                                            ).padStart(
-                                                2,
-                                                '0'
-                                            )
+                                            String(index + 1)
+                                                .padStart(
+                                                    2,
+                                                    '0'
+                                                )
                                         }}
 
                                     </div>
@@ -271,58 +189,24 @@ onUnmounted(() => {
                                 </div>
 
 
-                                <!-- =====================================
-                                     CONTENT
-                                ====================================== -->
+                                <!-- CONTENT -->
 
-                                <div
-                                    class="
-                                        project-content
-                                        p-4
-                                    "
-                                >
+                                <div class="project-content p-4">
 
-                                    <!-- CATEGORY -->
-
-                                    <div
-                                        class="
-                                            project-category
-                                            mb-3
-                                        "
-                                    >
-
-                                        {{
-                                            project.category
-                                        }}
-
+                                    <div class="project-category mb-3">
+                                        {{ project.category }}
                                     </div>
 
-
-                                    <!-- TITLE -->
-
                                     <h2 class="h3 mb-3">
-
-                                        {{
-                                            project.title
-                                        }}
-
+                                        {{ project.title }}
                                     </h2>
 
-
-                                    <!-- DESCRIPTION -->
-
                                     <p class="mb-4">
-
-                                        {{
-                                            project.shortDescription
-                                        }}
-
+                                        {{ project.shortDescription }}
                                     </p>
 
 
-                                    <!-- =====================================
-                                         TECHNOLOGIES
-                                    ====================================== -->
+                                    <!-- TECHNOLOGIES -->
 
                                     <div
                                         class="
@@ -334,24 +218,11 @@ onUnmounted(() => {
                                     >
 
                                         <span
-                                            v-for="
-                                                technology in
-                                                project.technologies
-                                            "
-
-                                            :key="
-                                                technology
-                                            "
-
-                                            class="
-                                                technology
-                                            "
+                                            v-for="technology in project.technologies"
+                                            :key="technology"
+                                            class="technology"
                                         >
-
-                                            {{
-                                                technology
-                                            }}
-
+                                            {{ technology }}
                                         </span>
 
                                     </div>
@@ -370,7 +241,6 @@ onUnmounted(() => {
 
         </section>
 
-
     </main>
 
 </template>
@@ -378,56 +248,40 @@ onUnmounted(() => {
 
 <style scoped>
 
-
-/* =====================================
+/* =========================================
    PAGE
-===================================== */
+========================================= */
 
 .projects-page {
-
     position: relative;
 
     width: 100%;
-
     min-height: 100vh;
 
     overflow: hidden;
-
 }
 
 
-/* =====================================
-   PROJECT LIST
-===================================== */
-
 .projects-list {
-
     width: 100%;
 
     padding:
         80px
         0
         120px;
-
 }
 
 
-/* =====================================
+/* =========================================
    PROJECT CARD
-===================================== */
+========================================= */
 
 .project-card {
-
     overflow: hidden;
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
+        rgba(255, 255, 255, 0.08);
 
     border-radius:
         14px;
@@ -437,53 +291,29 @@ onUnmounted(() => {
 
     transition:
         transform 0.5s
-        cubic-bezier(
-            0.16,
-            1,
-            0.3,
-            1
-        ),
+        cubic-bezier(0.16, 1, 0.3, 1),
 
         border-color 0.4s ease,
 
         box-shadow 0.5s ease;
-
 }
 
 
 .project-card:hover {
-
     transform:
         translateY(-10px);
 
     border-color:
-        rgba(
-            108,
-            99,
-            255,
-            0.7
-        );
+        rgba(108, 99, 255, 0.7);
 
     box-shadow:
         0 30px 70px
-        rgba(
-            0,
-            0,
-            0,
-            0.35
-        );
-
+        rgba(0, 0, 0, 0.35);
 }
 
 
-/* =====================================
-   PROJECT LINK
-===================================== */
-
 .project-card-link {
-
     display: flex;
-
     flex-direction: column;
 
     height: 100%;
@@ -493,130 +323,86 @@ onUnmounted(() => {
 
     text-decoration:
         none;
-
 }
 
 
-/* =====================================
-   PROJECT IMAGE
-===================================== */
+/* =========================================
+   IMAGE
+========================================= */
 
 .project-image {
-
     position: relative;
 
-    height:
-        300px;
+    height: 300px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     background:
         #08090d;
-
 }
 
 
 .project-image-inner {
-
     position: absolute;
 
-    inset:
-        0;
+    inset: 0;
 
-    overflow:
-        hidden;
-
+    overflow: hidden;
 }
 
 
 .project-image img {
+    display: block;
 
-    display:
-        block;
+    width: 100%;
+    height: 100%;
 
-    width:
-        100%;
-
-    height:
-        100%;
-
-    object-fit:
-        cover;
+    object-fit: cover;
 
     transition:
         transform 0.7s
-        cubic-bezier(
-            0.16,
-            1,
-            0.3,
-            1
-        );
-
+        cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 
 .project-card:hover
 .project-image img {
-
     transform:
         scale(1.08);
-
 }
 
 
-/* =====================================
-   PROJECT OVERLAY
-===================================== */
+/* =========================================
+   OVERLAY
+========================================= */
 
 .project-overlay {
+    position: absolute;
 
-    position:
-        absolute;
+    inset: 0;
 
-    inset:
-        0;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     background:
-        rgba(
-            8,
-            9,
-            13,
-            0.65
-        );
+        rgba(8, 9, 13, 0.65);
 
-    opacity:
-        0;
+    opacity: 0;
 
     transition:
         opacity 0.4s ease;
-
 }
 
 
 .project-overlay span {
-
     padding:
         12px
         20px;
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.3
-        );
+        rgba(255, 255, 255, 0.3);
 
     border-radius:
         30px;
@@ -625,112 +411,77 @@ onUnmounted(() => {
         #ffffff;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
+        rgba(255, 255, 255, 0.08);
 
     transform:
         translateY(15px);
 
     transition:
         transform 0.4s ease;
-
 }
 
 
 .project-card:hover
 .project-overlay {
-
-    opacity:
-        1;
-
+    opacity: 1;
 }
 
 
 .project-card:hover
 .project-overlay span {
-
     transform:
         translateY(0);
-
 }
 
 
-/* =====================================
+/* =========================================
    PROJECT NUMBER
-===================================== */
+========================================= */
 
 .project-number {
+    position: absolute;
 
-    position:
-        absolute;
-
-    right:
-        20px;
-
-    bottom:
-        20px;
+    right: 20px;
+    bottom: 20px;
 
     padding:
         6px
         10px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    border-radius:
+        6px;
+
+    color:
+        #ffffff;
+
+    background:
+        rgba(8, 9, 13, 0.75);
+
+    backdrop-filter:
+        blur(10px);
 
     font-family:
         monospace;
 
     font-size:
         0.75rem;
-
-    color:
-        #ffffff;
-
-    background:
-        rgba(
-            8,
-            9,
-            13,
-            0.75
-        );
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.15
-        );
-
-    border-radius:
-        6px;
-
-    backdrop-filter:
-        blur(10px);
-
 }
 
 
-/* =====================================
-   PROJECT CONTENT
-===================================== */
+/* =========================================
+   CONTENT
+========================================= */
 
 .project-content {
-
-    flex-grow:
-        1;
-
+    flex-grow: 1;
 }
 
 
-/* =====================================
-   PROJECT CATEGORY
-===================================== */
-
 .project-category {
-
     color:
         #a78bfa;
 
@@ -748,16 +499,10 @@ onUnmounted(() => {
 
     text-transform:
         uppercase;
-
 }
 
 
-/* =====================================
-   PROJECT TITLE
-===================================== */
-
 .project-content h2 {
-
     color:
         #ffffff;
 
@@ -766,36 +511,25 @@ onUnmounted(() => {
 
     letter-spacing:
         -0.03em;
-
 }
 
 
-/* =====================================
-   PROJECT DESCRIPTION
-===================================== */
-
 .project-content p {
-
     color:
         #a8adbd;
 
     line-height:
         1.7;
-
 }
 
 
-/* =====================================
-   TECHNOLOGY LABELS
-===================================== */
+/* =========================================
+   TECHNOLOGIES
+========================================= */
 
 .technology {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
+    display: inline-flex;
+    align-items: center;
 
     padding:
         6px
@@ -803,31 +537,16 @@ onUnmounted(() => {
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
+        rgba(255, 255, 255, 0.12);
 
     border-radius:
         999px;
 
     color:
-        rgba(
-            255,
-            255,
-            255,
-            0.65
-        );
+        rgba(255, 255, 255, 0.65);
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.04
-        );
+        rgba(255, 255, 255, 0.04);
 
     font-family:
         monospace;
@@ -844,30 +563,18 @@ onUnmounted(() => {
         border-color 220ms ease,
         background-color 220ms ease,
         box-shadow 220ms ease;
-
 }
 
 
 .technology:hover {
-
     color:
         #ffffff;
 
     border-color:
-        rgba(
-            139,
-            92,
-            246,
-            0.6
-        );
+        rgba(139, 92, 246, 0.6);
 
     background:
-        rgba(
-            139,
-            92,
-            246,
-            0.10
-        );
+        rgba(139, 92, 246, 0.10);
 
     transform:
         translateY(-2px)
@@ -875,24 +582,16 @@ onUnmounted(() => {
 
     box-shadow:
         0 5px 18px
-        rgba(
-            139,
-            92,
-            246,
-            0.20
-        );
-
+        rgba(139, 92, 246, 0.20);
 }
 
 
-/* =====================================
+/* =========================================
    REVEAL
-===================================== */
+========================================= */
 
 .reveal {
-
-    opacity:
-        0;
+    opacity: 0;
 
     transform:
         translateY(50px);
@@ -900,79 +599,56 @@ onUnmounted(() => {
     transition:
         opacity 700ms ease,
         transform 700ms
-        cubic-bezier(
-            .2,
-            .8,
-            .2,
-            1
-        );
-
+        cubic-bezier(.2, .8, .2, 1);
 }
 
 
 .reveal.is-visible {
-
-    opacity:
-        1;
+    opacity: 1;
 
     transform:
-        translate3d(
-            0,
-            0,
-            0
-        );
-
+        translate3d(0, 0, 0);
 }
 
 
-/* =====================================
-   REDUCED MOTION
-===================================== */
+/* =========================================
+   ACCESSIBILITY
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     .reveal {
+        opacity: 1;
 
-        opacity:
-            1;
+        transform: none;
 
-        transform:
-            none;
-
-        transition:
-            none;
-
+        transition: none;
     }
 
 }
 
 
-/* =====================================
+/* =========================================
    MOBILE
-===================================== */
+========================================= */
 
 @media (max-width: 576px) {
 
     .projects-list {
-
         padding:
             60px
             0
             80px;
-
     }
 
 
     .project-image {
-
         height:
             240px;
-
     }
 
 }
 
 </style>
-```
 
 

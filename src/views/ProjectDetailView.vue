@@ -847,8 +847,7 @@ onUnmounted(() => {
 
                     <video
                         controls
-                        autoplay
-                        muted
+                        
                         playsinline
                     >
 
