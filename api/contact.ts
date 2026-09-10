@@ -40,17 +40,32 @@ function escapeHtml(value: string): string {
 
 
 // =====================================
-// POST
+// API HANDLER
 // =====================================
 
-export async function POST(
-    request: Request
+export default async function handler(
+    request: any,
+    response: any
 ) {
+
+    // =====================================
+    // METHOD
+    // =====================================
+
+    if (request.method !== 'POST') {
+
+        return response.status(405).json({
+            success: false,
+            message: 'Method not allowed.'
+        });
+
+    }
+
 
     try {
 
         const body =
-            await request.json() as ContactRequest;
+            request.body as ContactRequest;
 
 
         const name =
@@ -77,16 +92,11 @@ export async function POST(
             !message
         ) {
 
-            return Response.json(
-                {
-                    success: false,
-                    message:
-                        'Niet alle velden zijn ingevuld.'
-                },
-                {
-                    status: 400
-                }
-            );
+            return response.status(400).json({
+                success: false,
+                message:
+                    'Niet alle velden zijn ingevuld.'
+            });
 
         }
 
@@ -97,16 +107,11 @@ export async function POST(
 
         if (!emailPattern.test(email)) {
 
-            return Response.json(
-                {
-                    success: false,
-                    message:
-                        'Ongeldig e-mailadres.'
-                },
-                {
-                    status: 400
-                }
-            );
+            return response.status(400).json({
+                success: false,
+                message:
+                    'Ongeldig e-mailadres.'
+            });
 
         }
 
@@ -120,11 +125,12 @@ export async function POST(
             error
         } = await resend.emails.send({
 
+            // Tijdelijk Resend testadres
             from:
-                'Portfolio <contact@jelmervandermeer.nl>',
+                'Portfolio <onboarding@resend.dev>',
 
             to: [
-                'jelmer@jelmervandermeer.nl'
+                'jelmervandermeer02@gmail.com'
             ],
 
             replyTo:
@@ -136,32 +142,22 @@ export async function POST(
             html: `
                 <div
                     style="
-                        font-family:
-                            Arial,
-                            sans-serif;
-
-                        max-width:
-                            650px;
-
-                        margin:
-                            0 auto;
-
-                        padding:
-                            30px;
+                        font-family: Arial, sans-serif;
+                        max-width: 650px;
+                        margin: 0 auto;
+                        padding: 30px;
                     "
                 >
-
                     <h1>
                         Nieuw bericht via je portfolio
                     </h1>
 
                     <p>
-                        Er is een nieuw bericht
-                        verstuurd via
+                        Er is een nieuw bericht verstuurd via
                         jelmervandermeer.nl.
                     </p>
 
-                    <hr />
+                    <hr>
 
                     <p>
                         <strong>Naam:</strong><br>
@@ -187,18 +183,20 @@ export async function POST(
                             )}
                     </p>
 
-                    <hr />
+                    <hr>
 
                     <p>
-                        Je kunt rechtstreeks
-                        antwoorden op deze e-mail.
+                        Je kunt rechtstreeks antwoorden
+                        op deze e-mail.
                     </p>
-
                 </div>
             `
-
         });
 
+
+        // =====================================
+        // RESEND ERROR
+        // =====================================
 
         if (error) {
 
@@ -207,30 +205,23 @@ export async function POST(
                 error
             );
 
-
-            return Response.json(
-                {
-                    success: false,
-                    message:
-                        'E-mail kon niet worden verzonden.'
-                },
-                {
-                    status: 500
-                }
-            );
+            return response.status(500).json({
+                success: false,
+                message:
+                    'E-mail kon niet worden verzonden.'
+            });
 
         }
 
 
-        return Response.json(
-            {
-                success: true,
-                id: data?.id
-            },
-            {
-                status: 200
-            }
-        );
+        // =====================================
+        // SUCCESS
+        // =====================================
+
+        return response.status(200).json({
+            success: true,
+            id: data?.id
+        });
 
     }
     catch (error) {
@@ -241,16 +232,11 @@ export async function POST(
         );
 
 
-        return Response.json(
-            {
-                success: false,
-                message:
-                    'Er is een onverwachte fout opgetreden.'
-            },
-            {
-                status: 500
-            }
-        );
+        return response.status(500).json({
+            success: false,
+            message:
+                'Er is een onverwachte fout opgetreden.'
+        });
 
     }
 
