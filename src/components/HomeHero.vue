@@ -637,7 +637,7 @@ onUnmounted(() => {
 
     font-weight: 600;
 
-    line-height: 0.95;
+    line-height: 1.20;
 
     letter-spacing: -0.045em;
 
