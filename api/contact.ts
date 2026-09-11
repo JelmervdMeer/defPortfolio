@@ -125,13 +125,12 @@ export default async function handler(
             error
         } = await resend.emails.send({
 
-            // Tijdelijk Resend testadres
-            from:
-                'Portfolio <onboarding@resend.dev>',
+         from:
+    'Portfolio <contact@jelmervandermeer.nl>',
 
-            to: [
-                'jelmervandermeer02@gmail.com'
-            ],
+to: [
+    'jelmer@jelmervandermeer.nl'
+],
 
             replyTo:
                 email,
