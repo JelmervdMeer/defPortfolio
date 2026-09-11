@@ -791,7 +791,7 @@ onUnmounted(() => {
                                 <i class="bi bi-github"></i>
 
                                 <span>
-                                    https://github.com/JelmervdMeer
+                                    
                                 </span>
 
                             </a>
@@ -807,21 +807,21 @@ onUnmounted(() => {
                                 <i class="bi bi-linkedin"></i>
 
                                 <span>
-                                    https://www.linkedin.com/in/jelmer-van-der-meer-18614614b/
+                                    
                                 </span>
 
                             </a>
 
 
                             <a
-                                href="mailto:jouwemail@example.com"
+                                href="mailto:jelmer#jelmervandermeer.nl"
                                 aria-label="E-mail"
                             >
 
                                 <i class="bi bi-envelope"></i>
 
                                 <span>
-                                    jelmervandermeer02@gmail.com
+                                    jelmer@jelmervandermeer.nl
                                 </span>
 
                             </a>

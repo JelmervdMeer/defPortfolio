@@ -13,15 +13,19 @@ import { RouterLink } from 'vue-router';
 // PARTICLE SYSTEM
 // =====================================
 
-const canvas = ref<HTMLCanvasElement | null>(null);
+const canvas =
+    ref<HTMLCanvasElement | null>(null);
 
-let ctx: CanvasRenderingContext2D | null = null;
+let ctx:
+    CanvasRenderingContext2D | null = null;
+
 let animationFrame = 0;
 
 let particles: Particle[] = [];
 
 let mouseX = 0;
 let mouseY = 0;
+
 let targetMouseX = 0;
 let targetMouseY = 0;
 
@@ -36,11 +40,15 @@ let height = 0;
 interface Particle {
     x: number;
     y: number;
+
     baseX: number;
     baseY: number;
+
     size: number;
+
     speedX: number;
     speedY: number;
+
     opacity: number;
 }
 
@@ -62,20 +70,36 @@ const createParticles = (): void => {
 
     particles = [];
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
+    for (
+        let i = 0;
+        i < PARTICLE_COUNT;
+        i++
+    ) {
 
-        const x = Math.random() * width;
-        const y = Math.random() * height;
+        const x =
+            Math.random() * width;
+
+        const y =
+            Math.random() * height;
 
         particles.push({
             x,
             y,
+
             baseX: x,
             baseY: y,
-            size: Math.random() * 2 + 0.5,
-            speedX: (Math.random() - 0.5) * 0.15,
-            speedY: (Math.random() - 0.5) * 0.15,
-            opacity: Math.random() * 0.5 + 0.15
+
+            size:
+                Math.random() * 2 + 0.5,
+
+            speedX:
+                (Math.random() - 0.5) * 0.15,
+
+            speedY:
+                (Math.random() - 0.5) * 0.15,
+
+            opacity:
+                Math.random() * 0.5 + 0.15
         });
 
     }
@@ -93,26 +117,38 @@ const resizeCanvas = (): void => {
         return;
     }
 
-    const rect = canvas.value.getBoundingClientRect();
+    const rect =
+        canvas.value.getBoundingClientRect();
 
     width = rect.width;
     height = rect.height;
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr =
+        window.devicePixelRatio || 1;
 
-    canvas.value.width = width * dpr;
-    canvas.value.height = height * dpr;
+    canvas.value.width =
+        width * dpr;
 
-    canvas.value.style.width = `${width}px`;
-    canvas.value.style.height = `${height}px`;
+    canvas.value.height =
+        height * dpr;
 
-    ctx = canvas.value.getContext('2d');
+    canvas.value.style.width =
+        `${width}px`;
+
+    canvas.value.style.height =
+        `${height}px`;
+
+    ctx =
+        canvas.value.getContext('2d');
 
     if (!ctx) {
         return;
     }
 
-    ctx.scale(dpr, dpr);
+    ctx.scale(
+        dpr,
+        dpr
+    );
 
     createParticles();
 
@@ -123,16 +159,22 @@ const resizeCanvas = (): void => {
 // MOUSE MOVE
 // =====================================
 
-const handleMouseMove = (event: MouseEvent): void => {
+const handleMouseMove = (
+    event: MouseEvent
+): void => {
 
     if (!canvas.value) {
         return;
     }
 
-    const rect = canvas.value.getBoundingClientRect();
+    const rect =
+        canvas.value.getBoundingClientRect();
 
-    targetMouseX = event.clientX - rect.left;
-    targetMouseY = event.clientY - rect.top;
+    targetMouseX =
+        event.clientX - rect.left;
+
+    targetMouseY =
+        event.clientY - rect.top;
 
 };
 
@@ -149,94 +191,147 @@ const animateParticles = (): void => {
 
     const context = ctx;
 
-    context.clearRect(0, 0, width, height);
-
-    mouseX += (targetMouseX - mouseX) * 0.05;
-    mouseY += (targetMouseY - mouseY) * 0.05;
-
-    particles.forEach((particle) => {
-
-        particle.baseX += particle.speedX;
-        particle.baseY += particle.speedY;
-
-        if (particle.baseX < 0) {
-            particle.baseX = width;
-        }
-
-        if (particle.baseX > width) {
-            particle.baseX = 0;
-        }
-
-        if (particle.baseY < 0) {
-            particle.baseY = height;
-        }
-
-        if (particle.baseY > height) {
-            particle.baseY = 0;
-        }
-
-        let x = particle.baseX;
-        let y = particle.baseY;
-
-        const dx = mouseX - x;
-        const dy = mouseY - y;
-
-        const distance = Math.sqrt(
-            dx * dx +
-            dy * dy
-        );
-
-        if (distance < MOUSE_RADIUS) {
-
-            const force =
-                (MOUSE_RADIUS - distance) /
-                MOUSE_RADIUS;
-
-            const angle = Math.atan2(dy, dx);
-
-            x -= Math.cos(angle) *
-                force *
-                MOUSE_FORCE *
-                25;
-
-            y -= Math.sin(angle) *
-                force *
-                MOUSE_FORCE *
-                25;
-
-        }
-
-        particle.x += (x - particle.x) * 0.08;
-        particle.y += (y - particle.y) * 0.08;
-
-        context.beginPath();
-
-        context.arc(
-            particle.x,
-            particle.y,
-            particle.size,
-            0,
-            Math.PI * 2
-        );
-
-        context.fillStyle =
-            `rgba(139, 92, 246, ${particle.opacity})`;
-
-        context.fill();
-
-    });
-
-    animationFrame = requestAnimationFrame(
-        animateParticles
+    context.clearRect(
+        0,
+        0,
+        width,
+        height
     );
 
+    mouseX +=
+        (targetMouseX - mouseX) * 0.05;
+
+    mouseY +=
+        (targetMouseY - mouseY) * 0.05;
+
+    particles.forEach(
+        particle => {
+
+            particle.baseX +=
+                particle.speedX;
+
+            particle.baseY +=
+                particle.speedY;
+
+
+            // Horizontal wrap
+
+            if (particle.baseX < 0) {
+                particle.baseX = width;
+            }
+
+            if (particle.baseX > width) {
+                particle.baseX = 0;
+            }
+
+
+            // Vertical wrap
+
+            if (particle.baseY < 0) {
+                particle.baseY = height;
+            }
+
+            if (particle.baseY > height) {
+                particle.baseY = 0;
+            }
+
+
+            let x =
+                particle.baseX;
+
+            let y =
+                particle.baseY;
+
+            const dx =
+                mouseX - x;
+
+            const dy =
+                mouseY - y;
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+
+            // Mouse interaction
+
+            if (
+                distance <
+                MOUSE_RADIUS
+            ) {
+
+                const force =
+                    (
+                        MOUSE_RADIUS -
+                        distance
+                    ) /
+                    MOUSE_RADIUS;
+
+                const angle =
+                    Math.atan2(
+                        dy,
+                        dx
+                    );
+
+                x -=
+                    Math.cos(angle) *
+                    force *
+                    MOUSE_FORCE *
+                    25;
+
+                y -=
+                    Math.sin(angle) *
+                    force *
+                    MOUSE_FORCE *
+                    25;
+
+            }
+
+
+            particle.x +=
+                (x - particle.x) * 0.08;
+
+            particle.y +=
+                (y - particle.y) * 0.08;
+
+
+            // Draw particle
+
+            context.beginPath();
+
+            context.arc(
+                particle.x,
+                particle.y,
+                particle.size,
+                0,
+                Math.PI * 2
+            );
+
+            context.fillStyle =
+                `rgba(139, 92, 246, ${particle.opacity})`;
+
+            context.fill();
+
+        }
+    );
+
+    animationFrame =
+        requestAnimationFrame(
+            animateParticles
+        );
+
 };
+
 
 // =====================================
 // REVEAL ANIMATION
 // =====================================
 
-let revealObserver: IntersectionObserver | null = null;
+let revealObserver:
+    IntersectionObserver | null = null;
+
 
 const setupRevealObserver = (): void => {
 
@@ -249,34 +344,49 @@ const setupRevealObserver = (): void => {
         return;
     }
 
-    revealObserver = new IntersectionObserver(
-        (entries) => {
+    revealObserver =
+        new IntersectionObserver(
+            entries => {
 
-            entries.forEach((entry) => {
+                entries.forEach(
+                    entry => {
 
-                if (entry.isIntersecting) {
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
 
-                    entry.target.classList.add(
-                        'revealed'
-                    );
-
-                    revealObserver?.unobserve(
                         entry.target
-                    );
+                            .classList
+                            .add(
+                                'revealed'
+                            );
 
-                }
+                        revealObserver
+                            ?.unobserve(
+                                entry.target
+                            );
 
-            });
+                    }
+                );
 
-        },
-        {
-            threshold: 0.1
+            },
+            {
+                threshold: 0.1
+            }
+        );
+
+    elements.forEach(
+        element => {
+
+            revealObserver
+                ?.observe(
+                    element
+                );
+
         }
     );
-
-    elements.forEach((element) => {
-        revealObserver?.observe(element);
-    });
 
 };
 
@@ -301,16 +411,20 @@ onMounted(() => {
 
     animateParticles();
 
-    requestAnimationFrame(() => {
-        setupRevealObserver();
-    });
+    requestAnimationFrame(
+        () => {
+            setupRevealObserver();
+        }
+    );
 
 });
 
 
 onUnmounted(() => {
 
-    cancelAnimationFrame(animationFrame);
+    cancelAnimationFrame(
+        animationFrame
+    );
 
     window.removeEventListener(
         'resize',
@@ -342,7 +456,7 @@ onUnmounted(() => {
             <canvas
                 ref="canvas"
                 class="hero-particles-canvas"
-            />
+            ></canvas>
 
         </div>
 
@@ -362,7 +476,6 @@ onUnmounted(() => {
 
                 <div class="hero-title-content">
 
-
                     <!-- LABEL -->
 
                     <div class="hero-label reveal">
@@ -378,7 +491,9 @@ onUnmounted(() => {
 
                         Ik maak digitale
 
-                        <span class="animated-gradient-text">
+                        <span
+                            class="animated-gradient-text"
+                        >
                             oplossingen
                         </span>.
 
@@ -387,7 +502,12 @@ onUnmounted(() => {
 
                     <!-- DESCRIPTION -->
 
-                    <p class="hero-description reveal">
+                    <p
+                        class="
+                            hero-description
+                            reveal
+                        "
+                    >
 
                         Ik ontwerp en ontwikkel digitale
                         ervaringen waarin techniek,
@@ -395,7 +515,6 @@ onUnmounted(() => {
                         samenkomen.
 
                     </p>
-
 
                 </div>
 
@@ -410,31 +529,50 @@ onUnmounted(() => {
 
                         <RouterLink
                             to="/projects"
-                            class="btn btn-primary btn-lg"
+                            class="
+                                btn
+                                btn-primary
+                                btn-lg
+                            "
                         >
 
                             Bekijk mijn werk
 
-                            <i class="bi bi-arrow-right ms-2"></i>
+                            <i
+                                class="
+                                    bi
+                                    bi-arrow-right
+                                    ms-2
+                                "
+                            ></i>
 
                         </RouterLink>
 
 
                         <RouterLink
                             to="/contact"
-                            class="btn btn-outline-light btn-lg"
+                            class="
+                                btn
+                                btn-outline-light
+                                btn-lg
+                            "
                         >
 
                             Laten we samenwerken
 
-                            <i class="bi bi-chat-dots ms-2"></i>
+                            <i
+                                class="
+                                    bi
+                                    bi-chat-dots
+                                    ms-2
+                                "
+                            ></i>
 
                         </RouterLink>
 
                     </div>
 
                 </div>
-
 
             </div>
 
@@ -443,14 +581,42 @@ onUnmounted(() => {
                  TECHNOLOGY MARQUEE
             ====================================== -->
 
-            <div class="technology-marquee reveal">
+            <div
+                class="
+                    technology-marquee
+                    reveal
+                "
+            >
 
-                <div class="technology-marquee-track">
+                <!-- PURPLE GLOW DOTS -->
 
+                <div
+                    class="tech-glow-dots"
+                    aria-hidden="true"
+                >
+
+                    <span
+                        v-for="dot in 14"
+                        :key="dot"
+                        class="tech-glow-dot"
+                    ></span>
+
+                </div>
+
+
+                <!-- MOVING TECHNOLOGIES -->
+
+                <div
+                    class="
+                        technology-marquee-track
+                    "
+                >
 
                     <!-- GROUP 1 -->
 
-                    <div class="technology-group">
+                    <div
+                        class="technology-group"
+                    >
 
                         <span>THREE.JS</span>
                         <span>TYPESCRIPT</span>
@@ -470,7 +636,10 @@ onUnmounted(() => {
                          Duplicate is necessary
                          for seamless animation -->
 
-                    <div class="technology-group">
+                    <div
+                        class="technology-group"
+                        aria-hidden="true"
+                    >
 
                         <span>THREE.JS</span>
                         <span>TYPESCRIPT</span>
@@ -485,11 +654,9 @@ onUnmounted(() => {
 
                     </div>
 
-
                 </div>
 
             </div>
-
 
         </div>
 
@@ -519,7 +686,10 @@ onUnmounted(() => {
 
     overflow: hidden;
 
-    padding: 190px 0 0;
+    padding:
+        190px
+        0
+        0;
 
     background:
         radial-gradient(
@@ -552,6 +722,7 @@ onUnmounted(() => {
     overflow: hidden;
 }
 
+
 .hero-particles-canvas {
     display: block;
 
@@ -577,7 +748,8 @@ onUnmounted(() => {
 
     width: 100%;
 
-    min-height: calc(100vh - 190px);
+    min-height:
+        calc(100vh - 190px);
 }
 
 
@@ -605,57 +777,82 @@ onUnmounted(() => {
 ===================================== */
 
 .hero-title-content {
-    width: calc(100% - 460px);
+    width:
+        calc(100% - 460px);
 
-    max-width: 900px;
+    max-width:
+        900px;
 }
+
 
 .hero-label {
-    margin-bottom: 24px;
+    margin-bottom:
+        24px;
 
-    font-family: var(--font-body);
+    font-family:
+        var(--font-body);
 
-    font-size: 0.8rem;
+    font-size:
+        0.8rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    letter-spacing: 0.18em;
+    letter-spacing:
+        0.18em;
 
-    color: var(--color-secondary);
+    color:
+        var(--color-secondary);
 }
+
 
 .hero-title {
     margin: 0;
 
-    font-family: var(--font-heading);
+    font-family:
+        var(--font-heading);
 
-    font-size: clamp(
-        3.5rem,
-        7vw,
-        7rem
-    );
+    font-size:
+        clamp(
+            3.5rem,
+            7vw,
+            7rem
+        );
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    line-height: 1.20;
+    line-height:
+        1.20;
 
-    letter-spacing: -0.045em;
+    letter-spacing:
+        -0.045em;
 
-    color: var(--color-text);
+    color:
+        var(--color-text);
 }
 
+
 .hero-description {
-    max-width: 680px;
+    max-width:
+        680px;
 
-    margin: 32px 0 0;
+    margin:
+        32px
+        0
+        0;
 
-    font-family: var(--font-body);
+    font-family:
+        var(--font-body);
 
-    font-size: 1.1rem;
+    font-size:
+        1.1rem;
 
-    line-height: 1.7;
+    line-height:
+        1.7;
 
-    color: var(--color-text-muted);
+    color:
+        var(--color-text-muted);
 }
 
 
@@ -664,7 +861,8 @@ onUnmounted(() => {
 ===================================== */
 
 .animated-gradient-text {
-    display: inline-block;
+    display:
+        inline-block;
 
     background:
         linear-gradient(
@@ -675,30 +873,45 @@ onUnmounted(() => {
             var(--color-primary)
         );
 
-    background-size: 300% auto;
+    background-size:
+        300%
+        auto;
 
-    -webkit-background-clip: text;
-    background-clip: text;
+    -webkit-background-clip:
+        text;
 
-    -webkit-text-fill-color: transparent;
+    background-clip:
+        text;
+
+    -webkit-text-fill-color:
+        transparent;
 
     animation:
-        heroGradientMove 6s ease infinite;
+        heroGradientMove
+        6s
+        ease
+        infinite;
 }
 
 
 @keyframes heroGradientMove {
 
     0% {
-        background-position: 0% center;
+        background-position:
+            0%
+            center;
     }
 
     50% {
-        background-position: 100% center;
+        background-position:
+            100%
+            center;
     }
 
     100% {
-        background-position: 0% center;
+        background-position:
+            0%
+            center;
     }
 
 }
@@ -709,35 +922,52 @@ onUnmounted(() => {
 ===================================== */
 
 .hero-actions {
-    flex: 0 0 380px;
+    flex:
+        0
+        0
+        380px;
 
-    width: 380px;
+    width:
+        380px;
 }
+
 
 .hero-buttons {
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    gap: 24px;
+    gap:
+        24px;
 
-    width: 100%;
+    width:
+        100%;
 }
 
+
 .hero-buttons .btn {
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 58px;
+    min-height:
+        58px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    font-family: var(--font-body);
+    font-family:
+        var(--font-body);
 
-    font-weight: 600;
+    font-weight:
+        600;
 }
 
 
@@ -746,42 +976,64 @@ onUnmounted(() => {
 ===================================== */
 
 .technology-marquee {
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    margin-top: 70px;
+    margin-top:
+        70px;
 
-    padding: 28px 0;
+    padding:
+        28px
+        0;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    border-top: 1px solid
+    border-top:
+        1px solid
         rgba(255, 255, 255, 0.06);
 
-    border-bottom: 1px solid
+    border-bottom:
+        1px solid
         rgba(255, 255, 255, 0.06);
 }
+
+
+/* =====================================
+   MARQUEE EDGE FADES
+===================================== */
 
 .technology-marquee::before,
 .technology-marquee::after {
-    position: absolute;
+    position:
+        absolute;
 
-    top: 0;
+    top:
+        0;
 
-    bottom: 0;
+    bottom:
+        0;
 
-    width: 120px;
+    width:
+        120px;
 
-    z-index: 2;
+    z-index:
+        2;
 
-    content: '';
+    content:
+        '';
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
 
+
 .technology-marquee::before {
-    left: 0;
+    left:
+        0;
 
     background:
         linear-gradient(
@@ -791,8 +1043,10 @@ onUnmounted(() => {
         );
 }
 
+
 .technology-marquee::after {
-    right: 0;
+    right:
+        0;
 
     background:
         linear-gradient(
@@ -802,55 +1056,195 @@ onUnmounted(() => {
         );
 }
 
-.technology-marquee-track {
-    display: flex;
 
-    width: max-content;
+/* =====================================
+   TECHNOLOGY TRACK
+===================================== */
+
+.technology-marquee-track {
+    display:
+        flex;
+
+    width:
+        max-content;
 
     animation:
-        techMarqueeMove 20s linear infinite;
+        techMarqueeMove
+        20s
+        linear
+        infinite;
 }
+
+
+/* =====================================
+   TECHNOLOGY GROUP
+===================================== */
 
 .technology-group {
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 70px;
+    gap:
+        0;
 
-    padding-right: 70px;
+    padding-right:
+        0;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 }
+
+
+/* =====================================
+   TECHNOLOGY ITEM
+===================================== */
 
 .technology-group span {
-    font-family: var(--font-heading);
+    display:
+        flex;
 
-    font-size: 0.75rem;
+    align-items:
+        center;
 
-    font-weight: 600;
+    font-family:
+        var(--font-heading);
 
-    letter-spacing: 0.16em;
+    font-size:
+        0.75rem;
 
-    color: rgba(245, 245, 247, 0.45);
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.16em;
+
+    color:
+        rgba(245, 245, 247, 0.45);
 
     transition:
-        color 0.3s ease;
+        color
+        0.3s
+        ease;
 }
+
 
 .technology-group span:hover {
-    color: var(--color-primary-light);
+    color:
+        var(--color-primary-light);
 }
 
+
+/* =====================================
+   GLOW SEPARATOR DOT
+===================================== */
+
+.technology-group span::after {
+    content:
+        '';
+
+    display:
+        block;
+
+    flex-shrink:
+        0;
+
+    width:
+        6px;
+
+    height:
+        6px;
+
+    margin:
+        0
+        34px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--color-primary-light);
+
+    box-shadow:
+        0 0 5px
+        rgba(167, 139, 250, 1),
+
+        0 0 10px
+        rgba(139, 92, 246, 0.95),
+
+        0 0 20px
+        rgba(139, 92, 246, 0.65),
+
+        0 0 30px
+        rgba(139, 92, 246, 0.30);
+
+    animation:
+        techSeparatorGlow
+        2.2s
+        ease-in-out
+        infinite;
+}
+
+
+/* =====================================
+   SEPARATOR ANIMATION
+===================================== */
+
+@keyframes techSeparatorGlow {
+
+    0%,
+    100% {
+        opacity:
+            0.55;
+
+        transform:
+            scale(0.8);
+
+        box-shadow:
+            0 0 4px
+            rgba(167, 139, 250, 0.8),
+
+            0 0 10px
+            rgba(139, 92, 246, 0.55);
+    }
+
+    50% {
+        opacity:
+            1;
+
+        transform:
+            scale(1.2);
+
+        box-shadow:
+            0 0 6px
+            rgba(196, 181, 253, 1),
+
+            0 0 14px
+            rgba(167, 139, 250, 1),
+
+            0 0 26px
+            rgba(139, 92, 246, 0.75);
+    }
+
+}
+
+
+/* =====================================
+   MARQUEE ANIMATION
+===================================== */
 
 @keyframes techMarqueeMove {
 
     from {
-        transform: translateX(0);
+        transform:
+            translateX(0);
     }
 
     to {
-        transform: translateX(-50%);
+        transform:
+            translateX(-50%);
     }
 
 }
@@ -861,18 +1255,26 @@ onUnmounted(() => {
 ===================================== */
 
 .reveal {
-    opacity: 0;
+    opacity:
+        0;
 
     transform:
         translateY(30px);
 
     transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
+        opacity
+        0.8s
+        ease,
+
+        transform
+        0.8s
+        ease;
 }
 
+
 .reveal.revealed {
-    opacity: 1;
+    opacity:
+        1;
 
     transform:
         translateY(0);
@@ -886,44 +1288,68 @@ onUnmounted(() => {
 @media (max-width: 991px) {
 
     .home-hero {
-        padding-top: 170px;
+        padding-top:
+            170px;
     }
+
 
     .home-hero > .container {
-        min-height: calc(100vh - 170px);
+        min-height:
+            calc(
+                100vh -
+                170px
+            );
     }
+
 
     .hero-content {
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        align-items: center;
+        align-items:
+            center;
 
-        gap: 40px;
+        gap:
+            40px;
 
-        text-align: center;
+        text-align:
+            center;
     }
+
 
     .hero-title-content {
-        width: 100%;
+        width:
+            100%;
 
-        max-width: 850px;
+        max-width:
+            850px;
     }
+
 
     .hero-actions {
-        width: 100%;
+        width:
+            100%;
 
-        max-width: 380px;
+        max-width:
+            380px;
 
-        flex: none;
+        flex:
+            none;
     }
+
 
     .hero-description {
-        margin-left: auto;
-        margin-right: auto;
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
     }
 
+
     .technology-marquee {
-        margin-top: 60px;
+        margin-top:
+            60px;
     }
 
 }
@@ -936,43 +1362,74 @@ onUnmounted(() => {
 @media (max-width: 768px) {
 
     .home-hero {
-        min-height: 90vh;
+        min-height:
+            90vh;
 
-        padding-top: 150px;
+        padding-top:
+            150px;
     }
+
 
     .home-hero > .container {
-        min-height: calc(90vh - 150px);
+        min-height:
+            calc(
+                90vh -
+                150px
+            );
     }
+
 
     .hero-title {
-        font-size: clamp(
-            3rem,
-            11vw,
-            5rem
-        );
+        font-size:
+            clamp(
+                3rem,
+                11vw,
+                5rem
+            );
     }
+
 
     .hero-description {
-        font-size: 1rem;
+        font-size:
+            1rem;
 
-        line-height: 1.65;
+        line-height:
+            1.65;
     }
+
 
     .hero-actions {
-        max-width: 340px;
+        max-width:
+            340px;
     }
+
 
     .technology-marquee {
-        margin-top: 50px;
+        margin-top:
+            50px;
 
-        padding: 22px 0;
+        padding:
+            22px
+            0;
     }
 
-    .technology-group {
-        gap: 45px;
 
-        padding-right: 45px;
+    .technology-group span {
+        font-size:
+            0.7rem;
+    }
+
+
+    .technology-group span::after {
+        width:
+            5px;
+
+        height:
+            5px;
+
+        margin:
+            0
+            24px;
     }
 
 }
@@ -985,57 +1442,121 @@ onUnmounted(() => {
 @media (max-width: 576px) {
 
     .home-hero {
-        padding-top: 125px;
+        padding-top:
+            125px;
     }
+
 
     .home-hero > .container {
-        min-height: calc(90vh - 125px);
+        min-height:
+            calc(
+                90vh -
+                125px
+            );
     }
+
 
     .hero-label {
-        margin-bottom: 18px;
+        margin-bottom:
+            18px;
 
-        font-size: 0.7rem;
+        font-size:
+            0.7rem;
     }
+
 
     .hero-title {
-        font-size: clamp(
-            2.6rem,
-            12vw,
-            3.8rem
-        );
+        font-size:
+            clamp(
+                2.6rem,
+                12vw,
+                3.8rem
+            );
 
-        line-height: 0.98;
+        line-height:
+            0.98;
     }
+
 
     .hero-description {
-        margin-top: 24px;
+        margin-top:
+            24px;
 
-        font-size: 0.95rem;
+        font-size:
+            0.95rem;
     }
+
 
     .hero-buttons {
-        gap: 16px;
+        gap:
+            16px;
     }
+
 
     .hero-buttons .btn {
-        min-height: 54px;
+        min-height:
+            54px;
 
-        font-size: 0.95rem;
+        font-size:
+            0.95rem;
     }
+
 
     .technology-marquee {
-        margin-top: 40px;
+        margin-top:
+            40px;
     }
 
-    .technology-group {
-        gap: 35px;
-
-        padding-right: 35px;
-    }
 
     .technology-group span {
-        font-size: 0.65rem;
+        font-size:
+            0.65rem;
+    }
+
+
+    .technology-group span::after {
+        width:
+            4px;
+
+        height:
+            4px;
+
+        margin:
+            0
+            18px;
+
+        box-shadow:
+            0 0 4px
+            rgba(167, 139, 250, 1),
+
+            0 0 10px
+            rgba(139, 92, 246, 0.75);
+    }
+
+}
+
+
+/* =====================================
+   REDUCED MOTION
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .technology-marquee-track {
+        animation-duration:
+            40s;
+    }
+
+
+    .technology-group span::after {
+        animation:
+            none;
+    }
+
+
+    .reveal {
+        transition-duration:
+            0.01ms;
     }
 
 }
