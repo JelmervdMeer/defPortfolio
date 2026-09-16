@@ -475,7 +475,7 @@ onUnmounted(() => {
     font-family:
         var(--font-heading);
 
-    font-size: 0.75rem;
+    font-size: 1rem;
 
     font-weight: 600;
 

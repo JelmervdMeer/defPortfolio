@@ -145,9 +145,13 @@ const resizeCanvas = (): void => {
         return;
     }
 
-    ctx.scale(
+    ctx.setTransform(
         dpr,
-        dpr
+        0,
+        0,
+        dpr,
+        0,
+        0
     );
 
     createParticles();
@@ -344,6 +348,31 @@ const setupRevealObserver = (): void => {
         return;
     }
 
+
+    // Mobile elements are made visible by CSS.
+    // No observer is needed there.
+
+    if (
+        window.matchMedia(
+            '(max-width: 768px)'
+        ).matches
+    ) {
+
+        elements.forEach(
+            element => {
+
+                element.classList.add(
+                    'revealed'
+                );
+
+            }
+        );
+
+        return;
+
+    }
+
+
     revealObserver =
         new IntersectionObserver(
             entries => {
@@ -413,7 +442,9 @@ onMounted(() => {
 
     requestAnimationFrame(
         () => {
+
             setupRevealObserver();
+
         }
     );
 
@@ -588,24 +619,6 @@ onUnmounted(() => {
                 "
             >
 
-                <!-- PURPLE GLOW DOTS -->
-
-                <div
-                    class="tech-glow-dots"
-                    aria-hidden="true"
-                >
-
-                    <span
-                        v-for="dot in 14"
-                        :key="dot"
-                        class="tech-glow-dot"
-                    ></span>
-
-                </div>
-
-
-                <!-- MOVING TECHNOLOGIES -->
-
                 <div
                     class="
                         technology-marquee-track
@@ -614,9 +627,7 @@ onUnmounted(() => {
 
                     <!-- GROUP 1 -->
 
-                    <div
-                        class="technology-group"
-                    >
+                    <div class="technology-group">
 
                         <span>THREE.JS</span>
                         <span>TYPESCRIPT</span>
@@ -674,8 +685,6 @@ onUnmounted(() => {
 .home-hero {
     position: relative;
 
-    min-height: 100vh;
-
     display: grid;
 
     grid-template-rows:
@@ -683,6 +692,8 @@ onUnmounted(() => {
         auto;
 
     width: 100%;
+
+    min-height: 100vh;
 
     overflow: hidden;
 
@@ -717,9 +728,9 @@ onUnmounted(() => {
 
     z-index: 0;
 
-    pointer-events: none;
-
     overflow: hidden;
+
+    pointer-events: none;
 }
 
 
@@ -789,6 +800,9 @@ onUnmounted(() => {
     margin-bottom:
         24px;
 
+    color:
+        var(--color-secondary);
+
     font-family:
         var(--font-body);
 
@@ -800,14 +814,14 @@ onUnmounted(() => {
 
     letter-spacing:
         0.18em;
-
-    color:
-        var(--color-secondary);
 }
 
 
 .hero-title {
     margin: 0;
+
+    color:
+        var(--color-text);
 
     font-family:
         var(--font-heading);
@@ -827,9 +841,6 @@ onUnmounted(() => {
 
     letter-spacing:
         -0.045em;
-
-    color:
-        var(--color-text);
 }
 
 
@@ -842,6 +853,9 @@ onUnmounted(() => {
         0
         0;
 
+    color:
+        var(--color-text-muted);
+
     font-family:
         var(--font-body);
 
@@ -850,9 +864,6 @@ onUnmounted(() => {
 
     line-height:
         1.7;
-
-    color:
-        var(--color-text-muted);
 }
 
 
@@ -948,12 +959,6 @@ onUnmounted(() => {
 
 
 .hero-buttons .btn {
-    width:
-        100%;
-
-    min-height:
-        58px;
-
     display:
         flex;
 
@@ -962,6 +967,12 @@ onUnmounted(() => {
 
     justify-content:
         center;
+
+    width:
+        100%;
+
+    min-height:
+        58px;
 
     font-family:
         var(--font-body);
@@ -1017,11 +1028,11 @@ onUnmounted(() => {
     bottom:
         0;
 
-    width:
-        120px;
-
     z-index:
         2;
+
+    width:
+        120px;
 
     content:
         '';
@@ -1109,6 +1120,9 @@ onUnmounted(() => {
     align-items:
         center;
 
+    color:
+        rgba(245, 245, 247, 0.45);
+
     font-family:
         var(--font-heading);
 
@@ -1120,9 +1134,6 @@ onUnmounted(() => {
 
     letter-spacing:
         0.16em;
-
-    color:
-        rgba(245, 245, 247, 0.45);
 
     transition:
         color
@@ -1142,9 +1153,6 @@ onUnmounted(() => {
 ===================================== */
 
 .technology-group span::after {
-    content:
-        '';
-
     display:
         block;
 
@@ -1163,6 +1171,9 @@ onUnmounted(() => {
 
     border-radius:
         50%;
+
+    content:
+        '';
 
     background:
         var(--color-primary-light);
@@ -1359,58 +1370,327 @@ onUnmounted(() => {
    MOBILE
 ===================================== */
 
+/* =====================================
+   MOBILE
+===================================== */
+
 @media (max-width: 768px) {
 
     .home-hero {
-        min-height:
-            90vh;
+        display:
+            block;
 
-        padding-top:
-            150px;
+        width:
+            100%;
+
+        min-height:
+            100svh;
+
+        height:
+            auto;
+
+        padding:
+            110px
+            0
+            0;
+
+        overflow-x:
+            hidden;
+
+        overflow-y:
+            visible;
     }
 
 
     .home-hero > .container {
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        display:
+            block;
+
+        width:
+            100%;
+
         min-height:
-            calc(
-                90vh -
-                150px
-            );
+            0;
+
+        height:
+            auto;
+    }
+
+
+    /* =====================================
+       FORCE HERO CONTENT VISIBLE
+    ===================================== */
+
+    .home-hero .reveal,
+    .home-hero .reveal.revealed {
+        opacity:
+            1 !important;
+
+        visibility:
+            visible !important;
+
+        transform:
+            none !important;
+    }
+
+
+    /* =====================================
+       HERO CONTENT
+    ===================================== */
+
+    .hero-content {
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+
+        justify-content:
+            flex-start;
+
+        gap:
+            36px;
+
+        width:
+            100%;
+
+        height:
+            auto;
+
+        min-height:
+            0;
+
+        text-align:
+            center;
+    }
+
+
+    /* =====================================
+       HERO TEXT
+    ===================================== */
+
+    .hero-title-content {
+        display:
+            block;
+
+        position:
+            relative;
+
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        height:
+            auto;
+
+        min-height:
+            0;
+
+        margin:
+            0;
+
+        padding:
+            0;
+
+        opacity:
+            1;
+
+        visibility:
+            visible;
+    }
+
+
+    .hero-label {
+        display:
+            block;
+
+        position:
+            relative;
+
+        width:
+            100%;
+
+        margin:
+            0
+            0
+            18px;
+
+        color:
+            var(--color-secondary);
+
+        font-size:
+            0.7rem;
+
+        opacity:
+            1 !important;
+
+        visibility:
+            visible !important;
     }
 
 
     .hero-title {
+        display:
+            block;
+
+        position:
+            relative;
+
+        width:
+            100%;
+
+        margin:
+            0;
+
+        color:
+            var(--color-text);
+
         font-size:
             clamp(
-                3rem,
+                2.6rem,
                 11vw,
-                5rem
+                4.5rem
             );
+
+        line-height:
+            1.05;
+
+        opacity:
+            1 !important;
+
+        visibility:
+            visible !important;
+    }
+
+
+    .animated-gradient-text {
+        display:
+            inline;
+
+        opacity:
+            1;
+
+        visibility:
+            visible;
     }
 
 
     .hero-description {
+        display:
+            block;
+
+        position:
+            relative;
+
+        width:
+            100%;
+
+        max-width:
+            600px;
+
+        margin:
+            24px
+            auto
+            0;
+
+        color:
+            var(--color-text-muted);
+
         font-size:
             1rem;
 
         line-height:
             1.65;
+
+        opacity:
+            1 !important;
+
+        visibility:
+            visible !important;
     }
 
+
+    /* =====================================
+       HERO ACTIONS
+    ===================================== */
 
     .hero-actions {
+        display:
+            block;
+
+        position:
+            relative;
+
+        flex:
+            none;
+
+        width:
+            100%;
+
         max-width:
             340px;
+
+        height:
+            auto;
+
+        margin:
+            0
+            auto;
+
+        opacity:
+            1 !important;
+
+        visibility:
+            visible !important;
     }
 
 
+    .hero-buttons {
+        width:
+            100%;
+    }
+
+
+    /* =====================================
+       TECHNOLOGY MARQUEE
+    ===================================== */
+
     .technology-marquee {
+        display:
+            block;
+
+        position:
+            relative;
+
+        width:
+            100%;
+
         margin-top:
             50px;
 
         padding:
             22px
             0;
+
+        opacity:
+            1 !important;
+
+        visibility:
+            visible !important;
+
+        transform:
+            none !important;
     }
 
 
@@ -1442,17 +1722,26 @@ onUnmounted(() => {
 @media (max-width: 576px) {
 
     .home-hero {
+        min-height:
+            100svh;
+
         padding-top:
-            125px;
+            110px;
     }
 
 
     .home-hero > .container {
         min-height:
             calc(
-                90vh -
-                125px
+                100svh -
+                110px
             );
+    }
+
+
+    .hero-content {
+        gap:
+            32px;
     }
 
 
@@ -1555,8 +1844,14 @@ onUnmounted(() => {
 
 
     .reveal {
-        transition-duration:
-            0.01ms;
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+
+        transition:
+            none;
     }
 
 }
