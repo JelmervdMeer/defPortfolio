@@ -39,15 +39,20 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
                 >
 
                     <template #title>
+
                         Een selectie van mijn
+
                         <span class="heading-accent">
                             werk
                         </span>.
+
                     </template>
 
 
                     <div class="section-reveal reveal">
+
                         <ProjectScrollShowcase />
+
                     </div>
 
                 </SectionLayout>
@@ -70,16 +75,22 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
                 >
 
                     <template #title>
+
                         Vijf
+
                         <span class="heading-accent">
                             disciplines
                         </span>,
+
                         één werkwijze.
+
                     </template>
 
 
                     <div class="section-reveal reveal">
+
                         <WorkDisciplines />
+
                     </div>
 
                 </SectionLayout>
@@ -103,12 +114,17 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
                 >
 
                     <template #title>
+
                         Samen iets
+
                         <span class="heading-accent">
                             geweldigs
                         </span>
+
                         <br />
+
                         bouwen?
+
                     </template>
 
 
@@ -121,7 +137,9 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
                     >
 
                         <div class="contact-scene-wrapper">
+
                             <ContactScene />
+
                         </div>
 
 
@@ -136,6 +154,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
                                     contact-primary-button
                                 "
                             >
+
                                 Start een gesprek
 
                                 <i
@@ -145,6 +164,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
                                         ms-2
                                     "
                                 ></i>
+
                             </RouterLink>
 
 
@@ -157,6 +177,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
                                     contact-secondary-button
                                 "
                             >
+
                                 Bekijk mijn werk
 
                                 <i
@@ -166,6 +187,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
                                         ms-2
                                     "
                                 ></i>
+
                             </RouterLink>
 
                         </div>
@@ -190,15 +212,22 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 ========================================= */
 
 .home-page {
-    position: relative;
 
-    width: 100%;
-    max-width: 100%;
+    position:
+        relative;
 
-    overflow-x: clip;
+    width:
+        100%;
+
+    max-width:
+        100%;
+
+    overflow-x:
+        clip;
 
     background:
         var(--color-bg);
+
 }
 
 
@@ -209,39 +238,51 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 .reveal,
 .reveal-left,
 .reveal-right {
-    opacity: 0;
+
+    opacity:
+        0;
 
     transition:
         opacity 700ms ease,
         transform 700ms cubic-bezier(.2, .8, .2, 1);
+
 }
 
 
 .reveal {
+
     transform:
         translateY(50px);
+
 }
 
 
 .reveal-left {
+
     transform:
         translateX(-50px);
+
 }
 
 
 .reveal-right {
+
     transform:
         translateX(50px);
+
 }
 
 
 .reveal.is-visible,
 .reveal-left.is-visible,
 .reveal-right.is-visible {
-    opacity: 1;
+
+    opacity:
+        1;
 
     transform:
         translate3d(0, 0, 0);
+
 }
 
 
@@ -250,14 +291,22 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 ========================================= */
 
 .home-sections {
-    position: relative;
 
-    display: flex;
-    flex-direction: column;
+    position:
+        relative;
 
-    gap: 60px;
+    display:
+        flex;
 
-    width: 100%;
+    flex-direction:
+        column;
+
+    gap:
+        60px;
+
+    width:
+        100%;
+
 }
 
 
@@ -266,7 +315,9 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 ========================================= */
 
 .home-section-container {
-    position: relative;
+
+    position:
+        relative;
 
     width:
         calc(100% - 20px);
@@ -300,6 +351,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     box-shadow:
         0 25px 80px
         rgba(0, 0, 0, 0.18);
+
 }
 
 
@@ -308,6 +360,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 ========================================= */
 
 .projects-container {
+
     background:
         radial-gradient(
             circle at 5% 10%,
@@ -320,6 +373,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
             transparent 35%
         ),
         rgba(10, 9, 17, 0.7);
+
 }
 
 
@@ -328,6 +382,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 ========================================= */
 
 .contact-container {
+
     background:
         radial-gradient(
             circle at 35% 5%,
@@ -340,6 +395,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
             transparent 35%
         ),
         rgba(9, 9, 17, 0.72);
+
 }
 
 
@@ -351,9 +407,12 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 :deep(.home-projects::after),
 :deep(.home-contact::before),
 :deep(.home-contact::after) {
-    content: "";
 
-    position: absolute;
+    content:
+        "";
+
+    position:
+        absolute;
 
     border-radius:
         50%;
@@ -366,15 +425,23 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     z-index:
         -1;
+
 }
 
 
 :deep(.home-projects::before) {
-    top: -140px;
-    left: -180px;
 
-    width: 520px;
-    height: 520px;
+    top:
+        -140px;
+
+    left:
+        -180px;
+
+    width:
+        520px;
+
+    height:
+        520px;
 
     background:
         radial-gradient(
@@ -383,15 +450,23 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
             rgba(217, 70, 239, 0.07) 35%,
             transparent 72%
         );
+
 }
 
 
 :deep(.home-projects::after) {
-    right: -180px;
-    bottom: -160px;
 
-    width: 480px;
-    height: 480px;
+    right:
+        -180px;
+
+    bottom:
+        -160px;
+
+    width:
+        480px;
+
+    height:
+        480px;
 
     background:
         radial-gradient(
@@ -400,15 +475,23 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
             rgba(168, 85, 247, 0.05) 38%,
             transparent 72%
         );
+
 }
 
 
 :deep(.home-contact::before) {
-    top: -150px;
-    left: 35%;
 
-    width: 560px;
-    height: 560px;
+    top:
+        -150px;
+
+    left:
+        35%;
+
+    width:
+        560px;
+
+    height:
+        560px;
 
     background:
         radial-gradient(
@@ -417,15 +500,23 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
             rgba(59, 130, 246, 0.07) 35%,
             transparent 72%
         );
+
 }
 
 
 :deep(.home-contact::after) {
-    right: -160px;
-    bottom: -170px;
 
-    width: 500px;
-    height: 500px;
+    right:
+        -160px;
+
+    bottom:
+        -170px;
+
+    width:
+        500px;
+
+    height:
+        500px;
 
     background:
         radial-gradient(
@@ -434,6 +525,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
             rgba(139, 92, 246, 0.05) 38%,
             transparent 72%
         );
+
 }
 
 
@@ -442,35 +534,61 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 ========================================= */
 
 .contact-content-wrapper {
-    position: relative;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position:
+        relative;
 
-    width: 100%;
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    width:
+        100%;
+
 }
 
 
 .contact-scene-wrapper {
-    position: relative;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position:
+        relative;
 
-    width: 100%;
-    min-height: 280px;
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        100%;
+
+    min-height:
+        280px;
+
 }
 
 
 .contact-scene-wrapper::before {
-    content: "";
 
-    position: absolute;
+    content:
+        "";
 
-    width: 280px;
-    height: 280px;
+    position:
+        absolute;
+
+    width:
+        280px;
+
+    height:
+        280px;
 
     border-radius:
         50%;
@@ -488,6 +606,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     pointer-events:
         none;
+
 }
 
 
@@ -496,108 +615,127 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 ========================================= */
 
 .contact-cta {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 
-    width: 100%;
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    justify-content:
+        center;
+
+    width:
+        100%;
 
     margin-top:
         10px;
 
     gap:
         16px;
+
 }
 
 
 .contact-cta .btn {
+
     min-width:
         190px;
 
     transition:
         transform 250ms ease,
         box-shadow 250ms ease;
+
 }
 
 
 .contact-cta .btn:hover {
+
     transform:
         translateY(-4px);
+
 }
 
 
 .contact-primary-button:hover {
+
     box-shadow:
         0 12px 35px
         rgba(139, 92, 246, 0.3);
+
 }
 
 
 .contact-secondary-button:hover {
+
     box-shadow:
         0 10px 30px
         rgba(255, 255, 255, 0.1);
+
 }
 
 
 /* =========================================
-   PROJECT HOVER
+   PROJECT PREVIEW HOVER
 ========================================= */
 
-:deep(.project-card),
 :deep(.project-preview-card),
 :deep(.project-item) {
+
     transition:
         transform 300ms ease,
         box-shadow 300ms ease;
 
     will-change:
         transform;
+
 }
 
 
-:deep(.project-card:hover),
 :deep(.project-preview-card:hover),
 :deep(.project-item:hover) {
+
     transform:
         translateY(-6px);
+
 }
 
 
 /* =========================================
-   PROJECT IMAGE HOVER
+   PROJECT PREVIEW IMAGE HOVER
 ========================================= */
 
-:deep(.project-card img),
 :deep(.project-preview-card img),
 :deep(.project-item img),
-:deep(.project-image img),
 :deep(.project-preview img) {
+
     transition:
         transform 450ms
         cubic-bezier(.2, .8, .2, 1);
 
     will-change:
         transform;
+
 }
 
 
-:deep(.project-card:hover img),
 :deep(.project-preview-card:hover img),
 :deep(.project-item:hover img),
-:deep(.project-image:hover img),
 :deep(.project-preview:hover img) {
+
     transform:
         scale(1.06);
+
 }
 
 
-:deep(.project-card .project-image),
 :deep(.project-preview-card .project-image),
 :deep(.project-item .project-image),
 :deep(.project-preview) {
+
     overflow:
         hidden;
+
 }
 
 
@@ -609,11 +747,13 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 :deep(.tech-tag),
 :deep(.project-tech span),
 :deep(.project-technologies span) {
+
     transition:
         transform 220ms ease,
         color 220ms ease,
         background-color 220ms ease,
         box-shadow 220ms ease;
+
 }
 
 
@@ -621,6 +761,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 :deep(.tech-tag:hover),
 :deep(.project-tech span:hover),
 :deep(.project-technologies span:hover) {
+
     transform:
         scale(1.08)
         translateY(-2px);
@@ -628,6 +769,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     box-shadow:
         0 5px 18px
         rgba(139, 92, 246, 0.2);
+
 }
 
 
@@ -636,8 +778,10 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 ========================================= */
 
 :deep(.home-contact .section-layout-content) {
+
     align-self:
         flex-start;
+
 }
 
 
@@ -645,9 +789,11 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     .home-contact.section-layout--reverse
     .section-layout-split
 ) {
+
     grid-template-columns:
         minmax(0, 6fr)
         minmax(0, 4fr);
+
 }
 
 
@@ -655,11 +801,13 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     .home-contact
     .section-layout-text
 ) {
+
     padding-right:
         50px;
 
     box-sizing:
         border-box;
+
 }
 
 
@@ -670,6 +818,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 @media (max-width: 991px) {
 
     .home-sections {
+
         gap:
             40px;
 
@@ -677,15 +826,18 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
             40px
             20px
             70px;
+
     }
 
 
     .home-section-container {
+
         width:
             calc(100% - 28px);
 
         border-radius:
             24px;
+
     }
 
 
@@ -693,8 +845,10 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
         .home-contact
         .section-layout-text
     ) {
+
         padding-right:
             0;
+
     }
 
 }
@@ -707,32 +861,40 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 @media (max-width: 576px) {
 
     .home-section-container {
+
         width:
             calc(100% - 12px);
 
         border-radius:
             18px;
+
     }
 
 
     .contact-cta {
+
         flex-direction:
             column;
 
         align-items:
             stretch;
+
     }
 
 
     .contact-cta .btn {
+
         width:
             100%;
+
     }
 
 
     .contact-scene-wrapper {
+
         min-height:
             230px;
+
     }
 
 }

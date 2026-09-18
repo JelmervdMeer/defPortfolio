@@ -180,12 +180,13 @@ onUnmounted(() => {
         ====================================== -->
 
         <PageHeader
-            label="OVER MIJ"
-            title="Wie ik ben."
-            accent="ben"
-            description="Ik ben een creatieve developer die graag techniek en creativiteit combineert om interactieve digitale ervaringen te bouwen."
-            :particles="true"
-        />
+    label="OVER MIJ"
+    title="Creatief denken. Technisch bouwen."
+    accent="Technisch bouwen."
+    description="Ik combineer techniek, creativiteit en een praktische aanpak om digitale oplossingen te bouwen die niet alleen werken, maar ook prettig aanvoelen."
+    image="/images/contact/jelmer2.png"
+    image-alt="Jelmer van der Meer"
+/>
 
 
         <!-- =====================================

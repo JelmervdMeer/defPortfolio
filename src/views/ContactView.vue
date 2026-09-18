@@ -247,13 +247,15 @@ onUnmounted(() => {
              PAGE HEADER
         ====================================== -->
 
-        <PageHeader
-            label="CONTACT"
-            title="Laten we iets moois bouwen."
-            accent="moois"
-            description="Heb je een idee, een project of een digitale uitdaging? Ik denk graag met je mee over een passende digitale oplossing."
-            :particles="false"
-        />
+    <PageHeader
+    label="CONTACT"
+    title="Laten we iets moois bouwen."
+    accent="moois bouwen."
+    description="Heb je een idee, een project of een digitale uitdaging? Ik denk graag met je mee over een passende digitale oplossing."
+    bottom-label="BESCHIKBAAR VOOR NIEUWE PROJECTEN"
+    image="/images/contact/pc1.png"
+    image-alt="Werkplek met computer en programmeercode"
+/>
 
 
         <!-- =====================================
