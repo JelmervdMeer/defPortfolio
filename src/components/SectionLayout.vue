@@ -372,30 +372,28 @@ onUnmounted(() => {
 
 <style scoped>
 
-
 /* =========================================
    SECTION
 ========================================= */
 
 .section-layout {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    /*
-        Centrale verticale section-padding.
-        HomeView overschrijft deze niet.
-    */
+    padding:
+        20px 70px;
 
-    padding: 20px 70px;
+    overflow:
+        hidden;
 
-    overflow: hidden;
-
-    isolation: isolate;
+    isolation:
+        isolate;
 
     background:
-
         linear-gradient(
             135deg,
 
@@ -423,16 +421,19 @@ onUnmounted(() => {
 
 .section-layout-glow {
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
-    z-index: -1;
+    z-index:
+        -1;
 
     background:
-
         radial-gradient(
             circle 380px at 8% 12%,
 
@@ -502,20 +503,25 @@ onUnmounted(() => {
 
 .section-layout::before {
 
-    content: '';
+    content:
+        '';
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: 0;
+    top:
+        0;
 
-    left: 0;
+    left:
+        0;
 
-    right: 0;
+    right:
+        0;
 
-    height: 1px;
+    height:
+        1px;
 
     background:
-
         linear-gradient(
             90deg,
 
@@ -538,27 +544,33 @@ onUnmounted(() => {
             transparent
         );
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
 }
 
 
 .section-layout::after {
 
-    content: '';
+    content:
+        '';
 
-    position: absolute;
+    position:
+        absolute;
 
-    bottom: 0;
+    bottom:
+        0;
 
-    left: 0;
+    left:
+        0;
 
-    right: 0;
+    right:
+        0;
 
-    height: 1px;
+    height:
+        1px;
 
     background:
-
         linear-gradient(
             90deg,
 
@@ -574,7 +586,8 @@ onUnmounted(() => {
             transparent
         );
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
 }
 
@@ -583,29 +596,21 @@ onUnmounted(() => {
    CONTAINER
 ========================================= */
 
-/*.section-layout > .container {
+.section-layout > .container {
 
-    position: relative;
+    position:
+        relative;
 
-    z-index: 2;
+    z-index:
+        2;
 
-    width: 100%;
+    width:
+        100%;
 
-   
+    min-width:
+        0;
 
-    margin: 0 auto;
-
-    /*
-        Centrale horizontale section-padding.
-    */
-/*
-    padding-left: 10px;
-
-    padding-right: 10px;
-
-    --bs-gutter-x: 0;
-
-}*/
+}
 
 
 /* =========================================
@@ -615,27 +620,27 @@ onUnmounted(() => {
 .section-layout--split
 .section-layout-split {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-
         minmax(
             0,
             3fr
         )
-
         minmax(
             0,
             7fr
         );
 
-   /* align-items: stretch;*/
+    gap:
+        40px;
 
-    gap: 40px;
+    width:
+        100%;
 
-    width: 100%;
-
-    min-width: 0;
+    min-width:
+        0;
 
 }
 
@@ -648,12 +653,10 @@ onUnmounted(() => {
 .section-layout-split {
 
     grid-template-columns:
-
         minmax(
             0,
             7fr
         )
-
         minmax(
             0,
             3fr
@@ -670,7 +673,8 @@ onUnmounted(() => {
 .section-layout-split
 .section-layout-text {
 
-    grid-column: 2;
+    grid-column:
+        2;
 
 }
 
@@ -679,9 +683,11 @@ onUnmounted(() => {
 .section-layout-split
 .section-layout-content {
 
-    grid-column: 1;
+    grid-column:
+        1;
 
-    grid-row: 1;
+    grid-row:
+        1;
 
 }
 
@@ -693,27 +699,30 @@ onUnmounted(() => {
 .section-layout--cta
 .section-layout-cta {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-
         minmax(
             0,
             3fr
         )
-
         minmax(
             0,
             7fr
         );
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 60px;
+    gap:
+        60px;
 
-    width: 100%;
+    width:
+        100%;
 
-    min-width: 0;
+    min-width:
+        0;
 
 }
 
@@ -725,7 +734,8 @@ onUnmounted(() => {
 .section-layout--cta
 .section-layout-text {
 
-    justify-content: center;
+    justify-content:
+        center;
 
 }
 
@@ -733,7 +743,8 @@ onUnmounted(() => {
 .section-layout--cta
 .section-layout-text h2 {
 
-    margin-top: 20px;
+    margin-top:
+        20px;
 
 }
 
@@ -744,12 +755,13 @@ onUnmounted(() => {
 
 .section-layout-cta-description {
 
-    max-width: 700px;
+    max-width:
+        700px;
 
-    margin: 0 0 32px;
+    margin:
+        0 0 32px;
 
     color:
-
         rgba(
             255,
             255,
@@ -758,14 +770,14 @@ onUnmounted(() => {
         );
 
     font-size:
-
         clamp(
             1rem,
             1.2vw,
             1.35rem
         );
 
-    line-height: 1.8;
+    line-height:
+        1.8;
 
 }
 
@@ -776,10 +788,10 @@ onUnmounted(() => {
 
 .section-reveal {
 
-    opacity: 0;
+    opacity:
+        0;
 
     transition:
-
         opacity 800ms ease,
 
         transform 800ms
@@ -823,7 +835,8 @@ onUnmounted(() => {
 
 .section-reveal.is-visible {
 
-    opacity: 1;
+    opacity:
+        1;
 
     transform:
         translate3d(
@@ -863,52 +876,63 @@ onUnmounted(() => {
 
 .section-layout-text {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    min-width: 0;
+    min-width:
+        0;
 
-    width: 100%;
+    width:
+        100%;
 
-    text-align: left;
+    text-align:
+        left;
 
 }
 
 
 .section-layout-text h2 {
 
-    margin: 20px 0 0;
+    margin:
+        20px 0 0;
 
-    color: #ffffff;
+    color:
+        #ffffff;
 
     font-size:
-
         clamp(
             2.8rem,
             5vw,
             5.5rem
         );
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    line-height: 1.10;
+    line-height:
+        1.10;
 
-    letter-spacing: -0.05em;
+    letter-spacing:
+        -0.05em;
 
 }
 
 
 .section-layout-text p {
 
-    max-width: 620px;
+    max-width:
+        620px;
 
-    margin: 30px 0 0;
+    margin:
+        30px 0 0;
 
     color:
-
         rgba(
             255,
             255,
@@ -917,14 +941,14 @@ onUnmounted(() => {
         );
 
     font-size:
-
         clamp(
             1rem,
             1.2vw,
             1.35rem
         );
 
-    line-height: 1.8;
+    line-height:
+        1.8;
 
 }
 
@@ -935,32 +959,30 @@ onUnmounted(() => {
 
 .section-layout-content {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: stretch;
+    align-items:
+        stretch;
 
-    justify-content: stretch;
+    justify-content:
+        stretch;
 
-    min-width: 0;
+    min-width:
+        0;
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: none;
-
-    /*
-        Centrale interne content-padding.
-        Ook deze wordt nergens vanuit HomeView
-        overschreven.
-    */
+    max-width:
+        none;
 
     padding:
-
         clamp(
             24px,
             3vw,
             56px
         )
-
         clamp(
             16px,
             2vw,
@@ -976,22 +998,28 @@ onUnmounted(() => {
 
 .section-layout-content > * {
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: none;
+    max-width:
+        none;
 
-    min-width: 0;
+    min-width:
+        0;
 
 }
 
 
 .section-layout-content > .section-reveal {
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: none;
+    max-width:
+        none;
 
-    min-width: 0;
+    min-width:
+        0;
 
 }
 
@@ -1003,13 +1031,17 @@ onUnmounted(() => {
 .section-layout--cta
 .section-layout-content {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    align-items: flex-start;
+    align-items:
+        flex-start;
 
-    justify-content: center;
+    justify-content:
+        center;
 
 }
 
@@ -1017,7 +1049,8 @@ onUnmounted(() => {
 .section-layout--cta
 .section-layout-content > * {
 
-    width: 100%;
+    width:
+        100%;
 
 }
 
@@ -1026,7 +1059,8 @@ onUnmounted(() => {
 .section-layout-content
 .about-cta {
 
-    width: 100%;
+    width:
+        100%;
 
 }
 
@@ -1037,13 +1071,17 @@ onUnmounted(() => {
 
 .section-layout-default {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    width: 100%;
+    width:
+        100%;
 
-    min-width: 0;
+    min-width:
+        0;
 
 }
 
@@ -1051,11 +1089,14 @@ onUnmounted(() => {
 .section-layout-default
 .section-layout-text {
 
-    max-width: 850px;
+    max-width:
+        850px;
 
-    margin: 0 auto 80px;
+    margin:
+        0 auto 80px;
 
-    text-align: center;
+    text-align:
+        center;
 
 }
 
@@ -1063,9 +1104,11 @@ onUnmounted(() => {
 .section-layout-default
 .section-layout-text p {
 
-    margin-left: auto;
+    margin-left:
+        auto;
 
-    margin-right: auto;
+    margin-right:
+        auto;
 
 }
 
@@ -1073,7 +1116,8 @@ onUnmounted(() => {
 .section-layout-default
 .section-layout-content {
 
-    width: 100%;
+    width:
+        100%;
 
 }
 
@@ -1082,26 +1126,39 @@ onUnmounted(() => {
    DISCIPLINES
 ========================================= */
 
-:deep(.home-disciplines .section-layout-content) {
+:deep(
+    .home-disciplines
+    .section-layout-content
+) {
 
-    column-gap: 120px;
+    column-gap:
+        120px;
 
 }
 
+
 /* =========================================
-   CONTACT LAYOUT
+   CONTACT DESKTOP
 ========================================= */
 
 :deep(
     .home-contact.section-layout--reverse
     .section-layout-split
 ) {
+
     grid-template-columns:
-        minmax(0, 55fr)
-        minmax(0, 45fr);
+        minmax(
+            0,
+            55fr
+        )
+        minmax(
+            0,
+            45fr
+        );
 
     gap:
         60px;
+
 }
 
 
@@ -1113,18 +1170,22 @@ onUnmounted(() => {
 
     .section-layout {
 
-        padding: 90px 0;
+        padding:
+            90px 0;
 
     }
 
 
     .section-layout > .container {
 
-        max-width: 100%;
+        max-width:
+            100%;
 
-        padding-left: 16px;
+        padding-left:
+            16px;
 
-        padding-right: 16px;
+        padding-right:
+            16px;
 
     }
 
@@ -1139,7 +1200,8 @@ onUnmounted(() => {
     .section-layout--split.section-layout--reverse
     .section-layout-split {
 
-        display: grid;
+        display:
+            grid;
 
         grid-template-columns:
             minmax(
@@ -1147,24 +1209,31 @@ onUnmounted(() => {
                 1fr
             );
 
-        gap: 60px;
+        gap:
+            60px;
 
-        width: 100%;
+        width:
+            100%;
+
+        min-width:
+            0;
 
     }
 
 
     /* =====================================
-       REVERSE MOBILE
+       REVERSE TABLET
     ====================================== */
 
     .section-layout--split.section-layout--reverse
     .section-layout-split
     .section-layout-text {
 
-        grid-column: auto;
+        grid-column:
+            auto;
 
-        grid-row: auto;
+        grid-row:
+            auto;
 
     }
 
@@ -1173,9 +1242,11 @@ onUnmounted(() => {
     .section-layout-split
     .section-layout-content {
 
-        grid-column: auto;
+        grid-column:
+            auto;
 
-        grid-row: auto;
+        grid-row:
+            auto;
 
     }
 
@@ -1187,7 +1258,8 @@ onUnmounted(() => {
     .section-layout--split
     .section-layout-text {
 
-        text-align: center;
+        text-align:
+            center;
 
     }
 
@@ -1195,9 +1267,11 @@ onUnmounted(() => {
     .section-layout--split
     .section-layout-text p {
 
-        margin-left: auto;
+        margin-left:
+            auto;
 
-        margin-right: auto;
+        margin-right:
+            auto;
 
     }
 
@@ -1209,18 +1283,18 @@ onUnmounted(() => {
     .section-layout--split
     .section-layout-content {
 
-        width: 100%;
+        width:
+            100%;
 
-        justify-content: stretch;
+        justify-content:
+            stretch;
 
         padding:
-
             clamp(
                 20px,
                 4vw,
                 40px
             )
-
             clamp(
                 12px,
                 3vw,
@@ -1232,9 +1306,127 @@ onUnmounted(() => {
 
     .section-layout-content > * {
 
-        width: 100%;
+        width:
+            100%;
 
-        max-width: none;
+        max-width:
+            none;
+
+    }
+
+
+    /* =====================================
+       CONTACT TABLET
+    ====================================== */
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-split
+    ) {
+
+        display:
+            grid;
+
+        grid-template-columns:
+            minmax(
+                0,
+                1fr
+            );
+
+        gap:
+            40px;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-text
+    ) {
+
+        grid-column:
+            1;
+
+        grid-row:
+            1;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        text-align:
+            left;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-text p
+    ) {
+
+        max-width:
+            650px;
+
+        margin-left:
+            0;
+
+        margin-right:
+            0;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-content
+    ) {
+
+        grid-column:
+            1;
+
+        grid-row:
+            2;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            none;
+
+        padding:
+            0;
+
+        justify-content:
+            stretch;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-content > *
+    ) {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            none;
 
     }
 
@@ -1246,9 +1438,11 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-cta {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
-        gap: 40px;
+        gap:
+            40px;
 
     }
 
@@ -1256,7 +1450,8 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-text {
 
-        text-align: center;
+        text-align:
+            center;
 
     }
 
@@ -1264,22 +1459,28 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-content {
 
-        align-items: center;
+        align-items:
+            center;
 
-        padding: 20px 12px;
+        padding:
+            20px 12px;
 
     }
 
 
     .section-layout-cta-description {
 
-        max-width: 700px;
+        max-width:
+            700px;
 
-        margin-left: auto;
+        margin-left:
+            auto;
 
-        margin-right: auto;
+        margin-right:
+            auto;
 
-        text-align: center;
+        text-align:
+            center;
 
     }
 
@@ -1326,16 +1527,31 @@ onUnmounted(() => {
 
     .section-layout {
 
-        padding: 75px 0;
+        padding:
+            75px 0;
 
     }
 
 
     .section-layout > .container {
 
-        padding-left: 12px;
+        width:
+            100%;
 
-        padding-right: 12px;
+        max-width:
+            100%;
+
+        padding-left:
+            16px;
+
+        padding-right:
+            16px;
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
 
     }
 
@@ -1346,7 +1562,8 @@ onUnmounted(() => {
     .section-layout--split.section-layout--reverse
     .section-layout-split {
 
-        gap: 45px;
+        gap:
+            45px;
 
     }
 
@@ -1357,7 +1574,8 @@ onUnmounted(() => {
 
     .section-layout-content {
 
-        padding: 20px 8px;
+        padding:
+            20px 8px;
 
     }
 
@@ -1365,12 +1583,148 @@ onUnmounted(() => {
     .section-layout-text h2 {
 
         font-size:
-
             clamp(
                 2.4rem,
                 12vw,
                 3.5rem
             );
+
+    }
+
+
+    /* =====================================
+       CONTACT MOBILE
+    ====================================== */
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-split
+    ) {
+
+        grid-template-columns:
+            minmax(
+                0,
+                1fr
+            );
+
+        gap:
+            28px;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-text
+    ) {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        text-align:
+            left;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-text h2
+    ) {
+
+        margin-top:
+            14px;
+
+        font-size:
+            clamp(
+                2.2rem,
+                11vw,
+                3rem
+            );
+
+        line-height:
+            1.08;
+
+        overflow-wrap:
+            anywhere;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-text p
+    ) {
+
+        max-width:
+            100%;
+
+        margin-top:
+            20px;
+
+        margin-left:
+            0;
+
+        margin-right:
+            0;
+
+        font-size:
+            1rem;
+
+        line-height:
+            1.65;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-content
+    ) {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            100%;
+
+        padding:
+            0;
+
+        margin:
+            0;
+
+        overflow:
+            visible;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-content > *
+    ) {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            100%;
+
+        margin-left:
+            0;
+
+        margin-right:
+            0;
 
     }
 
@@ -1382,7 +1736,8 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-cta {
 
-        gap: 30px;
+        gap:
+            30px;
 
     }
 
@@ -1390,14 +1745,119 @@ onUnmounted(() => {
     .section-layout--cta
     .section-layout-content {
 
-        padding: 20px 8px;
+        padding:
+            20px 8px;
 
     }
 
 
     .section-layout-cta-description {
 
-        margin-bottom: 28px;
+        margin-bottom:
+            28px;
+
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .section-layout {
+
+        padding:
+            60px 0;
+
+    }
+
+
+    .section-layout > .container {
+
+        padding-left:
+            14px;
+
+        padding-right:
+            14px;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-split
+    ) {
+
+        gap:
+            24px;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-text h2
+    ) {
+
+        font-size:
+            clamp(
+                2rem,
+                10vw,
+                2.6rem
+            );
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-text p
+    ) {
+
+        margin-top:
+            16px;
+
+        font-size:
+            0.95rem;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-content
+    ) {
+
+        padding:
+            0;
+
+    }
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (
+    prefers-reduced-motion:
+    reduce
+) {
+
+    .section-reveal {
+
+        opacity:
+            1;
+
+        transform:
+            none;
+
+        transition:
+            none;
 
     }
 

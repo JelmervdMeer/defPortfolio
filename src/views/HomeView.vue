@@ -244,7 +244,13 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     transition:
         opacity 700ms ease,
-        transform 700ms cubic-bezier(.2, .8, .2, 1);
+        transform 700ms
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
 
 }
 
@@ -281,7 +287,11 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
         1;
 
     transform:
-        translate3d(0, 0, 0);
+        translate3d(
+            0,
+            0,
+            0
+        );
 
 }
 
@@ -320,7 +330,9 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
         relative;
 
     width:
-        calc(100% - 20px);
+        calc(
+            100% - 20px
+        );
 
     max-width:
         1600px;
@@ -333,7 +345,12 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.055);
+        rgba(
+            255,
+            255,
+            255,
+            0.055
+        );
 
     border-radius:
         28px;
@@ -344,13 +361,28 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     background:
         linear-gradient(
             135deg,
-            rgba(255, 255, 255, 0.018),
-            rgba(255, 255, 255, 0.006)
+            rgba(
+                255,
+                255,
+                255,
+                0.018
+            ),
+            rgba(
+                255,
+                255,
+                255,
+                0.006
+            )
         );
 
     box-shadow:
         0 25px 80px
-        rgba(0, 0, 0, 0.18);
+        rgba(
+            0,
+            0,
+            0,
+            0.18
+        );
 
 }
 
@@ -364,15 +396,32 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     background:
         radial-gradient(
             circle at 5% 10%,
-            rgba(168, 85, 247, 0.075),
+            rgba(
+                168,
+                85,
+                247,
+                0.075
+            ),
             transparent 34%
         ),
+
         radial-gradient(
             circle at 90% 90%,
-            rgba(217, 70, 239, 0.035),
+            rgba(
+                217,
+                70,
+                239,
+                0.035
+            ),
             transparent 35%
         ),
-        rgba(10, 9, 17, 0.7);
+
+        rgba(
+            10,
+            9,
+            17,
+            0.7
+        );
 
 }
 
@@ -386,15 +435,32 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     background:
         radial-gradient(
             circle at 35% 5%,
-            rgba(139, 92, 246, 0.075),
+            rgba(
+                139,
+                92,
+                246,
+                0.075
+            ),
             transparent 35%
         ),
+
         radial-gradient(
             circle at 95% 90%,
-            rgba(59, 130, 246, 0.045),
+            rgba(
+                59,
+                130,
+                246,
+                0.045
+            ),
             transparent 35%
         ),
-        rgba(9, 9, 17, 0.72);
+
+        rgba(
+            9,
+            9,
+            17,
+            0.72
+        );
 
 }
 
@@ -446,8 +512,18 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     background:
         radial-gradient(
             circle,
-            rgba(168, 85, 247, 0.14) 0%,
-            rgba(217, 70, 239, 0.07) 35%,
+            rgba(
+                168,
+                85,
+                247,
+                0.14
+            ) 0%,
+            rgba(
+                217,
+                70,
+                239,
+                0.07
+            ) 35%,
             transparent 72%
         );
 
@@ -471,8 +547,18 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     background:
         radial-gradient(
             circle,
-            rgba(236, 72, 153, 0.09) 0%,
-            rgba(168, 85, 247, 0.05) 38%,
+            rgba(
+                236,
+                72,
+                153,
+                0.09
+            ) 0%,
+            rgba(
+                168,
+                85,
+                247,
+                0.05
+            ) 38%,
             transparent 72%
         );
 
@@ -496,8 +582,18 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     background:
         radial-gradient(
             circle,
-            rgba(139, 92, 246, 0.13) 0%,
-            rgba(59, 130, 246, 0.07) 35%,
+            rgba(
+                139,
+                92,
+                246,
+                0.13
+            ) 0%,
+            rgba(
+                59,
+                130,
+                246,
+                0.07
+            ) 35%,
             transparent 72%
         );
 
@@ -521,8 +617,18 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     background:
         radial-gradient(
             circle,
-            rgba(59, 130, 246, 0.08) 0%,
-            rgba(139, 92, 246, 0.05) 38%,
+            rgba(
+                59,
+                130,
+                246,
+                0.08
+            ) 0%,
+            rgba(
+                139,
+                92,
+                246,
+                0.05
+            ) 38%,
             transparent 72%
         );
 
@@ -550,6 +656,9 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     width:
         100%;
 
+    min-width:
+        0;
+
 }
 
 
@@ -569,6 +678,9 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     width:
         100%;
+
+    min-width:
+        0;
 
     min-height:
         280px;
@@ -590,14 +702,30 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     height:
         280px;
 
+    max-width:
+        90%;
+
+    aspect-ratio:
+        1;
+
     border-radius:
         50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(139, 92, 246, 0.18) 0%,
-            rgba(0, 212, 255, 0.08) 38%,
+            rgba(
+                139,
+                92,
+                246,
+                0.18
+            ) 0%,
+            rgba(
+                0,
+                212,
+                255,
+                0.08
+            ) 38%,
             transparent 72%
         );
 
@@ -627,6 +755,9 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     width:
         100%;
+
+    min-width:
+        0;
 
     margin-top:
         10px;
@@ -661,7 +792,12 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     box-shadow:
         0 12px 35px
-        rgba(139, 92, 246, 0.3);
+        rgba(
+            139,
+            92,
+            246,
+            0.3
+        );
 
 }
 
@@ -670,7 +806,12 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     box-shadow:
         0 10px 30px
-        rgba(255, 255, 255, 0.1);
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
 
 }
 
@@ -711,7 +852,12 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     transition:
         transform 450ms
-        cubic-bezier(.2, .8, .2, 1);
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
 
     will-change:
         transform;
@@ -768,16 +914,24 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
     box-shadow:
         0 5px 18px
-        rgba(139, 92, 246, 0.2);
+        rgba(
+            139,
+            92,
+            246,
+            0.2
+        );
 
 }
 
 
 /* =========================================
-   HOME CONTACT LAYOUT
+   HOME CONTACT DESKTOP LAYOUT
 ========================================= */
 
-:deep(.home-contact .section-layout-content) {
+:deep(
+    .home-contact
+    .section-layout-content
+) {
 
     align-self:
         flex-start;
@@ -791,8 +945,14 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 ) {
 
     grid-template-columns:
-        minmax(0, 6fr)
-        minmax(0, 4fr);
+        minmax(
+            0,
+            6fr
+        )
+        minmax(
+            0,
+            4fr
+        );
 
 }
 
@@ -812,7 +972,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
 
 /* =========================================
-   RESPONSIVE
+   TABLET
 ========================================= */
 
 @media (max-width: 991px) {
@@ -823,9 +983,7 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
             40px;
 
         padding:
-            40px
-            20px
-            70px;
+            40px 20px 70px;
 
     }
 
@@ -833,7 +991,10 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     .home-section-container {
 
         width:
-            calc(100% - 28px);
+            100%;
+
+        max-width:
+            100%;
 
         border-radius:
             24px;
@@ -841,12 +1002,162 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     }
 
 
+    /* =====================================
+       CONTACT → ONE COLUMN
+    ====================================== */
+
     :deep(
-        .home-contact
+        .home-contact.section-layout--reverse
+        .section-layout-split
+    ) {
+
+        display:
+            grid;
+
+        grid-template-columns:
+            minmax(
+                0,
+                1fr
+            );
+
+        gap:
+            40px;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+    }
+
+
+    /* =====================================
+       CONTACT TEXT FIRST
+    ====================================== */
+
+    :deep(
+        .home-contact.section-layout--reverse
         .section-layout-text
     ) {
 
+        grid-column:
+            1;
+
+        grid-row:
+            1;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
         padding-right:
+            0;
+
+        text-align:
+            left;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-text p
+    ) {
+
+        max-width:
+            650px;
+
+        margin-left:
+            0;
+
+        margin-right:
+            0;
+
+    }
+
+
+    /* =====================================
+       CONTACT CONTENT SECOND
+    ====================================== */
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-content
+    ) {
+
+        grid-column:
+            1;
+
+        grid-row:
+            2;
+
+        display:
+            block;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            100%;
+
+        padding:
+            0;
+
+        margin:
+            0;
+
+    }
+
+
+    .contact-content-wrapper {
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            100%;
+
+    }
+
+
+    .contact-scene-wrapper {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            100%;
+
+    }
+
+
+    .contact-cta {
+
+        width:
+            100%;
+
+        min-width:
             0;
 
     }
@@ -860,10 +1171,24 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
 
 @media (max-width: 576px) {
 
+    .home-sections {
+
+        gap:
+            28px;
+
+        padding:
+            28px 6px 50px;
+
+    }
+
+
     .home-section-container {
 
         width:
-            calc(100% - 12px);
+            100%;
+
+        max-width:
+            100%;
 
         border-radius:
             18px;
@@ -871,7 +1196,90 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     }
 
 
-    .contact-cta {
+    /* =====================================
+       CONTACT LAYOUT
+    ====================================== */
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-split
+    ) {
+
+        display:
+            grid;
+
+        grid-template-columns:
+            minmax(
+                0,
+                1fr
+            );
+
+        gap:
+            28px;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-text
+    ) {
+
+        grid-column:
+            1;
+
+        grid-row:
+            1;
+
+        width:
+            100%;
+
+        padding:
+            0;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-content
+    ) {
+
+        grid-column:
+            1;
+
+        grid-row:
+            2;
+
+        display:
+            block;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            100%;
+
+        padding:
+            0;
+
+        margin:
+            0;
+
+    }
+
+
+    /* =====================================
+       CONTACT INNER CONTENT
+    ====================================== */
+
+    .contact-content-wrapper {
+
+        display:
+            flex;
 
         flex-direction:
             column;
@@ -879,13 +1287,143 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
         align-items:
             stretch;
 
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            100%;
+
+        gap:
+            20px;
+
+    }
+
+
+    .contact-scene-wrapper {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        max-width:
+            100%;
+
+        min-height:
+            220px;
+
+        overflow:
+            hidden;
+
+    }
+
+
+    .contact-scene-wrapper::before {
+
+        width:
+            220px;
+
+        height:
+            220px;
+
+    }
+
+
+    /* =====================================
+       CONTACT BUTTONS
+    ====================================== */
+
+    .contact-cta {
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        flex-wrap:
+            nowrap;
+
+        align-items:
+            stretch;
+
+        justify-content:
+            flex-start;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        margin-top:
+            0;
+
+        gap:
+            12px;
+
     }
 
 
     .contact-cta .btn {
 
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
         width:
             100%;
+
+        max-width:
+            100%;
+
+        min-width:
+            0;
+
+        margin:
+            0;
+
+        white-space:
+            normal;
+
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .home-sections {
+
+        padding-left:
+            4px;
+
+        padding-right:
+            4px;
+
+    }
+
+
+    :deep(
+        .home-contact.section-layout--reverse
+        .section-layout-split
+    ) {
+
+        gap:
+            24px;
 
     }
 
@@ -893,7 +1431,63 @@ import WorkDisciplines from '../components/WorkDisciplines.vue';
     .contact-scene-wrapper {
 
         min-height:
-            230px;
+            190px;
+
+    }
+
+
+    .contact-scene-wrapper::before {
+
+        width:
+            190px;
+
+        height:
+            190px;
+
+    }
+
+
+    .contact-cta .btn {
+
+        font-size:
+            0.95rem;
+
+        padding-left:
+            14px;
+
+        padding-right:
+            14px;
+
+    }
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (
+    prefers-reduced-motion:
+    reduce
+) {
+
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    :deep(.project-preview-card),
+    :deep(.project-item),
+    :deep(.project-preview-card img),
+    :deep(.project-item img),
+    :deep(.project-preview img),
+    :deep(.tech-label),
+    :deep(.tech-tag),
+    :deep(.project-tech span),
+    :deep(.project-technologies span),
+    .contact-cta .btn {
+
+        transition:
+            none;
 
     }
 
