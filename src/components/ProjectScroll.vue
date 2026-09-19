@@ -1,4 +1,3 @@
-```vue
 <script setup lang="ts">
 
 import {
@@ -29,7 +28,11 @@ const animationDirection =
 // =========================================
 
 const currentProject = computed(() => {
-    return projects[displayIndex.value];
+
+    return projects[
+        displayIndex.value
+    ];
+
 });
 
 
@@ -50,7 +53,8 @@ onMounted(() => {
 
         const image = new Image();
 
-        image.src = project.image;
+        image.src =
+            project.image;
 
     });
 
@@ -67,13 +71,17 @@ function preloadImage(
 
     return new Promise(resolve => {
 
-        const image = new Image();
+        const image =
+            new Image();
 
-        image.onload = () => resolve();
+        image.onload =
+            () => resolve();
 
-        image.onerror = () => resolve();
+        image.onerror =
+            () => resolve();
 
-        image.src = src;
+        image.src =
+            src;
 
     });
 
@@ -134,11 +142,11 @@ async function changeProject(
     // -------------------------------------
     // HARD LOCK
     // -------------------------------------
-    // Prevents a second animation from
-    // starting while the current one runs.
 
     if (isAnimating.value) {
+
         return;
+
     }
 
 
@@ -147,7 +155,8 @@ async function changeProject(
     // -------------------------------------
 
     const targetIndex =
-        currentIndex.value + direction;
+        currentIndex.value +
+        direction;
 
 
     // -------------------------------------
@@ -168,7 +177,8 @@ async function changeProject(
     // LOCK IMMEDIATELY
     // -------------------------------------
 
-    isAnimating.value = true;
+    isAnimating.value =
+        true;
 
 
     // -------------------------------------
@@ -188,7 +198,9 @@ async function changeProject(
         // ---------------------------------
 
         await preloadImage(
-            projects[targetIndex].image
+            projects[
+                targetIndex
+            ].image
         );
 
 
@@ -218,14 +230,14 @@ async function changeProject(
 
         await waitForRender();
 
-
     } finally {
 
         // ---------------------------------
         // UNLOCK
         // ---------------------------------
 
-        isAnimating.value = false;
+        isAnimating.value =
+            false;
 
     }
 
@@ -239,7 +251,9 @@ async function changeProject(
 function showNextProject(): void {
 
     if (isAnimating.value) {
+
         return;
+
     }
 
     void changeProject(1);
@@ -254,7 +268,9 @@ function showNextProject(): void {
 function showPreviousProject(): void {
 
     if (isAnimating.value) {
+
         return;
+
     }
 
     void changeProject(-1);
@@ -269,13 +285,19 @@ function showPreviousProject(): void {
     <div
         class="project-scroll-showcase"
         :class="{
-            'is-animating': isAnimating,
+            'is-animating':
+                isAnimating,
+
             'direction-next':
-                animationDirection === 'next',
+                animationDirection ===
+                'next',
+
             'direction-previous':
-                animationDirection === 'previous'
+                animationDirection ===
+                'previous'
         }"
     >
+
 
         <!-- =====================================
              3D SCENE
@@ -288,11 +310,11 @@ function showPreviousProject(): void {
 
                 <!-- =================================
                      TOP CUBE
+                     IMAGE 4 : 3
                 ================================== -->
 
-                <div
-                    class="project-card-top"
-                >
+                <div class="project-card-top">
+
 
                     <!-- FRONT -->
 
@@ -304,8 +326,12 @@ function showPreviousProject(): void {
                     >
 
                         <img
-                            :src="currentProject.image"
-                            :alt="currentProject.title"
+                            :src="
+                                currentProject.image
+                            "
+                            :alt="
+                                currentProject.title
+                            "
                         />
 
 
@@ -356,11 +382,11 @@ function showPreviousProject(): void {
 
                 <!-- =================================
                      BOTTOM CUBE
+                     TEXT
                 ================================== -->
 
-                <div
-                    class="project-card-bottom"
-                >
+                <div class="project-card-bottom">
+
 
                     <!-- FRONT -->
 
@@ -376,6 +402,7 @@ function showPreviousProject(): void {
                                 project-showcase-content
                             "
                         >
+
 
                             <!-- CATEGORY -->
 
@@ -474,9 +501,8 @@ function showPreviousProject(): void {
              CONTROLS
         ====================================== -->
 
-        <div
-            class="project-scroll-controls"
-        >
+        <div class="project-scroll-controls">
+
 
             <!-- PREVIOUS -->
 
@@ -526,7 +552,6 @@ function showPreviousProject(): void {
 
                 </span>
 
-
                 <span
                     class="
                         project-scroll-divider
@@ -534,7 +559,6 @@ function showPreviousProject(): void {
                 >
                     /
                 </span>
-
 
                 <span>
 
@@ -594,9 +618,11 @@ function showPreviousProject(): void {
 
 .project-scroll-showcase {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
     perspective:
         1800px;
@@ -606,15 +632,32 @@ function showPreviousProject(): void {
 
 /* =========================================
    3D SCENE
+
+   IMAGE:
+   width / 4 × 3
+
+   TEXT:
+   240px
 ========================================= */
 
 .project-card-scene {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 600px;
+    height:
+        calc(
+            (
+                100% * 3 / 4
+            ) +
+            240px
+        );
+
+    aspect-ratio:
+        auto;
 
     perspective:
         1800px;
@@ -631,11 +674,14 @@ function showPreviousProject(): void {
 
 .project-card-3d {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 100%;
+    height:
+        100%;
 
     transform-style:
         preserve-3d;
@@ -645,19 +691,28 @@ function showPreviousProject(): void {
 
 /* =========================================
    TOP CUBE
+   IMAGE = EXACTLY 4 : 3
 ========================================= */
 
 .project-card-top {
 
-    position: absolute;
+    position:
+        relative;
 
-    top: 0;
+    top:
+        auto;
 
-    left: 0;
+    left:
+        auto;
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 360px;
+    aspect-ratio:
+        4 / 3;
+
+    height:
+        auto;
 
     transform-style:
         preserve-3d;
@@ -665,7 +720,8 @@ function showPreviousProject(): void {
     transform-origin:
         center bottom;
 
-    z-index: 2;
+    z-index:
+        2;
 
     transition:
         transform
@@ -686,15 +742,20 @@ function showPreviousProject(): void {
 
 .project-card-bottom {
 
-    position: absolute;
+    position:
+        relative;
 
-    left: 0;
+    left:
+        auto;
 
-    bottom: 0;
+    bottom:
+        auto;
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 240px;
+    height:
+        240px;
 
     transform-style:
         preserve-3d;
@@ -702,7 +763,8 @@ function showPreviousProject(): void {
     transform-origin:
         center top;
 
-    z-index: 1;
+    z-index:
+        1;
 
     transition:
         transform
@@ -767,13 +829,17 @@ function showPreviousProject(): void {
 
 .project-face {
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 100%;
+    height:
+        100%;
 
     backface-visibility:
         hidden;
@@ -793,9 +859,20 @@ function showPreviousProject(): void {
 
 .project-image-face {
 
-    position: relative;
+    position:
+        absolute;
 
-    overflow: hidden;
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    overflow:
+        hidden;
 
     border-radius:
         18px 18px 0 0;
@@ -815,15 +892,32 @@ function showPreviousProject(): void {
 }
 
 
+/* =========================================
+   IMAGE
+========================================= */
+
 .project-image-face img {
 
-    display: block;
+    position:
+        absolute;
 
-    width: 100%;
+    inset:
+        0;
 
-    height: 100%;
+    display:
+        block;
 
-    object-fit: cover;
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+
+    object-position:
+        center;
 
     transition:
         transform
@@ -846,7 +940,7 @@ function showPreviousProject(): void {
 .project-image-face img {
 
     transform:
-        scale(1.06);
+        scale(1.03);
 
 }
 
@@ -857,13 +951,17 @@ function showPreviousProject(): void {
 
 .project-image-face::after {
 
-    content: '';
+    content:
+        '';
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
     background:
         linear-gradient(
@@ -878,7 +976,8 @@ function showPreviousProject(): void {
             transparent 70%
         );
 
-    z-index: 1;
+    z-index:
+        1;
 
 }
 
@@ -889,19 +988,26 @@ function showPreviousProject(): void {
 
 .project-view-button {
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: 50%;
+    top:
+        50%;
 
-    left: 50%;
+    left:
+        50%;
 
-    z-index: 3;
+    z-index:
+        3;
 
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     gap:
         10px;
@@ -945,7 +1051,8 @@ function showPreviousProject(): void {
     text-decoration:
         none;
 
-    opacity: 0;
+    opacity:
+        0;
 
     transform:
         translate(
@@ -954,16 +1061,11 @@ function showPreviousProject(): void {
         );
 
     transition:
-        opacity
-        0.4s ease,
-        transform
-        0.4s ease,
-        background
-        0.4s ease,
-        border-color
-        0.4s ease,
-        box-shadow
-        0.4s ease;
+        opacity 0.4s ease,
+        transform 0.4s ease,
+        background 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
 
 }
 
@@ -975,7 +1077,8 @@ function showPreviousProject(): void {
 .project-card-scene:hover
 .project-view-button {
 
-    opacity: 1;
+    opacity:
+        1;
 
     transform:
         translate(
@@ -1057,7 +1160,8 @@ function showPreviousProject(): void {
 
 .project-image-back {
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     border-radius:
         18px 18px 0 0;
@@ -1081,11 +1185,14 @@ function showPreviousProject(): void {
 
 .back-pattern {
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
 
-    opacity: 0.5;
+    opacity:
+        0.5;
 
     background-image:
         radial-gradient(
@@ -1110,7 +1217,8 @@ function showPreviousProject(): void {
 
 .project-content-face {
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     border:
         1px solid
@@ -1174,7 +1282,8 @@ function showPreviousProject(): void {
 
 .project-showcase-category {
 
-    display: block;
+    display:
+        block;
 
     margin-bottom:
         12px;
@@ -1251,9 +1360,11 @@ function showPreviousProject(): void {
 
 .project-showcase-technologies {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-wrap: wrap;
+    flex-wrap:
+        wrap;
 
     gap:
         8px;
@@ -1267,9 +1378,11 @@ function showPreviousProject(): void {
 
 .technology {
 
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    align-items: center;
+    align-items:
+        center;
 
     padding:
         6px 10px;
@@ -1306,12 +1419,9 @@ function showPreviousProject(): void {
         0.75rem;
 
     transition:
-        transform
-        0.25s ease,
-        border-color
-        0.25s ease,
-        background
-        0.25s ease;
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
 
 }
 
@@ -1352,11 +1462,14 @@ function showPreviousProject(): void {
 
 .project-content-back {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     border-radius:
         0 0 18px 18px;
@@ -1406,9 +1519,11 @@ function showPreviousProject(): void {
 
 .project-scroll-controls {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
     justify-content:
         space-between;
@@ -1425,11 +1540,14 @@ function showPreviousProject(): void {
 
 .project-scroll-arrow {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     width:
         44px;
@@ -1464,12 +1582,9 @@ function showPreviousProject(): void {
         );
 
     transition:
-        transform
-        0.25s ease,
-        background
-        0.25s ease,
-        border-color
-        0.25s ease;
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
 
 }
 
@@ -1577,15 +1692,26 @@ span:first-child {
     .project-card-scene {
 
         height:
-            500px;
+            calc(
+                (
+                    100% * 3 / 4
+                ) +
+                250px
+            );
 
     }
 
 
     .project-card-top {
 
+        width:
+            100%;
+
         height:
-            250px;
+            auto;
+
+        aspect-ratio:
+            4 / 3;
 
     }
 
@@ -1657,8 +1783,3 @@ span:first-child {
 }
 
 </style>
-```
-
-**Belangrijk:** met deze versie blijft `isAnimating` gedurende de volledige **850 ms** actief. Dus als je bijvoorbeeld vijf keer heel snel op `→` klikt, wordt alleen de eerste klik uitgevoerd. De overige klikken worden genegeerd. Pas nadat de kaart volledig is gedraaid én Vue het nieuwe project heeft gerenderd, wordt de knop weer actief.
-
-Ook heb ik de `*background*`-fouten uit je `transition`-regels verwijderd.

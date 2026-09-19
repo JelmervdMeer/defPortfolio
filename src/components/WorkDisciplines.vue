@@ -5,49 +5,50 @@
 // =====================================
 
 interface Discipline {
-    number: string;
     title: string;
     description: string;
     icon: string;
     position: string;
 }
 
+
 const disciplines: Discipline[] = [
+
     {
-        number: '01',
         title: 'VERNIEUWING',
         description: 'Blijven ontdekken',
         icon: 'bi-book',
         position: 'top'
     },
+
     {
-        number: '02',
         title: 'TECHNISCH',
         description: 'Architectuur & structuur',
         icon: 'bi-code-slash',
         position: 'right'
     },
+
     {
-        number: '03',
         title: 'PRAKTISCH',
         description: 'Van idee naar resultaat',
         icon: 'bi-gear',
         position: 'bottom-right'
     },
+
     {
-        number: '04',
         title: 'CREATIEF',
         description: 'Denken buiten de standaard',
         icon: 'bi-brush',
         position: 'bottom-left'
     },
+
     {
-        number: '05',
         title: 'COMMUNICATIE',
         description: 'Techniek begrijpelijk maken',
         icon: 'bi-chat-square-text',
         position: 'left'
     }
+
 ];
 
 </script>
@@ -56,6 +57,7 @@ const disciplines: Discipline[] = [
 <template>
 
     <div class="discipline-network">
+
 
         <!-- =====================================
              CONNECTIONS
@@ -151,18 +153,12 @@ const disciplines: Discipline[] = [
 
         <article
             v-for="discipline in disciplines"
-            :key="discipline.number"
+            :key="discipline.title"
             class="discipline-node"
             :class="`discipline-node--${discipline.position}`"
         >
 
             <div class="discipline-node-inner">
-
-                <!-- NUMBER -->
-
-                <div class="discipline-number">
-                    {{ discipline.number }}
-                </div>
 
 
                 <!-- ICON -->
@@ -181,18 +177,24 @@ const disciplines: Discipline[] = [
 
                 <!-- TEXT -->
 
-               <div class="discipline-text">
+                <div class="discipline-text">
 
-    <h3>
-        {{ discipline.title }}
-    </h3>
+                    <h3>
 
-</div>
+                        {{ discipline.title }}
+
+                    </h3>
+
+                </div>
 
 
-<p class="discipline-description">
-    {{ discipline.description }}
-</p>
+                <!-- DESCRIPTION -->
+
+                <p class="discipline-description">
+
+                    {{ discipline.description }}
+
+                </p>
 
             </div>
 
@@ -210,14 +212,22 @@ const disciplines: Discipline[] = [
 ========================================= */
 
 .discipline-network {
-    position: relative;
 
-    width: 100%;
-    max-width: 680px;
+    position:
+        relative;
 
-    min-height: 520px;
+    width:
+        100%;
 
-    margin: 0 auto;
+    max-width:
+        680px;
+
+    min-height:
+        520px;
+
+    margin:
+        0 auto;
+
 }
 
 
@@ -226,20 +236,30 @@ const disciplines: Discipline[] = [
 ========================================= */
 
 .discipline-connections {
-    position: absolute;
 
-    inset: 0;
+    position:
+        absolute;
 
-    width: 100%;
-    height: 100%;
+    inset:
+        0;
 
-    overflow: visible;
+    width:
+        100%;
 
-    pointer-events: none;
+    height:
+        100%;
+
+    overflow:
+        visible;
+
+    pointer-events:
+        none;
+
 }
 
 
 .discipline-connections line {
+
     stroke:
         rgba(
             139,
@@ -257,6 +277,7 @@ const disciplines: Discipline[] = [
     transition:
         stroke 300ms ease,
         opacity 300ms ease;
+
 }
 
 
@@ -265,18 +286,30 @@ const disciplines: Discipline[] = [
 ========================================= */
 
 .discipline-center {
-    position: absolute;
 
-    top: 50%;
-    left: 50%;
+    position:
+        absolute;
 
-    display: flex;
+    top:
+        50%;
 
-    align-items: center;
-    justify-content: center;
+    left:
+        50%;
 
-    width: 128px;
-    height: 128px;
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        128px;
+
+    height:
+        128px;
 
     transform:
         translate(
@@ -328,16 +361,22 @@ const disciplines: Discipline[] = [
             0.08
         );
 
-    z-index: 1;
+    z-index:
+        1;
+
 }
 
 
 .discipline-center::before {
-    content: "";
 
-    position: absolute;
+    content:
+        "";
 
-    inset: 11px;
+    position:
+        absolute;
+
+    inset:
+        11px;
 
     border:
         1px solid
@@ -350,13 +389,17 @@ const disciplines: Discipline[] = [
 
     border-radius:
         inherit;
+
 }
 
 
 .discipline-center span {
-    position: relative;
 
-    z-index: 1;
+    position:
+        relative;
+
+    z-index:
+        1;
 
     color:
         rgba(
@@ -370,7 +413,7 @@ const disciplines: Discipline[] = [
         var(--font-heading);
 
     font-size:
-        0.7rem;
+        0.78rem;
 
     font-weight:
         600;
@@ -380,6 +423,7 @@ const disciplines: Discipline[] = [
 
     text-transform:
         uppercase;
+
 }
 
 
@@ -388,31 +432,42 @@ const disciplines: Discipline[] = [
 ========================================= */
 
 .discipline-node {
-    position: absolute;
 
-    z-index: 2;
+    position:
+        absolute;
 
-    width: 220px;
+    z-index:
+        2;
 
-    cursor: default;
+    width:
+        220px;
+
+    cursor:
+        default;
+
 }
 
 
 .discipline-node-inner {
-    position: relative;
 
-    display: grid;
+    position:
+        relative;
+
+    display:
+        grid;
 
     grid-template-columns:
         auto
-        auto
         minmax(0, 1fr);
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 12px;
+    gap:
+        12px;
 
-    width: 100%;
+    width:
+        100%;
 
     padding:
         14px
@@ -467,6 +522,7 @@ const disciplines: Discipline[] = [
 
         box-shadow
         300ms ease;
+
 }
 
 
@@ -475,90 +531,60 @@ const disciplines: Discipline[] = [
 ========================================= */
 
 .discipline-node--top {
-    top: 0;
-    left: 50%;
+
+    top:
+        0;
+
+    left:
+        50%;
 
     transform:
         translateX(-50%);
+
 }
 
 
 .discipline-node--right {
-    top: 135px;
-    right: 0;
+
+    top:
+        135px;
+
+    right:
+        0;
+
 }
 
 
 .discipline-node--bottom-right {
-    right: 55px;
-    bottom: 0;
+
+    right:
+        55px;
+
+    bottom:
+        0;
+
 }
 
 
 .discipline-node--bottom-left {
-    left: 55px;
-    bottom: 0;
+
+    left:
+        55px;
+
+    bottom:
+        0;
+
 }
 
 
 .discipline-node--left {
-    top: 135px;
-    left: 0;
-}
 
+    top:
+        135px;
 
-/* =========================================
-   NUMBER
-========================================= */
+    left:
+        0;
 
-.discipline-number {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 34px;
-    height: 34px;
-
-    flex-shrink: 0;
-
-    border:
-        1px solid
-        rgba(
-            139,
-            92,
-            246,
-            0.28
-        );
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(
-            139,
-            92,
-            246,
-            0.055
-        );
-
-    color:
-        var(--color-primary-light);
-
-    font-family:
-        var(--font-heading);
-
-    font-size:
-        0.66rem;
-
-    font-weight:
-        600;
-
-    transition:
-        transform 300ms ease,
-        border-color 300ms ease,
-        background-color 300ms ease,
-        box-shadow 300ms ease;
 }
 
 
@@ -567,15 +593,24 @@ const disciplines: Discipline[] = [
 ========================================= */
 
 .discipline-icon {
-    display: flex;
 
-    align-items: center;
-    justify-content: center;
+    display:
+        flex;
 
-    width: 34px;
-    height: 34px;
+    align-items:
+        center;
 
-    flex-shrink: 0;
+    justify-content:
+        center;
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    flex-shrink:
+        0;
 
     border-radius:
         10px;
@@ -592,12 +627,54 @@ const disciplines: Discipline[] = [
         var(--color-secondary);
 
     font-size:
-        0.95rem;
+        1.05rem;
 
     transition:
         transform 300ms ease,
         background-color 300ms ease,
         box-shadow 300ms ease;
+
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.discipline-text {
+
+    min-width:
+        0;
+
+}
+
+
+.discipline-text h3 {
+
+    margin:
+        0;
+
+    color:
+        var(--color-text);
+
+    font-family:
+        var(--font-heading);
+
+    font-size:
+        0.82rem;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.2;
+
+    letter-spacing:
+        0.035em;
+
+    white-space:
+        nowrap;
+
 }
 
 
@@ -606,6 +683,7 @@ const disciplines: Discipline[] = [
 ========================================= */
 
 .discipline-description {
+
     grid-column:
         1 / -1;
 
@@ -631,10 +709,10 @@ const disciplines: Discipline[] = [
         var(--font-body);
 
     font-size:
-        0.76rem;
+        0.82rem;
 
     line-height:
-        1.45;
+        1.5;
 
     transform:
         translateY(-6px);
@@ -644,35 +722,43 @@ const disciplines: Discipline[] = [
         margin-top 300ms ease,
         opacity 250ms ease,
         transform 300ms ease;
+
 }
 
 
 .discipline-node:hover
 .discipline-description {
+
     max-height:
-        50px;
+        55px;
 
     margin-top:
-        4px;
+        5px;
 
     opacity:
         1;
 
     transform:
         translateY(0);
+
 }
+
+
 /* =========================================
    NODE HOVER
 ========================================= */
 
 .discipline-node:hover {
+
     z-index:
         5;
+
 }
 
 
 .discipline-node:hover
 .discipline-node-inner {
+
     transform:
         translateY(-4px)
         scale(1.025);
@@ -718,45 +804,16 @@ const disciplines: Discipline[] = [
             246,
             0.08
         );
-}
 
-
-.discipline-node:hover
-.discipline-number {
-    transform:
-        scale(1.08);
-
-    border-color:
-        rgba(
-            167,
-            139,
-            250,
-            0.6
-        );
-
-    background:
-        rgba(
-            139,
-            92,
-            246,
-            0.14
-        );
-
-    box-shadow:
-        0 0 20px
-        rgba(
-            139,
-            92,
-            246,
-            0.16
-        );
 }
 
 
 .discipline-node:hover
 .discipline-icon {
+
     transform:
-        translateY(-2px);
+        translateY(-2px)
+        scale(1.06);
 
     background:
         rgba(
@@ -774,47 +831,7 @@ const disciplines: Discipline[] = [
             238,
             0.09
         );
-}
 
-
-.discipline-node:hover
-.discipline-text p {
-    max-height:
-        50px;
-
-    margin-top:
-        5px;
-
-    opacity:
-        1;
-
-    transform:
-        translateY(0);
-}
-
-.discipline-text h3 {
-    margin: 0;
-
-    color:
-        var(--color-text);
-
-    font-family:
-        var(--font-heading);
-
-    font-size:
-        0.62rem;
-
-    font-weight:
-        600;
-
-    line-height:
-        1.2;
-
-    letter-spacing:
-        0.05em;
-
-    white-space:
-        nowrap;
 }
 
 
@@ -824,6 +841,7 @@ const disciplines: Discipline[] = [
 
 .discipline-network:hover
 .discipline-connections line {
+
     stroke:
         rgba(
             139,
@@ -831,6 +849,31 @@ const disciplines: Discipline[] = [
             246,
             0.25
         );
+
+}
+
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1200px) {
+
+    .discipline-text h3 {
+
+        font-size:
+            0.9rem;
+
+    }
+
+
+    .discipline-description {
+
+        font-size:
+            0.86rem;
+
+    }
+
 }
 
 
@@ -841,41 +884,69 @@ const disciplines: Discipline[] = [
 @media (max-width: 991px) {
 
     .discipline-network {
+
         max-width:
             620px;
 
         min-height:
             500px;
+
     }
 
 
     .discipline-node {
+
         width:
             205px;
+
     }
 
 
     .discipline-node--right {
+
         right:
             0;
+
     }
 
 
     .discipline-node--left {
+
         left:
             0;
+
     }
 
 
     .discipline-node--bottom-right {
+
         right:
             35px;
+
     }
 
 
     .discipline-node--bottom-left {
+
         left:
             35px;
+
+    }
+
+
+    .discipline-text h3 {
+
+        font-size:
+            0.78rem;
+
+    }
+
+
+    .discipline-description {
+
+        font-size:
+            0.78rem;
+
     }
 
 }
@@ -888,6 +959,7 @@ const disciplines: Discipline[] = [
 @media (max-width: 700px) {
 
     .discipline-network {
+
         display:
             grid;
 
@@ -914,17 +986,21 @@ const disciplines: Discipline[] = [
 
         margin:
             0 auto;
+
     }
 
 
     .discipline-connections,
     .discipline-center {
+
         display:
             none;
+
     }
 
 
     .discipline-node {
+
         position:
             relative;
 
@@ -945,10 +1021,12 @@ const disciplines: Discipline[] = [
 
         transform:
             none;
+
     }
 
 
     .discipline-node:last-child {
+
         grid-column:
             1 / -1;
 
@@ -959,10 +1037,12 @@ const disciplines: Discipline[] = [
 
         justify-self:
             center;
+
     }
 
 
     .discipline-node-inner {
+
         height:
             100%;
 
@@ -975,49 +1055,82 @@ const disciplines: Discipline[] = [
                 0,
                 1fr
             );
-    }
 
-
-    .discipline-number {
-        grid-row:
-            1 / 3;
     }
 
 
     .discipline-icon {
+
         display:
-            none;
+            flex;
+
+        width:
+            38px;
+
+        height:
+            38px;
+
     }
 
 
-  
+    .discipline-text h3 {
+
+        font-size:
+            0.9rem;
+
+    }
 
 
-    .discipline-text p {
+    .discipline-description {
+
+        grid-column:
+            1 / -1;
+
         max-height:
             none;
 
         margin-top:
-            5px;
+            7px;
 
         opacity:
             1;
-
-        transform:
-            none;
 
         overflow:
             visible;
 
         font-size:
-            0.72rem;
+            0.82rem;
+
+        line-height:
+            1.45;
+
+        transform:
+            none;
+
+    }
+
+
+    .discipline-node:hover
+    .discipline-description {
+
+        max-height:
+            none;
+
+        margin-top:
+            7px;
+
+        transform:
+            none;
+
     }
 
 
     .discipline-node:hover
     .discipline-node-inner {
+
         transform:
             translateY(-3px);
+
     }
 
 }
@@ -1030,26 +1143,30 @@ const disciplines: Discipline[] = [
 @media (max-width: 480px) {
 
     .discipline-network {
+
         grid-template-columns:
             1fr;
 
         gap:
             10px;
+
     }
 
 
     .discipline-node:last-child {
+
         grid-column:
             auto;
 
         width:
             100%;
+
     }
 
 
     .discipline-node-inner {
+
         grid-template-columns:
-            auto
             auto
             minmax(
                 0,
@@ -1058,18 +1175,34 @@ const disciplines: Discipline[] = [
 
         min-height:
             76px;
-    }
 
-
-    .discipline-number {
-        grid-row:
-            auto;
     }
 
 
     .discipline-icon {
+
         display:
             flex;
+
+    }
+
+
+    .discipline-text h3 {
+
+        font-size:
+            0.88rem;
+
+    }
+
+
+    .discipline-description {
+
+        grid-column:
+            1 / -1;
+
+        font-size:
+            0.8rem;
+
     }
 
 }
@@ -1085,12 +1218,13 @@ const disciplines: Discipline[] = [
 ) {
 
     .discipline-node-inner,
-    .discipline-number,
     .discipline-icon,
-    .discipline-text p,
+    .discipline-description,
     .discipline-connections line {
+
         transition:
             none;
+
     }
 
 }

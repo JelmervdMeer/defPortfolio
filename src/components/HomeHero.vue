@@ -13,15 +13,46 @@ import { RouterLink } from 'vue-router';
 // PARTICLE SYSTEM
 // =====================================
 
-const canvas =
-    ref<HTMLCanvasElement | null>(null);
+interface Particle {
 
-let ctx:
-    CanvasRenderingContext2D | null = null;
+    element: HTMLDivElement;
 
-let animationFrame = 0;
+    x: number;
+    y: number;
 
-let particles: Particle[] = [];
+    baseX: number;
+    baseY: number;
+
+    phaseX: number;
+    phaseY: number;
+
+    speedX: number;
+    speedY: number;
+
+    amplitudeX: number;
+    amplitudeY: number;
+
+    size: number;
+
+}
+
+
+// =====================================
+// PARTICLE STATE
+// =====================================
+
+const heroParticles =
+    ref<HTMLDivElement | null>(null);
+
+const particles: Particle[] = [];
+
+let particleAnimationFrame:
+    number | null = null;
+
+
+// =====================================
+// MOUSE STATE
+// =====================================
 
 let mouseX = 0;
 let mouseY = 0;
@@ -29,46 +60,50 @@ let mouseY = 0;
 let targetMouseX = 0;
 let targetMouseY = 0;
 
-let width = 0;
-let height = 0;
-
-
-// =====================================
-// PARTICLE INTERFACE
-// =====================================
-
-interface Particle {
-    x: number;
-    y: number;
-
-    baseX: number;
-    baseY: number;
-
-    size: number;
-
-    speedX: number;
-    speedY: number;
-
-    opacity: number;
-}
-
 
 // =====================================
 // PARTICLE SETTINGS
 // =====================================
 
-const PARTICLE_COUNT = 90;
+const PARTICLE_COUNT = 60;
+
 const MOUSE_RADIUS = 180;
-const MOUSE_FORCE = 0.8;
+
+const MOUSE_FORCE = 0.035;
 
 
 // =====================================
 // CREATE PARTICLES
 // =====================================
 
-const createParticles = (): void => {
+function createParticles(): void {
 
-    particles = [];
+    if (!heroParticles.value) {
+        return;
+    }
+
+    const container =
+        heroParticles.value;
+
+
+    // ---------------------------------
+    // REMOVE EXISTING PARTICLES
+    // ---------------------------------
+
+    particles.forEach(
+        particle => {
+
+            particle.element.remove();
+
+        }
+    );
+
+    particles.length = 0;
+
+
+    // ---------------------------------
+    // CREATE PARTICLES
+    // ---------------------------------
 
     for (
         let i = 0;
@@ -76,181 +111,295 @@ const createParticles = (): void => {
         i++
     ) {
 
+        const element =
+            document.createElement('div');
+
+        element.className =
+            'hero-particle';
+
+
+        // ---------------------------------
+        // RANDOM SIZE
+        // ---------------------------------
+
+        const size =
+            Math.random() * 4 + 1;
+
+
+        // ---------------------------------
+        // RANDOM GLOW
+        // ---------------------------------
+
+        const glow =
+            Math.random();
+
+        element.style.boxShadow = `
+            0 0 ${4 + glow * 4}px
+            rgba(255, 255, 255, ${0.5 + glow * 0.5}),
+
+            0 0 ${8 + glow * 8}px
+            rgba(167, 139, 250, ${0.6 + glow * 0.4}),
+
+            0 0 ${18 + glow * 20}px
+            rgba(139, 92, 246, ${0.4 + glow * 0.4})
+        `;
+
+
+        // ---------------------------------
+        // RANDOM START POSITION
+        // ---------------------------------
+
         const x =
-            Math.random() * width;
+            Math.random() * 100;
 
         const y =
-            Math.random() * height;
+            Math.random() * 100;
+
+
+        // ---------------------------------
+        // RANDOM MOVEMENT
+        // ---------------------------------
+
+        const phaseX =
+            Math.random() *
+            Math.PI *
+            2;
+
+        const phaseY =
+            Math.random() *
+            Math.PI *
+            2;
+
+
+        const speedX =
+            Math.random() *
+            0.012 +
+            0.003;
+
+        const speedY =
+            Math.random() *
+            0.012 +
+            0.003;
+
+
+        const amplitudeX =
+            Math.random() *
+            35 +
+            15;
+
+        const amplitudeY =
+            Math.random() *
+            35 +
+            15;
+
+
+        // ---------------------------------
+        // ELEMENT SIZE
+        // ---------------------------------
+
+        element.style.width =
+            `${size}px`;
+
+        element.style.height =
+            `${size}px`;
+
+
+        // ---------------------------------
+        // INITIAL POSITION
+        // ---------------------------------
+
+        element.style.left =
+            `${x}%`;
+
+        element.style.top =
+            `${y}%`;
+
+
+        // ---------------------------------
+        // RANDOM OPACITY
+        // ---------------------------------
+
+        element.style.opacity =
+            `${Math.random() * 0.45 + 0.2}`;
+
+
+        // ---------------------------------
+        // ADD TO DOM
+        // ---------------------------------
+
+        container.appendChild(
+            element
+        );
+
+
+        // ---------------------------------
+        // STORE PARTICLE
+        // ---------------------------------
 
         particles.push({
+
+            element,
+
             x,
             y,
 
             baseX: x,
             baseY: y,
 
-            size:
-                Math.random() * 2 + 0.5,
+            phaseX,
+            phaseY,
 
-            speedX:
-                (Math.random() - 0.5) * 0.15,
+            speedX,
+            speedY,
 
-            speedY:
-                (Math.random() - 0.5) * 0.15,
+            amplitudeX,
+            amplitudeY,
 
-            opacity:
-                Math.random() * 0.5 + 0.15
+            size
+
         });
 
     }
 
-};
-
-
-// =====================================
-// RESIZE CANVAS
-// =====================================
-
-const resizeCanvas = (): void => {
-
-    if (!canvas.value) {
-        return;
-    }
-
-    const rect =
-        canvas.value.getBoundingClientRect();
-
-    width = rect.width;
-    height = rect.height;
-
-    const dpr =
-        window.devicePixelRatio || 1;
-
-    canvas.value.width =
-        width * dpr;
-
-    canvas.value.height =
-        height * dpr;
-
-    canvas.value.style.width =
-        `${width}px`;
-
-    canvas.value.style.height =
-        `${height}px`;
-
-    ctx =
-        canvas.value.getContext('2d');
-
-    if (!ctx) {
-        return;
-    }
-
-    ctx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
-    );
-
-    createParticles();
-
-};
-
-
-// =====================================
-// MOUSE MOVE
-// =====================================
-
-const handleMouseMove = (
-    event: MouseEvent
-): void => {
-
-    if (!canvas.value) {
-        return;
-    }
-
-    const rect =
-        canvas.value.getBoundingClientRect();
-
-    targetMouseX =
-        event.clientX - rect.left;
-
-    targetMouseY =
-        event.clientY - rect.top;
-
-};
+}
 
 
 // =====================================
 // PARTICLE ANIMATION
 // =====================================
 
-const animateParticles = (): void => {
+function animateParticles(): void {
 
-    if (!ctx) {
+    if (!heroParticles.value) {
         return;
     }
 
-    const context = ctx;
+    const container =
+        heroParticles.value;
 
-    context.clearRect(
-        0,
-        0,
-        width,
-        height
-    );
+
+    // ---------------------------------
+    // SMOOTH MOUSE MOVEMENT
+    // ---------------------------------
 
     mouseX +=
-        (targetMouseX - mouseX) * 0.05;
+        (
+            targetMouseX -
+            mouseX
+        ) * 0.08;
 
     mouseY +=
-        (targetMouseY - mouseY) * 0.05;
+        (
+            targetMouseY -
+            mouseY
+        ) * 0.08;
+
+
+    // ---------------------------------
+    // CONTAINER POSITION
+    // ---------------------------------
+
+    const rect =
+        container.getBoundingClientRect();
+
+
+    if (
+        rect.width === 0 ||
+        rect.height === 0
+    ) {
+
+        particleAnimationFrame =
+            requestAnimationFrame(
+                animateParticles
+            );
+
+        return;
+
+    }
+
+
+    // ---------------------------------
+    // CURSOR POSITION IN %
+    // ---------------------------------
+
+    const cursorX =
+        (
+            mouseX -
+            rect.left
+        ) /
+        rect.width *
+        100;
+
+
+    const cursorY =
+        (
+            mouseY -
+            rect.top
+        ) /
+        rect.height *
+        100;
+
+
+    // ---------------------------------
+    // PARTICLES
+    // ---------------------------------
 
     particles.forEach(
         particle => {
 
-            particle.baseX +=
+
+            // ---------------------------------
+            // UNIQUE TIME
+            // ---------------------------------
+
+            particle.phaseX +=
                 particle.speedX;
 
-            particle.baseY +=
+            particle.phaseY +=
                 particle.speedY;
 
 
-            // Horizontal wrap
+            // ---------------------------------
+            // NATURAL FLOATING MOTION
+            // ---------------------------------
 
-            if (particle.baseX < 0) {
-                particle.baseX = width;
-            }
-
-            if (particle.baseX > width) {
-                particle.baseX = 0;
-            }
-
-
-            // Vertical wrap
-
-            if (particle.baseY < 0) {
-                particle.baseY = height;
-            }
-
-            if (particle.baseY > height) {
-                particle.baseY = 0;
-            }
+            const movementX =
+                Math.sin(
+                    particle.phaseX
+                ) *
+                particle.amplitudeX;
 
 
-            let x =
+            const movementY =
+                Math.cos(
+                    particle.phaseY
+                ) *
+                particle.amplitudeY;
+
+
+            // ---------------------------------
+            // TARGET POSITION
+            // ---------------------------------
+
+            let targetX =
                 particle.baseX;
 
-            let y =
+            let targetY =
                 particle.baseY;
 
+
+            // ---------------------------------
+            // CURSOR DISTANCE
+            // ---------------------------------
+
             const dx =
-                mouseX - x;
+                cursorX -
+                particle.baseX;
 
             const dy =
-                mouseY - y;
+                cursorY -
+                particle.baseY;
+
 
             const distance =
                 Math.sqrt(
@@ -259,74 +408,173 @@ const animateParticles = (): void => {
                 );
 
 
-            // Mouse interaction
+            const radius =
+                (
+                    MOUSE_RADIUS /
+                    rect.width
+                ) *
+                100;
+
+
+            // ---------------------------------
+            // CURSOR INTERACTION
+            // ---------------------------------
 
             if (
-                distance <
-                MOUSE_RADIUS
+                distance < radius
             ) {
 
                 const force =
                     (
-                        MOUSE_RADIUS -
-                        distance
-                    ) /
-                    MOUSE_RADIUS;
+                        1 -
+                        distance /
+                        radius
+                    ) *
+                    MOUSE_FORCE;
 
-                const angle =
-                    Math.atan2(
-                        dy,
-                        dx
-                    );
 
-                x -=
-                    Math.cos(angle) *
+                targetX +=
+                    dx *
                     force *
-                    MOUSE_FORCE *
-                    25;
+                    100;
 
-                y -=
-                    Math.sin(angle) *
+
+                targetY +=
+                    dy *
                     force *
-                    MOUSE_FORCE *
-                    25;
+                    100;
 
             }
 
 
-            particle.x +=
-                (x - particle.x) * 0.08;
+            // ---------------------------------
+            // APPLY POSITION
+            // ---------------------------------
 
-            particle.y +=
-                (y - particle.y) * 0.08;
+            particle.element.style.left =
+                `${targetX}%`;
 
+            particle.element.style.top =
+                `${targetY}%`;
 
-            // Draw particle
-
-            context.beginPath();
-
-            context.arc(
-                particle.x,
-                particle.y,
-                particle.size,
-                0,
-                Math.PI * 2
-            );
-
-            context.fillStyle =
-                `rgba(139, 92, 246, ${particle.opacity})`;
-
-            context.fill();
+            particle.element.style.transform =
+                `translate3d(
+                    ${movementX}px,
+                    ${movementY}px,
+                    0
+                )`;
 
         }
     );
 
-    animationFrame =
+
+    // ---------------------------------
+    // NEXT FRAME
+    // ---------------------------------
+
+    particleAnimationFrame =
         requestAnimationFrame(
             animateParticles
         );
 
-};
+}
+
+
+// =====================================
+// MOUSE MOVE
+// =====================================
+
+function handleMouseMove(
+    event: MouseEvent
+): void {
+
+    targetMouseX =
+        event.clientX;
+
+    targetMouseY =
+        event.clientY;
+
+
+    if (!heroParticles.value) {
+        return;
+    }
+
+
+    const hero =
+        heroParticles.value.parentElement;
+
+
+    if (!hero) {
+        return;
+    }
+
+
+    const rect =
+        hero.getBoundingClientRect();
+
+
+    const x =
+        (
+            (
+                event.clientX -
+                rect.left
+            ) /
+            rect.width
+        ) *
+        100;
+
+
+    const y =
+        (
+            (
+                event.clientY -
+                rect.top
+            ) /
+            rect.height
+        ) *
+        100;
+
+
+    hero.style.setProperty(
+        '--cursor-x',
+        `${x}%`
+    );
+
+
+    hero.style.setProperty(
+        '--cursor-y',
+        `${y}%`
+    );
+
+}
+
+
+// =====================================
+// MOUSE LEAVE
+// =====================================
+
+function handleMouseLeave(): void {
+
+    if (!heroParticles.value) {
+        return;
+    }
+
+
+    const rect =
+        heroParticles.value
+            .getBoundingClientRect();
+
+
+    targetMouseX =
+        rect.left +
+        rect.width / 2;
+
+
+    targetMouseY =
+        rect.top +
+        rect.height / 2;
+
+}
 
 
 // =====================================
@@ -337,20 +585,22 @@ let revealObserver:
     IntersectionObserver | null = null;
 
 
-const setupRevealObserver = (): void => {
+function setupRevealObserver(): void {
 
     const elements =
         document.querySelectorAll(
             '.home-hero .reveal'
         );
 
+
     if (!elements.length) {
         return;
     }
 
 
-    // Mobile elements are made visible by CSS.
-    // No observer is needed there.
+    // ---------------------------------
+    // MOBILE
+    // ---------------------------------
 
     if (
         window.matchMedia(
@@ -373,6 +623,10 @@ const setupRevealObserver = (): void => {
     }
 
 
+    // ---------------------------------
+    // DESKTOP OBSERVER
+    // ---------------------------------
+
     revealObserver =
         new IntersectionObserver(
             entries => {
@@ -386,11 +640,13 @@ const setupRevealObserver = (): void => {
                             return;
                         }
 
+
                         entry.target
                             .classList
                             .add(
                                 'revealed'
                             );
+
 
                         revealObserver
                             ?.unobserve(
@@ -402,9 +658,11 @@ const setupRevealObserver = (): void => {
 
             },
             {
-                threshold: 0.1
+                threshold:
+                    0.1
             }
         );
+
 
     elements.forEach(
         element => {
@@ -417,7 +675,7 @@ const setupRevealObserver = (): void => {
         }
     );
 
-};
+}
 
 
 // =====================================
@@ -426,19 +684,72 @@ const setupRevealObserver = (): void => {
 
 onMounted(() => {
 
-    resizeCanvas();
+    // ---------------------------------
+    // CREATE PARTICLES
+    // ---------------------------------
 
-    window.addEventListener(
-        'resize',
-        resizeCanvas
-    );
+    createParticles();
+
+
+    // ---------------------------------
+    // INITIAL MOUSE POSITION
+    // ---------------------------------
+
+    if (heroParticles.value) {
+
+        const rect =
+            heroParticles.value
+                .getBoundingClientRect();
+
+
+        mouseX =
+            rect.left +
+            rect.width / 2;
+
+
+        mouseY =
+            rect.top +
+            rect.height / 2;
+
+
+        targetMouseX =
+            mouseX;
+
+        targetMouseY =
+            mouseY;
+
+    }
+
+
+    // ---------------------------------
+    // MOUSE EVENTS
+    // ---------------------------------
 
     window.addEventListener(
         'mousemove',
         handleMouseMove
     );
 
-    animateParticles();
+
+    window.addEventListener(
+        'mouseleave',
+        handleMouseLeave
+    );
+
+
+    // ---------------------------------
+    // START PARTICLES
+    // ---------------------------------
+
+    particleAnimationFrame =
+        requestAnimationFrame(
+            animateParticles
+        );
+
+
+    // ---------------------------------
+    // REVEAL
+    // ---------------------------------
 
     requestAnimationFrame(
         () => {
@@ -453,21 +764,64 @@ onMounted(() => {
 
 onUnmounted(() => {
 
-    cancelAnimationFrame(
-        animationFrame
-    );
-
-    window.removeEventListener(
-        'resize',
-        resizeCanvas
-    );
+    // ---------------------------------
+    // MOUSE EVENTS
+    // ---------------------------------
 
     window.removeEventListener(
         'mousemove',
         handleMouseMove
     );
 
+
+    window.removeEventListener(
+        'mouseleave',
+        handleMouseLeave
+    );
+
+
+    // ---------------------------------
+    // PARTICLE ANIMATION
+    // ---------------------------------
+
+    if (
+        particleAnimationFrame !== null
+    ) {
+
+        cancelAnimationFrame(
+            particleAnimationFrame
+        );
+
+        particleAnimationFrame =
+            null;
+
+    }
+
+
+    // ---------------------------------
+    // REMOVE PARTICLES
+    // ---------------------------------
+
+    particles.forEach(
+        particle => {
+
+            particle.element.remove();
+
+        }
+    );
+
+
+    particles.length = 0;
+
+
+    // ---------------------------------
+    // REVEAL OBSERVER
+    // ---------------------------------
+
     revealObserver?.disconnect();
+
+    revealObserver =
+        null;
 
 });
 
@@ -478,18 +832,26 @@ onUnmounted(() => {
 
     <section class="home-hero">
 
+
         <!-- =====================================
-             PARTICLE BACKGROUND
+             PARTICLES
         ====================================== -->
 
-        <div class="hero-particles">
+        <div
+            ref="heroParticles"
+            class="hero-particles"
+            aria-hidden="true"
+        ></div>
 
-            <canvas
-                ref="canvas"
-                class="hero-particles-canvas"
-            ></canvas>
 
-        </div>
+        <!-- =====================================
+             CURSOR GLOW
+        ====================================== -->
+
+        <div
+            class="hero-cursor-glow"
+            aria-hidden="true"
+        ></div>
 
 
         <!-- =====================================
@@ -506,6 +868,7 @@ onUnmounted(() => {
                 ====================================== -->
 
                 <div class="hero-title-content">
+
 
                     <!-- LABEL -->
 
@@ -625,6 +988,7 @@ onUnmounted(() => {
                     "
                 >
 
+
                     <!-- GROUP 1 -->
 
                     <div class="technology-group">
@@ -683,19 +1047,31 @@ onUnmounted(() => {
 ===================================== */
 
 .home-hero {
-    position: relative;
 
-    display: grid;
+    --cursor-x:
+        50%;
+
+    --cursor-y:
+        50%;
+
+    position:
+        relative;
+
+    display:
+        grid;
 
     grid-template-rows:
         1fr
         auto;
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 100vh;
+    min-height:
+        100vh;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     padding:
         190px
@@ -714,6 +1090,7 @@ onUnmounted(() => {
             transparent 30%
         ),
         var(--color-bg);
+
 }
 
 
@@ -722,23 +1099,87 @@ onUnmounted(() => {
 ===================================== */
 
 .hero-particles {
-    position: absolute;
 
-    inset: 0;
+    position:
+        absolute;
 
-    z-index: 0;
+    inset:
+        0;
 
-    overflow: hidden;
+    width:
+        100%;
 
-    pointer-events: none;
+    height:
+        100%;
+
+    overflow:
+        hidden;
+
+    pointer-events:
+        none;
+
+    z-index:
+        1;
+
 }
 
 
-.hero-particles-canvas {
-    display: block;
+:deep(.hero-particle) {
 
-    width: 100%;
-    height: 100%;
+    position:
+        absolute;
+
+    border-radius:
+        50%;
+
+    background:
+        #a78bfa;
+
+    pointer-events:
+        none;
+
+    z-index:
+        1;
+
+    will-change:
+        left,
+        top,
+        transform;
+
+}
+
+
+/* =====================================
+   CURSOR GLOW
+===================================== */
+
+.hero-cursor-glow {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    z-index:
+        0;
+
+    background:
+        radial-gradient(
+            circle 220px at
+            var(--cursor-x, 50%)
+            var(--cursor-y, 50%),
+
+            rgba(139, 92, 246, 0.14),
+
+            rgba(139, 92, 246, 0.05) 35%,
+
+            transparent 70%
+        );
+
 }
 
 
@@ -747,20 +1188,31 @@ onUnmounted(() => {
 ===================================== */
 
 .home-hero > .container {
-    position: relative;
 
-    z-index: 2;
+    position:
+        relative;
 
-    display: flex;
+    z-index:
+        2;
 
-    flex-direction: column;
+    display:
+        flex;
 
-    justify-content: space-between;
+    flex-direction:
+        column;
 
-    width: 100%;
+    justify-content:
+        space-between;
+
+    width:
+        100%;
 
     min-height:
-        calc(100vh - 190px);
+        calc(
+            100vh -
+            190px
+        );
+
 }
 
 
@@ -769,17 +1221,25 @@ onUnmounted(() => {
 ===================================== */
 
 .hero-content {
-    display: flex;
 
-    align-items: center;
+    display:
+        flex;
 
-    justify-content: space-between;
+    align-items:
+        center;
 
-    gap: 80px;
+    justify-content:
+        space-between;
 
-    width: 100%;
+    gap:
+        80px;
 
-    flex: 1;
+    width:
+        100%;
+
+    flex:
+        1;
+
 }
 
 
@@ -788,15 +1248,21 @@ onUnmounted(() => {
 ===================================== */
 
 .hero-title-content {
+
     width:
-        calc(100% - 460px);
+        calc(
+            100% -
+            460px
+        );
 
     max-width:
         900px;
+
 }
 
 
 .hero-label {
+
     margin-bottom:
         24px;
 
@@ -814,11 +1280,14 @@ onUnmounted(() => {
 
     letter-spacing:
         0.18em;
+
 }
 
 
 .hero-title {
-    margin: 0;
+
+    margin:
+        0;
 
     color:
         var(--color-text);
@@ -841,10 +1310,12 @@ onUnmounted(() => {
 
     letter-spacing:
         -0.045em;
+
 }
 
 
 .hero-description {
+
     max-width:
         680px;
 
@@ -864,6 +1335,7 @@ onUnmounted(() => {
 
     line-height:
         1.7;
+
 }
 
 
@@ -872,6 +1344,7 @@ onUnmounted(() => {
 ===================================== */
 
 .animated-gradient-text {
+
     display:
         inline-block;
 
@@ -902,27 +1375,34 @@ onUnmounted(() => {
         6s
         ease
         infinite;
+
 }
 
 
 @keyframes heroGradientMove {
 
     0% {
+
         background-position:
             0%
             center;
+
     }
 
     50% {
+
         background-position:
             100%
             center;
+
     }
 
     100% {
+
         background-position:
             0%
             center;
+
     }
 
 }
@@ -933,6 +1413,7 @@ onUnmounted(() => {
 ===================================== */
 
 .hero-actions {
+
     flex:
         0
         0
@@ -940,10 +1421,12 @@ onUnmounted(() => {
 
     width:
         380px;
+
 }
 
 
 .hero-buttons {
+
     display:
         flex;
 
@@ -955,10 +1438,12 @@ onUnmounted(() => {
 
     width:
         100%;
+
 }
 
 
 .hero-buttons .btn {
+
     display:
         flex;
 
@@ -979,6 +1464,7 @@ onUnmounted(() => {
 
     font-weight:
         600;
+
 }
 
 
@@ -987,6 +1473,7 @@ onUnmounted(() => {
 ===================================== */
 
 .technology-marquee {
+
     position:
         relative;
 
@@ -1005,11 +1492,22 @@ onUnmounted(() => {
 
     border-top:
         1px solid
-        rgba(255, 255, 255, 0.06);
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
 
     border-bottom:
         1px solid
-        rgba(255, 255, 255, 0.06);
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
+
 }
 
 
@@ -1019,6 +1517,7 @@ onUnmounted(() => {
 
 .technology-marquee::before,
 .technology-marquee::after {
+
     position:
         absolute;
 
@@ -1039,10 +1538,12 @@ onUnmounted(() => {
 
     pointer-events:
         none;
+
 }
 
 
 .technology-marquee::before {
+
     left:
         0;
 
@@ -1052,10 +1553,12 @@ onUnmounted(() => {
             var(--color-bg),
             transparent
         );
+
 }
 
 
 .technology-marquee::after {
+
     right:
         0;
 
@@ -1065,6 +1568,7 @@ onUnmounted(() => {
             var(--color-bg),
             transparent
         );
+
 }
 
 
@@ -1073,6 +1577,7 @@ onUnmounted(() => {
 ===================================== */
 
 .technology-marquee-track {
+
     display:
         flex;
 
@@ -1084,6 +1589,7 @@ onUnmounted(() => {
         20s
         linear
         infinite;
+
 }
 
 
@@ -1092,6 +1598,7 @@ onUnmounted(() => {
 ===================================== */
 
 .technology-group {
+
     display:
         flex;
 
@@ -1106,6 +1613,7 @@ onUnmounted(() => {
 
     white-space:
         nowrap;
+
 }
 
 
@@ -1114,6 +1622,7 @@ onUnmounted(() => {
 ===================================== */
 
 .technology-group span {
+
     display:
         flex;
 
@@ -1121,7 +1630,12 @@ onUnmounted(() => {
         center;
 
     color:
-        rgba(245, 245, 247, 0.45);
+        rgba(
+            245,
+            245,
+            247,
+            0.45
+        );
 
     font-family:
         var(--font-heading);
@@ -1139,12 +1653,15 @@ onUnmounted(() => {
         color
         0.3s
         ease;
+
 }
 
 
 .technology-group span:hover {
+
     color:
         var(--color-primary-light);
+
 }
 
 
@@ -1153,6 +1670,7 @@ onUnmounted(() => {
 ===================================== */
 
 .technology-group span::after {
+
     display:
         block;
 
@@ -1180,22 +1698,43 @@ onUnmounted(() => {
 
     box-shadow:
         0 0 5px
-        rgba(167, 139, 250, 1),
+        rgba(
+            167,
+            139,
+            250,
+            1
+        ),
 
         0 0 10px
-        rgba(139, 92, 246, 0.95),
+        rgba(
+            139,
+            92,
+            246,
+            0.95
+        ),
 
         0 0 20px
-        rgba(139, 92, 246, 0.65),
+        rgba(
+            139,
+            92,
+            246,
+            0.65
+        ),
 
         0 0 30px
-        rgba(139, 92, 246, 0.30);
+        rgba(
+            139,
+            92,
+            246,
+            0.30
+        );
 
     animation:
         techSeparatorGlow
         2.2s
         ease-in-out
         infinite;
+
 }
 
 
@@ -1207,6 +1746,7 @@ onUnmounted(() => {
 
     0%,
     100% {
+
         opacity:
             0.55;
 
@@ -1215,13 +1755,25 @@ onUnmounted(() => {
 
         box-shadow:
             0 0 4px
-            rgba(167, 139, 250, 0.8),
+            rgba(
+                167,
+                139,
+                250,
+                0.8
+            ),
 
             0 0 10px
-            rgba(139, 92, 246, 0.55);
+            rgba(
+                139,
+                92,
+                246,
+                0.55
+            );
+
     }
 
     50% {
+
         opacity:
             1;
 
@@ -1230,13 +1782,29 @@ onUnmounted(() => {
 
         box-shadow:
             0 0 6px
-            rgba(196, 181, 253, 1),
+            rgba(
+                196,
+                181,
+                253,
+                1
+            ),
 
             0 0 14px
-            rgba(167, 139, 250, 1),
+            rgba(
+                167,
+                139,
+                250,
+                1
+            ),
 
             0 0 26px
-            rgba(139, 92, 246, 0.75);
+            rgba(
+                139,
+                92,
+                246,
+                0.75
+            );
+
     }
 
 }
@@ -1249,13 +1817,17 @@ onUnmounted(() => {
 @keyframes techMarqueeMove {
 
     from {
+
         transform:
             translateX(0);
+
     }
 
     to {
+
         transform:
             translateX(-50%);
+
     }
 
 }
@@ -1266,6 +1838,7 @@ onUnmounted(() => {
 ===================================== */
 
 .reveal {
+
     opacity:
         0;
 
@@ -1280,15 +1853,18 @@ onUnmounted(() => {
         transform
         0.8s
         ease;
+
 }
 
 
 .reveal.revealed {
+
     opacity:
         1;
 
     transform:
         translateY(0);
+
 }
 
 
@@ -1299,21 +1875,26 @@ onUnmounted(() => {
 @media (max-width: 991px) {
 
     .home-hero {
+
         padding-top:
             170px;
+
     }
 
 
     .home-hero > .container {
+
         min-height:
             calc(
                 100vh -
                 170px
             );
+
     }
 
 
     .hero-content {
+
         flex-direction:
             column;
 
@@ -1325,19 +1906,23 @@ onUnmounted(() => {
 
         text-align:
             center;
+
     }
 
 
     .hero-title-content {
+
         width:
             100%;
 
         max-width:
             850px;
+
     }
 
 
     .hero-actions {
+
         width:
             100%;
 
@@ -1346,21 +1931,26 @@ onUnmounted(() => {
 
         flex:
             none;
+
     }
 
 
     .hero-description {
+
         margin-left:
             auto;
 
         margin-right:
             auto;
+
     }
 
 
     .technology-marquee {
+
         margin-top:
             60px;
+
     }
 
 }
@@ -1370,13 +1960,10 @@ onUnmounted(() => {
    MOBILE
 ===================================== */
 
-/* =====================================
-   MOBILE
-===================================== */
-
 @media (max-width: 768px) {
 
     .home-hero {
+
         display:
             block;
 
@@ -1399,10 +1986,12 @@ onUnmounted(() => {
 
         overflow-y:
             visible;
+
     }
 
 
     .home-hero > .container {
+
         position:
             relative;
 
@@ -1420,6 +2009,7 @@ onUnmounted(() => {
 
         height:
             auto;
+
     }
 
 
@@ -1429,6 +2019,7 @@ onUnmounted(() => {
 
     .home-hero .reveal,
     .home-hero .reveal.revealed {
+
         opacity:
             1 !important;
 
@@ -1437,6 +2028,7 @@ onUnmounted(() => {
 
         transform:
             none !important;
+
     }
 
 
@@ -1445,6 +2037,7 @@ onUnmounted(() => {
     ===================================== */
 
     .hero-content {
+
         display:
             flex;
 
@@ -1471,6 +2064,7 @@ onUnmounted(() => {
 
         text-align:
             center;
+
     }
 
 
@@ -1479,6 +2073,7 @@ onUnmounted(() => {
     ===================================== */
 
     .hero-title-content {
+
         display:
             block;
 
@@ -1508,10 +2103,12 @@ onUnmounted(() => {
 
         visibility:
             visible;
+
     }
 
 
     .hero-label {
+
         display:
             block;
 
@@ -1537,10 +2134,12 @@ onUnmounted(() => {
 
         visibility:
             visible !important;
+
     }
 
 
     .hero-title {
+
         display:
             block;
 
@@ -1571,10 +2170,12 @@ onUnmounted(() => {
 
         visibility:
             visible !important;
+
     }
 
 
     .animated-gradient-text {
+
         display:
             inline;
 
@@ -1583,10 +2184,12 @@ onUnmounted(() => {
 
         visibility:
             visible;
+
     }
 
 
     .hero-description {
+
         display:
             block;
 
@@ -1618,6 +2221,7 @@ onUnmounted(() => {
 
         visibility:
             visible !important;
+
     }
 
 
@@ -1626,6 +2230,7 @@ onUnmounted(() => {
     ===================================== */
 
     .hero-actions {
+
         display:
             block;
 
@@ -1653,12 +2258,15 @@ onUnmounted(() => {
 
         visibility:
             visible !important;
+
     }
 
 
     .hero-buttons {
+
         width:
             100%;
+
     }
 
 
@@ -1667,6 +2275,7 @@ onUnmounted(() => {
     ===================================== */
 
     .technology-marquee {
+
         display:
             block;
 
@@ -1691,16 +2300,20 @@ onUnmounted(() => {
 
         transform:
             none !important;
+
     }
 
 
     .technology-group span {
+
         font-size:
             0.7rem;
+
     }
 
 
     .technology-group span::after {
+
         width:
             5px;
 
@@ -1710,6 +2323,7 @@ onUnmounted(() => {
         margin:
             0
             24px;
+
     }
 
 }
@@ -1722,39 +2336,48 @@ onUnmounted(() => {
 @media (max-width: 576px) {
 
     .home-hero {
+
         min-height:
             100svh;
 
         padding-top:
             110px;
+
     }
 
 
     .home-hero > .container {
+
         min-height:
             calc(
                 100svh -
                 110px
             );
+
     }
 
 
     .hero-content {
+
         gap:
             32px;
+
     }
 
 
     .hero-label {
+
         margin-bottom:
             18px;
 
         font-size:
             0.7rem;
+
     }
 
 
     .hero-title {
+
         font-size:
             clamp(
                 2.6rem,
@@ -1764,46 +2387,58 @@ onUnmounted(() => {
 
         line-height:
             0.98;
+
     }
 
 
     .hero-description {
+
         margin-top:
             24px;
 
         font-size:
             0.95rem;
+
     }
 
 
     .hero-buttons {
+
         gap:
             16px;
+
     }
 
 
     .hero-buttons .btn {
+
         min-height:
             54px;
 
         font-size:
             0.95rem;
+
     }
 
 
     .technology-marquee {
+
         margin-top:
             40px;
+
     }
 
 
     .technology-group span {
+
         font-size:
             0.65rem;
+
     }
 
 
     .technology-group span::after {
+
         width:
             4px;
 
@@ -1816,10 +2451,21 @@ onUnmounted(() => {
 
         box-shadow:
             0 0 4px
-            rgba(167, 139, 250, 1),
+            rgba(
+                167,
+                139,
+                250,
+                1
+            ),
 
             0 0 10px
-            rgba(139, 92, 246, 0.75);
+            rgba(
+                139,
+                92,
+                246,
+                0.75
+            );
+
     }
 
 }
@@ -1832,18 +2478,23 @@ onUnmounted(() => {
 @media (prefers-reduced-motion: reduce) {
 
     .technology-marquee-track {
+
         animation-duration:
             40s;
+
     }
 
 
     .technology-group span::after {
+
         animation:
             none;
+
     }
 
 
     .reveal {
+
         opacity:
             1;
 
@@ -1852,6 +2503,7 @@ onUnmounted(() => {
 
         transition:
             none;
+
     }
 
 }
