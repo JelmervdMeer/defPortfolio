@@ -671,6 +671,7 @@ onUnmounted(() => {
 </script>
 
 
+```vue
 <template>
 
     <footer class="portfolio-footer">
@@ -704,7 +705,6 @@ onUnmounted(() => {
 
             <div class="footer-top">
 
-
                 <!-- =====================================
                      BRAND
                 ====================================== -->
@@ -715,18 +715,13 @@ onUnmounted(() => {
                         to="/"
                         class="footer-logo"
                     >
-
                         JELMER<span>.</span>
-
                     </RouterLink>
 
-
                     <p>
-
                         Freelance developer gespecialiseerd
                         in interactieve webapplicaties,
                         3D en creatieve softwareprojecten.
-
                     </p>
 
                 </div>
@@ -738,7 +733,6 @@ onUnmounted(() => {
 
                 <div class="footer-links">
 
-
                     <!-- NAVIGATION -->
 
                     <div class="footer-link-group">
@@ -747,21 +741,17 @@ onUnmounted(() => {
                             NAVIGATIE
                         </div>
 
-
                         <RouterLink to="/">
                             Home
                         </RouterLink>
-
 
                         <RouterLink to="/projects">
                             Projects
                         </RouterLink>
 
-
                         <RouterLink to="/about">
                             About
                         </RouterLink>
-
 
                         <RouterLink to="/contact">
                             Contact
@@ -778,52 +768,51 @@ onUnmounted(() => {
                             ONLINE
                         </div>
 
-
                         <div class="footer-socials">
 
+                            <!-- GITHUB -->
+
                             <a
-                                href="#"
+                                href="https://github.com/JelmervdMeer"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="GitHub"
                             >
-
                                 <i class="bi bi-github"></i>
 
                                 <span>
-                                    
+                                    GitHub
                                 </span>
-
                             </a>
 
 
+                            <!-- LINKEDIN -->
+
                             <a
-                                href="#"
+                                href="https://www.linkedin.com/in/jelmer-van-der-meer-18614614b"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="LinkedIn"
                             >
-
                                 <i class="bi bi-linkedin"></i>
 
                                 <span>
-                                    
+                                    LinkedIn
                                 </span>
-
                             </a>
 
 
-                            <a
-                                href="mailto:jelmer#jelmervandermeer.nl"
-                                aria-label="E-mail"
-                            >
+                            <!-- EMAIL -->
 
+                            <a
+                                href="mailto:jelmer@jelmervandermeer.nl"
+                                aria-label="Email"
+                            >
                                 <i class="bi bi-envelope"></i>
 
                                 <span>
-                                    jelmer@jelmervandermeer.nl
+                                    EMAIL
                                 </span>
-
                             </a>
 
                         </div>
@@ -842,18 +831,13 @@ onUnmounted(() => {
             <div class="footer-bottom">
 
                 <span>
-
                     © {{ new Date().getFullYear() }}
                     Jelmer.
                     Alle rechten voorbehouden.
-
                 </span>
 
-
                 <span>
-
                     Built with Vue & TypeScript.
-
                 </span>
 
             </div>
@@ -863,6 +847,7 @@ onUnmounted(() => {
     </footer>
 
 </template>
+```
 
 
 <style scoped>
